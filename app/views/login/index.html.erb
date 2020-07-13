@@ -8,8 +8,8 @@
     </p>
     <div class="login_box">
       <%= form_tag("/login_action",{method:"POST",autocomplete:"off"}) do %>
-      <input type="email" name="email" id="email" placeholder="ID(メールアドレス)" required>
-      <input type="password" name="password" id="password" placeholder="パスワード" required>
+      <input type="email" name="email" id="email" placeholder="ID(メールアドレス)" aria-label="email_input" required>
+      <input type="password" name="password" id="password" placeholder="パスワード" aria-label="password_input" required>
       <input type="hidden" name="width" id="width" required>
       <button type="submit">Login</button>
       <% end %>
@@ -42,7 +42,7 @@
         <i class="far fa-copyright"></i>
         2019-2021 minutes system development inc. All rights reserved.
         <div class="image inline">
-          <img src="<%= image_path "msd_logo.png" %>">
+          <img src="<%= image_path "msd_logo.png" %>" alt="">
         </div>
       </a>
     </div>

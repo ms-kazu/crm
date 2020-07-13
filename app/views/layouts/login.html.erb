@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>medical crm</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="description" content="medicalCRM 治療院経営に必要な売上分析の深層化">
 
     <%= favicon_link_tag('search_logo.png') %>
 
     <link href="//fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=5.0, minimum-scale=1.0,viewport-fit=cover">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -33,7 +34,7 @@
         <div class="time">今</div>
         <div class="details">
           <div class="left">
-            <img class="login_bg_image" src="<%= asset_path "search_logo.png" %>">
+            <img class="login_bg_image" src="<%= asset_path "search_logo.png" %>" alt="">
           </div>
           <div class="right">
             <div class="top">
