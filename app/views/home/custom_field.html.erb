@@ -1,0 +1,76 @@
+<div class="page_base achieve_analytics_base customer_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fas fa-file-excel"></i> 帳票
+    </div>
+
+    <div class="setting_box inline">
+      <input class="input_label" type="checkbox" id="setting_ios">
+      <label class="label_indi" for="setting_ios" id="setting_indi">
+      </label>
+      <div class="modal">
+        <div class="modal_title">
+          <i class="fas fa-cogs"></i> 期間と比較の設定
+          <label for="setting_ios"><i class="fas fa-times"></i></label>
+        </div>
+        <form onsubmit="query_function(); return false;" name="query_form">
+          <div class="box">
+            <div class="indi">期間軸</div>
+            <div class="content">
+              <div class="radio_label">
+                <input type="radio" name="pt_" id="pt_0" value="0" checked>
+                <label for="pt_0"><div class="icon inline"></div>日別</label>
+                <input type="radio" name="pt_" id="pt_1" value="1">
+                <label for="pt_1"><div class="icon inline"></div>週別</label>
+                <input type="radio" name="pt_" id="pt_2" value="2">
+                <label for="pt_2"><div class="icon inline"></div>月別</label>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="indi">期間</div>
+            <div class="content">
+              <div class="pibb">
+                <input class="pi_" type="date" name="pi_s" id="pi_s" required>
+                <div class="border">~</div>
+                <input class="pi_" type="date" name="pi_e" id="pi_e" required>
+              </div>
+              <div class="pilbb" id="pilb_pi_"></div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="indi">対象</div>
+            <div class="content">
+              <div class="osbb select_box">
+                <select id="obj_select">
+                </select>
+                <div class="icon_base">
+                  <i class="fas fa-caret-down"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box_submit">
+            <div class="indi"></div>
+            <div class="content">
+              <div class="submit_base">
+                <button type="submit">適用する <i class="fas fa-caret-down"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="content_base" id="content_base">
+    <div class="loading_base inline">
+      <i class="fad fa-spinner-third fa-spin"></i>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.10/xlsx.full.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+<%= javascript_include_tag 'custom_field.js', 'data-turbolinks-track': 'reload' %>

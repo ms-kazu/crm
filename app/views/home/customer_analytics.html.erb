@@ -1,0 +1,69 @@
+<div class="page_base achieve_analytics_base customer_base customer_analytics_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fad fa-braille"></i> 顧客グラフ分析
+    </div>
+
+    <div class="setting_box inline">
+      <input class="input_label" type="checkbox" id="setting_ios">
+      <label class="label_indi" for="setting_ios" id="setting_indi">
+      </label>
+      <div class="modal">
+        <div class="modal_title">
+          <i class="fas fa-cogs"></i> 期間と対象の設定
+          <label for="setting_ios"><i class="fas fa-times"></i></label>
+        </div>
+        <form onsubmit="query_function(); return false;" name="query_form">
+          <div class="box">
+            <div class="content">
+              <div class="radio_label">
+                <input type="radio" name="pt_" id="pt_2" value="2" checked>
+                <label for="pt_2"><div class="icon inline"></div>月別</label>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="pibb">
+                <input class="pi_" type="date" name="pi_s" id="pi_s" required>
+                <div class="border">~</div>
+                <input class="pi_" type="date" name="pi_e" id="pi_e" required>
+              </div>
+              <div class="pilbb" id="pilb_pi_"></div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="osbb select_box">
+                <select id="obj_select">
+                </select>
+                <div class="icon_base">
+                  <i class="fas fa-caret-down"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box_submit">
+            <div class="content">
+              <div class="submit_base">
+                <button type="submit">適用する <i class="fas fa-caret-down"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="content_base" id="content_base">
+    <div class="loading_base inline">
+      <i class="fad fa-spinner-third fa-spin"></i>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+
+<table style="display:none;" class="table_to_export" id="download_table_base">
+</table>
+
+<%= javascript_include_tag 'customer_analytics.js', 'data-turbolinks-track': 'reload' %>

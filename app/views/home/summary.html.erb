@@ -1,0 +1,18 @@
+<div class="page_base achieve_analytics_base customer_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fas fa-desktop"></i> 今月の概要
+    </div>
+  </div>
+  <div class="content_base" id="content_base">
+    <div class="loading_base inline">
+      <i class="fad fa-spinner-third fa-spin"></i>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+
+<table style="display:none;" class="table_to_export" id="download_table_base"></table>
+
+<%= javascript_include_tag 'summary.js', 'data-turbolinks-track': 'reload' %>

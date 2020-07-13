@@ -1,0 +1,67 @@
+<div class="login_page">
+  <div class="login_base">
+    <div class="title_icon inline">
+      <img src="<%= image_path "search_logo.png" %>" alt="">
+    </div>
+    <p class="logo">
+      Medical CRM
+    </p>
+    <div class="login_box">
+      <%= form_tag("/login_action",{method:"POST",autocomplete:"off"}) do %>
+      <input type="email" name="email" id="email" required>
+      <input type="password" name="password" id="password" required>
+      <input type="hidden" name="width" id="width" required>
+      <button type="submit">Login</button>
+      <% end %>
+    </div>
+    <br>
+    <!-- <p style="font-size:.75rem;">
+      <a href="#">IDまたはパスワードをお忘れですか？</a>
+    </p> -->
+  </div>
+
+  <div class="login_footer">
+    <div class="icons_base inline">
+      <i class="fab fa-aws"></i>
+      <i class="fas fa-cloud"></i>
+      <i class="fas fa-database"></i>
+      <i class="far fa-phone-laptop"></i>
+      <i class="fab fa-windows"></i>
+      <i class="fab fa-apple"></i>
+      <i class="fab fa-android"></i>
+      <i class="fab fa-chrome"></i>
+      <i class="fab fa-safari"></i>
+      <i class="fab fa-firefox"></i>
+      <i class="fab fa-opera"></i>
+    </div>
+    <div class="info_base inline">
+      <a href="#">プライバシーポリシー</a>
+      <a href="https://msd-net.co.jp/medical-crm/">インフォメーション</a>
+      <a href="#">利用規約</a>
+      <a href="//www.msd-net.co.jp/">
+        <i class="far fa-copyright"></i>
+        2019-2021 minutes system development inc. All rights reserved.
+        <div class="image inline">
+          <img src="<%= image_path "msd_logo.png" %>">
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  const login_width_init = () => {
+    let width = window.innerWidth;
+    let width_id = width <= 1000 ? 0 : 1;
+    $(`#width`).prop('value',width_id);
+  }
+  login_width_init();
+
+  $('#email').focus();
+</script>
+
+<style>
+  body.home_body {
+    min-width:0 !important;
+  }
+</style>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>medical crm</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag('search_logo.png') %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRP_XBYSn09Udg6vRUEimQtbeHFRSSYM4"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="<%= image_path "search_logo.png" %>" sizes="120x120"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head>
+
+  <body class="home_body">
+    <input type="hidden" id="user_name" value="<%= @name %>">
+
+    <div id="help_tips_pop">
+    </div>
+
+    <div class="header_base">
+      <a href="/home">
+        <div class="logo_base inline">
+          <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
+          <div class="text_base inline">Medical CRM</div>
+        </div>
+      </a>
+
+      <label class="text_overflow inline" for="acounts_modal_input">
+        <%= @inc_name %>
+      </label>
+      <% if @name == "msd_system_master" %>
+      <div class="n_l_b">
+        <input type="checkbox" id="acounts_modal_input">
+        <div class="acount_modal inline" id="acount_modal">
+          <div class="cover" id="acount_cover">
+            <div class="loading_base inline">
+              <i class="fad fa-spinner-third fa-spin"></i>
+            </div>
+          </div>
+          <%= form_tag("/change_acount",{method:"POST",autocomplete:"off"}) do %>
+          <div class="title">アカウントの切り替え</div>
+          <div class="select_box">
+            <select name="acount_select" id="acount_select"></select>
+            <div class="icon_base">
+              <i class="fas fa-caret-down"></i>
+            </div>
+          </div>
+          <div class="btn_base">
+            <button type="submit">切り替える</button>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="n_r_b inline">
+        <a href="/home">
+          <div class="cell cell_big inline">
+            <input type="hidden" name="header_input_">
+            <label><i class="fas fa-home"></i></label>
+          </div>
+        </a>
+        <div class="cell cell_big inline">
+          <input type="radio" name="header_input_" id="header_input_0">
+          <label for="header_input_0">
+            <i class="fas fa-search"></i>
+            <div class="text inline">何をお探しですか？</div>
+          </label>
+          <div class="modal">
+            <form class="search_form">
+              <div class="icon inline">
+                <input type="submit" id="search_icon_submit">
+                <label for="search_icon_submit">
+                  <i class="fas fa-search"></i>
+                </label>
+              </div>
+              <div class="input inline">
+                <input type="search" name="" value="">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="cell cell_big inline">
+          <input type="radio" name="header_input_" id="header_input_1">
+          <label for="header_input_1">
+            <i class="fas fa-cogs"></i>
+            <div class="text inline">設定</div>
+          </label>
+          <ul class="modal modal_ul">
+            <a href="/mission" target="_blank"><li><i class="fas fa-flag"></i> 目標を設定する</li></a>
+            <a href="/keyword" target="_blank"><li><i class="fas fa-sitemap"></i> キーワードの作成</li></a>
+          </ul>
+        </div>
+        <div class="cell inline">
+          <input type="radio" name="header_input_" id="header_input_2">
+          <label for="header_input_2">
+            <i class="fas fa-user"></i>
+            <div class="text inline"><%= @name %></div>
+            <i class="fas fa-caret-down"></i>
+          </label>
+          <div class="modal">
+            <%= link_to('/logout_action',{method:"POST"}) do %>
+            <button type="submit" class="logout">
+              ログアウト
+              <i class="fas fa-power-off"></i>
+            </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="left_bar_base home_left">
+      <div class="pc_left">
+        <input type="checkbox" name="left_input_" id="left_input_0" checked>
+        <label for="left_input_0">
+          <div class="box">
+            <div class="text">概要</div>
+            <div class="icon"></div>
+          </div>
+        </label>
+        <div class="modal_menu">
+          <a href="/summary">
+            <div class="cell cell_box">
+              <i class="fas fa-desktop"></i> 概要
+            </div>
+          </a>
+          <div class="cell cell_grid_box cell_1x3_box">
+            <a href="/achieve_summary">
+              <div class="cell inline">
+                <i class="fas fa-list"></i>
+              </div>
+            </a>
+            <a href="/remarkable_points">
+              <div class="cell inline">
+                <i class="fas fa-lightbulb-on"></i>
+              </div>
+            </a>
+            <a href="/achieve_analytics?bt=2">
+              <div class="cell inline">
+                <i class="fas fa-folders"></i>
+              </div>
+            </a>
+          </div>
+          <div class="cell cell_grid_box cell_1x2_box">
+            <a href="/sales_forecast?s_type=0">
+              <div class="cell inline">
+                <i class="fas fa-forward"></i> 売上予測
+              </div>
+            </a>
+            <a href="/custom_field">
+              <div class="cell inline">
+                <i class="fas fa-cubes"></i> カスタム
+              </div>
+            </a>
+          </div>
+        </div>
+        <input type="checkbox" name="left_input_" id="left_input_1" checked>
+        <label for="left_input_1">
+          <div class="box">
+            <div class="text">成績分析</div>
+            <div class="icon"></div>
+          </div>
+        </label>
+        <div class="modal_menu">
+          <div class="cell cell_grid_box cell_1x3_box">
+            <a href="/achieve_analytics">
+              <div class="cell inline">
+                <i class="fas fa-globe"></i>
+              </div>
+            </a>
+            <a href="/achieve_analytics?st=1">
+              <div class="cell inline">
+                <i class="fas fa-clinic-medical"></i>
+              </div>
+            </a>
+            <a href="/achieve_analytics?st=2">
+              <div class="cell inline">
+                <i class="fas fa-user-tie"></i>
+              </div>
+            </a>
+          </div>
+          <div class="cell cell_grid_box cell_1x2_box">
+            <a href="/achieve_analytics?st=0&bt=3&mt=4">
+              <div class="cell inline">
+                <i class="fas fa-file-alt"></i> メニュー
+              </div>
+            </a>
+            <a href="/achieve_analytics?st=0&bt=3&mt=3">
+              <div class="cell inline">
+                <i class="fab fa-amilia"></i> キーワード
+              </div>
+            </a>
+          </div>
+          <a href="/random_stome">
+            <div class="cell cell_box">
+              <i class="fad fa-random"></i> ランダムクエリ
+            </div>
+          </a>
+        </div>
+        <input type="checkbox" name="left_input_" id="left_input_2" checked>
+        <label for="left_input_2">
+          <div class="box">
+            <div class="text">顧客分析</div>
+            <div class="icon"></div>
+          </div>
+        </label>
+        <div class="modal_menu">
+          <a href="/customer_analytics">
+            <div class="cell cell_box">
+              <i class="fad fa-braille"></i> 顧客グラフ分析
+            </div>
+          </a>
+          <a href="/achieve_analytics?st=0&bt=5">
+            <div class="cell cell_box">
+              <i class="fas fa-sync-alt"></i> 継続者分析
+            </div>
+          </a>
+          <div class="cell cell_grid_box cell_1x2_box">
+            <a href="/achieve_analytics?st=0&bt=6">
+              <div class="cell inline">
+                <i class="fas fa-exclamation-triangle"></i> 離脱分析
+              </div>
+            </a>
+            <a href="/customer_search">
+              <div class="cell inline">
+                <i class="fas fa-search"></i> アプローチ
+              </div>
+            </a>
+          </div>
+        </div>
+        <input type="checkbox" name="left_input_" id="left_input_3">
+        <label for="left_input_3">
+          <div class="box">
+            <div class="text">システム</div>
+            <div class="icon"></div>
+          </div>
+        </label>
+        <div class="modal_menu">
+          <a href="/mission" target="_blank">
+            <div class="cell cell_box">
+              <i class="fas fa-flag"></i> 目標設定
+            </div>
+          </a>
+          <a href="/keyword" target="_blank">
+            <div class="cell cell_box">
+              <i class="fas fa-sitemap"></i> キーワード
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="sp_left">
+        <a href="/home">
+          <div class="box" data-title="ホーム">
+            <i class="fas fa-home"></i>
+          </div>
+        </a>
+        <a href="/summary">
+          <div class="box" data-title="概要">
+            <i class="fas fa-desktop"></i>
+          </div>
+        </a>
+        <a href="/achieve_summary">
+          <div class="box" data-title="リスト">
+            <i class="fas fa-list"></i>
+          </div>
+        </a>
+        <a href="/remarkable_points">
+          <div class="box" data-title="重要指標">
+            <i class="fas fa-lightbulb-on"></i>
+          </div>
+        </a>
+        <a href="/custom_field">
+          <div class="box" data-title="カスタム">
+            <i class="fas fa-cubes"></i>
+          </div>
+        </a>
+        <a href="/achieve_analytics">
+          <div class="box" data-title="管轄">
+            <i class="fas fa-globe"></i>
+          </div>
+        </a>
+        <a href="/customer_analytics">
+          <div class="box" data-title="顧客グラフ">
+            <i class="fad fa-braille"></i>
+          </div>
+        </a>
+        <a href="/achieve_analytics?st=0&bt=5">
+          <div class="box" data-title="継続">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+        </a>
+        <a href="/achieve_analytics?st=0&bt=6">
+          <div class="box" data-title="離脱">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+        </a>
+        <a href="/customer_search">
+          <div class="box" data-title="顧客検索">
+            <i class="fas fa-search"></i>
+          </div>
+        </a>
+        <%= link_to('/logout_action',{method:"POST"}) do %>
+        <div class="box" data-title="Log out">
+          <i class="fas fa-power-off" style="color:red;"></i>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if flash[:notice_pos] %>
+      <div class="flash_success">
+        <div class="time">今</div>
+        <div class="details">
+          <div class="left">
+            <img class="login_bg_image" src="<%= asset_path "search_logo.png" %>">
+          </div>
+          <div class="right">
+            <div class="top">
+              Medical CRM
+            </div>
+            <div class="bottom">
+              <%= flash[:notice_pos] %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+        $('.flash_success').fadeIn(300);
+        setTimeout(() => {$('.flash_success').remove();},4000);
+      </script>
+    <% end %>
+
+    <% if flash[:notice_nega] %>
+      <div class="flash_failed">
+        <div class="content"><%= flash[:notice_nega] %></div>
+      </div>
+
+      <script type="text/javascript">
+        $('.flash_failed').fadeIn(300);
+        setTimeout(() => {$('.flash_failed').remove();},4000);
+      </script>
+    <% end %>
+
+    <%= yield %>
+
+    <script type="text/javascript">
+      Chart.defaults.LineWithLine = Chart.defaults.line;
+      Chart.controllers.LineWithLine = Chart.controllers.line.extend({
+        draw: function(ease) {
+          Chart.controllers.line.prototype.draw.call(this, ease);
+
+          if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+            var activePoint = this.chart.tooltip._active[0],
+            ctx = this.chart.ctx,
+            x = activePoint.tooltipPosition().x,
+            topY = this.chart.scales['y-axis-0'].top,
+            bottomY = this.chart.scales['y-axis-0'].bottom;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x, topY);
+            ctx.lineTo(x, bottomY);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = `#ddd`;
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>medical crm</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag('search_logo.png') %>
+
+    <link href="//fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="//kit.fontawesome.com/2cbc40982b.js" crossorigin="anonymous"></script>
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="<%= image_path "msd_logo.png" %>" sizes="120x120"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head>
+
+  <body class="home_body">
+    <div class="header_base">
+      <div class="logo_base inline">
+        <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
+        <div class="text_base inline">Medical CRM</div>
+      </div>
+    </div>
+
+    <% if flash[:notice_pos] %>
+      <div class="flash_success">
+        <div class="time">今</div>
+        <div class="details">
+          <div class="left">
+            <img class="login_bg_image" src="<%= asset_path "search_logo.png" %>">
+          </div>
+          <div class="right">
+            <div class="top">
+              Medical CRM
+            </div>
+            <div class="bottom">
+              <%= flash[:notice_pos] %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+        $('.flash_success').fadeIn(300);
+        setTimeout(() => {$('.flash_success').remove();},4000);
+      </script>
+    <% end %>
+
+    <% if flash[:notice_nega] %>
+      <div class="flash_failed">
+        <div class="content"><%= flash[:notice_nega] %></div>
+      </div>
+
+      <script type="text/javascript">
+        $('.flash_failed').fadeIn(300);
+        setTimeout(() => {$('.flash_failed').remove();},4000);
+      </script>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

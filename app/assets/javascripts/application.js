@@ -1,0 +1,16 @@
+//= require jquery
+//= require jquery.turbolinks
+//= require rails-ujs
+//= require turbolinks
+//= require local_CDN/FontAwesome_
+//= require local_CDN/jQuery_ui
+//= require local_CDN/DataTable_
+//= require local_CDN/DataTable_jp
+//= require local_CDN/Excel_
+//= require local_CDN/FileSaver_
+//= require local_CDN/GoogleMap_markerCluster
+//= require local_CDN/ChartJS_
+//= require local_CDN/ChartJS_boxplot
+//= require local_CDN/ChartJS_chartbox
+//= require script
+//= require serviceworker-companion

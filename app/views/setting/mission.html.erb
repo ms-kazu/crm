@@ -1,0 +1,104 @@
+<div class="setting_base">
+  <div class="setting_content">
+    <div class="section" id="month_list">
+      <div class="title">
+        月を選択
+        <i class="fas fa-chevron-double-right"></i>
+        店舗を選択するか更にプルダウン
+        <i class="fas fa-chevron-double-right"></i>
+        担当者を選択
+      </div>
+      <div class="table_base">
+        <table id="mission_table">
+          <thead>
+            <tr>
+              <th><i class="fas fa-calendar-alt"></i></th>
+              <th>月</th>
+              <th>窓口売上目標(店舗計)</th>
+              <th>来院数目標(店舗計)</th>
+            </tr>
+          </thead>
+          <tbody id="month_tbody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="setting_modal">
+    <div class="modal_box">
+      <div class="title" id="calendar_title">
+      </div>
+      <div class="calendar_list">
+        <div class="top_base">
+          <div class="left_base">
+            <div class="box box_type">
+              <input type="radio" name="mci_type" id="mci_type_0" checked>
+              <label for="mci_type_0">窓口売上</label>
+              <input type="radio" name="mci_type" id="mci_type_1">
+              <label for="mci_type_1">来院数</label>
+            </div>
+            <div class="box_box">
+              <div class="box">
+                <div class="title"><span>入力方法1</span> 月累計目標</div>
+                <form onsubmit="month_mission_input(); return false;" name="mmi_form">
+                  <input type="number" name="amount" value="0">
+                  <button class="button create" type="submit">適用</button>
+                </form>
+              </div>
+              <div class="box">
+                <div class="title"><span>入力方法2</span> 日割目標</div>
+                <form onsubmit="day_mission_input(); return false;" name="dmi_form">
+                  <input type="number" name="amount" value="0">
+                  <button class="button create" type="submit">適用</button>
+                </form>
+              </div>
+              <div class="box">
+                <div class="title"><span>入力方法3</span> 平日</div>
+                <form onsubmit="weekday_mission_input(); return false;" name="wmi_form">
+                  <input type="number" name="amount" value="0">
+                  <button class="button create" type="submit">適用</button>
+                </form>
+              </div>
+              <div class="box">
+                <div class="title"><span>入力方法4</span> 休日</div>
+                <form onsubmit="holiday_mission_input(); return false;" name="hmi_form">
+                  <input type="number" name="amount" value="0">
+                  <button class="button create" type="submit">適用</button>
+                </form>
+              </div>
+              <div class="box">
+                <div class="title"><span>入力方法5</span> 曜日</div>
+                <form onsubmit="select_week_mission_input(); return false;" name="swmi_form">
+                  <select name="week" id="way5_select_week"></select><br>
+                  <input type="number" name="amount" value="0">
+                  <button class="button create" type="submit">適用</button>
+                </form>
+              </div>
+              <div class="box">
+                <div class="title"><span>入力方法6</span> 任意の日付</div>
+                <form onsubmit="select_day_mission_input(); return false;" name="sdmi_form">
+                  <select name="day" id="way6_select_day"></select><br>
+                  <input type="number" name="amount" value="0">
+                  <button class="button create" type="submit">適用</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="right_base">
+            <div class="calendar" id="calendar_list"></div>
+          </div>
+        </div>
+        <div class="bottom_base">
+          <div class="button_box inline">
+            <label class="button quit" id="setting_modal_quit">やめる</label>
+            <button class="button create" id="setting_modal_submit">適用</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+
+<%= javascript_include_tag 'mission_setter.js', 'data-turbolinks-track': 'reload' %>

@@ -1,0 +1,186 @@
+<input type="hidden" value="<%= @s_type %>"   id="s_type">
+<input type="hidden" value="<%= @s_select %>" id="s_select">
+<input type="hidden" value="<%= @s_id %>"     id="s_id">
+<input type="hidden" value="<%= @p_type %>"   id="p_type">
+<input type="hidden" value="<%= @p_select %>" id="p_select">
+<input type="hidden" value="<%= @ps %>"       id="ps">
+<input type="hidden" value="<%= @pe %>"       id="pe">
+<input type="hidden" value="<%= @b_type %>"   id="b_type">
+<input type="hidden" value="<%= @m_type %>"   id="m_type">
+<input type="hidden" value="<%= @m_select %>" id="m_select">
+<input type="hidden" value="<%= @m_id %>"     id="m_id">
+
+<div class="page_base achieve_analytics_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fas fa-analytics"></i> 成績分析
+    </div>
+    <div class="inline" id="setting_sp_b">
+
+    </div>
+  </div>
+  <div class="center_left_base">
+    <div class="pb bb">
+      <input type="checkbox" id="setting_p" checked>
+      <label for="setting_p" id="setting_p_indi">
+      </label>
+      <div class="modal">
+        <div class="modal_title">
+          <i class="fas fa-cogs"></i> 期間の設定
+          <label for="setting_cp"><i class="fas fa-times"></i></label>
+        </div>
+
+        <form onsubmit="list_query(); return false;" name="list_query_form">
+        <div class="box">
+          <div class="radio_label">
+            <input type="radio" name="pt_" id="pt_0" value="0" checked>
+            <label for="pt_0"><div class="icon inline"></div>日別</label>
+            <input type="radio" name="pt_" id="pt_1" value="1">
+            <label for="pt_1"><div class="icon inline"></div>週別</label>
+            <input type="radio" name="pt_" id="pt_2" value="2">
+            <label for="pt_2"><div class="icon inline"></div>月別</label>
+          </div>
+        </div>
+        <div class="box">
+          <div class="pibb">
+            <input class="pi_" type="date" name="pi_s" id="pi_s" required>
+            <input class="pi_" type="date" name="pi_e" id="pi_e" required>
+          </div>
+          <div class="pilbb" id="pilb_pi_"></div>
+        </div>
+        <div class="box_submit">
+          <div class="submit_base">
+            <button type="submit">適用する <i class="fas fa-caret-down"></i></button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+    <div class="sb bb">
+      <input type="radio" name="st_" id="st_0" checked>
+      <label for="st_0">
+        <i class="fas fa-globe"></i> 管轄
+      </label>
+      <input type="radio" name="st_" id="st_1">
+      <label for="st_1">
+        <i class="fas fa-clinic-medical"></i> 院
+      </label>
+      <input type="radio" name="st_" id="st_2">
+      <label for="st_2">
+        <i class="fas fa-user-tie"></i> 担当者
+      </label>
+    </div>
+    <div class="mb ob bb">
+      <div class="map" id="map_list">
+      </div>
+      <div class="btns">
+        <input type="radio" name="mp_" id="mp_0">
+        <label for="mp_0">
+          <i class="fad fa-border-center-h"></i> 総合売上 <br>
+          <i class="fad fa-border-center-v"></i> 客単価
+        </label>
+        <input type="radio" name="mp_" id="mp_1" checked>
+        <label for="mp_1">
+          <i class="fad fa-border-center-h"></i> 総合売上 <br>
+          <i class="fad fa-border-center-v"></i> 時間単価
+        </label>
+        <input type="radio" name="mp_" id="mp_2">
+        <label for="mp_2">
+          <i class="fad fa-border-center-h"></i> 総合売上 <br>
+          <i class="fad fa-border-center-v"></i> 自費売上
+        </label>
+      </div>
+    </div>
+    <div class="tb ob bb">
+      <div class="table_base" id="table_list">
+        <div class="loading_base inline">
+          <i class="fad fa-spinner-third fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="center_middle_base">
+    <div class="name_title">
+      <div class="nt inline text_overflow" id="cmb_nt" data-id="nt_0">
+      </div>
+      <div class="setting_box inline" id="con_setting_box">
+        <input class="input_label" type="checkbox" id="setting_cp">
+        <label class="label_indi" for="setting_cp" id="setting_cp_indi">
+        </label>
+        <div class="modal">
+          <div class="modal_title modal_con_title">
+            <i class="far fa-balance-scale-left"></i> 比較の設定
+            <label for="setting_cp"><i class="fas fa-times"></i></label>
+          </div>
+          <form onsubmit="desc_obj_query_data(); return false;" name="query_form">
+            <div class="box">
+              <div class="content">
+                <div class="box_con">
+                  <input type="checkbox" name="cpt" id="cpt">
+                  比較 <label for="cpt"></label>
+                  <div class="con_content">
+                    <div class="osbb select_box" id="consb">
+                      <select id="cos_select">
+                        <option value="0">管轄院</option>
+                      </select>
+                      <div class="icon_base">
+                        <i class="fas fa-caret-down"></i>
+                      </div>
+                    </div>
+                    <div class="pibb">
+                      <input class="cpi_" type="date" name="cpi_s" id="cpi_s">
+                      <div class="border">~</div>
+                      <input class="cpi_" type="date" name="cpi_e" id="cpi_e">
+                    </div>
+                    <div class="pilbb" id="pilb_cpi_"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box_submit">
+              <div class="indi"></div>
+              <div class="content">
+                <div class="submit_base">
+                  <button type="submit">適用する <i class="fas fa-caret-down"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="segment_base">
+      <input type="radio" name="segment_input_" id="segment_input_0" checked>
+      <label for="segment_input_0"><i class="fad fa-th-list"></i> 概要</label>
+      <input type="radio" name="segment_input_" id="segment_input_1">
+      <label for="segment_input_1"><i class="fad fa-divide"></i> 実績詳細</label>
+      <input type="radio" name="segment_input_" id="segment_input_2">
+      <label for="segment_input_2"><i class="fad fa-folders"></i> 施術概要</label>
+      <input type="radio" name="segment_input_" id="segment_input_3">
+      <label for="segment_input_3"><i class="fad fa-folder-open"></i> 施術</label>
+      <input type="radio" name="segment_input_" id="segment_input_4">
+      <label for="segment_input_4"><i class="fad fa-copy"></i> 施術詳細</label>
+      <input type="radio" name="segment_input_" id="segment_input_5">
+      <label for="segment_input_5">
+        <i class="fad fa-sync-alt"></i> 継続
+        <i class="fas fa-question-circle help_tips" data-title="継続分析" data-help="指定期間内にどの程度来院したのかを分析するセクションです。様々なボタンを押す事でセグメント条件をカスタムできます。"></i>
+      </label>
+      <input type="radio" name="segment_input_" id="segment_input_6">
+      <label for="segment_input_6"><i class="fad fa-exclamation-triangle"></i> 離脱</label>
+      <div class="slider"></div>
+    </div>
+  </div>
+
+  <div class="content_base" id="content_base">
+    <div class="loading_base inline">
+      <i class="fad fa-spinner-third fa-spin"></i>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+
+<table style="display:none;" class="table_to_export" id="download_table_base">
+</table>
+
+<%= javascript_include_tag 'achieve_analytics.js', 'data-turbolinks-track': 'reload' %>

@@ -1,0 +1,75 @@
+<input type="hidden" id="cid" value="<%= @cid %>">
+<input type="hidden" id="ptno" value="<%= @ptno %>">
+<input type="hidden" id="cname" value="<%= @cname %>">
+
+<div class="page_base customer_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fas fa-user-injured"></i>
+      <%= @cname %>
+    </div>
+  </div>
+
+  <div class="content_base">
+    <div class="section">
+      <div class="private_box">
+        <div class="top">
+          <div class="left">
+            <div class="icon">
+              <i class="fas fa-user-injured"></i>
+            </div>
+          </div>
+          <div class="right" id="private_right_base">
+          </div>
+        </div>
+        <div class="bottom" id="private_bottom_base">
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="cells_box">
+        <div class="cell cell_1x1 inline">
+          <div class="box cell_link">
+            <div class="cell_title text_overflow">スコア</div>
+            <div class="content _integral_">
+              <div class="base">
+                <div class="graph_wrap">
+                  <canvas id="radar_pie" width="150" height="100"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cell cell_2x1 inline">
+          <div class="box cell_link">
+            <div class="cell_title text_overflow">行動</div>
+            <div class="content _integral_">
+              <div class="base">
+                <div class="graph_wrap">
+                  <canvas id="trend_line" width="300" height="100"></canvas>
+                </div>
+                <div class="sum_box" id="sum_base">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cell cell_4x1 inline">
+          <div class="box cell_link">
+            <div class="cell_title text_overflow">来院の履歴</div>
+            <div class="content _table_">
+              <div class="base">
+                <div class="table_base table_base1 no_border" id="details_table_base">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<input type="hidden" id="page_js_status">
+
+<%= javascript_include_tag 'customer.js', 'data-turbolinks-track': 'reload' %>

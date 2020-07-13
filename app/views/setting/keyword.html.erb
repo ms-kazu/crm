@@ -1,0 +1,89 @@
+<div class="setting_base">
+  <div class="setting_content">
+    <div class="section">
+      <div class="title">・メニューグループを選択</div>
+      <div class="cell_box">
+        <input type="checkbox" name="keyword_cell_create" id="keyword_cell_create">
+        <label for="keyword_cell_create">
+          <div class="label_box">
+            <div class="check_box"></div>
+            <div class="text">新しく作成する</div>
+          </div>
+        </label>
+        <div class="modal">
+          <div class="modal_box">
+            <form onsubmit="create_keyword(); return false;" name="create_keyword_form">
+              <div class="title">メニューグループ新規作成</div>
+              <input type="text" name="keyword" placeholder="キーワードを入力" required>
+              <label class="button quit" for="keyword_cell_create">やめる</label>
+              <button class="button create" type="submit">作成する</button>
+            </form>
+          </div>
+        </div>
+        <div class="border"></div>
+        <div id="cell_box">
+        </div>
+      </div>
+    </div>
+    <div class="section" id="menu_section">
+      <div class="mn_dtls">
+        <div class="title" id="key_name"></div>
+        <div id="key_length"></div>
+        <form onsubmit="delete_keyword(); return false;" name="delete_keyword_form" class="inline">
+          <input type="hidden" name="keyword_id" class="form_key_id">
+          <button type="submit"><i class="fas fa-trash-alt"></i></button>
+        </form>
+        <div class="cell_box inline">
+          <input type="checkbox" name="keyword_cell_update" id="keyword_cell_update">
+          <label for="keyword_cell_update" class="button inline">
+            <i class="fas fa-edit"></i>
+          </label>
+          <div class="modal">
+            <div class="modal_box">
+              <form onsubmit="update_keyword(); return false;" name="update_keyword_form">
+                <div class="title">メニューグループ編集</div>
+                <input type="hidden" name="keyword_id" class="form_key_id">
+                <input type="text" name="keyword" id="key_input_name" require>
+                <label class="button quit" for="keyword_cell_update">やめる</label>
+                <button class="button create" type="submit">編集する</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="title">・メニューリスト</div>
+      <div class="menu_box">
+        <div class="menu_contents">
+          <div class="menu_lists">
+            <div class="title">登録中のメニュー</div>
+            <div class="indi">
+              <div></div>
+              <div>メニュー名</div>
+              <div>キーワード名</div>
+            </div>
+            <ul class="menu_ul" id="menu_key_list"></ul>
+          </div>
+          <div class="menu_border">
+            <div class="indi">ドラッグ&ドロップで登録</div>
+          </div>
+          <div class="menu_lists">
+            <div class="title">全メニュー</div>
+            <div class="indi">
+              <div></div>
+              <div>メニュー名</div>
+              <div>キーワード名</div>
+            </div>
+            <ul class="menu_ul" id="all_menu_list"></ul>
+          </div>
+        </div>
+        <div class="menu_btn">
+          <button id="update_menu_list">適用</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+
+<%= javascript_include_tag 'keyword_setter.js', 'data-turbolinks-track': 'reload' %>

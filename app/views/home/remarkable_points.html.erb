@@ -1,0 +1,85 @@
+<div class="page_base remarkable_points_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fas fa-lightbulb-on"></i> 重要指標
+    </div>
+
+    <div class="setting_box inline">
+      <input class="input_label" type="checkbox" id="setting_ios" checked>
+      <label class="label_indi" for="setting_ios" id="setting_indi">
+      </label>
+      <div class="modal">
+        <div class="modal_title">
+          <i class="fas fa-cogs"></i> 期間と比較の設定
+          <label for="setting_ios"><i class="fas fa-times"></i></label>
+        </div>
+        <form onsubmit="query_function(); return false;" name="query_form">
+          <div class="box">
+            <div class="content">
+              <div class="radio_label">
+                <input type="radio" name="pt_" id="pt_0" value="0" checked>
+                <label for="pt_0"><div class="icon inline"></div>日別</label>
+                <input type="radio" name="pt_" id="pt_1" value="1">
+                <label for="pt_1"><div class="icon inline"></div>週別</label>
+                <input type="radio" name="pt_" id="pt_2" value="2">
+                <label for="pt_2"><div class="icon inline"></div>月別</label>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="pibb">
+                <input class="pi_" type="date" name="pi_s" id="pi_s" required>
+                <div class="border">~</div>
+                <input class="pi_" type="date" name="pi_e" id="pi_e" required>
+              </div>
+              <div class="pilbb" id="pilb_pi_"></div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="content">
+              <div class="box_con">
+                <input type="checkbox" name="cpt" id="cpt">
+                比較 <label for="cpt"></label>
+                <div class="con_content">
+                  <div class="pibb">
+                    <input class="cpi_" type="date" name="cpi_s" id="cpi_s">
+                    <div class="border">~</div>
+                    <input class="cpi_" type="date" name="cpi_e" id="cpi_e">
+                  </div>
+                  <div class="pilbb" id="pilb_cpi_"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box_submit">
+            <div class="content">
+              <div class="submit_base">
+                <button type="submit">適用する <i class="fas fa-caret-down"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="content_base">
+    <div class="select_box">
+      <select id="segment_select">
+        <option value="0">店舗</option>
+        <option value="1">担当者</option>
+      </select>
+      <div class="icon_base">
+        <i class="fas fa-caret-down"></i>
+      </div>
+    </div>
+    <div class="table_base" id="table_list">
+      <div class="loading_base inline">
+        <i class="fad fa-spinner-third fa-spin"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+<%= javascript_include_tag 'remarkable_points.js', 'data-turbolinks-track': 'reload' %>

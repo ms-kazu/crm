@@ -1,0 +1,35 @@
+<div class="page_base achieve_summary_base">
+  <div class="center_top_base">
+    <div class="title">
+      <i class="fas fa-list"></i> 成績リスト
+    </div>
+    <div class="segment_base">
+      <input type="radio" name="segment_input_" id="segment_input_0">
+      <label for="segment_input_0">今日</label>
+      <input type="radio" name="segment_input_" id="segment_input_1">
+      <label for="segment_input_1">過去1週間</label>
+      <input type="radio" name="segment_input_" id="segment_input_2" checked>
+      <label for="segment_input_2">今月</label>
+      <div class="slider"></div>
+    </div>
+  </div>
+  <div class="content_base">
+    <div class="select_box">
+      <select id="segment_select">
+        <option value="0">店舗</option>
+        <option value="1">担当者</option>
+      </select>
+      <div class="icon_base">
+        <i class="fas fa-caret-down"></i>
+      </div>
+    </div>
+    <div class="table_base" id="table_list">
+      <div class="loading_base inline">
+        <i class="fad fa-spinner-third fa-spin"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+<%= javascript_include_tag 'achieve_summary.js', 'data-turbolinks-track': 'reload' %>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>medical crm</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag('search_logo.png') %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="<%= image_path "msd_logo.png" %>" sizes="120x120"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head>
+
+  <body class="setting_body">
+    <input type="hidden" id="user_name" value="<%= @name %>">
+
+    <div class="left_bar_base">
+      <div class="logo_base inline">
+        <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
+        <div class="text_base inline">MediCRM 設定</div>
+      </div>
+
+      <div class="pc_left">
+        <a href="/mission">
+          <input type="radio" name="left_input_" id="left_input_0">
+          <label for="left_input_0">
+            <div class="box">
+              <div class="text"><i class="fas fa-flag"></i> 目標</div>
+              <div class="icon icon_arrow"></div>
+            </div>
+          </label>
+        </a>
+        <a href="/keyword">
+          <input type="radio" name="left_input_" id="left_input_1">
+          <label for="left_input_1">
+            <div class="box">
+              <div class="text"><i class="fas fa-sitemap"></i> キーワード</div>
+              <div class="icon icon_arrow"></div>
+            </div>
+          </label>
+        </a>
+        <a href="/calendar">
+          <input type="radio" name="left_input_" id="left_input_2">
+          <label for="left_input_2">
+            <div class="box">
+              <div class="text"><i class="fas fa-calendar-alt"></i> 営業日</div>
+              <div class="icon icon_arrow"></div>
+            </div>
+          </label>
+        </a>
+      </div>
+      <div class="sp_left">
+        <a href="/home">
+          <div class="box" data-title="ホーム">
+            <i class="fas fa-home"></i>
+          </div>
+        </a>
+        <a href="/mission">
+          <div class="box" data-title="目標">
+            <i class="fas fa-flag"></i>
+          </div>
+        </a>
+        <a href="/keyword">
+          <div class="box" data-title="キーワード">
+            <i class="fas fa-sitemap"></i>
+          </div>
+        </a>
+        <a href="/calendar">
+          <div class="box" data-title="営業日">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <%= yield %>
+  </body>
+</html>

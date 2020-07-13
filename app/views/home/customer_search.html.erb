@@ -1,0 +1,290 @@
+<div class="page_base customer_search_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fas fa-search"></i> 顧客検索
+    </div>
+
+    <div class="setting_box inline">
+      <input class="input_label" type="checkbox" id="setting_ios">
+      <label class="label_indi" for="setting_ios" id="setting_indi">
+        <div class="cell inline">a</div>
+      </label>
+      <div class="modal">
+        <div class="modal_title">
+          <i class="fas fa-filter"></i> フィルタ
+          <div class="icon inline">
+            <i class="fas fa-question-circle help_tips" data-title="フィルタの有効化" data-help="各セクションのタイトルをクリックするとフィルタが有効になり入力が可能になります。"></i>
+          </div>
+
+          <label for="setting_ios"><i class="fas fa-times"></i></label>
+        </div>
+        <form onsubmit="query_function(); return false;" name="query_form">
+          <div class="flex_box_base">
+            <div class="section_t">基本情報</div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_0">
+                <label for="fs_0" class="title inline">性別</label>
+                <div class="cont_base checkbox_base">
+                  <input type="radio" name="filter_gender_" id="filter_gender_0" value="1" checked>
+                  <label for="filter_gender_0">男性</label>
+                  <input type="radio" name="filter_gender_" id="filter_gender_1" value="2">
+                  <label for="filter_gender_1">女性</label>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_1">
+                <label for="fs_1" class="title inline">年齢</label>
+                <div class="cont_base i_i_base">
+                  <div data-dim="歳">
+                    <input type="number" name="filter_age_" id="filter_age_0" value="1">
+                  </div>
+                  <div class="border">~</div>
+                  <div data-dim="歳">
+                    <input type="number" name="filter_age_" id="filter_age_1" value="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_2">
+                <label for="fs_2" class="title inline">名前</label>
+                <div class="cont_base i_t_base">
+                  <div>
+                    <input type="text" name="filter_name_" id="filter_name_0" placeholder="名前を入力">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_3">
+                <label for="fs_3" class="title inline">電話番号</label>
+                <div class="annotation inline">※ ハイフンなし</div>
+                <div class="cont_base i_t_base">
+                  <div>
+                    <input type="number" name="filter_phone_" id="filter_phone_0" value="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_4">
+                <label for="fs_4" class="title inline">誕生月</label>
+                <div class="cont_base s_base">
+                  <div>
+                    <select id="filter_birth_0">
+                      <option value="01">1月</option>
+                      <option value="02">2月</option>
+                      <option value="03">3月</option>
+                      <option value="04">4月</option>
+                      <option value="05">5月</option>
+                      <option value="06">6月</option>
+                      <option value="07">7月</option>
+                      <option value="08">8月</option>
+                      <option value="09">9月</option>
+                      <option value="10">10月</option>
+                      <option value="11">11月</option>
+                      <option value="12">12月</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="section_t">来院</div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_5" checked>
+                <label for="fs_5" class="title inline">来院回数</label>
+                <div class="cont_base i_t_base">
+                  <div>
+                    <input type="number" name="filter_count_" id="filter_count_0" min="1" value="1" required>
+                  </div>
+                  <div class="text">回以上</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_6" checked>
+                <label for="fs_6" class="title inline">来院期間1</label>
+                <div class="annotation inline">※ 期間内に1度でも来院した</div>
+                <div class="cont_base i_i_base">
+                  <div>
+                    <input type="date" name="filter_in1_" id="filter_in1_0" required>
+                  </div>
+                  <div class="border">~</div>
+                  <div>
+                    <input type="date" name="filter_in1_" id="filter_in1_1" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_7">
+                <label for="fs_7" class="title inline">来院期間2</label>
+                <div class="annotation inline" style="color:red;">※ 1と併用すると取得に時間がかかります</div>
+                <div class="cont_base i_i_base">
+                  <div>
+                    <input type="date" name="filter_in2_" id="filter_in2_0">
+                  </div>
+                  <div class="border">~</div>
+                  <div>
+                    <input type="date" name="filter_in2_" id="filter_in2_1">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_8">
+                <label for="fs_8" class="title inline">離反期間1</label>
+                <div class="annotation inline">※ 期間内に1度も来院していない</div>
+                <div class="cont_base i_i_base">
+                  <div>
+                    <input type="date" name="filter_left1_" id="filter_left1_0">
+                  </div>
+                  <div class="border">~</div>
+                  <div>
+                    <input type="date" name="filter_left1_" id="filter_left1_1">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_9">
+                <label for="fs_9" class="title inline">離反期間2</label>
+                <div class="annotation inline" style="color:red;">※ 1と併用すると取得に時間がかかります</div>
+                <div class="cont_base i_i_base">
+                  <div>
+                    <input type="date" name="filter_left2_" id="filter_left2_0">
+                  </div>
+                  <div class="border">~</div>
+                  <div>
+                    <input type="date" name="filter_left2_" id="filter_left2_1">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_10">
+                <label for="fs_10" class="title inline">最終来院日</label>
+                <div class="annotation inline" style="color:red;">※ 取得に時間がかかる場合があります</div>
+                <div class="cont_base i_t_base">
+                  <div>
+                    <input type="date" name="filter_last_" id="filter_last_0">
+                  </div>
+                  <div class="text">以降来院がない</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_11">
+                <label for="fs_11" class="title inline">通院店舗</label>
+                <div class="cont_base s_base">
+                  <div>
+                    <select id="filter_clinic_0">
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_12">
+                <label for="fs_12" class="title inline">施術担当</label>
+                <div class="annotation inline" style="color:red;">※ 取得に時間がかかる場合があります</div>
+                <div class="cont_base s_base">
+                  <div>
+                    <select id="filter_staff_0">
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="section_t">使用金額</div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_13">
+                <label for="fs_13" class="title inline">総合売上</label>
+                <div class="cont_base i_i_base">
+                  <div data-dim="円">
+                    <input type="number" name="filter_all_" id="filter_all_0" value="1">
+                  </div>
+                  <div class="border">~</div>
+                  <div data-dim="円">
+                    <input type="number" name="filter_all_" id="filter_all_1" value="1000000">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_14">
+                <label for="fs_14" class="title inline">保険請求額</label>
+                <div class="cont_base i_i_base">
+                  <div data-dim="円">
+                    <input type="number" name="filter_seikyu_" id="filter_seikyu_0" value="1">
+                  </div>
+                  <div class="border">~</div>
+                  <div data-dim="円">
+                    <input type="number" name="filter_seikyu_" id="filter_seikyu_1" value="10000">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_15">
+                <label for="fs_15" class="title inline">保険負担金</label>
+                <div class="cont_base i_i_base">
+                  <div data-dim="円">
+                    <input type="number" name="filter_hutan_" id="filter_hutan_0" value="1">
+                  </div>
+                  <div class="border">~</div>
+                  <div data-dim="円">
+                    <input type="number" name="filter_hutan_" id="filter_hutan_1" value="10000">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex_box">
+              <div class="base">
+                <input type="checkbox" name="fs_" id="fs_16">
+                <label for="fs_15" class="title inline">自費金額</label>
+                <div class="cont_base i_i_base">
+                  <div data-dim="円">
+                    <input type="number" name="filter_jihi_" id="filter_jihi_0" value="1">
+                  </div>
+                  <div class="border">~</div>
+                  <div data-dim="円">
+                    <input type="number" name="filter_jihi_" id="filter_jihi_1" value="10000">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn_base">
+            <button type="submit">適用する <i class="fas fa-caret-down"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="content_base" id="content_base">
+  </div>
+</div>
+<input type="hidden" id="page_js_status">
+<table style="display:none;" class="table_to_export" id="download_table_base">
+</table>
+
+<%= javascript_include_tag 'customer_search.js', 'data-turbolinks-track': 'reload' %>

@@ -1,0 +1,53 @@
+<input type="hidden" id="s_type" value="<%= @s_type %>">
+
+<div class="page_base achieve_analytics_base customer_base">
+  <div class="center_top_base">
+    <div class="title inline">
+      <i class="fas fa-forward"></i> 今月の売上予測
+    </div>
+
+    <div class="setting_box inline">
+      <input class="input_label" type="checkbox" id="setting_ios" checked>
+      <label class="label_indi" for="setting_ios" id="setting_indi">
+      </label>
+      <div class="modal" style="min-width:250px;">
+        <div class="modal_title">
+          <i class="fas fa-cogs"></i> 対象の設定
+          <label for="setting_ios"><i class="fas fa-times"></i></label>
+        </div>
+        <form onsubmit="query_function(); return false;" name="query_form">
+          <div class="box">
+            <div class="content">
+              <div class="osbb select_box">
+                <select id="obj_select">
+                  <option value="0">店舗別</option>
+                  <option value="1">担当者別</option>
+                </select>
+                <div class="icon_base">
+                  <i class="fas fa-caret-down"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box_submit">
+            <div class="indi"></div>
+            <div class="content">
+              <div class="submit_base">
+                <button type="submit">適用する <i class="fas fa-caret-down"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="content_base" id="content_base">
+    <div class="loading_base inline">
+      <i class="fad fa-spinner-third fa-spin"></i>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+
+<%= javascript_include_tag 'sales_forecast.js', 'data-turbolinks-track': 'reload' %>

@@ -1,0 +1,203 @@
+<div class="page_base random_query_base customer_search_base">
+  <div class="center_top_base">
+    <div class="title">
+      <i class="fas fa-random"></i> ランダムクエリ
+    </div>
+  </div>
+  <div class="content_base">
+    <div class="setting_content">
+      <div class="content_title">
+        検索条件
+        <div class="icon inline">
+          <i class="fas fa-question-circle help_tips" data-title="軸のドラッグアンドドロップ" data-help="表示軸に要素をドロップすると適用され、順番も代えることができます。"></i>
+        </div>
+      </div>
+      <div class="section">
+        <div class="period_box">
+          <div class="pobj">
+            <input type="date" id="pi_s" value="">
+          </div>
+          <div class="pindi">~</div>
+          <div class="pobj">
+            <input type="date" id="pi_e" value="">
+          </div>
+        </div>
+      </div>
+      <div class="section section_rails">
+        <div class="section_title">セグメント軸 (y軸)</div>
+        <div class="section_content">
+          <div class="rail_base">
+            <div class="rail_title">軸 配列順序</div>
+            <div class="rail_rail">
+              <ul class="rail axis_uls" id="ul_axis">
+                <li name="axis_group_0_" id="axis_0_3">日次</li>
+                <li name="axis_group_1_" id="axis_1_1">店舗</li>
+              </ul>
+              <div class="rail_reset">
+              </div>
+            </div>
+            <div class="list_content_base" id="axis_list_content_base">
+              <div class="list_content">
+                <div class="indi">期間単位</div>
+                <div class="content">
+                  <div class="label_base">
+                    <input type="radio" name="axis_input_0_" id="axis_input_0_0">
+                    <label for="axis_input_0_0">未指定</label>
+                    <input type="radio" name="axis_input_0_" id="axis_input_0_1">
+                    <label for="axis_input_0_1">月次</label>
+                    <input type="radio" name="axis_input_0_" id="axis_input_0_2">
+                    <label for="axis_input_0_2">週次</label>
+                    <input type="radio" name="axis_input_0_" id="axis_input_0_3" checked>
+                    <label for="axis_input_0_3">日次</label>
+                    <input type="radio" name="axis_input_0_" id="axis_input_0_4">
+                    <label for="axis_input_0_4">曜日別</label>
+                    <input type="radio" name="axis_input_0_" id="axis_input_0_5">
+                    <label for="axis_input_0_5">時間帯別</label>
+                  </div>
+                </div>
+              </div>
+              <div class="list_content">
+                <div class="indi">オブジェクト</div>
+                <div class="content">
+                  <div class="label_base">
+                    <input type="radio" name="axis_input_1_" id="axis_input_1_0">
+                    <label for="axis_input_1_0">未指定</label>
+                    <input type="radio" name="axis_input_1_" id="axis_input_1_1" checked>
+                    <label for="axis_input_1_1">店舗</label>
+                    <input type="radio" name="axis_input_1_" id="axis_input_1_2">
+                    <label for="axis_input_1_2">担当者</label>
+                  </div>
+                </div>
+              </div>
+              <div class="list_content">
+                <div class="indi">世代</div>
+                <div class="content">
+                  <div class="label_base">
+                    <input type="radio" name="axis_input_2_" id="axis_input_2_0" checked>
+                    <label for="axis_input_2_0">未指定</label>
+                    <input type="radio" name="axis_input_2_" id="axis_input_2_1">
+                    <label for="axis_input_2_1">簡易5世代</label>
+                    <input type="radio" name="axis_input_2_" id="axis_input_2_2">
+                    <label for="axis_input_2_2">10世代</label>
+                  </div>
+                </div>
+              </div>
+              <div class="list_content">
+                <div class="indi">性別</div>
+                <div class="content">
+                  <div class="label_base">
+                    <input type="radio" name="axis_input_3_" id="axis_input_3_0" checked>
+                    <label for="axis_input_3_0">未指定</label>
+                    <input type="radio" name="axis_input_3_" id="axis_input_3_1">
+                    <label for="axis_input_3_1">男女</label>
+                  </div>
+                </div>
+              </div>
+              <div class="list_content">
+                <div class="indi">施術</div>
+                <div class="content">
+                  <div class="label_base">
+                    <input type="radio" name="axis_input_4_" id="axis_input_4_0" checked>
+                    <label for="axis_input_4_0">未指定</label>
+                    <input type="radio" name="axis_input_4_" id="axis_input_4_1">
+                    <label for="axis_input_4_1">大分類</label>
+                    <input type="radio" name="axis_input_4_" id="axis_input_4_2">
+                    <label for="axis_input_4_2">中分類</label>
+                    <input type="radio" name="axis_input_4_" id="axis_input_4_3">
+                    <label for="axis_input_4_3">小分類</label>
+                    <input type="radio" name="axis_input_4_" id="axis_input_4_4">
+                    <label for="axis_input_4_4">キーワード</label>
+                    <input type="radio" name="axis_input_4_" id="axis_input_4_5">
+                    <label for="axis_input_4_5">自費メニュー</label>
+                  </div>
+                </div>
+              </div>
+              <div class="list_content">
+                <div class="indi">来店動機</div>
+                <div class="content">
+                  <div class="label_base">
+                    <input type="radio" name="axis_input_5_" id="axis_input_5_0" checked>
+                    <label for="axis_input_5_0">指定しない</label>
+                    <input type="radio" name="axis_input_5_" id="axis_input_5_1">
+                    <label for="axis_input_5_1">来店動機</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section section_rails">
+        <div class="section_title">項目軸 (x軸)</div>
+        <div class="section_content">
+          <div class="rail_base">
+            <div class="rail_title">項目 配列順序</div>
+            <div class="rail_rail">
+              <ul class="rail column_uls_0 column_uls_1 column_uls_2" id="ul_column">
+              </ul>
+              <div class="rail_reset">
+                <div class="icon inline" id="column_reset">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+            </div>
+            <div class="list_content_base">
+              <div class="list_content">
+                <div class="indi">売上</div>
+                <div class="content">
+                  <ul class="cell_base column_uls_0" id="column_list_0">
+                  </ul>
+                </div>
+              </div>
+              <div class="list_content">
+                <div class="indi">施術回数</div>
+                <div class="content">
+                  <ul class="cell_base column_uls_1" id="column_list_1">
+                  </ul>
+                </div>
+              </div>
+              <div class="list_content">
+                <div class="indi">患者数</div>
+                <div class="content">
+                  <ul class="cell_base column_uls_2" id="column_list_2">
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="btn_base">
+          <button type="button" id="query_btn">適用する</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="cells_box">
+        <div class="cell cell_4x1 inline">
+          <div class="box">
+            <div class="cell_title text_overflow">集計結果表</div>
+            <div class="content _segment_">
+              <div class="btn_base desktop_elm">
+                <button class="inline" id="excel_download">
+                  <i class="fas fa-file-excel"></i>
+                  集計結果表.xlsx
+                </button>
+              </div>
+              <div class="table_base" id="list_table_base">
+                <div class="loading_base inline">
+                  <i class="fad fa-spinner-third fa-spin"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="page_js_status">
+<%= javascript_include_tag 'random_stome.js', 'data-turbolinks-track': 'reload' %>
