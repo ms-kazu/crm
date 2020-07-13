@@ -8,8 +8,8 @@
     </p>
     <div class="login_box">
       <%= form_tag("/login_action",{method:"POST",autocomplete:"off"}) do %>
-      <input type="email" name="email" id="email" required>
-      <input type="password" name="password" id="password" required>
+      <input type="email" name="email" id="email" placeholder="ID(メールアドレス)" required>
+      <input type="password" name="password" id="password" placeholder="パスワード" required>
       <input type="hidden" name="width" id="width" required>
       <button type="submit">Login</button>
       <% end %>
