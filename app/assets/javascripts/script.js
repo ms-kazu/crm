@@ -295,8 +295,7 @@ const genderna = [
   "75歳~ 女性"
 ];
 
-// const MSD_smn = `msd_system_master`;
-const MSD_smn = `msds`;
+const MSD_smn = `msd_system_master`;
 const MSD_client = [];
 
 let ajax_api_progress = false;
