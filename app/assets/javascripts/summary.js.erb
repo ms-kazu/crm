@@ -237,17 +237,17 @@ var desc_function = (data,so) => {
                   <div class="filter_base" id="customer_filter_base">
                     <input type="checkbox" name="map_customer_" id="map_customer_0" checked>
                     <label for="map_customer_0">
-                      <img class="inline" src="/assets/man_100b.png">
+                      <img class="inline" src="<%= image_path "man_100b.png" %>" alt="">
                       1回来院
                     </label>
                     <input type="checkbox" name="map_customer_" id="map_customer_1" checked>
                     <label for="map_customer_1">
-                      <img class="inline" src="/assets/man_100y.png">
+                      <img class="inline" src="<%= image_path "man_100y.png" %>" alt="">
                       2~5回来院
                     </label>
                     <input type="checkbox" name="map_customer_" id="map_customer_2" checked>
                     <label for="map_customer_2">
-                      <img class="inline" src="/assets/man_100r.png">
+                      <img class="inline" src="<%= image_path "man_100r.png" %>" alt="">
                       5回~来院
                     </label>
                   </div>
@@ -257,17 +257,17 @@ var desc_function = (data,so) => {
                   </div>
                   <div class="indi_base">
                     <div class="cel">
-                      <img class="inline" src="/assets/man_100b.png">
+                      <img class="inline" src="<%= image_path "man_100b.png" %>" alt="">
                       <div class="amount inline" id="indi_sum_map_0">
                       </div>
                     </div>
                     <div class="cel">
-                      <img class="inline" src="/assets/man_100y.png">
+                      <img class="inline" src="<%= image_path "man_100y.png" %>" alt="">
                       <div class="amount inline" id="indi_sum_map_1">
                       </div>
                     </div>
                     <div class="cel">
-                      <img class="inline" src="/assets/man_100r.png">
+                      <img class="inline" src="<%= image_path "man_100r.png" %>" alt="">
                       <div class="amount inline" id="indi_sum_map_2">
                       </div>
                     </div>
@@ -1929,6 +1929,18 @@ var desc_function = (data,so) => {
       let marker_group_0;
       let marker_group_1;
       let marker_group_2;
+      let image_path_ar = [
+        [
+          `<%= image_path "man_10.png" %>`,
+          `<%= image_path "man_20.png" %>`,
+          `<%= image_path "man_30.png" %>`
+        ],
+        [
+          `<%= image_path "group_0.png" %>`,
+          `<%= image_path "group_1.png" %>`,
+          `<%= image_path "group_2.png" %>`
+        ],
+      ];
 
       const desc_clear_close = (callback) => {
         for (let idx = 0;idx < clinic_infoWindow.length;idx++) {
@@ -2055,7 +2067,7 @@ var desc_function = (data,so) => {
             user_0_arr.push(new google.maps.Marker({
               position: markerLatLng,
               map: map,
-              icon:"/assets/man_10.png"
+              icon:image_path_ar[0][0]
             }));
             num = user_0_arr.length - 1;
 
@@ -2070,7 +2082,7 @@ var desc_function = (data,so) => {
             user_1_arr.push(new google.maps.Marker({
               position: markerLatLng,
               map: map,
-              icon:"/assets/man_20.png"
+              icon:image_path_ar[0][1]
             }));
             num = user_1_arr.length - 1;
 
@@ -2085,7 +2097,7 @@ var desc_function = (data,so) => {
             user_2_arr.push(new google.maps.Marker({
               position: markerLatLng,
               map: map,
-              icon:"/assets/man_30.png"
+              icon:image_path_ar[0][2]
             }));
             num = user_2_arr.length - 1;
 
@@ -2100,31 +2112,31 @@ var desc_function = (data,so) => {
         marker_group_0 = new MarkerClusterer(map, user_0_arr,{
           minimumClusterSize:100,
           styles:[
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
           ]
         });
         marker_group_1 = new MarkerClusterer(map, user_1_arr,{
           minimumClusterSize:100,
           styles:[
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
           ]
         });
         marker_group_2 = new MarkerClusterer(map, user_2_arr,{
           minimumClusterSize:100,
           styles:[
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
           ]
         });
       }
@@ -2231,31 +2243,31 @@ var desc_function = (data,so) => {
         marker_group_0 = new MarkerClusterer(map, remark_0_arr,{
           minimumClusterSize:100,
           styles:[
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
-            {textColor: 'white',url: '/assets/group_0.png',height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
+            {textColor: 'white',url: image_path_ar[1][0],height:52,width:53},
           ]
         });
         marker_group_1 = new MarkerClusterer(map, remark_1_arr,{
           minimumClusterSize:100,
           styles:[
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
-            {textColor: 'white',url: '/assets/group_1.png',height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
+            {textColor: 'white',url: image_path_ar[1][1],height:55,width:56},
           ]
         });
         marker_group_2 = new MarkerClusterer(map, remark_2_arr,{
           minimumClusterSize:100,
           styles:[
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
-            {textColor: 'white',url: '/assets/group_2.png',height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
+            {textColor: 'white',url: image_path_ar[1][2],height:65,width:66},
           ]
         });
       }
