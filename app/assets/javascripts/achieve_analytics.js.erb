@@ -15163,14 +15163,13 @@ if ($('#page_js_status').prop('checked') == false) {
             sender_list_objs = [[],cls.data,sfs.data];
             let ap_cl = ``;
             let ap_sf = ``;
-
             cls.data.forEach((cell,i) => {
-              ap_cl += `<option value="${cell.obj_id}">${cell.obj_name}</option>`;
+              ap_cl += `<option value="${cell.obj_id}">${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}</option>`;
 
-              ap_sf += `<optgroup label="${cell.obj_name}"></optgroup>`;
+              ap_sf += `<optgroup label="${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}"></optgroup>`;
               let result = sfs.data.filter(({clinic_id}) => clinic_id == cell.obj_id);
               result.forEach((cel,idx) => {
-                ap_sf += `<option value="${cel.obj_id}">${cel.obj_name}</option>`;
+                ap_sf += `<option value="${cel.obj_id}">${user_name==MSD_smn?`担当者${cel.obj_id}`: cel.obj_name}</option>`;
               });
             });
             $('#filter_clinic_0').html(ap_cl);
