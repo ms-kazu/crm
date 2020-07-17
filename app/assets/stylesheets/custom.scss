@@ -4800,7 +4800,7 @@ html {
                   grid-template-columns:1fr 3rem;
                   line-height: 2rem;
                   select {
-                    width:4rem;
+                    width:5rem;
                     margin:.25rem 0;
                     height:2rem;
                     border-radius: 4px;
@@ -4857,6 +4857,9 @@ html {
                     display: grid;
                     grid-template-columns:2rem 1fr;
                     line-height: 1.25rem;
+                    &.box_shift {
+                      display: block;
+                    }
                     .indi {
                       font-size: .6rem;
                       text-align: left;

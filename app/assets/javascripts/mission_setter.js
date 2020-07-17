@@ -267,7 +267,7 @@ if ($('#page_js_status').prop('checked') == false) {
           let pa = period_map(ps,pe,0);
           let objs = result.data;
 
-          $('#calendar_title').html(`${pl.str_date(`.`)} ${user_name=="msds"?`${stna[st]}${oid}`:name} 目標`);
+          $('#calendar_title').html(`${pl.str_date(`.`)} ${user_name==MSD_smn?`${stna[st]}${oid}`:name} 目標`);
           sm_day_length = pa.length;
           sm_segment_type = st;
           sm_segment_id = oid;

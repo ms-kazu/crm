@@ -44,8 +44,9 @@ var desc_function = (sender) => {
       let at6 = jihi_rate.toLocaleString();
       let at7 = jihi_cup.toLocaleString();
       let at8 = hup.toLocaleString();
-      let at9 = new_repeat;
-      let at10 = total_repeat;
+      let at9 = data1.toLocaleString();
+      let at10 = new_repeat;
+      let at11 = total_repeat;
 
       if (!cpt) {
         ap +=
@@ -65,8 +66,9 @@ var desc_function = (sender) => {
           <td>${at6}%</td>
           <td>¥${at7}</td>
           <td>¥${at8}</td>
-          <td>${at9}%</td>
+          <td>¥${at9}</td>
           <td>${at10}%</td>
+          <td>${at11}%</td>
         </tr>
         `;
       } else {
@@ -102,8 +104,9 @@ var desc_function = (sender) => {
         let c_at6 = c_jihi_rate.toLocaleString();
         let c_at7 = c_jihi_cup.toLocaleString();
         let c_at8 = c_hup.toLocaleString();
-        let c_at9 = c_new_repeat;
-        let c_at10 = c_total_repeat;
+        let c_at9 = c_data1.toLocaleString();
+        let c_at10 = c_new_repeat;
+        let c_at11 = c_total_repeat;
 
         let rate0 = data0.to_rate(c_data0).rate_str();
         let rate1 = data3.to_rate(c_data3).rate_str();
@@ -114,8 +117,9 @@ var desc_function = (sender) => {
         let rate6 = jihi_rate.to_rate(c_jihi_rate).rate_str();
         let rate7 = jihi_cup.to_rate(c_jihi_cup).rate_str();
         let rate8 = hup.to_rate(c_hup).rate_str();
-        let rate9 = new_repeat.to_rate(c_new_repeat).rate_str();
-        let rate10 = total_repeat.to_rate(c_total_repeat).rate_str();
+        let rate9 = data1.to_rate(c_data1).rate_str();
+        let rate10 = new_repeat.to_rate(c_new_repeat).rate_str();
+        let rate11 = total_repeat.to_rate(c_total_repeat).rate_str();
 
         ap +=
         `
@@ -171,14 +175,19 @@ var desc_function = (sender) => {
             <div class="rate">${rate8}</div>
           </td>
           <td>
-            <div class="amount">${at9}%</div>
-            <div class="c_amount">${c_at9}%</div>
+            <div class="amount">¥${at9}</div>
+            <div class="c_amount">¥${c_at9}</div>
             <div class="rate">${rate9}</div>
           </td>
           <td>
             <div class="amount">${at10}%</div>
             <div class="c_amount">${c_at10}%</div>
             <div class="rate">${rate10}</div>
+          </td>
+          <td>
+            <div class="amount">${at11}%</div>
+            <div class="c_amount">${c_at11}%</div>
+            <div class="rate">${rate11}</div>
           </td>
         </tr>
         `;
@@ -192,7 +201,7 @@ var desc_function = (sender) => {
           <tr class="group">
             <th></th>
             <th colspan="5">ボリューム(Quantity)</th>
-            <th colspan="6">効果(Quality)</th>
+            <th colspan="7">効果(Quality)</th>
           </tr>
           <tr>
             <th>${tia[st]}</th>
@@ -205,6 +214,7 @@ var desc_function = (sender) => {
             <th>自費割合</th>
             <th>自費客単</th>
             <th>自費時単</th>
+            <th>自費LTV</th>
             <th>新規顧客再来率</th>
             <th>リピート率</th>
           </tr>
@@ -215,7 +225,7 @@ var desc_function = (sender) => {
     );
 
     let table = $('#list_table').DataTable({
-      columnDefs:[{type:'currency',targets:[1,2,3,4,5,6,7,8,9,10,11]}],
+      columnDefs:[{type:'currency',targets:[1,2,3,4,5,6,7,8,9,10,11,12]}],
       lengthMenu: [10,20,30,40,50],
       displayLength:10,
       lengthChange: true,

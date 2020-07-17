@@ -30,50 +30,59 @@
           <div class="left_base">
             <div class="box_box">
               <div class="box">
-                <div class="title"><span>入力方法1</span> 月内全て</div>
-                <form onsubmit="month_mission_input(); return false;" name="mmi_form">
+                <div class="title"><span>入力方法1</span> 全ての日</div>
+                <form onsubmit="all_day_select(); return false;" name="ads_form">
                   <select name="status">
                     <option value="0">休日</option>
                     <option value="1">半日営業</option>
-                    <option value="2">全日営業</option>
+                    <option value="2" selected>通常営業</option>
                   </select>
                   <button class="button create" type="submit">適用</button>
                 </form>
               </div>
               <div class="box">
-                <div class="title"><span>入力方法2</span> 日割目標</div>
-                <form onsubmit="day_mission_input(); return false;" name="dmi_form">
-                  <input type="number" name="amount" value="0">
+                <div class="title"><span>入力方法2</span> 平日</div>
+                <form onsubmit="week_day_select(); return false;" name="wds_form">
+                  <select name="status">
+                    <option value="0">休日</option>
+                    <option value="1">半日営業</option>
+                    <option value="2" selected>通常営業</option>
+                  </select>
                   <button class="button create" type="submit">適用</button>
                 </form>
               </div>
               <div class="box">
-                <div class="title"><span>入力方法3</span> 平日</div>
-                <form onsubmit="weekday_mission_input(); return false;" name="wmi_form">
-                  <input type="number" name="amount" value="0">
+                <div class="title"><span>入力方法3</span> 休日</div>
+                <form onsubmit="holi_day_select(); return false;" name="hds_form">
+                  <select name="status">
+                    <option value="0">休日</option>
+                    <option value="1">半日営業</option>
+                    <option value="2" selected>通常営業</option>
+                  </select>
                   <button class="button create" type="submit">適用</button>
                 </form>
               </div>
               <div class="box">
-                <div class="title"><span>入力方法4</span> 休日</div>
-                <form onsubmit="holiday_mission_input(); return false;" name="hmi_form">
-                  <input type="number" name="amount" value="0">
-                  <button class="button create" type="submit">適用</button>
-                </form>
-              </div>
-              <div class="box">
-                <div class="title"><span>入力方法5</span> 曜日</div>
-                <form onsubmit="select_week_mission_input(); return false;" name="swmi_form">
+                <div class="title"><span>入力方法4</span> 曜日</div>
+                <form onsubmit="week_select(); return false;" name="ws_form">
                   <select name="week" id="way5_select_week"></select><br>
-                  <input type="number" name="amount" value="0">
+                  <select name="status">
+                    <option value="0">休日</option>
+                    <option value="1">半日営業</option>
+                    <option value="2" selected>通常営業</option>
+                  </select>
                   <button class="button create" type="submit">適用</button>
                 </form>
               </div>
               <div class="box">
-                <div class="title"><span>入力方法6</span> 任意の日付</div>
-                <form onsubmit="select_day_mission_input(); return false;" name="sdmi_form">
+                <div class="title"><span>入力方法5</span> 任意の日付</div>
+                <form onsubmit="perticular_day_select(); return false;" name="pds_form">
                   <select name="day" id="way6_select_day"></select><br>
-                  <input type="number" name="amount" value="0">
+                  <select name="status">
+                    <option value="0">休日</option>
+                    <option value="1">半日営業</option>
+                    <option value="2" selected>通常営業</option>
+                  </select>
                   <button class="button create" type="submit">適用</button>
                 </form>
               </div>

@@ -4,41 +4,34 @@ var sm_day_length = 0;
 var sm_segment_type = 1;
 var sm_segment_id = 0;
 var sm_segment_month = `2020-01`;
-var return_ipath = (sender) => {
-  if (sender == 0) return `w_a`;
-  else return `c_a`;
+
+var shift_name_arr = ["休日","半日営業","通常営業"];
+var all_day_select = () => {
+  let value = document.forms['ads_form'].elements[`status`].value;
+  $(`.cell_day .w_a`).html(shift_name_arr[value]);
+  $(`.cell_day .w_a`).attr('data-set',value);
 }
-var month_mission_input = () => {
-  let amount = Math.round(Number(document.forms['mmi_form'].elements['amount'].value) / sm_day_length).toLocaleString();
-  let mci_type = $('input[name="mci_type"]:checked').prop('id').split('_')[2];
-  $(`.cell_day .${return_ipath(mci_type)}`).html(amount);
+var week_day_select = () => {
+  let value = document.forms['wds_form'].elements['status'].value;
+  $(`.cell_day_weekday .w_a`).html(shift_name_arr[value]);
+  $(`.cell_day_weekday .w_a`).attr('data-set',value);
 }
-var day_mission_input = () => {
-  let amount = Number(document.forms['dmi_form'].elements['amount'].value).toLocaleString();
-  let mci_type = $('input[name="mci_type"]:checked').prop('id').split('_')[2];
-  $(`.cell_day .${return_ipath(mci_type)}`).html(amount);
+var holi_day_select = () => {
+  let value = document.forms['hds_form'].elements['status'].value;
+  $(`.cell_day_holiday .w_a`).html(shift_name_arr[value]);
+  $(`.cell_day_holiday .w_a`).attr('data-set',value);
 }
-var weekday_mission_input = () => {
-  let amount = Number(document.forms['wmi_form'].elements['amount'].value).toLocaleString();
-  let mci_type = $('input[name="mci_type"]:checked').prop('id').split('_')[2];
-  $(`.cell_day_weekday .${return_ipath(mci_type)}`).html(amount);
+var week_select = () => {
+  let week = document.forms['ws_form'].elements['week'].value;
+  let value = document.forms['ws_form'].elements['status'].value;
+  $(`.cell_day_week_${week} .w_a`).html(shift_name_arr[value]);
+  $(`.cell_day_week_${week} .w_a`).attr('data-set',value);
 }
-var holiday_mission_input = () => {
-  let amount = Number(document.forms['hmi_form'].elements['amount'].value).toLocaleString();
-  let mci_type = $('input[name="mci_type"]:checked').prop('id').split('_')[2];
-  $(`.cell_day_holiday .${return_ipath(mci_type)}`).html(amount);
-}
-var select_week_mission_input = () => {
-  let week = document.forms['swmi_form'].elements['week'].value;
-  let amount = Number(document.forms['swmi_form'].elements['amount'].value).toLocaleString();
-  let mci_type = $('input[name="mci_type"]:checked').prop('id').split('_')[2];
-  $(`.cell_day_week_${week} .${return_ipath(mci_type)}`).html(amount);
-}
-var select_day_mission_input = () => {
-  let day = document.forms['sdmi_form'].elements['day'].value;
-  let amount = Number(document.forms['sdmi_form'].elements['amount'].value).toLocaleString();
-  let mci_type = $('input[name="mci_type"]:checked').prop('id').split('_')[2];
-  $(`.cell_day_day_${day} .${return_ipath(mci_type)}`).html(amount);
+var perticular_day_select = () => {
+  let day = document.forms['pds_form'].elements['day'].value;
+  let value = document.forms['pds_form'].elements['status'].value;
+  $(`.cell_day_day_${day} .w_a`).html(shift_name_arr[value]);
+  $(`.cell_day_day_${day} .w_a`).attr('data-set',value);
 }
 
 $(document).off('click','#setting_modal_quit').on('click','#setting_modal_quit',function() {
@@ -49,22 +42,24 @@ $(document).off('click','#setting_modal_submit').on('click','#setting_modal_subm
   let seg_id = sm_segment_id;
   let seg_month = sm_segment_month;
 
-  let sql = `insert into mt_targets(sdate,seg_type,seg_id,window_,count_) values`;
+  let sql = `insert into mt_opens(sdate,seg_id,status) values`;
   for (let i = 1;i <= sm_day_length;i++) {
-    let w_a = Number($(`.cell_day_day_${i} .w_a`).html().replace(',','')) || 0;
-    let c_a = Number($(`.cell_day_day_${i} .c_a`).html().replace(',','')) || 0;
+    let w_a = $(`.cell_day_day_${i} .w_a`).attr('data-set');
+    if (!w_a) {
+      alert('全ての日に営業日設定をしてください。');
+      return;
+    }
     let comma = i != sm_day_length ? `,`: ``;
-    sql += `("${seg_month}-${i.str_num()}",${seg_type},${seg_id},${w_a},${c_a})${comma}`;
+    sql += `("${seg_month}-${i.str_num()}",${seg_id},${w_a})${comma}`;
   }
 
   const sender_data = {
-    st:seg_type,
     si:seg_id,
     sm:seg_month,
     sql:sql
   }
 
-  let result = await ajax_api_function("create_mission",sender_data);
+  let result = await ajax_api_function("create_open",sender_data);
   if (result.dataExists) {
     window.location.reload();
   } else {
@@ -114,7 +109,7 @@ if ($('#page_js_status').prop('checked') == false) {
         <tr>
           <th class="open_selector month_tr_os" data-label="${label}"><div></div></th>
           <td>${pl}</td>
-          <td>¥${window_amount.toLocaleString()}</td>
+          <td>${window_amount.toLocaleString()}日</td>
         </tr>
         `;
       }
@@ -140,7 +135,7 @@ if ($('#page_js_status').prop('checked') == false) {
           <tr>
             <th class="open_selector"></th>
             <td><button class="cl_sl_btn" id="cl_sl_${pl}_${cell.id}" data-name="${cell.name}">${user_name==MSD_smn?`店舗${cell.id}`:cell.name}</button></td>
-            <td>¥${window_amount.toLocaleString()}</td>
+            <td>${window_amount.toLocaleString()}日</td>
           </tr>
           `;
         });
@@ -204,7 +199,7 @@ if ($('#page_js_status').prop('checked') == false) {
           let pa = period_map(ps,pe,0);
           let objs = result.data;
 
-          $('#calendar_title').html(`${pl.str_date(`.`)} ${user_name=="msds"?`${stna[st]}${oid}`:name} 営業日`);
+          $('#calendar_title').html(`${pl.str_date(`.`)} ${user_name==MSD_smn?`店舗${oid}`:name} 営業日`);
           sm_day_length = pa.length;
           sm_segment_type = st;
           sm_segment_id = oid;
@@ -233,13 +228,8 @@ if ($('#page_js_status').prop('checked') == false) {
             `
             <div class="cell cell_day cell_day_day_${i} ${week_type} cell_day_week_${first_week}">
               <div class="day">${i}</div>
-              <div class="box">
-                <div class="indi">窓売</div>
-                <div class="amount w_a">${w_a.toLocaleString()}</div>
-              </div>
-              <div class="box">
-                <div class="indi">来院数</div>
-                <div class="amount c_a">${c_a.toLocaleString()}</div>
+              <div class="box box_shift">
+                <div class="amount w_a">未設定</div>
               </div>
             </div>
             `;
