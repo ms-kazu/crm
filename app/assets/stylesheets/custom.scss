@@ -2943,36 +2943,37 @@ html {
                 }
                 &._details_box_ {
                   .details_cell_base {
-                    padding: .125rem;
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr 1fr;
                     input {
                       display: none;
                       &:checked + label {
                         .wrap {
-                          border:1px solid $btn_color;
                           .row_title {
+                            font-size: 1rem;
                             color:$btn_color;
-                            font-size: .9rem;
-                            border-bottom: 1px solid $border_color;
+                            background-color: $btn_color;
+                            color:#fff !important;
+                            span {
+                              color:#fff !important;
+                            }
                           }
                         }
                       }
                     }
                     label {
-                      padding: .125rem;
+                      padding:0;
                       * {
                         transition: .1s;
                       }
                       .wrap {
-                        border:1px solid $border_color;
-                        padding: .25rem;
                         .row_title {
-                          line-height: 1.5rem;
+                          background-color: #fafafa;
                           font-size: .75rem;
-                          border-bottom: 1px solid $border_color;
+                          padding:.125rem .25rem;
                         }
                         .contents {
+                          padding: .25rem;
                           line-height: 2rem;
                           font-size: 1.25rem;
                           .amount {
@@ -2984,6 +2985,7 @@ html {
                           .rate {
                           }
                           .bb {
+                            margin:.25rem .5rem;
                             height:4px;
                             background-color: $border_color;
                             .b {

@@ -5,6 +5,7 @@ var desc_function = (data,so) => {
   let sum_obj = data.data.summary;
   let obj_m = data.data.m;
   let obj_mmm = data.data.mmm;
+  let opens = data.data.opens;
 
   let st = so.st;
   let p0 = so.p0;
@@ -341,6 +342,8 @@ var desc_function = (data,so) => {
 
       objs.forEach((cell) => {
         let result = obj.filter(({obj_id}) => obj_id == cell.obj_id);
+        let result_open = opens.filter(({obj_id}) => obj_id == cell.obj_id);
+
         let obj_accuracy = result.length.to_perate((result.length + period_map(p1,pe,0).length - 1)).to_Perate(1);
         accuracy_sum += obj_accuracy;
 
@@ -363,18 +366,27 @@ var desc_function = (data,so) => {
         let forecast_2 = 0;
         pa.forEach((label) => {
           if (label > p1) {
-            let year = label.split('-')[0];
-            let month = Number(label.split('-')[1]) - 1;
-            let day = Number(label.split('-')[2]);
-            let w = new Date(year,month,day).getDay();
+            let rslt_open = result_open.filter(({period}) => period == label);
+            let status = rslt_open.sum_val(`status`);
 
-            let data_0 = ave_0_arr[w];
-            let data_1 = ave_1_arr[w];
-            let data_2 = ave_2_arr[w];
+            if (status == 1) {
+              forecast_0 += 0;
+              forecast_1 += 0;
+              forecast_2 += 0;
+            } else {
+              let year = label.split('-')[0];
+              let month = Number(label.split('-')[1]) - 1;
+              let day = Number(label.split('-')[2]);
+              let w = new Date(year,month,day).getDay();
 
-            forecast_0 += data_0;
-            forecast_1 += data_1;
-            forecast_2 += data_2;
+              let data_0 = ave_0_arr[w];
+              let data_1 = ave_1_arr[w];
+              let data_2 = ave_2_arr[w];
+
+              forecast_0 += data_0;
+              forecast_1 += data_1;
+              forecast_2 += data_2;
+            }
           }
         });
 

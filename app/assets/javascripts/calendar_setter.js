@@ -5,7 +5,7 @@ var sm_segment_type = 1;
 var sm_segment_id = 0;
 var sm_segment_month = `2020-01`;
 
-var shift_name_arr = ["休日","半日営業","通常営業"];
+var shift_name_arr = ["未設定","休日","半日営業","営業日"];
 var all_day_select = () => {
   let value = document.forms['ads_form'].elements[`status`].value;
   $(`.cell_day .w_a`).html(shift_name_arr[value]);
@@ -45,7 +45,7 @@ $(document).off('click','#setting_modal_submit').on('click','#setting_modal_subm
   let sql = `insert into mt_opens(sdate,seg_id,status) values`;
   for (let i = 1;i <= sm_day_length;i++) {
     let w_a = $(`.cell_day_day_${i} .w_a`).attr('data-set');
-    if (!w_a) {
+    if (!w_a || w_a == 0) {
       alert('全ての日に営業日設定をしてください。');
       return;
     }
@@ -58,6 +58,20 @@ $(document).off('click','#setting_modal_submit').on('click','#setting_modal_subm
     sm:seg_month,
     sql:sql
   }
+  /*
+
+  CREATE TABLE `mt_opens` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `sdate` date DEFAULT NULL,
+    `seg_id` int(6) DEFAULT NULL,
+    `status` smallint(6) DEFAULT NULL,
+    `updated_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+  )
+
+  */
 
   let result = await ajax_api_function("create_open",sender_data);
   if (result.dataExists) {
@@ -84,7 +98,7 @@ if ($('#page_js_status').prop('checked') == false) {
       let pa = period_map(ps,pe,2);
 
       const sender_data = {ps:ps,pe:pe}
-      let result = await ajax_api_function("read_mission_objs",sender_data);
+      let result = await ajax_api_function("read_open_objs",sender_data);
       if (result.dataExists) {
         desc_month_list(pa,result);
       } else {
@@ -93,23 +107,19 @@ if ($('#page_js_status').prop('checked') == false) {
     }
     const desc_month_list = (pa,sender) => {
       let cl_objs = sender.data_cl;
-      let sf_objs = sender.data_sf;
       let mscl_objs = sender.data_mscl;
-      let mssf_objs = sender.data_mssf;
-
       let ap = ``;
       for (let i = pa.length - 1;i >= 0;i--) {
         let label = pa[i];
         let pl = label.str_date(`.`);
         let result = mscl_objs.filter(({month}) => month == label);
-        let window_amount = result.sum_val(`window_amount`);
-        let count_amount = result.sum_val(`count_amount`);
+        let day = result.sum_val(`status`);
         ap +=
         `
         <tr>
           <th class="open_selector month_tr_os" data-label="${label}"><div></div></th>
           <td>${pl}</td>
-          <td>${window_amount.toLocaleString()}日</td>
+          <td>${day.toLocaleString()}日</td>
         </tr>
         `;
       }
@@ -127,15 +137,14 @@ if ($('#page_js_status').prop('checked') == false) {
         let list_ap = ``;
         cl_objs.forEach((cell) => {
           let mission = result.filter(({obj_id}) => obj_id == cell.id);
-          let window_amount = mission.sum_val(`window_amount`);
-          let count_amount = mission.sum_val(`count_amount`);
+          let day = mission.sum_val(`status`);
 
           list_ap +=
           `
           <tr>
             <th class="open_selector"></th>
             <td><button class="cl_sl_btn" id="cl_sl_${pl}_${cell.id}" data-name="${cell.name}">${user_name==MSD_smn?`店舗${cell.id}`:cell.name}</button></td>
-            <td>${window_amount.toLocaleString()}日</td>
+            <td>${day.toLocaleString()}日</td>
           </tr>
           `;
         });
@@ -146,7 +155,7 @@ if ($('#page_js_status').prop('checked') == false) {
               <tr>
                 <th><i class="fas fa-clinic-medical"></i></th>
                 <th>店舗名</th>
-                <th>営業日合計(半日=0.5)</th>
+                <th>営業日合計</th>
               </tr>
             </thead>
             <tbody>
@@ -191,7 +200,7 @@ if ($('#page_js_status').prop('checked') == false) {
         oid:oid
       }
 
-      let result = await ajax_api_function("read_mission_calendar",sender_data);
+      let result = await ajax_api_function("read_open_calendar",sender_data);
       if (result.dataExists) {
         const desc_calendar = () => {
           let ps = new Date(`${pl}-01`);
@@ -209,7 +218,6 @@ if ($('#page_js_status').prop('checked') == false) {
           let select_week = ``;
           let first_week = new Date(pa[0]).getDay();
           let month = new Date(pa[0]).getMonth() + 1;
-
           let ap = ``;
           for (let i = 0;i <= 6;i++) {
             select_week += `<option value="${i}">${wna[i]}曜日</option>`;
@@ -221,15 +229,13 @@ if ($('#page_js_status').prop('checked') == false) {
 
             let week_type = first_week == 0 || first_week == 6 ? `cell_day_holiday` : `cell_day_weekday`;
             let result = objs.filter(({date}) => date == `${pl}-${i.str_num()}`);
-            let w_a = result.sum_val(`window_amount`);
-            let c_a = result.sum_val(`count_amount`);
-
+            let status = result.sum_val(`status`);
             ap +=
             `
             <div class="cell cell_day cell_day_day_${i} ${week_type} cell_day_week_${first_week}">
               <div class="day">${i}</div>
               <div class="box box_shift">
-                <div class="amount w_a">未設定</div>
+                <div class="amount w_a" data-set="${status}">${shift_name_arr[status]}</div>
               </div>
             </div>
             `;
