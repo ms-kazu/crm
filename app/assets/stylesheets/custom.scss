@@ -29,6 +29,13 @@ $border_color:#e1e1e1;
     width:100%;
     line-height:2.5rem;
     table-layout: fixed;
+    tbody {
+      th {
+        overflow: auto !important;
+        text-overflow:clip !important;
+        white-space:normal !important;
+      }
+    }
     tr {
       text-align: center;
       th,td {
