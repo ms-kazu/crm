@@ -328,6 +328,7 @@ var desc_function = (data) => {
     (() => {
       $('#table_clinic_base').html(``);
 
+      objs = objs.filter(({obj_id}) => obj_id >= 0);
       objs.forEach((cell) => {
         let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
         let repeat = repeats.filter(({obj_id}) => obj_id == cell.obj_id)
@@ -366,34 +367,34 @@ var desc_function = (data) => {
           let cate_4 = cate.filter(({type}) => type == 15);
           let cate_5 = cate.filter(({type}) => type == 16);
 
-          let cate_s_0 = cate_0.sum_val(`data_1`);
-          let cate_f_0 = cate_0.sum_val(`data_2`);
-          let cate_c_0 = cate_0.sum_val(`data_4`);
+          let cate_s_0 = cate_0.filter(({period}) => period == label).sum_val(`data_1`);
+          let cate_f_0 = cate_0.filter(({period}) => period == label).sum_val(`data_2`);
+          let cate_c_0 = cate_0.filter(({period}) => period == label).sum_val(`data_4`);
           let cate_a_0 = cate_c_0.to_Perate(day_pa.length);
 
-          let cate_s_1 = cate_1.sum_val(`data_1`);
-          let cate_f_1 = cate_1.sum_val(`data_2`);
-          let cate_c_1 = cate_1.sum_val(`data_4`);
+          let cate_s_1 = cate_1.filter(({period}) => period == label).sum_val(`data_1`);
+          let cate_f_1 = cate_1.filter(({period}) => period == label).sum_val(`data_2`);
+          let cate_c_1 = cate_1.filter(({period}) => period == label).sum_val(`data_4`);
           let cate_a_1 = cate_c_1.to_Perate(day_pa.length);
 
-          let cate_s_2 = cate_2.sum_val(`data_1`);
-          let cate_f_2 = cate_2.sum_val(`data_2`);
-          let cate_c_2 = cate_2.sum_val(`data_4`);
+          let cate_s_2 = cate_2.filter(({period}) => period == label).sum_val(`data_1`);
+          let cate_f_2 = cate_2.filter(({period}) => period == label).sum_val(`data_2`);
+          let cate_c_2 = cate_2.filter(({period}) => period == label).sum_val(`data_4`);
           let cate_a_2 = cate_c_2.to_Perate(day_pa.length);
 
-          let cate_s_3 = cate_3.sum_val(`data_1`);
-          let cate_f_3 = cate_3.sum_val(`data_2`);
-          let cate_c_3 = cate_3.sum_val(`data_4`);
+          let cate_s_3 = cate_3.filter(({period}) => period == label).sum_val(`data_1`);
+          let cate_f_3 = cate_3.filter(({period}) => period == label).sum_val(`data_2`);
+          let cate_c_3 = cate_3.filter(({period}) => period == label).sum_val(`data_4`);
           let cate_a_3 = cate_c_3.to_Perate(day_pa.length);
 
-          let cate_s_4 = cate_4.sum_val(`data_1`);
-          let cate_f_4 = cate_4.sum_val(`data_2`);
-          let cate_c_4 = cate_4.sum_val(`data_4`);
+          let cate_s_4 = cate_4.filter(({period}) => period == label).sum_val(`data_1`);
+          let cate_f_4 = cate_4.filter(({period}) => period == label).sum_val(`data_2`);
+          let cate_c_4 = cate_4.filter(({period}) => period == label).sum_val(`data_4`);
           let cate_a_4 = cate_c_4.to_Perate(day_pa.length);
 
-          let cate_s_5 = cate_5.sum_val(`data_1`);
-          let cate_f_5 = cate_5.sum_val(`data_2`);
-          let cate_c_5 = cate_5.sum_val(`data_4`);
+          let cate_s_5 = cate_5.filter(({period}) => period == label).sum_val(`data_1`);
+          let cate_f_5 = cate_5.filter(({period}) => period == label).sum_val(`data_2`);
+          let cate_c_5 = cate_5.filter(({period}) => period == label).sum_val(`data_4`);
           let cate_a_5 = cate_c_5.to_Perate(day_pa.length);
 
 
@@ -505,7 +506,7 @@ var desc_function = (data) => {
 
         $('#table_clinic_base').append(
           `
-          <table data-sheet-name="${cell.obj_name}">
+          <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
             <tr>
               <th>${cell.obj_name}</th>
               <th>${ps.str_date(`.`)}</th>
@@ -856,6 +857,7 @@ var desc_function = (data) => {
     (() => {
       $('#table_staff_base').html(``);
 
+      objs = objs.filter(({obj_id}) => obj_id >= 0);
       objs.forEach((cell) => {
         let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
         let repeat = repeats.filter(({obj_id}) => obj_id == cell.obj_id)
@@ -885,12 +887,12 @@ var desc_function = (data) => {
 
           let cate = cates.filter(({obj_id}) => obj_id == cell.obj_id);
 
-          let cate_0 = cate.filter(({type}) => type == 11);
-          let cate_1 = cate.filter(({type}) => type == 12);
-          let cate_2 = cate.filter(({type}) => type == 13);
-          let cate_3 = cate.filter(({type}) => type == 14);
-          let cate_4 = cate.filter(({type}) => type == 15);
-          let cate_5 = cate.filter(({type}) => type == 16);
+          let cate_0 = cate.filter(({type}) => type == 11).filter(({period}) => period == label);
+          let cate_1 = cate.filter(({type}) => type == 12).filter(({period}) => period == label);
+          let cate_2 = cate.filter(({type}) => type == 13).filter(({period}) => period == label);
+          let cate_3 = cate.filter(({type}) => type == 14).filter(({period}) => period == label);
+          let cate_4 = cate.filter(({type}) => type == 15).filter(({period}) => period == label);
+          let cate_5 = cate.filter(({type}) => type == 16).filter(({period}) => period == label);
 
           let cate_s_0 = cate_0.sum_val(`data_1`);
           let cate_f_0 = cate_0.sum_val(`data_2`);
@@ -996,7 +998,7 @@ var desc_function = (data) => {
 
         $('#table_staff_base').append(
           `
-          <table data-sheet-name="${cell.obj_name}">
+          <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
             <tr>
               <th>${cell.obj_name}</th>
               <th>${ps.str_date(`.`)}</th>
@@ -1154,6 +1156,7 @@ var desc_function = (data) => {
     let objs = data.data.data5;
 
     let ap = ``;
+    objs = objs.filter(({obj_id}) => obj_id >= 0);
     objs.forEach((cell) => {
       ap +=
       `
@@ -1215,6 +1218,7 @@ var desc_function = (data) => {
     let objs = data.data.data8;
 
     let ap = ``;
+    objs = objs.filter(({obj_id}) => obj_id >= 0);
     objs.forEach((cell) => {
       ap +=
       `
@@ -1278,6 +1282,7 @@ var desc_function = (data) => {
     let objs = data.data.data9;
 
     let ap = ``;
+    objs = objs.filter(({obj_id}) => obj_id >= 0);
     objs.forEach((cell) => {
       ap +=
       `
