@@ -291,19 +291,19 @@ var desc_function = (data,so) => {
       $('#summary_base').html(
         `
         <div class="row">
-          <div class="indi">計:予測売上</div>
+          <div class="indi">予測売上残値</div>
           <div class="content">
             <div class="amount">¥${data_0.toLocaleString()}</div>
           </div>
         </div>
         <div class="row">
-          <div class="indi">上方修正</div>
+          <div class="indi">上方修正値</div>
           <div class="content">
             <div class="amount" style="color:rgb(54,183,235)">¥${data_1.toLocaleString()}</div>
           </div>
         </div>
         <div class="row">
-          <div class="indi">下方修正</div>
+          <div class="indi">下方修正値</div>
           <div class="content">
             <div class="amount" style="color:rgb(242,100,100)">¥${data_2.toLocaleString()}</div>
           </div>
