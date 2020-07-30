@@ -396,7 +396,7 @@ var desc_function = (data) => {
           <td>${cell.product_name}</td>
           <td>${cell.treat_min}分</td>
           <td>
-            <a href="/achieve_analytics?st=2&ss=true&si=${cell.staff_id}">
+            <a href="/achieve_analytics?st=3&ss=true&si=${cell.staff_id}">
               ${cell.staff_name}
             </a>
           </td>
@@ -443,7 +443,7 @@ var desc_function = (data) => {
   let radar_pie_ctx = document.getElementById('radar_pie').getContext('2d');
   desc_graph_init("radar_pie","radar_pie_ctx",'radar');
   let trend_line_ctx = document.getElementById('trend_line').getContext('2d');
-  desc_graph_init("trend_line","trend_line_ctx",'LineWithLine');
+  desc_graph_init("trend_line","trend_line_ctx",'crossed_lines');
 
   desc_static_sections();
 }

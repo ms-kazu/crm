@@ -56,8 +56,12 @@ if ($('#page_js_status').prop('checked') == false) {
         let st = Number($('#segment_select option:selected').prop('value'));
         let c0_ta = ["前日比","1週間前比","1ヶ月前比"];
         let c1_ta = ["7日前比","2週間前比","1年前比"];
-        let tia = [`<i class="fas fa-clinic-medical"></i>`,`<i class="fas fa-user-tie"></i>`];
-        let objs = [result.data.data_cl,result.data.data_sf];
+        let tia = [
+          `<i class="fas fa-map-marked-alt"></i>`,
+          `<i class="fas fa-clinic-medical"></i>`,
+          `<i class="fas fa-user-tie"></i>`
+        ];
+        let objs = [result.data.data_ar,result.data.data_cl,result.data.data_sf];
 
         let ps = so[`pt${pt}`]._0[0];
         let pe = so[`pt${pt}`]._0[1];
@@ -75,7 +79,6 @@ if ($('#page_js_status').prop('checked') == false) {
 
           let at1 = result_pt0.reduce((a,b) => a + b.m_mado,0) || 0;
           let at1_s = at0.to_perate(at1).perate_str();
-
           let at2 = result_pt1.reduce((a,b) => a + b.mado,0) || 0;
           let at2_s = at0.to_rate(at2).rate_str();
 

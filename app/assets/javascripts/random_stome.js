@@ -139,7 +139,7 @@ if ($('#page_js_status').prop('checked') == false) {
 
   $(document).ready(async function(){
     (() => {
-      $('.left_bar_base a:eq(11) .cell').addClass('selected');
+      $('.left_bar_base a:eq(12) .cell').addClass('selected');
       jQuery(function($) {
         $.extend( $.fn.dataTable.defaults, {
           language: {
@@ -164,7 +164,7 @@ if ($('#page_js_status').prop('checked') == false) {
     (() => {
       let name_arr = [
         ["","月次","週次","日次","曜日別","時間帯別"],
-        ["","店舗","担当者"],
+        ["","エリア","店舗","担当者"],
         ["","簡易5世代","10世代"],
         ["","男女"],
         ["","大分類","中分類","小分類","キーワード","自費メニュー"],

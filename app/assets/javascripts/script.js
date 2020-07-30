@@ -239,14 +239,16 @@ Array.prototype.exist_val = function() {
 
 const wna = ["日","月","火","水","木","金","土"];
 const ptna = ["日別","週別","月別"];
-const stna = ["","店舗","スタッフ","メニュー"];
+const stna = ["","エリア","店舗","スタッフ","メニュー"];
 const stia = [
   `<i class="fas fa-globe"></i>`,
+  `<i class="fas fa-map-marked-alt"></i>`,
   `<i class="fas fa-clinic-medical"></i>`,
   `<i class="fas fa-user-tie"color:rgba(32,170,179,1);></i>`
 ];
 const stca = [
   `background-color:rgb(18,83,164);`,
+  `background-color:rgb(255,200,0);`,
   `background-color:rgba(242,100,100,1);`,
   `background-color:rgba(32,170,179,1);`
 ];

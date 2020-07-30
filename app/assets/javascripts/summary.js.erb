@@ -11,56 +11,173 @@ var desc_function = (data,so) => {
       <div class="section">
         <div class="section_title">
           今日の概要
-          <span style="font-size:.7rem;color:#333;" id="day_trend_indi">データ更新時刻 : --:--</span>
+          <span style="font-size:.7rem;color:#333;" id="day_trend_indi">データ更新 : --:--</span>
         </div>
-        <div class="cells_box">
-          <div class="cell cell_4x1 inline">
-            <div class="box day_box">
+        <div class="cover" id="day_trend_cover">
+          <div class="text">
+            <i class="fas fa-sync-alt fa-spin"></i>
+            Loading...
+          </div>
+        </div>
+        <div class="cells_box day_cells_box" id="day_section">
+          <div class="cell cell_23x1 inline">
+            <div class="box day_box box_pure">
               <div class="content">
-                <div class="cover" id="day_trend_cover">
-                  <div class="text">
-                    <i class="fad fa-spinner-third fa-spin"></i>
+                <div class="base">
+                  <div class="switch_base">
+                    <input type="radio" name="s0_input_" id="s0_input_0" checked>
+                    <label for="s0_input_0" id="s0_input_label_0">今日(-/-)</label>
+                    <input type="radio" name="s0_input_" id="s0_input_1">
+                    <label for="s0_input_1" id="s0_input_label_1">昨日(-/-)</label>
+                    <button class="redo" id="day_redo">
+                      <i class="fas fa-redo"></i>
+                    </button>
+                  </div>
+                  <div class="graph_wrap">
+                    <canvas id="day_bar" width="500" height="100"></canvas>
+                  </div>
+                  <div class="table_base table_base1" id="day_sum_table_base">
                   </div>
                 </div>
-                <div class="day_base">
-                  <div class="left">
-                    <div class="base">
-                      <div class="switch_base">
-                        <input type="radio" name="s0_input_" id="s0_input_0" checked>
-                        <label for="s0_input_0" id="s0_input_label_0">今日(-/-)</label>
-                        <input type="radio" name="s0_input_" id="s0_input_1">
-                        <label for="s0_input_1" id="s0_input_label_1">昨日(-/-)</label>
-                        <button class="redo" id="day_redo">
-                          <i class="fas fa-redo"></i>
-                        </button>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_13x1 day_sync inline">
+            <div class="box day_box day_box_0 box_pure">
+              <div class="content">
+                <div class="base">
+                  <div class="cel">
+                    <div class="cel_tl">
+                      <div class="tl">
+                        <div class="icn inline">
+                          <i class='fas fa-cash-register'></i>
+                        </div>
+                        窓口売上
                       </div>
-                      <div class="graph_wrap">
-                        <canvas id="day_bar" width="200" height="100"></canvas>
+                      <div class="amount">¥<span id="ds_a_0">0</span></div>
+                    </div>
+                    <div class="cel_content">
+                      <div class="bar_base">
+                        <div class="bar" id="ds_bw_0_0"></div>
                       </div>
-                      <div class="table_base table_base1 no_border" id="day_sum_table_base">
+                      <div class="rate_row">
+                        <div class="tl">前日比</div>
+                        <div class="content">
+                          <div class="r" id="ds_r_0_0">0%</div>
+                          <div class="sub" id="ds_s_0">--</div>
+                        </div>
+                      </div>
+                      <div class="bar_base">
+                        <div class="bar" id="ds_bw_0_1"></div>
+                      </div>
+                      <div class="rate_row">
+                        <div class="tl">前同曜日比</div>
+                        <div class="content">
+                          <div class="r" id="ds_r_0_1">0%</div>
+                          <div class="sub" id="ds_s_1">--</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="right">
-                    <div class="table_base table_base2" id="day_clinic_table_base">
+                  <div class="cel">
+                    <div class="cel_tl">
+                      <div class="tl">
+                        <div class="icn inline">
+                          <i class='fas fa-users'></i>
+                        </div>
+                        来院数
+                      </div>
+                      <div class="amount _sub"><span id="ds_a_1">0</span>人</div>
                     </div>
-                    <div class="table_base table_base2" id="day_staff_table_base">
+                    <div class="cel_content">
+                      <div class="rate_boxes">
+                        <div class="rate_box">
+                          <div class="rate_tl">前日比</div>
+                          <div class="bar_base">
+                            <div class="bar" id="ds_bw_1_0"></div>
+                          </div>
+                          <div class="cnt" id="ds_r_1_0">0%</div>
+                        </div>
+                        <div class="rate_box">
+                          <div class="rate_tl">前同曜日比</div>
+                          <div class="bar_base">
+                            <div class="bar" id="ds_bw_1_1"></div>
+                          </div>
+                          <div class="cnt" id="ds_r_1_1">0%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cel">
+                    <div class="cel_tl">
+                      <div class="tl">
+                        <div class="icn inline">
+                          <i class="fas fa-user-plus"></i>
+                        </div>
+                        新患数
+                      </div>
+                      <div class="amount _sub"><span id="ds_a_2">0</span>人</div>
+                    </div>
+                    <div class="cel_content">
+                      <div class="rate_boxes">
+                        <div class="rate_box">
+                          <div class="rate_tl">前日比</div>
+                          <div class="bar_base">
+                            <div class="bar" id="ds_bw_2_0"></div>
+                          </div>
+                          <div class="cnt" id="ds_r_2_0">0%</div>
+                        </div>
+                        <div class="rate_box">
+                          <div class="rate_tl">前同曜日比</div>
+                          <div class="bar_base">
+                            <div class="bar" id="ds_bw_2_1"></div>
+                          </div>
+                          <div class="cnt" id="ds_r_2_1">0%</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="cell cell_13x1 inline">
+            <div class="box day_box box_pure">
+              <div class="content">
+                <div class="base">
+                  <div class="table_base table_base2 no_border" id="day_staff_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_23x1 inline">
+            <div class="box day_box box_pure">
+              <div class="content">
+                <div class="base">
+                  <div class="table_base table_base2 no_border" id="day_clinic_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
+      </div>
+      <div class="section">
         <div class="section_title">今月の概要</div>
         <div class="cells_box">
           <div class="cell cell_2x1 cell_sync inline">
             <div class="box">
-              <div class="cell_title text_overflow">
+              <div class="cell_title cell_title_r text_overflow">
                 今月のトレンド
                 <div class="icon inline">
                   <i class="fas fa-question-circle help_tips" data-title="セルのクリック" data-help="セルをクリックするとトレンドセクションの値が更新されます。"></i>
+                </div>
+
+                <div class="link_base">
+                  <a href="/achieve_analytics">
+                    <div class="link inline">詳しく見る <i class="fas fa-caret-right"></i></div>
+                  </a>
                 </div>
               </div>
               <div class="content _details_box_">
@@ -82,7 +199,7 @@ var desc_function = (data,so) => {
                   <i class="fas fa-question-circle help_tips" data-title="売上予測" data-help="過去30日以内の曜日別平均値が予測値として表示されます。"></i>
                 </div>
                 <div class="link_base">
-                  <a href="/sales_forecast?s_type=0">
+                  <a href="/sales_forecast?s_type=1">
                     <div class="link inline">詳しく見る <i class="fas fa-caret-right"></i></div>
                   </a>
                 </div>
@@ -135,6 +252,47 @@ var desc_function = (data,so) => {
           </div>
           <div class="cell cell_2x1 inline">
             <div class="box">
+              <div class="cell_title text_overflow">詳細値・その他</div>
+              <div class="content _details_list_">
+                <div class="base">
+                  <div class="sct_tl"><div class="icon inline"><i class="fas fa-heart-rate"></i></div>日別自費売上実績</div>
+                  <div class="sct" id="details_sct_0">
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                  </div>
+                  <div class="sct_tl"><div class="icon inline"><i class="fas fa-users"></i></div>顧客実績</div>
+                  <div class="sct" id="details_sct_1">
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                  </div>
+                  <div class="sct_tl"><div class="icon inline"><i class="fas fa-braille"></i></div>その他</div>
+                  <div class="sct" id="details_sct_2">
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                    <div class="cel inline"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_1x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">顧客属性</div>
+              <div class="content _summary_page_ _table_list_">
+                <div class="base">
+                  <div class="table_base table_base1 no_border" id="customer_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_2x1 inline">
+            <div class="box">
               <div class="cell_title text_overflow">
                 過去6週の週次トレンド
                 <div class="link_base">
@@ -147,7 +305,9 @@ var desc_function = (data,so) => {
                 <div class="graph_wrap" style="padding:0;">
                   <canvas id="week_line" width="500" height="100"></canvas>
                 </div>
-                <div class="table_base table_base_padding table_base2" id="week_table_base">
+                <div class="table_base table_base_padding table_base1 table_base2" id="week_table_base">
+                </div>
+                <div class="table_base table_base_padding table_base1 table_base2" id="week_c_table_base">
                 </div>
               </div>
             </div>
@@ -167,13 +327,26 @@ var desc_function = (data,so) => {
                   <div class="graph_wrap" style="padding:0;">
                     <canvas id="month_line" width="500" height="100"></canvas>
                   </div>
-                  <div class="table_base table_base_padding table_base2" id="month_table_base">
+                  <div class="table_base table_base_padding table_base1 table_base2" id="month_table_base">
+                  </div>
+                  <div class="table_base table_base_padding table_base1 table_base2" id="month_c_table_base">
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="cell cell_1x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">エリア別</div>
+              <div class="content _summary_page_ _table_list_">
+                <div class="base">
+                  <div class="table_base table_base2" id="area_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_3x1 inline">
             <div class="box">
               <div class="cell_title text_overflow">店舗別</div>
               <div class="content _summary_page_ _table_list_">
@@ -184,10 +357,10 @@ var desc_function = (data,so) => {
               </div>
             </div>
           </div>
-          <div class="cell cell_1x1 inline">
+          <div class="cell cell_4x1 inline">
             <div class="box">
               <div class="cell_title text_overflow">担当者別</div>
-              <div class="content _summary_page_ _table_list_">
+              <div class="content">
                 <div class="base">
                   <div class="table_base table_base2" id="staff_table_base">
                   </div>
@@ -195,30 +368,26 @@ var desc_function = (data,so) => {
               </div>
             </div>
           </div>
-          <div class="cell cell_1x1 inline">
+          <div class="cell cell_4x1 inline">
             <div class="box">
-              <div class="cell_title text_overflow">
-                施術カテゴリ
-                <div class="link_base">
-                  <a href="/achieve_analytics?psel=true&ps=${ps}&pe=${pe}&bt=2">
-                    <div class="link inline">詳しく見る <i class="fas fa-caret-right"></i></div>
-                  </a>
-                </div>
-              </div>
-              <div class="content _summary_page_ _table_list_">
+              <div class="cell_title text_overflow">顧客属性の詳細な内訳</div>
+              <div class="content _geneder_details_">
                 <div class="base">
-                  <div class="table_base no_border" id="cate_table_base">
+                  <div class="graph_row">
+                    <div class="_column">
+                      <canvas id="geneder_details_bar" width="500" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas class="inline" id="geneder_details_bar_0" width="300" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas class="inline" id="geneder_details_radar_1" width="100" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas id="geneder_details_pie" width="100" height="100"></canvas>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="cell cell_1x1 inline">
-            <div class="box">
-              <div class="cell_title text_overflow">顧客属性</div>
-              <div class="content _summary_page_ _table_list_">
-                <div class="base">
-                  <div class="table_base no_border no_border2" id="customer_table_base">
+                  <div class="table_base table_base1" id="geneder_details_table_base">
                   </div>
                 </div>
               </div>
@@ -276,28 +445,6 @@ var desc_function = (data,so) => {
               </div>
             </div>
           </div>
-          <div class="cell cell_1x1 inline">
-            <div class="box">
-              <div class="cell_title text_overflow">キーワード</div>
-              <div class="content _summary_page_ _table_list_">
-                <div class="base">
-                  <div class="table_base table_base2" id="keyword_table_base">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="cell cell_1x1 inline">
-            <div class="box">
-              <div class="cell_title text_overflow">割引券・回数券</div>
-              <div class="content _summary_page_ _table_list_">
-                <div class="base">
-                  <div class="table_base table_base2" id="coupon_table_base">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="cell cell_1x1 desktop_elm inline">
             <div class="box">
               <div class="cell_title text_overflow">7日前の離反顧客</div>
@@ -335,12 +482,51 @@ var desc_function = (data,so) => {
               </div>
             </div>
           </div>
+          <div class="cell cell_1x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">
+                施術カテゴリ
+                <div class="link_base">
+                  <a href="/achieve_analytics?psel=true&ps=${ps}&pe=${pe}&bt=2">
+                    <div class="link inline">詳しく見る <i class="fas fa-caret-right"></i></div>
+                  </a>
+                </div>
+              </div>
+              <div class="content _summary_page_ _table_list_">
+                <div class="base">
+                  <div class="table_base no_border" id="cate_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_1x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">割引券・回数券</div>
+              <div class="content _summary_page_ _table_list_">
+                <div class="base">
+                  <div class="table_base table_base2" id="coupon_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_2x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">キーワード</div>
+              <div class="content _summary_page_ _table_list_">
+                <div class="base">
+                  <div class="table_base table_base2" id="keyword_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       `
     );
   }
-
   const desc_static_sections = () => {
     let gender_arr = ["","男性","女性"];
 
@@ -351,12 +537,18 @@ var desc_function = (data,so) => {
       const desc_daily_content = async () => {
         reloading_process = true;
         $('#day_trend_cover').fadeIn();
+        $('#day_section').css('filter','blur(3px)');
 
         let today = new Date();
         let day0 = `${today.dD()}`;
         let day1 = `${today.aD(-1).dD()}`;
         let day2 = `${today.aD(-7).dD()}`;
         let day3 = `${today.aD(-8).dD()}`;
+
+        day0 = `2020-06-15`;
+        day1 = `2020-06-14`;
+        day2 = `2020-06-08`;
+        day3 = `2020-06-07`;
 
         const sender_data = {
           day0:day0,
@@ -371,7 +563,7 @@ var desc_function = (data,so) => {
           (() => {
             let hour = today.getHours();
             let minutes = today.getMinutes();
-            $('#day_trend_indi').text(`データ更新時刻 : ${hour}:${minutes}`);
+            $('#day_trend_indi').text(`データ更新時刻 : ${hour}:${minutes.str_num()}`);
 
             $('#s0_input_label_0').html(`今日(${today.getMonth()+1}/${today.getDate()})`);
             $('#s0_input_label_1').html(`昨日`);
@@ -379,6 +571,77 @@ var desc_function = (data,so) => {
           let obj = result.data.day;
 
           const desc__ = (st) => {
+            const desc_summary = () => {
+              let rslt_0 = obj.filter(({period}) => period == sender_data[`day0`])
+              let rslt_1 = obj.filter(({period}) => period == sender_data[`day1`])
+              let rslt_2 = obj.filter(({period}) => period == sender_data[`day2`])
+
+              let data_0_0 = rslt_0.sum_val(`data_2`) + rslt_0.sum_val(`data_3`);
+              let data_0_1 = rslt_0.sum_val(`data_4`);
+              let data_0_2 = rslt_0.sum_val(`data_5`);
+
+              let data_1_0 = rslt_1.sum_val(`data_2`) + rslt_1.sum_val(`data_3`);
+              let data_1_1 = rslt_1.sum_val(`data_4`);
+              let data_1_2 = rslt_1.sum_val(`data_5`);
+
+              let data_2_0 = rslt_2.sum_val(`data_2`) + rslt_2.sum_val(`data_3`);
+              let data_2_1 = rslt_2.sum_val(`data_4`);
+              let data_2_2 = rslt_2.sum_val(`data_5`);
+
+
+              let rate_0_0 = data_0_0.to_perate(data_1_0);
+              let rate_0_1 = data_0_0.to_perate(data_2_0);
+              let rate_1_0 = data_0_1.to_perate(data_1_1);
+              let rate_1_1 = data_0_1.to_perate(data_2_1);
+              let rate_2_0 = data_0_2.to_perate(data_1_2);
+              let rate_2_1 = data_0_2.to_perate(data_2_2);
+
+
+              const start_animation = (amount,elm) => {
+                const duration = 3000;
+                let from = $(`#${elm}`).attr('data-set') | 0;
+                let to = amount;
+                let sT = Date.now();
+                $(`#${elm}`).attr('data-set',amount);
+
+                const timer = setInterval(() => {
+                  let eT = Date.now() - sT;
+                  let progress = eT / duration;
+
+                  if (progress < 1) {
+                    $(`#${elm}`).html(`${(Math.floor(from + progress * (to - from))).toLocaleString()}`);
+                  } else {
+                    $(`#${elm}`).html(`${to.toLocaleString()}`);
+                    clearInterval(timer);
+                  }
+                }, 16)
+              }
+
+              start_animation(data_0_0,`ds_a_0`);
+              start_animation(data_0_1,`ds_a_1`);
+              start_animation(data_0_2,`ds_a_2`);
+
+              $('#ds_bw_0_0').css('width',`${rate_0_0}%`);
+              $('#ds_bw_0_1').css('width',`${rate_0_1}%`);
+              $('#ds_bw_1_0').css('width',`${rate_1_0}%`);
+              $('#ds_bw_1_1').css('width',`${rate_1_1}%`);
+              $('#ds_bw_2_0').css('width',`${rate_2_0}%`);
+              $('#ds_bw_2_1').css('width',`${rate_2_1}%`);
+
+              setTimeout(() => {
+                $('#ds_r_0_0').html(rate_0_0.rate_str());
+                $('#ds_r_0_1').html(rate_0_1.rate_str());
+                $('#ds_r_1_0').html(rate_1_0.rate_str());
+                $('#ds_r_1_1').html(rate_1_1.rate_str());
+                $('#ds_r_2_0').html(rate_2_0.rate_str());
+                $('#ds_r_2_1').html(rate_2_1.rate_str());
+
+                $('#ds_s_0').html(`¥${data_1_0.toLocaleString()}`);
+                $('#ds_s_1').html(`¥${data_2_0.toLocaleString()}`);
+
+              },500);
+
+            }
             const desc_bar = () => {
               let result = obj.filter(({period}) => period == sender_data[`${st==0?`day0`:`day1`}`]);
               let c_result = obj.filter(({period}) => period == sender_data[`${st==0?`day2`:`day3`}`]);
@@ -403,10 +666,9 @@ var desc_function = (data,so) => {
                 let graph_data = [{
                   label:"総合売上",
                   data:data_arr,
-                  backgroundColor:`rgba(54,100,180,1)`,
+                  backgroundColor:`rgba(54,100,180,.9)`,
                   borderColor:"rgba(54,100,180,1)",
-                  borderWidth:1.5,
-                  pointRadius:5,
+                  borderWidth:1,
                   pointBackgroundColor:"#fff",
                   fill:true,
                   cubicInterpolationMode: 'monotone',
@@ -414,14 +676,14 @@ var desc_function = (data,so) => {
                 },{
                   label:"前同曜日",
                   data:data_c_arr,
-                  backgroundColor:`rgba(242,100,100,1)`,
+                  backgroundColor:`rgba(242,100,100,.5)`,
                   borderColor:"rgba(242,100,100,1)",
-                  borderWidth:1.5,
-                  pointRadius:5,
+                  borderWidth:1,
                   pointBackgroundColor:"#fff",
                   fill:true,
                   cubicInterpolationMode: 'monotone',
-                  lineTension: 0
+                  lineTension: 0,
+                  hidden:true
                 }];
                 let graph_option = {
                   maintainAspectRatio:true,
@@ -459,7 +721,8 @@ var desc_function = (data,so) => {
                     }],
                     xAxes: [{
                       barPercentage: 1,
-                      categoryPercentage:.8,
+                      categoryPercentage:.95,
+                      stacked:true,
                       ticks: {
                         maxRotation: 0,
                         minRotation: 0,
@@ -508,7 +771,7 @@ var desc_function = (data,so) => {
               }
               desc_graph();
             }
-            const desc_summary = () => {
+            const desc_rail = () => {
               let ap = ``;
 
               let result = obj.filter(({period}) => period == sender_data[`${st==0?`day0`:`day1`}`]);
@@ -538,42 +801,46 @@ var desc_function = (data,so) => {
               ap =
               `
               <table>
-                <tr>
-                  <th></th>
-                  <th>総合売上</th>
-                  <th>保険請求</th>
-                  <th>保険負担金</th>
-                  <th>自費売上</th>
-                  <th>来院数</th>
-                  <th>新患数</th>
-                </tr>
-                <tr>
-                  <th>${["今日","昨日"][st]}</th>
-                  <td>${data_0.toLocaleString()}</td>
-                  <td>${data_1.toLocaleString()}</td>
-                  <td>${data_2.toLocaleString()}</td>
-                  <td>${data_3.toLocaleString()}</td>
-                  <td>${data_4.toLocaleString()}</td>
-                  <td>${data_5.toLocaleString()}</td>
-                </tr>
-                <tr>
-                  <th>前同曜日</th>
-                  <td>${c_data_0.toLocaleString()}</td>
-                  <td>${c_data_1.toLocaleString()}</td>
-                  <td>${c_data_2.toLocaleString()}</td>
-                  <td>${c_data_3.toLocaleString()}</td>
-                  <td>${c_data_4.toLocaleString()}</td>
-                  <td>${c_data_5.toLocaleString()}</td>
-                </tr>
-                <tr>
-                  <th>変化</th>
-                  <td>${rate_0}</td>
-                  <td>${rate_1}</td>
-                  <td>${rate_2}</td>
-                  <td>${rate_3}</td>
-                  <td>${rate_4}</td>
-                  <td>${rate_5}</td>
-                </tr>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>総合売上</th>
+                    <th>保険請求</th>
+                    <th>保険負担金</th>
+                    <th>自費売上</th>
+                    <th>来院数</th>
+                    <th>新患数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>${["今日","昨日"][st]}</th>
+                    <td>${data_0.toLocaleString()}</td>
+                    <td>${data_1.toLocaleString()}</td>
+                    <td>${data_2.toLocaleString()}</td>
+                    <td>${data_3.toLocaleString()}</td>
+                    <td>${data_4.toLocaleString()}</td>
+                    <td>${data_5.toLocaleString()}</td>
+                  </tr>
+                  <tr>
+                    <th>前同曜日</th>
+                    <td>${c_data_0.toLocaleString()}</td>
+                    <td>${c_data_1.toLocaleString()}</td>
+                    <td>${c_data_2.toLocaleString()}</td>
+                    <td>${c_data_3.toLocaleString()}</td>
+                    <td>${c_data_4.toLocaleString()}</td>
+                    <td>${c_data_5.toLocaleString()}</td>
+                  </tr>
+                  <tr>
+                    <th>変化率</th>
+                    <td>${rate_0}</td>
+                    <td>${rate_1}</td>
+                    <td>${rate_2}</td>
+                    <td>${rate_3}</td>
+                    <td>${rate_4}</td>
+                    <td>${rate_5}</td>
+                  </tr>
+                </tbody>
               </table>
               `;
 
@@ -589,41 +856,40 @@ var desc_function = (data,so) => {
                 let data_0 = rslt.sum_val('data_0');
                 let data_1 = rslt.sum_val('data_1');
                 let data_2 = rslt.sum_val('data_2');
+                let data_3 = rslt.sum_val('data_3');
+                let data_4 = rslt.sum_val('data_4');
 
                 let c_rslt = c_result.filter(({obj_id}) => obj_id == cell.obj_id);
                 let c_data_0 = c_rslt.sum_val('data_0');
                 let c_data_1 = c_rslt.sum_val('data_1');
                 let c_data_2 = c_rslt.sum_val('data_2');
+                let c_data_3 = c_rslt.sum_val('data_3');
+                let c_data_4 = c_rslt.sum_val('data_4');
 
                 let rate_0 = data_0.to_perate(c_data_0).rate_str();
                 let rate_1 = data_1.to_perate(c_data_1).rate_str();
                 let rate_2 = data_2.to_perate(c_data_2).rate_str();
+                let rate_3 = data_3.to_perate(c_data_3).rate_str();
+                let rate_4 = data_4.to_perate(c_data_4).rate_str();
 
+                let app = ``;
+                for (let i = 0;i < 5;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">
+                      ${eval(`data_${i}`).toLocaleString()}
+                      <span>(${eval(`c_data_${i}`).toLocaleString()})</span>
+                      <div class="rate inline">${eval(`rate_${i}`)}</div>
+                    </div>
+                  </td>
+                  `;
+                }
                 ap +=
                 `
                 <tr>
                   <th>${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}</th>
-                  <td>
-                    <div class="amount">
-                      ${data_0.toLocaleString()}
-                      <span>(${c_data_0.toLocaleString()})</span>
-                      <div class="rate inline">${rate_0}</div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="amount">
-                      ${data_1.toLocaleString()}
-                      <span>(${c_data_1.toLocaleString()})</span>
-                      <div class="rate inline">${rate_1}</div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="amount">
-                      ${data_2.toLocaleString()}
-                      <span>(${c_data_2.toLocaleString()})</span>
-                      <div class="rate inline">${rate_1}</div>
-                    </div>
-                  </td>
+                  ${app}
                 </tr>
                 `;
               });
@@ -634,6 +900,8 @@ var desc_function = (data,so) => {
                     <tr>
                       <th></th>
                       <th>総合売上</th>
+                      <th>窓口売上</th>
+                      <th>自費売上</th>
                       <th>来院数</th>
                       <th>新患数</th>
                     </tr>
@@ -643,7 +911,7 @@ var desc_function = (data,so) => {
                 `
               );
               let table = $('#day_clinic_table').DataTable({
-                columnDefs:[{type:'currency',targets:[1,2]}],
+                columnDefs:[{type:'currency',targets:[1,2,3,4,5]}],
                 displayLength:5,
                 lengthChange: false,
                 searching: false,
@@ -673,31 +941,26 @@ var desc_function = (data,so) => {
                 let rate_0 = data_0.to_perate(c_data_0).rate_str();
                 let rate_1 = data_1.to_perate(c_data_1).rate_str();
                 let rate_2 = data_2.to_perate(c_data_2).rate_str();
+
+                let app = ``;
+                for (let i = 0;i < 3;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">
+                      ${eval(`data_${i}`).toLocaleString()}
+                      <span>(${eval(`c_data_${i}`).toLocaleString()})</span>
+                      <div class="rate inline">${eval(`rate_${i}`)}</div>
+                    </div>
+                  </td>
+                  `;
+                }
+
                 ap +=
                 `
                 <tr>
                   <th>${user_name==MSD_smn?`担当者${cell.obj_id}`:cell.obj_name}</th>
-                  <td>
-                    <div class="amount">
-                      ${data_0.toLocaleString()}
-                      <span>(${c_data_0.toLocaleString()})</span>
-                      <div class="rate inline">${rate_0}</div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="amount">
-                      ${data_1.toLocaleString()}
-                      <span>(${c_data_1.toLocaleString()})</span>
-                      <div class="rate inline">${rate_1}</div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="amount">
-                      ${data_2.toLocaleString()}
-                      <span>(${c_data_2.toLocaleString()})</span>
-                      <div class="rate inline">${rate_1}</div>
-                    </div>
-                  </td>
+                  ${app}
                 </tr>
                 `;
               });
@@ -728,12 +991,16 @@ var desc_function = (data,so) => {
               });
             }
 
-            desc_bar();
             desc_summary();
+            desc_bar();
+            desc_rail();
             desc_clinic_table(result.data.cl);
             desc_staff_table(result.data.sf);
             reloading_process = false;
-            $('#day_trend_cover').fadeOut(1000);
+            setTimeout(() => {
+              $('#day_trend_cover').fadeOut();
+              $('#day_section').css('filter','blur(0)');
+            },1000);
           }
           $(document).off('input','input[name="s0_input_"]').on('input','input[name="s0_input_"]',function() {
             let index = $('input[name="s0_input_"]').index(this);
@@ -860,20 +1127,20 @@ var desc_function = (data,so) => {
         }
         const desc_graph = () => {
           let graph_data = [{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"今月",
             data:data_arr,
-            backgroundColor:`rgba(54,183,235,.1)`,
-            borderColor:"#36b7eb",
+            backgroundColor:`rgba(54,100,180,.05)`,
+            borderColor:"rgb(54,100,180)",
             borderWidth:1.5,
             pointRadius:5,
             pointBackgroundColor:"#fff",
-            fill:true,
+            fill:false,
             yAxisID: "y-axis-0",
             cubicInterpolationMode: 'monotone',
             lineTension: 0
           },{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"先月",
             data:data_c_arr,
             backgroundColor:`rgba(242,100,100,.05)`,
@@ -881,7 +1148,7 @@ var desc_function = (data,so) => {
             borderWidth:1.5,
             pointRadius:5,
             pointBackgroundColor:"#fff",
-            fill:true,
+            fill:false,
             yAxisID: "y-axis-0",
             cubicInterpolationMode: 'monotone',
             lineTension: 0
@@ -1528,9 +1795,15 @@ var desc_function = (data,so) => {
       let pe = so.pw1;
       let pa = period_map(ps,pe,1);
 
+      let cps = so.pw2;
+      let cpe = so.pw3;
+      let cpa = period_map(cps,cpe,1);
+
       let obj = data.week;
+      let obj_c = data.week_c;
       const desc_graph = () => {
         let data_arr = [];
+        let data_c_arr = [];
 
         let tpl = [];
         pa.forEach((label,idx) => {
@@ -1539,12 +1812,29 @@ var desc_function = (data,so) => {
           let result = obj.filter(({period}) => period == label);
           let data = result.sum_val('data_0');
           data_arr.push(data);
+
+          (() => {
+            let result_c = obj_c.filter(({period}) => period == cpa[idx]);
+            let data_c = result_c.sum_val('data_0');
+            data_c_arr.push(data_c);
+          })();
+
         });
 
         let graph_data = [{
-          label:"総合売上",
+          label:"6~1週前",
           data:data_arr,
           borderColor:"rgb(18,83,164)",
+          borderWidth:2,
+          pointRadius:0,
+          fill:false,
+          yAxisID: "y-axis-0",
+          cubicInterpolationMode: 'monotone',
+          lineTension: 0
+        },{
+          label:"12~7週前",
+          data:data_c_arr,
+          borderColor:"rgb(242,100,100)",
           borderWidth:2,
           pointRadius:0,
           fill:false,
@@ -1615,7 +1905,9 @@ var desc_function = (data,so) => {
                 let index = t[0].index;
                 let period = pa[index];
                 period = period == undefined ? `0000-00-00` : period;
-                return `${period.str_date(`.`)}`;
+                let period_c = cpa[index];
+                period_c = period_c == undefined ? `0000-00-00` : period_c;
+                return `${period.str_date(`.`)}と${period_c.str_date(`.`)}`;
               },
               label:function(t,d) {
                 let idx = t.datasetIndex;
@@ -1654,9 +1946,47 @@ var desc_function = (data,so) => {
 
         let tpa = ``;
         pa.forEach((label,idx) => {
-          tpa += `<th>${convert_pl(label,idx,2)}</th>`;
+          tpa += `<th>${5 - idx}週前</th>`;
         });
         $('#week_table_base').html(
+          `
+          <table style="line-height:1.5rem;">
+            <thead>
+              <tr>
+                <th></th>
+                ${tpa}
+              </tr>
+            </thead>
+            <tbody>
+              ${ap}
+            </tbody>
+          </table>
+          `
+        );
+      }
+      const desc_table_c = () => {
+        let ap = ``;
+        let na = ["総合売上","来院数","新患数"];
+
+        for (let i = 0;i < 3;i++) {
+          let app = ``;
+          cpa.forEach((label) => {
+            let result = obj_c.filter(({period}) => period == label);
+            let data = result.sum_val(`data_${i}`);
+            app += `<td>${data.toLocaleString()}</td>`;
+          });
+          ap +=
+          `
+          <tr>
+            <th>${na[i]}</th>
+            ${app}
+          </tr>
+          `;
+        }
+
+        let tpa = ``;
+        cpa.forEach((label,idx) => {tpa += `<th>${11 - idx}週前</th>`;});
+        $('#week_c_table_base').html(
           `
           <table style="line-height:1.5rem;">
             <thead>
@@ -1675,15 +2005,22 @@ var desc_function = (data,so) => {
 
       desc_graph();
       desc_table();
+      desc_table_c();
     }
     const desc_month = () => {
       let ps = so.pm0;
       let pe = so.pm1;
       let pa = period_map(ps,pe,2);
 
+      let cps = so.pm2;
+      let cpe = so.pm3;
+      let cpa = period_map(cps,cpe,2);
+
       let obj = data.month;
+      let obj_c = data.month_c;
       const desc_graph = () => {
         let data_arr = [];
+        let data_c_arr = [];
 
         let tpl = [];
         pa.forEach((label,idx) => {
@@ -1692,12 +2029,28 @@ var desc_function = (data,so) => {
           let result = obj.filter(({period}) => period == label);
           let data = result.sum_val('data_0');
           data_arr.push(data);
+
+          (() => {
+            let result_c = obj_c.filter(({period}) => period == cpa[idx]);
+            let data_c = result_c.sum_val('data_0');
+            data_c_arr.push(data_c);
+          })();
         });
 
         let graph_data = [{
-          label:"総合売上",
+          label:"",
           data:data_arr,
           borderColor:"rgb(18,83,164)",
+          borderWidth:2,
+          pointRadius:0,
+          fill:false,
+          yAxisID: "y-axis-0",
+          cubicInterpolationMode: 'monotone',
+          lineTension: 0
+        },{
+          label:"",
+          data:data_c_arr,
+          borderColor:"rgb(242,100,100)",
           borderWidth:2,
           pointRadius:0,
           fill:false,
@@ -1768,7 +2121,9 @@ var desc_function = (data,so) => {
                 let index = t[0].index;
                 let period = pa[index];
                 period = period == undefined ? `0000-00-00` : period;
-                return `${period.str_date(`.`)}`;
+                let period_c = cpa[index];
+                period_c = period_c == undefined ? `0000-00-00` : period_c;
+                return `${period.str_date(`.`)}と${period_c.str_date(`.`)}`;
               },
               label:function(t,d) {
                 let idx = t.datasetIndex;
@@ -1825,23 +2180,63 @@ var desc_function = (data,so) => {
           `
         );
       }
+      const desc_table_c = () => {
+        let ap = ``;
+        let na = ["総合売上","来院数","新患数"];
+
+        for (let i = 0;i < 3;i++) {
+          let app = ``;
+          cpa.forEach((label) => {
+            let result = obj_c.filter(({period}) => period == label);
+            let data = result.sum_val(`data_${i}`);
+            app += `<td>${data.toLocaleString()}</td>`;
+          });
+          ap +=
+          `
+          <tr>
+            <th>${na[i]}</th>
+            ${app}
+          </tr>
+          `;
+        }
+
+        let tpa = ``;
+        cpa.forEach((label,idx) => {tpa += `<th>${convert_pl(label,idx,2)}</th>`;});
+
+        $('#month_c_table_base').html(
+          `
+          <table style="line-height:1.5rem;">
+            <thead>
+              <tr>
+                <th></th>
+                ${tpa}
+              </tr>
+            </thead>
+            <tbody>
+              ${ap}
+            </tbody>
+          </table>
+          `
+        );
+      }
 
       desc_graph();
       desc_table();
+      desc_table_c();
     }
     const desc_customer = () => {
       let objs = data.customer;
       let obj = [
-        {obj_id:0,obj_name:"未成年 男性"},
-        {obj_id:1,obj_name:"未成年 女性"},
+        {obj_id:0,obj_name:"~19歳 男性"},
+        {obj_id:1,obj_name:"~19歳 女性"},
         {obj_id:2,obj_name:"20~34歳 男性"},
         {obj_id:3,obj_name:"20~34歳 女性"},
         {obj_id:4,obj_name:"35~64歳 男性"},
         {obj_id:5,obj_name:"35~64歳 女性"},
-        {obj_id:6,obj_name:"前期高齢者 男性"},
-        {obj_id:7,obj_name:"前期高齢者 女性"},
-        {obj_id:8,obj_name:"後期高齢者 男性"},
-        {obj_id:9,obj_name:"後期高齢者 女性"},
+        {obj_id:6,obj_name:"65~74歳 男性"},
+        {obj_id:7,obj_name:"65~74歳 女性"},
+        {obj_id:8,obj_name:"75歳~ 男性"},
+        {obj_id:9,obj_name:"75歳~ 女性"},
       ];
 
       let ap = ``;
@@ -1887,6 +2282,629 @@ var desc_function = (data,so) => {
         paging: false,
         order:[[1,"desc"]]
       });
+    }
+    const desc_geneder_details = () => {
+      const desc_bar = () => {
+        let objs = data.customer;
+
+        let sum_0 = objs.sum_val(`data_0`);
+        let sum_1 = objs.sum_val(`data_1`);
+        let sum_2 = objs.sum_val(`data_2`);
+
+        let objs_0 = objs.filter(({obj_id}) => obj_id == 0 || obj_id == 1);
+        let objs_1 = objs.filter(({obj_id}) => obj_id == 2 || obj_id == 3);
+        let objs_2 = objs.filter(({obj_id}) => obj_id == 4 || obj_id == 5);
+        let objs_3 = objs.filter(({obj_id}) => obj_id == 6 || obj_id == 7);
+        let objs_4 = objs.filter(({obj_id}) => obj_id == 8 || obj_id == 9);
+
+        let data_0_arr = [
+          objs_0.sum_val(`data_0`).to_perate(sum_0),
+          objs_1.sum_val(`data_0`).to_perate(sum_0),
+          objs_2.sum_val(`data_0`).to_perate(sum_0),
+          objs_3.sum_val(`data_0`).to_perate(sum_0),
+          objs_4.sum_val(`data_0`).to_perate(sum_0)
+        ];
+        let data_1_arr = [
+          objs_0.sum_val(`data_1`).to_perate(sum_1),
+          objs_1.sum_val(`data_1`).to_perate(sum_1),
+          objs_2.sum_val(`data_1`).to_perate(sum_1),
+          objs_3.sum_val(`data_1`).to_perate(sum_1),
+          objs_4.sum_val(`data_1`).to_perate(sum_1)
+        ];
+        let data_2_arr = [
+          objs_0.sum_val(`data_2`).to_perate(sum_2),
+          objs_1.sum_val(`data_2`).to_perate(sum_2),
+          objs_2.sum_val(`data_2`).to_perate(sum_2),
+          objs_3.sum_val(`data_2`).to_perate(sum_2),
+          objs_4.sum_val(`data_2`).to_perate(sum_2)
+        ];
+
+        let ca = [
+          `rgba(18,83,164,1)`,
+          `rgba(18,83,164,.8)`,
+          `rgba(18,83,164,.6)`,
+          `rgba(18,83,164,.4)`,
+          `rgba(18,83,164,.2)`
+        ];
+        let na = [
+          `~19歳`,
+          `20~34歳`,
+          `35~64歳`,
+          `65~74歳`,
+          `75歳~`
+        ];
+
+        let data_arr = [];
+        for (let i = 0;i < 5;i++) {
+          data_arr.push({
+            data:[data_0_arr[i],data_1_arr[i],data_2_arr[i]],
+            backgroundColor: ca[i]
+          });
+        }
+
+        let graph_option = {
+          maintainAspectRatio: false,
+          legend: {display: false},
+          scales: {
+            xAxes: [{
+              stacked:true,
+              ticks: {
+                min:0,
+                max:100,
+                maxTicksLimit: 8,
+                fontSize:8,
+                callback: function(label, index, labels) {
+                  return Number(label).toLocaleString() + "%";
+                }
+              },
+              gridLines: {
+                display:false,
+              },
+            }],
+            yAxes: [{
+              categoryPercentage:.6,
+              stacked:true,
+              ticks: {
+                fontSize:8,
+              },
+              gridLines: {
+                display:false,
+                drawBorder:false,
+              },
+            }]
+          },
+          tooltips:{
+            callbacks: {
+              title:function(t,d) {
+                let index = t[0].index;
+                return `${["総合売上","来院数","新患数"][index]}`;
+              },
+              label: function(t,d) {
+                let idx = t.datasetIndex;
+                let index = t.index;
+                let amount = data_arr[idx].data[index];
+                return `${na[idx]} ${amount.toLocaleString()}%`;
+              }
+            }
+          }
+        }
+        geneder_details_bar.data = {
+          labels:["総合売上","来院数","新患数"],
+          datasets:data_arr
+        };
+        geneder_details_bar.options = graph_option;
+        geneder_details_bar.update();
+
+      }
+      const desc_radar = () => {
+        let objs = data.geneder;
+
+        const desc_bar_0 = () => {
+          let dma = [],dfa = [];
+          let dma_ = [],dfa_ = [];
+
+          for (let i = 0;i < 11;i++) {
+            let m = objs.filter((cell) => cell.generation == i && cell.gender == 1);
+            let f = objs.filter((cell) => cell.generation == i && cell.gender == 2);
+
+
+            dma.push(m.sum_val(`i_5_data`));
+            dfa.push(f.sum_val(`i_5_data`));
+
+            dma_.push(m.sum_val(`i_0_data`).to_devide(m.sum_val(`i_3_data`)));
+            dfa_.push(f.sum_val(`i_0_data`).to_devide(f.sum_val(`i_3_data`)));
+          }
+
+          let graph_data = [{
+            type:"crossed_lines",
+            data:dma_,
+            backgroundColor:`rgba(18,83,164,1)`,
+            borderColor:`rgba(18,83,164,1)`,
+            borderWidth:2,
+            pointRadius:3,
+            fill:false,
+            yAxisID: "y-axis-1",
+            lineTension:0
+          },{
+            type:"crossed_lines",
+            data:dfa_,
+            backgroundColor:`rgba(242,100,100,1)`,
+            borderColor:`rgba(242,100,100,1)`,
+            borderWidth:2,
+            pointRadius:3,
+            fill:false,
+            yAxisID: "y-axis-1",
+            lineTension:0
+          },{
+            data:dma,
+            backgroundColor:`rgba(18,83,164,.75)`,
+            borderWidth:0,
+            yAxisID: "y-axis-0",
+          },{
+            data:dfa,
+            backgroundColor:`rgba(242,100,100,.75)`,
+            borderWidth:0,
+            yAxisID: "y-axis-0",
+          }];
+          let graph_option = {
+            maintainAspectRatio: true,
+            responsive: true,
+            legend: {
+              display: false,
+              labels:{
+                fontSize:8
+              }
+            },
+            title: {display:true,fontSize:12,fontStyle:500,text: '男女年代別純患数と客単価'},
+            elements: {point:{radius:1.5}},
+            scales: {
+              yAxes: [{
+                id: "y-axis-0",
+                type: "linear",
+                position: "left",
+                gridLines: {
+                  display:true,
+                  drawBorder: false,
+                  zeroLineColor:"#eee",
+                  color:"#eee"
+                },
+                ticks: {
+                  min:0,
+                  autoSkip: true,
+                  maxTicksLimit: 3,
+                  fontSize:10,
+                  callback: function(label, index, labels) {
+                    return label.str_jp();
+                  }
+                },
+              },{
+                id: "y-axis-1",
+                type: "linear",
+                position: "right",
+                gridLines: {
+                  display:true,
+                  drawBorder: false,
+                  zeroLineColor:"#eee",
+                  color:"#eee"
+                },
+                ticks: {
+                  min:0,
+                  autoSkip: true,
+                  maxTicksLimit: 3,
+                  fontSize:10,
+                  callback: function(label, index, labels) {
+                    return label.str_jp();
+                  }
+                },
+              }],
+              xAxes: [{
+                barPercentage:1,
+                categoryPercentage: 0.9,
+                ticks: {
+                  autoSkip: true,
+                  maxTicksLimit: 4,
+                  maxRotation: 0,
+                  minRotation: 0,
+                  fontSize:10,
+                },
+                gridLines: {
+                  display:false,
+                },
+                scaleLabel: {
+                  display: false,
+                  labelString: '日'
+                }
+              }]
+            },
+            tooltips: {
+              bodySpacing:5,
+              titleFontSize:12.5,
+              bodyFontSize:15,
+              intersect:false,
+              axis:'x',
+              mode:'index',
+              callbacks: {
+                title:function(t,d) {
+                  let index = t[0].index;
+                  let ar = ["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"];
+                  return `${ar[index]}`;
+                },
+                label:function(t,d) {
+                  let idx = t.datasetIndex;
+                  return `${["男性客単価","女性客単価","男性純患数","女性純患数"][idx]} : ${idx==0||idx==1?`¥`:``}${t.yLabel.toLocaleString()}${idx==2||idx==3?`人`:``}`;
+                }
+              }
+            }
+          }
+          geneder_details_bar_0.data = {
+            labels:["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"],
+            datasets:graph_data
+          };
+          geneder_details_bar_0.options = graph_option;
+          geneder_details_bar_0.update();
+        }
+        const desc_radar_1 = () => {
+          let dma = [],dfa = [];
+
+          for (let i = 0;i < 7;i++) {
+            dma.push(objs.sum_val(`i_${i}_1_week`));
+            dfa.push(objs.sum_val(`i_${i}_2_week`));
+          }
+
+          let graph_data = [{
+            data:dma,
+            backgroundColor:'rgba(18,83,164,.1)',
+            borderColor:'rgba(18,83,164,1)',
+            borderWidth:2,
+            pointRadius:3,
+            pointBackgroundColor:'rgba(18,83,164,1)'
+          },{
+            data:dfa,
+            backgroundColor:'rgba(242,100,100,.1)',
+            borderColor:'rgba(242,100,100,1)',
+            borderWidth:2,
+            pointRadius:3,
+            pointBackgroundColor:'rgba(242,100,100,1)'
+          }];
+          let graph_option = {
+            maintainAspectRatio: false,
+            legend: {
+              display: false
+            },
+            title: {display:true,fontSize:12,fontStyle:500,text: '曜日別来院数分布'},
+            elements: {point:{radius:0.5}},
+            scale: {
+              pointLabels: {
+                fontSize:10,
+                fontColor:"#73879C"
+              },
+              gridLines: {
+                color:"#ddd"
+              },
+              ticks: {
+                beginAtZero: true,
+                fontSize:10,
+                fontColor:"#73879C",
+                callback: function(label, index, labels) {
+                  return Number(label).toLocaleString() + "人";
+                }
+              }
+            },
+            responsive: true,
+            tooltips: {
+              bodySpacing:5,
+              titleFontSize:12.5,
+              bodyFontSize:15,
+              intersect:false,
+              callbacks: {
+                title:function(t,d) {
+                  let idx = t[0].datasetIndex;
+                  let arr = ["総人数","男性","女性"];
+                  return `${arr[idx]}`;
+                },
+                label:function(t,d) {
+                  return `${t.yLabel.toLocaleString()}人`;
+                }
+              }
+            }
+          }
+          geneder_details_radar_1.data = {
+            labels:["日","月","火","水","木","金","土"],
+            datasets:graph_data
+          };
+          geneder_details_radar_1.options = graph_option;
+          geneder_details_radar_1.update();
+        }
+
+        desc_bar_0();
+        desc_radar_1();
+      }
+      const desc_pie = () => {
+        let objs = data.geneder;
+        let male = objs.filter(({gender}) => gender == 1).sum_val(`i_5_data`);
+        let female = objs.filter(({gender}) => gender == 2).sum_val(`i_5_data`);
+        let data_arr = [male,female];
+        let graph_plugin = {
+          afterDatasetsDraw: function (chart, easing) {
+            var ctx = chart.ctx;
+            chart.data.datasets.forEach(function (dataset, i) {
+              var meta = chart.getDatasetMeta(i);
+              if (!meta.hidden) {
+                meta.data.forEach(function (element, index) {
+                  ctx.fillStyle = "white";
+                  var fontSize = 8;
+                  var fontStyle = 'normal';
+                  var fontFamily = 'Helvetica Neue';
+                  ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+                  let amount = data_arr[index].to_perate(objs.sum_val(`i_5_data`));
+                  var dataString =
+                  amount > 0 ? [`${["男性","女性"][index]}${amount}%`] : [``];
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'middle';
+                  var padding = 5;
+                  var position = element.tooltipPosition();
+                  ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                });
+              }
+            });
+          }
+        }
+        let graph_data = [{
+          data:data_arr,
+          backgroundColor:["rgba(54,100,180,.75)","rgba(242,100,100,.75)"],
+          borderColor:"",
+          borderWidth:0,
+        }];
+        let graph_option = {
+          maintainAspectRatio: true,
+          responsive: true,
+          cutoutPercentage:0,
+          title: {display:true,fontSize:12,fontStyle:500,text: '顧客男女比'},
+          pieceLabel: {render: 'label',position: 'outside'},
+          tooltips:{
+            callbacks: {
+              title:function(t,d) {
+                let index = t[0].index;
+                return `${["男性","女性"][index]}`;
+              },
+              label: function(t,d) {
+                let index = t.index;
+                let amount = data_arr[index];
+                return `${amount.toLocaleString()}人`;
+              }
+            }
+          }
+        }
+        geneder_details_pie.data = {
+          labels:"",
+          datasets:graph_data,
+        };
+        geneder_details_pie.config.plugins = [graph_plugin];
+        geneder_details_pie.options = graph_option;
+        geneder_details_pie.update();
+      }
+      const desc_table = () => {
+        let objs = data.geneder;
+        let na = ["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"]
+
+        let ap = ``;
+
+        let sd_0 = objs.sum_val(`i_3_data`);
+        let sd_1 = objs.sum_val(`i_5_data`);
+        let sd_2 = objs.sum_val(`i_6_data`);
+        let sd_3 = objs.sum_val(`i_1_data`);
+
+        for (let i = 0;i < 11;i++) {
+          let rslt = objs.filter(({generation}) => generation == i);
+
+          let data_0 = rslt.sum_val(`i_3_data`);
+          let data_1 = rslt.sum_val(`i_5_data`);
+          let data_2 = rslt.sum_val(`i_6_data`);
+          let data_3 = rslt.sum_val(`i_1_data`);
+          let data_4 = data_0.to_Perate(data_1);
+          let data_5 = data_3.to_devide(data_0);
+          let data_6 = data_3.to_devide(data_1);
+
+          let data_7 = rslt.filter(({gender}) => gender == 1).sum_val('i_5_data');
+          let data_8 = rslt.filter(({gender}) => gender == 2).sum_val('i_5_data');
+          let data_9 = rslt.sum_val('i_5_data');
+
+          data_7 = data_7.to_perate(data_9).to_devide(1);
+          data_8 = data_8.to_perate(data_9).to_devide(1);
+
+          let rate_0 = data_0.to_perate(sd_0);
+          let rate_1 = data_1.to_perate(sd_1);
+          let rate_2 = data_2.to_perate(sd_2);
+          let rate_3 = data_3.to_perate(sd_3);
+
+          ap +=
+          `
+          <tr>
+            <th>${na[i]}</th>
+            <td>
+              <div class="amount">
+                ${data_0.toLocaleString()}回
+                <span class="percent">${rate_0}%</span>
+              </div>
+              <div class="bb" style="width:${rate_0}%;"></div>
+            </td>
+            <td>
+              <div class="amount">
+                ${data_1.toLocaleString()}人
+                <span class="percent">${rate_1}%</span>
+              </div>
+              <div class="bb" style="width:${rate_1}%;"></div>
+            </td>
+            <td>
+              <div class="amount">
+                ${data_2.toLocaleString()}人
+                <span class="percent">${rate_2}%</span>
+              </div>
+              <div class="bb" style="width:${rate_2}%;"></div>
+            </td>
+            <td>
+              <div class="amount">
+                ¥${data_3.toLocaleString()}
+                <span class="percent">${rate_3}%</span>
+              </div>
+              <div class="bb" style="width:${rate_3}%;"></div>
+            </td>
+            <td>
+              ${data_4.toLocaleString()}回
+            </td>
+            <td>¥${data_5.toLocaleString()}</td>
+            <td>¥${data_6.toLocaleString()}</td>
+            <td>${data_7} : ${data_8}</td>
+          </tr>
+          `;
+        }
+
+        $('#geneder_details_table_base').html(
+          `
+          <table id="geneder_details_table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>来院数</th>
+                <th>純患数</th>
+                <th>新患数</th>
+                <th>窓口売上</th>
+                <th>平均来院回数</th>
+                <th>窓口客単価</th>
+                <th>窓口LTV</th>
+                <th>男女比率</th>
+              </tr>
+            </thead>
+            <tbody>${ap}</tbody>
+          </table>
+          `
+        );
+        let table = $('#geneder_details_table').DataTable({
+          columnDefs:[{type:'currency',targets:[0,1,2,3]}],
+          displayLength:10,
+          lengthChange: false,
+          searching: false,
+          ordering: true,
+          info: false,
+          paging: false,
+          order:[[0,"asc"]]
+        });
+      }
+
+      desc_bar();
+      desc_radar();
+      desc_pie();
+      desc_table();
+    }
+    const desc_details_list = () => {
+      let objs = data.trend;
+
+      (() => {
+        let ap = ``;
+
+        let jihi = objs.sum_val(`data_3`);
+        let ave = jihi.to_devide(objs.length);
+        let median = objs.median_val(`data_3`);
+        let min = objs.min_val(`data_3`);
+        let max = objs.max_val(`data_3`);
+
+        let da = [ave,median,min,max];
+        let na = ["平均","中央値","最小","最大"];
+
+        for (let i = 0;i < 4;i++) {
+          ap +=
+          `
+          <div class="cel inline">
+            <div class="cel_tl">${na[i]}</div>
+            <div class="amount">¥${da[i].toLocaleString()}</div>
+          </div>
+          `;
+        }
+
+        $('#details_sct_0').html(ap);
+      })();
+      (() => {
+        let ap = ``;
+
+        let mado = objs.sum_val(`data_2`) + objs.sum_val(`data_3`);
+        let count = objs.sum_val(`data_4`);
+        let user = objs.sum_val(`data_6`);
+        let minutes = objs.sum_val(`data_8`);
+        let menus = objs.sum_val(`data_5`);
+
+        let cuc = count.to_Perate(user);
+        let mup = minutes.to_Perate(count);
+        let muc = menus.to_Perate(count);
+        let muu = menus.to_Perate(user);
+        let cup = mado.to_devide(count);
+        let uup = mado.to_devide(user);
+
+        ap +=
+        `
+        <div class="cel inline">
+          <div class="cel_tl">平均来院数</div>
+          <div class="amount">${cuc.toLocaleString()}回</div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">平均滞在時間</div>
+          <div class="amount">${mup.toLocaleString()}分</div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">来院あたり施術回数</div>
+          <div class="amount">${muc.toLocaleString()}回</div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">顧客あたり施術回数</div>
+          <div class="amount">${muu.toLocaleString()}回</div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">窓口客単価</div>
+          <div class="amount">¥${cup.toLocaleString()}</div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">顧客あたり窓口LTV</div>
+          <div class="amount">¥${uup.toLocaleString()}</div>
+        </div>
+        `;
+
+        $('#details_sct_1').html(ap);
+      })();
+      (() => {
+        let ap = ``;
+
+        let hour = objs.sum_val(`data_8`);
+        hour = hour.to_Perate(60);
+        let al = objs.sum_val(`data_0`);
+        let hup = al.to_devide(hour);
+
+        let jihi = objs.sum_val(`data_3`);
+        let mado = objs.sum_val(`data_2`) + jihi;
+        let jpal = jihi.to_perate(al);
+        let jpm = jihi.to_perate(mado);
+        ap +=
+        `
+        <div class="cel inline">
+          <div class="cel_tl">累計施術時間</div>
+          <div class="amount">${hour.toLocaleString()}時間</div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">時間単価</div>
+          <div class="amount">¥${hup.toLocaleString()}</div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">自費/総合売上割合</div>
+          <div class="amount">${jpal}%</div>
+          <div class="bb"><div class="b" style="width:${jpal}%;"></div></div>
+        </div>
+        <div class="cel inline">
+          <div class="cel_tl">自費/窓口売上割合</div>
+          <div class="amount">${jpm}%</div>
+          <div class="bb"><div class="b" style="width:${jpm}%;"></div></div>
+        </div>
+        `;
+
+        $('#details_sct_2').html(ap);
+      })();
     }
     const desc_map = () => {
       $('input[name="map_customer_"]').prop('checked',true);
@@ -2408,8 +3426,8 @@ var desc_function = (data,so) => {
         }), `${p7.str_date(`.`)}が最終来院日の顧客一覧${today.dD().str_date(`-`)}.xlsx`);
       });
     }
-    const desc_clinic = () => {
-      let objs = data.cl;
+    const desc_areas = () => {
+      let objs = data.ar;
 
       let ap = ``;
       objs.forEach((cell) => {
@@ -2423,6 +3441,58 @@ var desc_function = (data,so) => {
         <tr>
           <th>
             <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=0&psel=true&ps=${ps}&pe=${pe}">
+              ${user_name==MSD_smn?`エリア${cell.obj_id}`: cell.obj_name}
+            </a>
+          </th>
+          <td>${data_0.toLocaleString()}</td>
+          <td>${data_1.toLocaleString()}</td>
+          <td>${data_2.toLocaleString()}</td>
+        </tr>
+        `;
+      });
+      $('#area_table_base').html(
+        `
+        <table id="area_table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>総合売上</th>
+              <th>来院数</th>
+              <th>新患数</th>
+            </tr>
+          </thead>
+          <tbody>${ap}</tbody>
+        </table>
+        `
+      );
+      let table = $('#area_table').DataTable({
+        columnDefs:[{type:'currency',targets:[1,2,3]}],
+        displayLength:10,
+        lengthChange: false,
+        searching: true,
+        ordering: true,
+        info: true,
+        paging: true,
+        order:[[1,"desc"]]
+      });
+    }
+    const desc_clinic = () => {
+      let objs = data.cl;
+
+      let ap = ``;
+      objs.forEach((cell) => {
+        let name = cell.obj_name;
+        let pname = cell.pobj_name;
+        let data_0 = cell.data_0;
+        let data_1 = cell.data_1;
+        let data_2 = cell.data_2;
+
+        ap +=
+        `
+        <tr>
+          <th>${pname}</th>
+          <th>
+            <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=0&psel=true&ps=${ps}&pe=${pe}">
               ${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}
             </a>
           </th>
@@ -2437,6 +3507,7 @@ var desc_function = (data,so) => {
         <table id="clinic_table">
           <thead>
             <tr>
+              <th>所属エリア</th>
               <th></th>
               <th>総合売上</th>
               <th>来院数</th>
@@ -2448,14 +3519,14 @@ var desc_function = (data,so) => {
         `
       );
       let table = $('#clinic_table').DataTable({
-        columnDefs:[{type:'currency',targets:[1,2,3]}],
-        displayLength:5,
+        columnDefs:[{type:'currency',targets:[2,3,4]}],
+        displayLength:10,
         lengthChange: false,
         searching: true,
         ordering: true,
         info: true,
         paging: true,
-        order:[[1,"desc"]]
+        order:[[2,"desc"]]
       });
     }
     const desc_staff = () => {
@@ -2464,6 +3535,8 @@ var desc_function = (data,so) => {
       let ap = ``;
       objs.forEach((cell) => {
         let name = cell.obj_name;
+        let pname = cell.pobj_name;
+        let ppname = cell.ppobj_name;
         let data_0 = cell.data_0;
         let data_1 = cell.data_1;
         let data_2 = cell.data_2;
@@ -2471,8 +3544,10 @@ var desc_function = (data,so) => {
         ap +=
         `
         <tr>
+          <th>${ppname}</th>
+          <th>${pname}</th>
           <th>
-            <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=0&psel=true&ps=${ps}&pe=${pe}">
+            <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=0&psel=true&ps=${ps}&pe=${pe}">
               ${user_name==MSD_smn?`担当者${cell.obj_id}`: cell.obj_name}
             </a>
           </th>
@@ -2487,6 +3562,8 @@ var desc_function = (data,so) => {
         <table id="staff_table">
           <thead>
             <tr>
+              <th>所属エリア</th>
+              <th>所属店</th>
               <th></th>
               <th>総合売上</th>
               <th>来院数</th>
@@ -2498,14 +3575,14 @@ var desc_function = (data,so) => {
         `
       );
       let table = $('#staff_table').DataTable({
-        columnDefs:[{type:'currency',targets:[1,2,3]}],
-        displayLength:5,
+        columnDefs:[{type:'currency',targets:[3,4,5]}],
+        displayLength:10,
         lengthChange: false,
         searching: true,
         ordering: true,
         info: true,
         paging: true,
-        order:[[1,"desc"]]
+        order:[[3,"desc"]]
       });
     }
     const desc_cate = () => {
@@ -2573,6 +3650,8 @@ var desc_function = (data,so) => {
         let data_0 = cell.data_0;
         let data_1 = cell.data_1;
         let data_2 = cell.data_2;
+        let data_3 = cell.data_3;
+        let data_4 = cell.data_4;
 
         ap +=
         `
@@ -2583,6 +3662,8 @@ var desc_function = (data,so) => {
           <td>${data_0.toLocaleString()}</td>
           <td>${data_1.toLocaleString()}</td>
           <td>${data_2.toLocaleString()}</td>
+          <td>${data_3.toLocaleString()}</td>
+          <td>${data_4.toLocaleString()}</td>
         </tr>
         `;
       });
@@ -2592,8 +3673,10 @@ var desc_function = (data,so) => {
           <thead>
             <tr>
               <th></th>
-              <th>総合売上</th>
+              <th>自費売上</th>
               <th>来院数</th>
+              <th>純患数</th>
+              <th>施術数</th>
               <th>新患数</th>
             </tr>
           </thead>
@@ -2675,7 +3758,7 @@ var desc_function = (data,so) => {
         }
 
         let graph_data = [{
-          type:"LineWithLine",
+          type:"crossed_lines",
           label:"人数",
           data:data_1_arr,
           borderColor:"rgba(54,100,180,1)",
@@ -2880,20 +3963,56 @@ var desc_function = (data,so) => {
     setTimeout(() => {
       desc_day();
     },1000);
-    desc_remark();
-    desc_trend();
-    desc_forecast();
-    desc_mission();
-    desc_week();
-    desc_month();
-    desc_customer();
-    desc_left();
-    desc_clinic();
-    desc_staff();
-    desc_cate();
-    desc_keyword();
-    desc_coupon();
-    desc_count();
+
+    setTimeout(() => {
+      desc_trend();
+      desc_remark();
+      setTimeout(() => {
+        desc_forecast();
+        setTimeout(() => {
+          desc_mission();
+          setTimeout(() => {
+            desc_details_list();
+            setTimeout(() => {
+              desc_customer();
+              setTimeout(() => {
+                desc_week();
+                setTimeout(() => {
+                  desc_month();
+                  setTimeout(() => {
+                    desc_areas();
+                    setTimeout(() => {
+                      desc_clinic();
+                      setTimeout(() => {
+                        desc_staff();
+                        setTimeout(() => {
+                          desc_geneder_details();
+                          setTimeout(() => {
+                            desc_left();
+                            setTimeout(() => {
+                              desc_count();
+                              setTimeout(() => {
+                                desc_cate();
+                                setTimeout(() => {
+                                  desc_coupon();
+                                  setTimeout(() => {
+                                    desc_keyword();
+                                  },250);
+                                },250);
+                              },250);
+                            },250);
+                          },250);
+                        },250);
+                      },250);
+                    },250);
+                  },250);
+                },250);
+              },250);
+            },250);
+          },250);
+        },250);
+      },250);
+    },250);
 
     $(document).off('click','#open_map').on('click','#open_map',function() {
       $('._map_ .cover').hide();
@@ -2909,28 +4028,39 @@ var desc_function = (data,so) => {
     eval(`${sender1} = new Chart(${sender2},{type:'${sender3}',data:{labels:"",datasets:"",},plugins:"",})`);
   }
 
-
   let day_bar;
   let trend_line;
   let forecast_line;
   let mission_line;
   let week_line;
   let month_line;
+  let geneder_details_pie;
+  let geneder_details_bar;
+  let geneder_details_bar_0;
+  let geneder_details_radar_1;
   let mission_pie;
   let count_line;
 
   let day_bar_ctx = document.getElementById('day_bar').getContext('2d');
-  desc_graph_init("day_bar","day_bar_ctx",'bar');
+  desc_graph_init("day_bar","day_bar_ctx",'rounded_bar');
   let trend_line_ctx = document.getElementById('trend_line').getContext('2d');
-  desc_graph_init("trend_line","trend_line_ctx",'LineWithLine');
+  desc_graph_init("trend_line","trend_line_ctx",'crossed_lines');
   let forecast_line_ctx = document.getElementById('forecast_line').getContext('2d');
-  desc_graph_init("forecast_line","forecast_line_ctx",'LineWithLine');
+  desc_graph_init("forecast_line","forecast_line_ctx",'crossed_lines');
   let mission_line_ctx = document.getElementById('mission_line').getContext('2d');
   desc_graph_init("mission_line","mission_line_ctx",'bar');
   let week_line_ctx = document.getElementById('week_line').getContext('2d');
-  desc_graph_init("week_line","week_line_ctx",'LineWithLine');
+  desc_graph_init("week_line","week_line_ctx",'crossed_lines');
   let month_line_ctx = document.getElementById('month_line').getContext('2d');
-  desc_graph_init("month_line","month_line_ctx",'LineWithLine');
+  desc_graph_init("month_line","month_line_ctx",'crossed_lines');
+  let geneder_details_pie_ctx = document.getElementById('geneder_details_pie').getContext('2d');
+  desc_graph_init("geneder_details_pie","geneder_details_pie_ctx",'pie');
+  let geneder_details_bar_ctx = document.getElementById('geneder_details_bar').getContext('2d');
+  desc_graph_init("geneder_details_bar","geneder_details_bar_ctx",'horizontalBar');
+  let geneder_details_bar_0_ctx = document.getElementById('geneder_details_bar_0').getContext('2d');
+  desc_graph_init("geneder_details_bar_0","geneder_details_bar_0_ctx",'rounded_bar');
+  let geneder_details_radar_1_ctx = document.getElementById('geneder_details_radar_1').getContext('2d');
+  desc_graph_init("geneder_details_radar_1","geneder_details_radar_1_ctx",'radar');
   let mission_pie_ctx = document.getElementById('mission_pie').getContext('2d');
   desc_graph_init("mission_pie","mission_pie_ctx",'pie');
   let count_line_ctx = document.getElementById('count_line').getContext('2d');
@@ -2952,11 +4082,16 @@ var query_function = async () => {
   let cps = `${today.aM(-1).dMS().dD()}`;
   let cpe = `${today.aM(-1).dME().dD()}`;
 
-  let pw0 = `${today.aD(-7*6).dD()}`;
+  let pw0 = `${today.aD(-7*5).dD()}`;
   let pw1 = `${today.dD()}`;
 
-  let pm0 = `${today.aM(-6).dMS().dD()}`;
+  let pw2 = `${today.aD(-7*11).dD()}`;
+  let pw3 = `${today.aD(-7*6).dD()}`;
+
+  let pm0 = `${today.aM(-5).dMS().dD()}`;
   let pm1 = `${today.dD()}`;
+  let pm2 = `${today.aM(-11).dMS().dD()}`;
+  let pm3 = `${today.aM(-6).dME().dD()}`;
 
   const sender_data = {
     ps:ps,
@@ -2969,8 +4104,12 @@ var query_function = async () => {
     fore2:fore2,
     pw0:pw0,
     pw1:pw1,
+    pw2:pw2,
+    pw3:pw3,
     pm0:pm0,
-    pm1:pm1
+    pm1:pm1,
+    pm2:pm2,
+    pm3:pm3
   }
 
   let result = await ajax_api_function("summary",sender_data);

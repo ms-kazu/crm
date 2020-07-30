@@ -643,7 +643,7 @@ var desc_obj_page = () => {
         const desc_trend = () => {
           const desc_line = () => {
             let graph_data = [{
-              type:"LineWithLine",
+              type:"crossed_lines",
               label:"当期",
               data:trend_data_arr,
               backgroundColor:`rgba(54,100,180,.05)`,
@@ -656,7 +656,7 @@ var desc_obj_page = () => {
               cubicInterpolationMode: 'monotone',
               lineTension: 0
             },{
-              type:"LineWithLine",
+              type:"crossed_lines",
               label:"回帰線",
               data:trend_regression_data,
               backgroundColor:`rgba(66,113,244,.05)`,
@@ -670,7 +670,7 @@ var desc_obj_page = () => {
             }];
             if (cpt) {
               graph_data.push({
-                type:"LineWithLine",
+                type:"crossed_lines",
                 label:"比較",
                 data:trend_c_data_arr,
                 backgroundColor:"#fff",
@@ -682,7 +682,7 @@ var desc_obj_page = () => {
                 cubicInterpolationMode: 'monotone',
                 lineTension: 0
               },{
-                type:"LineWithLine",
+                type:"crossed_lines",
                 label:"比較回帰線",
                 data:trend_c_regression_data,
                 backgroundColor:`rgba(255,165,0,.05)`,
@@ -895,7 +895,7 @@ var desc_obj_page = () => {
             }
             if (mbt == 0) {
               graph_data = [{
-                type:"LineWithLine",
+                type:"crossed_lines",
                 label:"成長線",
                 data:integral_regression_data,
                 backgroundColor:`rgba(66,113,244,.05)`,
@@ -906,7 +906,7 @@ var desc_obj_page = () => {
                 cubicInterpolationMode: 'monotone',
                 lineTension : 0
               },{
-                type:"LineWithLine",
+                type:"crossed_lines",
                 label:"平均線",
                 data:integral_ave_arr,
                 backgroundColor:"#fff",
@@ -919,7 +919,7 @@ var desc_obj_page = () => {
               }];
               if (cpt) {
                 graph_data.push({
-                  type:"LineWithLine",
+                  type:"crossed_lines",
                   label:"比較成長線",
                   data:integral_c_regression_data,
                   backgroundColor:`rgba(255,165,0,.05)`,
@@ -933,11 +933,11 @@ var desc_obj_page = () => {
               }
             } else {
               graph_data = [{
-                type:"LineWithLine",
+                type:"crossed_lines",
                 data:integral_data_arr,
                 label:"累積値",
-                backgroundColor:`rgba(54,183,235,.05)`,
-                borderColor:"#36b7eb",
+                backgroundColor:`rgba(54,100,180,.05)`,
+                borderColor:`rgba(54,100,180,1)`,
                 borderWidth: "2",
                 yAxisID: "y-axis-0",
                 pointBackgroundColor:"#fff",
@@ -948,7 +948,7 @@ var desc_obj_page = () => {
               }];
               if (cpt) {
                 graph_data.push({
-                  type:"LineWithLine",
+                  type:"crossed_lines",
                   label:"比較",
                   data:integral_c_data_arr,
                   backgroundColor:"#fff",
@@ -2028,6 +2028,7 @@ var desc_obj_page = () => {
         let ave_objs = [
           [89065,32.045],
           [89065,32.045],
+          [89065,32.045],
           [18901,7.2496]
         ];
         let dlna = ["全国平均","あなた"];
@@ -2144,13 +2145,27 @@ var desc_obj_page = () => {
         section_content(0);
       }
 
-      desc_mission_section();
-      desc_money_section();
-      desc_week_section();
-      desc_source_section();
-      desc_customer_section();
-      desc_hour_section();
-      desc_appearance_section();
+      setTimeout(() => {
+        desc_mission_section();
+        setTimeout(() => {
+          desc_money_section();
+          setTimeout(() => {
+            desc_week_section();
+            setTimeout(() => {
+              desc_source_section();
+              setTimeout(() => {
+                desc_customer_section();
+                setTimeout(() => {
+                  desc_hour_section();
+                  setTimeout(() => {
+                    desc_appearance_section();
+                  },250);
+                },250);
+              },250);
+            },250);
+          },250);
+        },250);
+      },250);
     }
 
     desc_content_leveling();
@@ -2178,7 +2193,7 @@ var desc_obj_page = () => {
     let week_line_ctx = document.getElementById('week_line').getContext('2d');
     desc_graph_init("week_line","week_line_ctx",'bar');
     let appearance_bar_ctx = document.getElementById('appearance_bar').getContext('2d');
-    desc_graph_init("appearance_bar","appearance_bar_ctx",'bar');
+    desc_graph_init("appearance_bar","appearance_bar_ctx",'rounded_bar');
 
     desc_cells_btn();
     desc_dynamic_sections(0);
@@ -2191,6 +2206,56 @@ var desc_obj_page = () => {
     const desc_content_leveling = () => {
       let ap = ``;
       if (st == 0) {
+        ap +=
+        `
+        <div class="section">
+          <div class="section_title">エリア別</div>
+          <div class="cells_box">
+            <div class="cell cell_4x1 inline">
+              <div class="box">
+                <div class="cell_title text_overflow">リスト</div>
+                <div class="content _segment_">
+                  <div class="table_base table_base2" id="area_table_base"></div>
+                </div>
+              </div>
+            </div>
+            <div class="cell cell_4x1 inline">
+              <div class="box">
+                <div class="cell_title text_overflow">顧客属性</div>
+                <div class="content _segment_">
+                  <div class="table_base table_base2 no_border" id="area_customer_table_base"></div>
+                </div>
+              </div>
+            </div>
+            <div class="cell cell_nx1__15rem inline">
+              <div class="box">
+                <div class="cell_title text_overflow">総合売上パイチャート</div>
+                <div class="content _trend_">
+                  <div class="base">
+                    <div class="graph_wrap">
+                      <canvas id="area_pie" width="100" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cell cell_13x1 inline">
+              <div class="box">
+                <div class="cell_title text_overflow">箱ひげ図</div>
+                <div class="content _trend_">
+                  <div class="base">
+                    <div class="graph_wrap">
+                      <canvas id="area_boxplot" width="300" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+      }
+      if (st <= 1) {
         ap +=
         `
         <div class="section">
@@ -2240,7 +2305,7 @@ var desc_obj_page = () => {
         </div>
         `;
       }
-      if (st <= 1) {
+      if (st <= 2) {
         ap +=
         `
         <div class="section">
@@ -2325,10 +2390,34 @@ var desc_obj_page = () => {
           </div>
         </div>
       </div>
-
       <div class="section">
         <div class="section_title">顧客属性別</div>
         <div class="cells_box">
+          <div class="cell cell_4x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">顧客属性の詳細な内訳</div>
+              <div class="content _geneder_details_">
+                <div class="base">
+                  <div class="graph_row">
+                    <div class="_column">
+                      <canvas id="geneder_details_bar" width="500" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas class="inline" id="geneder_details_bar_0" width="300" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas class="inline" id="geneder_details_radar_1" width="100" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas id="geneder_details_pie" width="100" height="100"></canvas>
+                    </div>
+                  </div>
+                  <div class="table_base table_base1" id="geneder_details_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="cell cell_4x1 inline">
             <div class="box">
               <div class="cell_title text_overflow">リスト</div>
@@ -2364,8 +2453,6 @@ var desc_obj_page = () => {
           </div>
         </div>
       </div>
-
-
       <div class="section">
         <div class="section_title">自費メニュー別</div>
         <div class="cells_box">
@@ -2404,6 +2491,440 @@ var desc_obj_page = () => {
       $('#content_base').html(ap);
     }
     const desc_static_sections = () => {
+      const desc_areas = () => {
+        let obj = data.data.ar;
+        let c_obj = data.cdata.ar;
+        if (!obj.exist_val()) return;
+
+        let sum_data_0 = obj.sum_val(`data_0`);
+        let sum_data_1 = obj.sum_val(`data_1`);
+        let sum_data_2 = obj.sum_val(`data_2`);
+        let sum_data_3 = obj.sum_val(`data_3`);
+        let sum_data_4 = obj.sum_val(`data_4`);
+        let sum_data_5 = obj.sum_val(`data_5`);
+        let sum_data_6 = obj.sum_val(`data_6`);
+
+        const desc_pie = () => {
+          let data_arr = [];
+          for (let i = 0;i < 5;i++) {
+            if (i >= obj.length) continue;
+            let cell = obj[i];
+            data_arr.push(cell.data_0);
+          }
+          if (obj.length >= 6) data_arr.push(sum_data_0 - data_arr.sum_val(``));
+
+          let graph_plugin = {
+            afterDatasetsDraw: function (chart, easing) {
+              var ctx = chart.ctx;
+              chart.data.datasets.forEach(function (dataset, i) {
+                var meta = chart.getDatasetMeta(i);
+                if (!meta.hidden) {
+                  meta.data.forEach(function (element, index) {
+                    ctx.fillStyle = "white";
+                    var fontSize = 8;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+                    let amount = data_arr[index].to_perate(sum_data_0);
+                    var dataString =
+                    amount > 0 ? [`${amount}%`] : [``];
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                  });
+                }
+              });
+            }
+          }
+          let graph_data = [{
+            data:data_arr,
+            backgroundColor:pgca,
+            borderColor:"",
+            borderWidth:0,
+          }];
+          let graph_option = {
+            maintainAspectRatio: true,
+            responsive: true,
+            cutoutPercentage:0,
+            title: {display:false,fontSize:12,fontStyle:500,text: ''},
+            pieceLabel: {render: 'label',position: 'outside'},
+            tooltips:{
+              callbacks: {
+                title:function(t,d) {
+                  let index = t[0].index;
+                  let name = index != 5 ? obj[index].obj_name : `その他`;
+                  return `${name}`;
+                },
+                label: function(t,d) {
+                  let index = t.index;
+                  let amount = data_arr[index];
+                  return `¥${amount.toLocaleString()}`;
+                }
+              }
+            }
+          }
+          area_pie.data = {
+            labels:"",
+            datasets:graph_data,
+          };
+          area_pie.config.plugins = [graph_plugin];
+          area_pie.options = graph_option;
+          area_pie.update();
+        }
+        const desc_plot = () => {
+          let data_0_arr = [];
+          let data_1_arr = [];
+          let data_2_arr = [];
+          let data_3_arr = [];
+          let data_c_0_arr = [];
+          let data_c_1_arr = [];
+          let data_c_2_arr = [];
+          let data_c_3_arr = [];
+
+          obj.forEach((cell) => {
+            data_0_arr.push(cell.data_0);
+            data_1_arr.push(cell.data_1);
+            data_2_arr.push(cell.data_2);
+            data_3_arr.push(cell.data_3);
+          });
+          if (cpt) {
+            c_obj.forEach((cell) => {
+              data_c_0_arr.push(cell.data_0);
+              data_c_1_arr.push(cell.data_1);
+              data_c_2_arr.push(cell.data_2);
+              data_c_3_arr.push(cell.data_3);
+            });
+          }
+          let graph_data = [];
+
+          graph_data = [{
+            label:"当期",
+            backgroundColor:'rgba(54,100,180,.5)',
+            borderColor:'rgba(54,100,180,1)',
+            borderWidth: 1.5,
+            outlierColor: '#999999',
+            padding: 10,
+            itemRadius: 0,
+            data: [data_0_arr,data_1_arr,data_2_arr,data_3_arr],
+          }];
+          if (cpt) {
+            graph_data.push({
+              label:"前期",
+              backgroundColor:'rgba(242,100,100,.5)',
+              borderColor:'rgb(242,100,100)',
+              borderWidth: 1.5,
+              outlierColor: '#999999',
+              padding: 10,
+              itemRadius: 0,
+              data: [data_c_0_arr,data_c_1_arr,data_c_2_arr,data_c_3_arr],
+            });
+          }
+          let graph_option = {
+            maintainAspectRatio:true,
+            responsive: true,
+            legend:{labels:{fontSize:10,boxWidth:24}},
+            title: {display:false},
+            scales: {
+              yAxes: [{
+                gridLines: {
+                  display:true,
+                  drawBorder: false,
+                  zeroLineColor:"#eee",
+                  color:"#eee"
+                },
+                ticks: {
+                  autoSkip: true,
+                  fontSize:8,
+                  maxTicksLimit:6,
+                  callback: function(label, index, labels) {
+                    return label.str_jp();
+                  }
+                },
+              }],
+              xAxes: [{
+                ticks: {
+                  maxRotation: 0,
+                  minRotation: 0,
+                  fontSize:8,
+                  autoSkip: true,
+                },
+                gridLines: {
+                  display:false,
+                  drawBorder: false,
+                },
+                scaleLabel: {
+                  display: false,
+                }
+              }]
+            },
+            tooltips:{
+              bodySpacing:5,
+              titleFontSize:12.5,
+              bodyFontSize:15,
+              intersect:false,
+              axis:'x',
+              mode:'index',
+            }
+          }
+          area_boxplot.data = {
+            labels:["総合売上","保険請求","保険負担","自費売上"],
+            datasets:graph_data,
+          };
+          area_boxplot.options = graph_option;
+          area_boxplot.update();
+        }
+        const desc_table = () => {
+          let ap = ``;
+          obj.forEach((cell) => {
+            let data_0 = cell.data_0;
+            let data_1 = cell.data_1;
+            let data_2 = cell.data_2;
+            let data_3 = cell.data_3;
+            let data_4 = cell.data_4;
+            let data_5 = cell.data_5;
+            let data_6 = cell.data_6;
+
+            let app = ``;
+
+            if (!cpt) {
+              let rate_0 = data_0.to_perate(sum_data_0);
+              let rate_1 = data_1.to_perate(sum_data_1);
+              let rate_2 = data_2.to_perate(sum_data_2);
+              let rate_3 = data_3.to_perate(sum_data_3);
+              let rate_4 = data_4.to_perate(sum_data_4);
+              let rate_5 = data_5.to_perate(sum_data_5);
+              let rate_6 = data_6.to_perate(sum_data_6);
+
+              for (let i = 0;i < 7;i++) {
+                app +=
+                `
+                <td>
+                  <div class="amount">${eval(`data_${i}`).toLocaleString()} <span class="percent">${eval(`rate_${i}`)}%</span></div>
+                  <div class="bb" style="width:${eval(`rate_${i}`)}%;"></div>
+                </td>
+                `;
+              }
+            } else {
+              let c_cell = c_obj.filter(({obj_id}) => obj_id == cell.obj_id);
+              if (c_cell.exist_val()) {
+                let c_data_0 = c_cell.sum_val(`data_0`);
+                let c_data_1 = c_cell.sum_val(`data_1`);
+                let c_data_2 = c_cell.sum_val(`data_2`);
+                let c_data_3 = c_cell.sum_val(`data_3`);
+                let c_data_4 = c_cell.sum_val(`data_4`);
+                let c_data_5 = c_cell.sum_val(`data_5`);
+                let c_data_6 = c_cell.sum_val(`data_6`);
+
+                let rate_0 = data_0.to_rate(c_data_0).rate_str();
+                let rate_1 = data_1.to_rate(c_data_1).rate_str();
+                let rate_2 = data_2.to_rate(c_data_2).rate_str();
+                let rate_3 = data_3.to_rate(c_data_3).rate_str();
+                let rate_4 = data_4.to_rate(c_data_4).rate_str();
+                let rate_5 = data_5.to_rate(c_data_5).rate_str();
+                let rate_6 = data_6.to_rate(c_data_6).rate_str();
+
+                for (let i = 0;i < 7;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">${eval(`data_${i}`).toLocaleString()} <span>(${eval(`c_data_${i}`).toLocaleString()})</span></div>
+                    <div class="rate">${eval(`rate_${i}`)}</div>
+                  </td>
+                  `;
+                }
+              } else {
+                for (let i = 0;i < 7;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="rate">-%</div>
+                    <div class="amount">${eval(`data_${i}`).toLocaleString()} <span>(0)</span></div>
+                  </td>
+                  `;
+                }
+              }
+            }
+            ap +=
+            `
+            <tr>
+              <th>
+                <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                  ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+                </a>
+              </th>
+              ${app}
+            </tr>
+            `;
+          });
+
+          $('#area_table_base').html(
+            `
+            <table id="area_table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>総売上</th>
+                  <th>保険請求額</th>
+                  <th>保険負担金</th>
+                  <th>自費売上</th>
+                  <th>来院数</th>
+                  <th>純患数</th>
+                  <th>新患数</th>
+                </tr>
+              </thead>
+              <tbody>${ap}</tbody>
+            </table>
+            `
+          );
+          let table = $('#area_table').DataTable({
+            columnDefs:[{type:'currency',targets:[1,2,3,4,5,6,7]}],
+            displayLength:10,
+            lengthChange: false,
+            searching: true,
+            ordering: true,
+            info: true,
+            paging: true,
+            order:[[1,"desc"]]
+          });
+        }
+        const desc_cus = () => {
+          let sum_geneder_0 = obj.sum_val(`geneder_0`);
+          let sum_geneder_1 = obj.sum_val(`geneder_1`);
+          let sum_geneder_2 = obj.sum_val(`geneder_2`);
+          let sum_geneder_3 = obj.sum_val(`geneder_3`);
+          let sum_geneder_4 = obj.sum_val(`geneder_4`);
+          let sum_geneder_5 = obj.sum_val(`geneder_5`);
+          let sum_geneder_6 = obj.sum_val(`geneder_6`);
+          let sum_geneder_7 = obj.sum_val(`geneder_7`);
+          let sum_geneder_8 = obj.sum_val(`geneder_8`);
+          let sum_geneder_9 = obj.sum_val(`geneder_9`);
+
+          let ap = ``;
+          obj.forEach((cell) => {
+            let geneder_0 = cell.geneder_0;
+            let geneder_1 = cell.geneder_1;
+            let geneder_2 = cell.geneder_2;
+            let geneder_3 = cell.geneder_3;
+            let geneder_4 = cell.geneder_4;
+            let geneder_5 = cell.geneder_5;
+            let geneder_6 = cell.geneder_6;
+            let geneder_7 = cell.geneder_7;
+            let geneder_8 = cell.geneder_8;
+            let geneder_9 = cell.geneder_9;
+
+
+            let app = ``;
+
+            if (!cpt) {
+              for (let i = 0;i < 10;i++) {
+                let geneder = eval(`geneder_${i}`);
+                let sum_geneder = eval(`sum_geneder_${i}`);
+
+                let rate = geneder.to_perate(sum_geneder);
+
+                app +=
+                `
+                <td>
+                  <div class="amount">${geneder.str_jp()} <span class="percent">${rate}%</span></div>
+                  <div class="bb" style="width:${rate}%;"></div>
+                </td>
+                `;
+              }
+            } else {
+              let c_cell = c_obj.filter(({obj_id}) => obj_id == cell.obj_id);
+              if (c_cell.exist_val()) {
+                let c_geneder_0 = c_cell.sum_val(`geneder_0`);
+                let c_geneder_1 = c_cell.sum_val(`geneder_1`);
+                let c_geneder_2 = c_cell.sum_val(`geneder_2`);
+                let c_geneder_3 = c_cell.sum_val(`geneder_3`);
+                let c_geneder_4 = c_cell.sum_val(`geneder_4`);
+                let c_geneder_5 = c_cell.sum_val(`geneder_5`);
+                let c_geneder_6 = c_cell.sum_val(`geneder_6`);
+                let c_geneder_7 = c_cell.sum_val(`geneder_7`);
+                let c_geneder_8 = c_cell.sum_val(`geneder_8`);
+                let c_geneder_9 = c_cell.sum_val(`geneder_9`);
+
+                for (let i = 0;i < 10;i++) {
+                  let geneder = eval(`geneder_${i}`);
+                  let c_geneder = eval(`c_geneder_${i}`);
+
+                  let rate = geneder.to_rate(c_geneder).rate_str();
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">${geneder.str_jp()} <span>(${c_geneder.toLocaleString()})</span></div>
+                    <div class="rate">${rate}</div>
+                  </td>
+                  `;
+                }
+              } else {
+                for (let i = 0;i < 10;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="rate">-%</div>
+                    <div class="amount">${eval(`data_${i}`).toLocaleString()} <span>(0)</span></div>
+                  </td>
+                  `;
+                }
+              }
+            }
+            ap +=
+            `
+            <tr>
+              <th>
+                <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                  ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+                </a>
+              </th>
+              ${app}
+            </tr>
+            `;
+          });
+
+          $('#area_customer_table_base').html(
+            `
+            <table id="area_customer_table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>未成年 男性</th>
+                  <th>未成年 女性</th>
+                  <th>20~34歳 男性</th>
+                  <th>20~34歳 女性</th>
+                  <th>34~64歳 男性</th>
+                  <th>34~64歳 女性</th>
+                  <th>65~74歳 男性</th>
+                  <th>65~74歳 女性</th>
+                  <th>75歳~ 男性</th>
+                  <th>75歳~ 女性</th>
+                </tr>
+              </thead>
+              <tbody>${ap}</tbody>
+            </table>
+            `
+          );
+          let table = $('#area_customer_table').DataTable({
+            columnDefs:[{type:'currency',targets:[1,2,3,4,5,6,7,8,9,10]}],
+            displayLength:5,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: false,
+            paging: true,
+            order:[[1,"desc"]]
+          });
+        }
+
+        setTimeout(() => {
+          desc_pie();
+          desc_plot();
+        },250);
+        desc_table();
+        desc_cus();
+      }
       const desc_clinics = () => {
         let obj = data.data.cl;
         let c_obj = data.cdata.cl;
@@ -2663,7 +3184,7 @@ var desc_obj_page = () => {
             `
             <tr>
               <th>
-                <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                   ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
                 </a>
               </th>
@@ -2788,7 +3309,7 @@ var desc_obj_page = () => {
             `
             <tr>
               <th>
-                <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                   ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
                 </a>
               </th>
@@ -3107,7 +3628,7 @@ var desc_obj_page = () => {
             if (cls.filter(({id}) => id == cell.obj_clinic_id).exist_val()) {
               link =
               `
-              <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+              <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                 ${user_name==MSD_smn?`${stna[2]}${cell.obj_id}`: cell.obj_name}
               </a>
               `;
@@ -3239,7 +3760,7 @@ var desc_obj_page = () => {
             `
             <tr>
               <th>
-                <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                   ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
                 </a>
               </th>
@@ -3645,10 +4166,611 @@ var desc_obj_page = () => {
         },250);
         desc_table();
       }
+      const desc_geneder_details = () => {
+        const desc_bar = () => {
+          let objs = data.data.cs;
+          let sum_0 = objs.sum_val(`data_0`);
+          let sum_1 = objs.sum_val(`data_4`);
+          let sum_2 = objs.sum_val(`data_6`);
+
+          let objs_0 = objs.filter(({obj_id}) => 0 <= obj_id && obj_id <= 5);
+          let objs_1 = objs.filter(({obj_id}) => 6 <= obj_id && obj_id <= 13);
+          let objs_2 = objs.filter(({obj_id}) => 14 <= obj_id && obj_id <= 21);
+          let objs_3 = objs.filter(({obj_id}) => 22 <= obj_id && obj_id <= 29);
+          let objs_4 = objs.filter(({obj_id}) => 30 <= obj_id);
+
+          let data_0_arr = [
+            objs_0.sum_val(`data_0`).to_perate(sum_0),
+            objs_1.sum_val(`data_0`).to_perate(sum_0),
+            objs_2.sum_val(`data_0`).to_perate(sum_0),
+            objs_3.sum_val(`data_0`).to_perate(sum_0),
+            objs_4.sum_val(`data_0`).to_perate(sum_0)
+          ];
+          let data_1_arr = [
+            objs_0.sum_val(`data_4`).to_perate(sum_1),
+            objs_1.sum_val(`data_4`).to_perate(sum_1),
+            objs_2.sum_val(`data_4`).to_perate(sum_1),
+            objs_3.sum_val(`data_4`).to_perate(sum_1),
+            objs_4.sum_val(`data_4`).to_perate(sum_1)
+          ];
+          let data_2_arr = [
+            objs_0.sum_val(`data_6`).to_perate(sum_2),
+            objs_1.sum_val(`data_6`).to_perate(sum_2),
+            objs_2.sum_val(`data_6`).to_perate(sum_2),
+            objs_3.sum_val(`data_6`).to_perate(sum_2),
+            objs_4.sum_val(`data_6`).to_perate(sum_2)
+          ];
+
+          let ca = [
+            `rgba(18,83,164,1)`,
+            `rgba(18,83,164,.8)`,
+            `rgba(18,83,164,.6)`,
+            `rgba(18,83,164,.4)`,
+            `rgba(18,83,164,.2)`
+          ];
+          let na = [
+            `~19歳`,
+            `20~39歳`,
+            `40~59歳`,
+            `60~79歳`,
+            `80歳~`
+          ];
+
+          let data_arr = [];
+          for (let i = 0;i < 5;i++) {
+            data_arr.push({
+              data:[data_0_arr[i],data_1_arr[i],data_2_arr[i]],
+              backgroundColor: ca[i]
+            });
+          }
+
+          let graph_option = {
+            maintainAspectRatio: false,
+            legend: {display: false},
+            scales: {
+              xAxes: [{
+                stacked:true,
+                ticks: {
+                  min:0,
+                  max:100,
+                  maxTicksLimit: 8,
+                  fontSize:8,
+                  callback: function(label, index, labels) {
+                    return Number(label).toLocaleString() + "%";
+                  }
+                },
+                gridLines: {
+                  display:false,
+                },
+              }],
+              yAxes: [{
+                categoryPercentage:.6,
+                stacked:true,
+                ticks: {
+                  fontSize:8,
+                },
+                gridLines: {
+                  display:false,
+                  drawBorder:false,
+                },
+              }]
+            },
+            tooltips:{
+              callbacks: {
+                title:function(t,d) {
+                  let index = t[0].index;
+                  return `${["総合売上","来院数","新患数"][index]}`;
+                },
+                label: function(t,d) {
+                  let idx = t.datasetIndex;
+                  let index = t.index;
+                  let amount = data_arr[idx].data[index];
+                  return `${na[idx]} ${amount.toLocaleString()}%`;
+                }
+              }
+            }
+          }
+          geneder_details_bar.data = {
+            labels:["総合売上","来院数","新患数"],
+            datasets:data_arr
+          };
+          geneder_details_bar.options = graph_option;
+          geneder_details_bar.update();
+
+        }
+        const desc_radar = () => {
+          let objs = data.data.gene;
+
+          const desc_bar_0 = () => {
+            let dma = [],dfa = [];
+            let dma_ = [],dfa_ = [];
+
+            for (let i = 0;i < 11;i++) {
+              let m = objs.filter((cell) => cell.generation == i && cell.gender == 1);
+              let f = objs.filter((cell) => cell.generation == i && cell.gender == 2);
+
+
+              dma.push(m.sum_val(`i_5_data`));
+              dfa.push(f.sum_val(`i_5_data`));
+
+              dma_.push(m.sum_val(`i_0_data`).to_devide(m.sum_val(`i_3_data`)));
+              dfa_.push(f.sum_val(`i_0_data`).to_devide(f.sum_val(`i_3_data`)));
+            }
+
+            let graph_data = [{
+              type:"crossed_lines",
+              data:dma_,
+              backgroundColor:`rgba(18,83,164,1)`,
+              borderColor:`rgba(18,83,164,1)`,
+              borderWidth:2,
+              pointRadius:3,
+              fill:false,
+              yAxisID: "y-axis-1",
+              lineTension:0
+            },{
+              type:"crossed_lines",
+              data:dfa_,
+              backgroundColor:`rgba(242,100,100,1)`,
+              borderColor:`rgba(242,100,100,1)`,
+              borderWidth:2,
+              pointRadius:3,
+              fill:false,
+              yAxisID: "y-axis-1",
+              lineTension:0
+            },{
+              data:dma,
+              backgroundColor:`rgba(18,83,164,.75)`,
+              borderWidth:0,
+              yAxisID: "y-axis-0",
+            },{
+              data:dfa,
+              backgroundColor:`rgba(242,100,100,.75)`,
+              borderWidth:0,
+              yAxisID: "y-axis-0",
+            }];
+            let graph_option = {
+              maintainAspectRatio: true,
+              responsive: true,
+              legend: {
+                display: false,
+                labels:{
+                  fontSize:8
+                }
+              },
+              title: {display:true,fontSize:12,fontStyle:500,text: '男女年代別純患数と客単価'},
+              elements: {point:{radius:1.5}},
+              scales: {
+                yAxes: [{
+                  id: "y-axis-0",
+                  type: "linear",
+                  position: "left",
+                  gridLines: {
+                    display:true,
+                    drawBorder: false,
+                    zeroLineColor:"#eee",
+                    color:"#eee"
+                  },
+                  ticks: {
+                    min:0,
+                    autoSkip: true,
+                    maxTicksLimit: 3,
+                    fontSize:10,
+                    callback: function(label, index, labels) {
+                      return label.str_jp();
+                    }
+                  },
+                },{
+                  id: "y-axis-1",
+                  type: "linear",
+                  position: "right",
+                  gridLines: {
+                    display:true,
+                    drawBorder: false,
+                    zeroLineColor:"#eee",
+                    color:"#eee"
+                  },
+                  ticks: {
+                    min:0,
+                    autoSkip: true,
+                    maxTicksLimit: 3,
+                    fontSize:10,
+                    callback: function(label, index, labels) {
+                      return label.str_jp();
+                    }
+                  },
+                }],
+                xAxes: [{
+                  barPercentage:1,
+                  categoryPercentage: 0.9,
+                  ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 4,
+                    maxRotation: 0,
+                    minRotation: 0,
+                    fontSize:10,
+                  },
+                  gridLines: {
+                    display:false,
+                  },
+                  scaleLabel: {
+                    display: false,
+                    labelString: '日'
+                  }
+                }]
+              },
+              tooltips: {
+                bodySpacing:5,
+                titleFontSize:12.5,
+                bodyFontSize:15,
+                intersect:false,
+                axis:'x',
+                mode:'index',
+                callbacks: {
+                  title:function(t,d) {
+                    let index = t[0].index;
+                    let ar = ["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"];
+                    return `${ar[index]}`;
+                  },
+                  label:function(t,d) {
+                    let idx = t.datasetIndex;
+                    return `${["男性客単価","女性客単価","男性純患数","女性純患数"][idx]} : ${idx==0||idx==1?`¥`:``}${t.yLabel.toLocaleString()}${idx==2||idx==3?`人`:``}`;
+                  }
+                }
+              }
+            }
+            geneder_details_bar_0.data = {
+              labels:["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"],
+              datasets:graph_data
+            };
+            geneder_details_bar_0.options = graph_option;
+            geneder_details_bar_0.update();
+          }
+          const desc_radar = () => {
+            let dma = [],dfa = [];
+
+            for (let i = 0;i < 7;i++) {
+              dma.push(objs.sum_val(`i_${i}_1_week`));
+              dfa.push(objs.sum_val(`i_${i}_2_week`));
+            }
+
+            let graph_data = [{
+              data:dma,
+              backgroundColor:'rgba(18,83,164,.1)',
+              borderColor:'rgba(18,83,164,1)',
+              borderWidth:2,
+              pointRadius:3,
+              pointBackgroundColor:'rgba(18,83,164,1)'
+            },{
+              data:dfa,
+              backgroundColor:'rgba(242,100,100,.1)',
+              borderColor:'rgba(242,100,100,1)',
+              borderWidth:2,
+              pointRadius:3,
+              pointBackgroundColor:'rgba(242,100,100,1)'
+            }];
+            let graph_option = {
+              maintainAspectRatio: false,
+              legend: {
+                display: false
+              },
+              title: {display:true,fontSize:12,fontStyle:500,text: '曜日別来院数分布'},
+              elements: {point:{radius:0.5}},
+              scale: {
+                pointLabels: {
+                  fontSize:10,
+                  fontColor:"#73879C"
+                },
+                gridLines: {
+                  color:"#ddd"
+                },
+                ticks: {
+                  beginAtZero: true,
+                  fontSize:10,
+                  fontColor:"#73879C",
+                  callback: function(label, index, labels) {
+                    return Number(label).toLocaleString() + "人";
+                  }
+                }
+              },
+              responsive: true,
+              tooltips: {
+                bodySpacing:5,
+                titleFontSize:12.5,
+                bodyFontSize:15,
+                intersect:false,
+                callbacks: {
+                  title:function(t,d) {
+                    let idx = t[0].datasetIndex;
+                    let arr = ["総人数","男性","女性"];
+                    return `${arr[idx]}`;
+                  },
+                  label:function(t,d) {
+                    return `${t.yLabel.toLocaleString()}人`;
+                  }
+                }
+              }
+            }
+            geneder_details_radar_1.data = {
+              labels:["日","月","火","水","木","金","土"],
+              datasets:graph_data
+            };
+            geneder_details_radar_1.options = graph_option;
+            geneder_details_radar_1.update();
+          }
+
+          desc_bar_0();
+          desc_radar();
+        }
+        const desc_pie = () => {
+          let objs = data.data.gene;
+          let male = objs.filter(({gender}) => gender == 1).sum_val(`i_5_data`);
+          let female = objs.filter(({gender}) => gender == 2).sum_val(`i_5_data`);
+
+          let data_arr = [male,female];
+          let graph_plugin = {
+            afterDatasetsDraw: function (chart, easing) {
+              var ctx = chart.ctx;
+              chart.data.datasets.forEach(function (dataset, i) {
+                var meta = chart.getDatasetMeta(i);
+                if (!meta.hidden) {
+                  meta.data.forEach(function (element, index) {
+                    ctx.fillStyle = "white";
+                    var fontSize = 8;
+                    var fontStyle = 'normal';
+                    var fontFamily = 'Helvetica Neue';
+                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+                    let amount = data_arr[index].to_perate(objs.sum_val(`i_5_data`));
+                    var dataString =
+                    amount > 0 ? [`${["男性","女性"][index]}${amount}%`] : [``];
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    var padding = 5;
+                    var position = element.tooltipPosition();
+                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                  });
+                }
+              });
+            }
+          }
+          let graph_data = [{
+            data:data_arr,
+            backgroundColor:["rgba(54,100,180,.75)","rgba(242,100,100,.75)"],
+            borderColor:"",
+            borderWidth:0,
+          }];
+          let graph_option = {
+            maintainAspectRatio: true,
+            responsive: true,
+            cutoutPercentage:0,
+            title: {display:true,fontSize:12,fontStyle:500,text: '顧客男女比'},
+            pieceLabel: {render: 'label',position: 'outside'},
+            tooltips:{
+              callbacks: {
+                title:function(t,d) {
+                  let index = t[0].index;
+                  return `${["男性","女性"][index]}`;
+                },
+                label: function(t,d) {
+                  let index = t.index;
+                  let amount = data_arr[index];
+                  return `${amount.toLocaleString()}人`;
+                }
+              }
+            }
+          }
+          geneder_details_pie.data = {
+            labels:"",
+            datasets:graph_data,
+          };
+          geneder_details_pie.config.plugins = [graph_plugin];
+          geneder_details_pie.options = graph_option;
+          geneder_details_pie.update();
+        }
+        const desc_table = () => {
+          let objs = data.data.gene;
+          let c_objs = data.cdata.gene;
+
+          let na = ["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"]
+          let daf = ["","","","¥","","¥","¥",""];
+          let dar = ["回","人","人","","回","","",""];
+
+          let ap = ``;
+
+          let sd_0 = objs.sum_val(`i_3_data`);
+          let sd_1 = objs.sum_val(`i_5_data`);
+          let sd_2 = objs.sum_val(`i_6_data`);
+          let sd_3 = objs.sum_val(`i_1_data`);
+
+          for (let i = 0;i < 11;i++) {
+            let rslt = objs.filter(({generation}) => generation == i);
+
+            let data_0 = rslt.sum_val(`i_3_data`);
+            let data_1 = rslt.sum_val(`i_5_data`);
+            let data_2 = rslt.sum_val(`i_6_data`);
+            let data_3 = rslt.sum_val(`i_1_data`);
+            let data_4 = data_0.to_Perate(data_1);
+            let data_5 = data_3.to_devide(data_0);
+            let data_6 = data_3.to_devide(data_1);
+
+            let data_7 = rslt.filter(({gender}) => gender == 1).sum_val('i_5_data');
+            let data_8 = rslt.filter(({gender}) => gender == 2).sum_val('i_5_data');
+            let data_9 = rslt.sum_val('i_5_data');
+
+            data_7 = data_7.to_perate(data_9).to_devide(1);
+            data_8 = data_8.to_perate(data_9).to_devide(1);
+
+            let app = ``;
+
+            if (!cpt) {
+              let rate_0 = data_0.to_perate(sd_0);
+              let rate_1 = data_1.to_perate(sd_1);
+              let rate_2 = data_2.to_perate(sd_2);
+              let rate_3 = data_3.to_perate(sd_3);
+
+              for (let i = 0;i < 8;i++) {
+                app +=
+                `
+                <td>
+                  <div class="amount">
+                    ${
+                      i != 7
+                      ? `${daf[i]}${eval(`data_${i}`).toLocaleString()}${dar[i]}${i <= 3?`<span class="percent">${eval(`rate_${i}`)}%</span>`:``}`
+                      : `${data_7} : ${data_8}`
+                    }
+                  </div>
+                  ${i <= 3?`<div class="bb" style="width:${eval(`rate_${i}`)}%;"></div>`:``}
+                </td>
+                `;
+              }
+            } else {
+              let c_rslt = c_objs.filter(({generation}) => generation == i);
+              if (c_rslt.exist_val()) {
+                let c_data_0 = c_rslt.sum_val(`i_3_data`);
+                let c_data_1 = c_rslt.sum_val(`i_5_data`);
+                let c_data_2 = c_rslt.sum_val(`i_6_data`);
+                let c_data_3 = c_rslt.sum_val(`i_1_data`);
+                let c_data_4 = c_data_0.to_Perate(c_data_1);
+                let c_data_5 = c_data_3.to_devide(c_data_0);
+                let c_data_6 = c_data_3.to_devide(c_data_1);
+
+                let c_data_7 = c_rslt.filter(({gender}) => gender == 1).sum_val('i_5_data');
+                let c_data_8 = c_rslt.filter(({gender}) => gender == 2).sum_val('i_5_data');
+                let c_data_9 = c_rslt.sum_val('i_5_data');
+
+                c_data_7 = c_data_7.to_perate(c_data_9).to_devide(1);
+                c_data_8 = c_data_8.to_perate(c_data_9).to_devide(1);
+
+                let rate_0 = data_0.to_rate(c_data_0).rate_str();
+                let rate_1 = data_1.to_rate(c_data_1).rate_str();
+                let rate_2 = data_2.to_rate(c_data_2).rate_str();
+                let rate_3 = data_3.to_rate(c_data_3).rate_str();
+                let rate_4 = data_4.to_rate(c_data_4).rate_str();
+                let rate_5 = data_5.to_rate(c_data_5).rate_str();
+                let rate_6 = data_6.to_rate(c_data_6).rate_str();
+
+                for (let i = 0;i < 8;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">
+                      ${
+                        i != 7
+                        ? `${eval(`data_${i}`).toLocaleString()}<span>(${eval(`c_data_${i}`).toLocaleString()})</span>`
+                        : `${data_7}<span>(${c_data_7})</span> : ${data_8} <span>(${c_data_8})</span>`
+                      }
+                    </div>
+                    ${i!=7?`<div class="rate">${eval(`rate_${i}`)}</div>`:``}
+                  </td>
+                  `;
+                }
+              } else {
+                for (let i = 0;i < 8;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">
+                      ${i != 7 ? `${daf[i]}${eval(`data_${i}`).toLocaleString()}${dar[i]}<span>(0)</span>` : `${data_7}<span>(0)</span> : ${data_8} <span>(0)</span>`}
+                    </div>
+                    ${i!=7?`<div class="rate">-%</div>`:``}
+                  </td>
+                  `;
+                }
+              }
+            }
+
+            ap +=
+            `
+            <tr>
+              <th>${na[i]}</th>
+              ${app}
+            </tr>
+            `;
+          }
+
+          $('#geneder_details_table_base').html(
+            `
+            <table id="geneder_details_table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>来院数</th>
+                  <th>純患数</th>
+                  <th>新患数</th>
+                  <th>窓口売上</th>
+                  <th>平均来院回数</th>
+                  <th>窓口客単価</th>
+                  <th>窓口LTV</th>
+                  <th>男女比率</th>
+                </tr>
+              </thead>
+              <tbody>${ap}</tbody>
+            </table>
+            `
+          );
+          let table = $('#geneder_details_table').DataTable({
+            columnDefs:[{type:'currency',targets:[0,1,2,3]}],
+            displayLength:10,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: false,
+            paging: false,
+            order:[[0,"asc"]]
+          });
+        }
+
+        desc_bar();
+        desc_radar();
+        desc_pie();
+        desc_table();
+      }
       const desc_customers = () => {
         let obj = data.data.cs;
         let c_obj = data.cdata.cs;
         if (!obj.exist_val()) return;
+
+        let g_obj = [
+          {obj_id:0,obj_name:"0代 男性"},
+          {obj_id:1,obj_name:"0代 女性"},
+          {obj_id:2,obj_name:"10~14歳 男性"},
+          {obj_id:3,obj_name:"10~14歳 女性"},
+          {obj_id:4,obj_name:"15~19歳 男性"},
+          {obj_id:5,obj_name:"15~19歳 女性"},
+          {obj_id:6,obj_name:"20~24歳 男性"},
+          {obj_id:7,obj_name:"20~24歳 女性"},
+          {obj_id:8,obj_name:"25~29歳 男性"},
+          {obj_id:9,obj_name:"25~29歳 女性"},
+          {obj_id:10,obj_name:"30~34歳 男性"},
+          {obj_id:11,obj_name:"30~34歳 女性"},
+          {obj_id:12,obj_name:"35~39歳 男性"},
+          {obj_id:13,obj_name:"35~39歳 女性"},
+          {obj_id:14,obj_name:"40~44歳 男性"},
+          {obj_id:15,obj_name:"40~44歳 女性"},
+          {obj_id:16,obj_name:"45~49歳 男性"},
+          {obj_id:17,obj_name:"45~49歳 女性"},
+          {obj_id:18,obj_name:"50~54歳 男性"},
+          {obj_id:19,obj_name:"50~54歳 女性"},
+          {obj_id:20,obj_name:"55~59歳 男性"},
+          {obj_id:21,obj_name:"55~59歳 女性"},
+          {obj_id:22,obj_name:"60~64歳 男性"},
+          {obj_id:23,obj_name:"60~64歳 女性"},
+          {obj_id:24,obj_name:"65~69歳 男性"},
+          {obj_id:25,obj_name:"65~69歳 女性"},
+          {obj_id:26,obj_name:"70~74歳 男性"},
+          {obj_id:27,obj_name:"70~74歳 女性"},
+          {obj_id:28,obj_name:"75~79歳 男性"},
+          {obj_id:29,obj_name:"75~79歳 女性"},
+          {obj_id:30,obj_name:"80~84歳 男性"},
+          {obj_id:31,obj_name:"80~84歳 女性"},
+          {obj_id:32,obj_name:"85~89歳 男性"},
+          {obj_id:33,obj_name:"85~89歳 女性"},
+          {obj_id:34,obj_name:"90~94歳 男性"},
+          {obj_id:35,obj_name:"90~94歳 女性"},
+          {obj_id:36,obj_name:"95~99歳 男性"},
+          {obj_id:37,obj_name:"95~99歳 女性"},
+          {obj_id:38,obj_name:"100歳~ 男性"},
+          {obj_id:39,obj_name:"100歳~ 女性"}
+        ];
 
         let sum_data_0 = obj.sum_val(`data_0`);
         let sum_data_1 = obj.sum_val(`data_1`);
@@ -3831,14 +4953,17 @@ var desc_obj_page = () => {
         }
         const desc_table = () => {
           let ap = ``;
-          obj.forEach((cell) => {
-            let data_0 = cell.data_0;
-            let data_1 = cell.data_1;
-            let data_2 = cell.data_2;
-            let data_3 = cell.data_3;
-            let data_4 = cell.data_4;
-            let data_5 = cell.data_5;
-            let data_6 = cell.data_6;
+
+          g_obj.forEach((cell) => {
+            let rslt = obj.filter(({obj_id}) => obj_id == cell.obj_id);
+
+            let data_0 = rslt.sum_val(`data_0`);
+            let data_1 = rslt.sum_val(`data_1`);
+            let data_2 = rslt.sum_val(`data_2`);
+            let data_3 = rslt.sum_val(`data_3`);
+            let data_4 = rslt.sum_val(`data_4`);
+            let data_5 = rslt.sum_val(`data_5`);
+            let data_6 = rslt.sum_val(`data_6`);
 
             let app = ``;
 
@@ -3917,6 +5042,7 @@ var desc_obj_page = () => {
             </tr>
             `;
           });
+
           $('#customer_table_base').html(
             `
             <table id="customer_table">
@@ -4278,12 +5404,31 @@ var desc_obj_page = () => {
         desc_cus();
       }
 
-      desc_clinics();
-      desc_staffs();
-      desc_visit_reason();
-      desc_hour();
-      desc_customers();
-      desc_menus();
+      if (st == 0) {
+        desc_areas();
+      }
+      if (st <= 1) {
+        desc_clinics();
+      }
+      if (st <= 2) {
+        desc_staffs();
+      }
+
+      setTimeout(() => {
+        desc_visit_reason();
+        setTimeout(() => {
+          desc_hour();
+          setTimeout(() => {
+            desc_geneder_details();
+            setTimeout(() => {
+              desc_customers();
+              setTimeout(() => {
+                desc_menus();
+              },250);
+            },250);
+          },250);
+        },250);
+      },250);
     }
 
     desc_content_leveling();
@@ -4293,6 +5438,8 @@ var desc_obj_page = () => {
       eval(`${sender1} = new Chart(${sender2},{type:'${sender3}',data:{labels:"",datasets:"",},plugins:"",})`);
     }
 
+    let area_pie;
+    let area_boxplot;
     let clinic_pie;
     let clinic_boxplot;
     let staff_pie;
@@ -4302,16 +5449,25 @@ var desc_obj_page = () => {
     let customer_pie;
     let customer_boxplot;
     let menu_pie;
+    let geneder_details_pie;
+    let geneder_details_bar;
+    let geneder_details_bar_0;
+    let geneder_details_radar_1;
 
-    let clinic_pie_ctx = st == 0 ? document.getElementById('clinic_pie').getContext('2d') : ``;
-    st == 0 ? desc_graph_init("clinic_pie","clinic_pie_ctx",'pie') : console.log();
-    let clinic_boxplot_ctx = st == 0 ? document.getElementById('clinic_boxplot').getContext('2d') : ``;
-    st == 0 ? desc_graph_init("clinic_boxplot","clinic_boxplot_ctx",'boxplot') : console.log();
+    let area_pie_ctx = st == 0 ? document.getElementById('area_pie').getContext('2d') : ``;
+    st == 0 ? desc_graph_init("area_pie","area_pie_ctx",'pie') : console.log();
+    let area_boxplot_ctx = st == 0 ? document.getElementById('area_boxplot').getContext('2d') : ``;
+    st == 0 ? desc_graph_init("area_boxplot","area_boxplot_ctx",'boxplot') : console.log();
 
-    let staff_pie_ctx = st <= 1 ? document.getElementById('staff_pie').getContext('2d') : ``;
-    st <= 1 ? desc_graph_init("staff_pie","staff_pie_ctx",'pie') : console.log();
-    let staff_boxplot_ctx = st <= 1 ? document.getElementById('staff_boxplot').getContext('2d') : ``;
-    st <= 1 ? desc_graph_init("staff_boxplot","staff_boxplot_ctx",'boxplot') : console.log();
+    let clinic_pie_ctx = st <= 1 ? document.getElementById('clinic_pie').getContext('2d') : ``;
+    st <= 1 ? desc_graph_init("clinic_pie","clinic_pie_ctx",'pie') : console.log();
+    let clinic_boxplot_ctx = st <= 1 ? document.getElementById('clinic_boxplot').getContext('2d') : ``;
+    st <= 1 ? desc_graph_init("clinic_boxplot","clinic_boxplot_ctx",'boxplot') : console.log();
+
+    let staff_pie_ctx = st <= 2 ? document.getElementById('staff_pie').getContext('2d') : ``;
+    st <= 2 ? desc_graph_init("staff_pie","staff_pie_ctx",'pie') : console.log();
+    let staff_boxplot_ctx = st <= 2 ? document.getElementById('staff_boxplot').getContext('2d') : ``;
+    st <= 2 ? desc_graph_init("staff_boxplot","staff_boxplot_ctx",'boxplot') : console.log();
 
     let vr_polar_ctx = document.getElementById('vr_polar').getContext('2d');
     desc_graph_init("vr_polar","vr_polar_ctx",'polarArea');
@@ -4323,6 +5479,14 @@ var desc_obj_page = () => {
     desc_graph_init("customer_boxplot","customer_boxplot_ctx",'boxplot');
     let menu_pie_ctx = document.getElementById('menu_pie').getContext('2d');
     desc_graph_init("menu_pie","menu_pie_ctx",'pie');
+    let geneder_details_pie_ctx = document.getElementById('geneder_details_pie').getContext('2d');
+    desc_graph_init("geneder_details_pie","geneder_details_pie_ctx",'pie');
+    let geneder_details_bar_ctx = document.getElementById('geneder_details_bar').getContext('2d');
+    desc_graph_init("geneder_details_bar","geneder_details_bar_ctx",'horizontalBar');
+    let geneder_details_bar_0_ctx = document.getElementById('geneder_details_bar_0').getContext('2d');
+    desc_graph_init("geneder_details_bar_0","geneder_details_bar_0_ctx",'bar');
+    let geneder_details_radar_1_ctx = document.getElementById('geneder_details_radar_1').getContext('2d');
+    desc_graph_init("geneder_details_radar_1","geneder_details_radar_1_ctx",'radar');
 
     desc_static_sections();
   } else if (bt == 2) {
@@ -7363,7 +8527,7 @@ var desc_obj_page = () => {
           }
           const desc_line = () => {
             let graph_data = [{
-              type:"LineWithLine",
+              type:"crossed_lines",
               label:"累積売上割合",
               data:step_rate_arr,
               backgroundColor:"#fff",
@@ -8894,7 +10058,7 @@ var desc_obj_page = () => {
           const desc_trend = () => {
             const desc_line = () => {
               let graph_data = [{
-                type:"LineWithLine",
+                type:"crossed_lines",
                 label:"当期",
                 data:trend_data_arr,
                 backgroundColor:`rgba(54,100,180,.05)`,
@@ -8907,7 +10071,7 @@ var desc_obj_page = () => {
                 cubicInterpolationMode: 'monotone',
                 lineTension: 0
               },{
-                type:"LineWithLine",
+                type:"crossed_lines",
                 label:"回帰線",
                 data:trend_regression_data,
                 backgroundColor:`rgba(66,113,244,.05)`,
@@ -8921,7 +10085,7 @@ var desc_obj_page = () => {
               }];
               if (cpt) {
                 graph_data.push({
-                  type:"LineWithLine",
+                  type:"crossed_lines",
                   label:"比較",
                   data:trend_c_data_arr,
                   backgroundColor:"#fff",
@@ -8933,7 +10097,7 @@ var desc_obj_page = () => {
                   cubicInterpolationMode: 'monotone',
                   lineTension: 0
                 },{
-                  type:"LineWithLine",
+                  type:"crossed_lines",
                   label:"比較回帰線",
                   data:trend_c_regression_data,
                   backgroundColor:`rgba(255,165,0,.05)`,
@@ -9147,7 +10311,7 @@ var desc_obj_page = () => {
               }
               if (mbt == 0) {
                 graph_data = [{
-                  type:"LineWithLine",
+                  type:"crossed_lines",
                   label:"成長線",
                   data:integral_regression_data,
                   backgroundColor:`rgba(66,113,244,.05)`,
@@ -9158,7 +10322,7 @@ var desc_obj_page = () => {
                   cubicInterpolationMode: 'monotone',
                   lineTension : 0
                 },{
-                  type:"LineWithLine",
+                  type:"crossed_lines",
                   label:"平均線",
                   data:integral_ave_arr,
                   backgroundColor:"#fff",
@@ -9171,7 +10335,7 @@ var desc_obj_page = () => {
                 }];
                 if (cpt) {
                   graph_data.push({
-                    type:"LineWithLine",
+                    type:"crossed_lines",
                     label:"比較成長線",
                     data:integral_c_regression_data,
                     backgroundColor:`rgba(255,165,0,.05)`,
@@ -9185,11 +10349,11 @@ var desc_obj_page = () => {
                 }
               } else {
                 graph_data = [{
-                  type:"LineWithLine",
+                  type:"crossed_lines",
                   data:integral_data_arr,
                   label:"累積値",
-                  backgroundColor:`rgba(54,183,235,.05)`,
-                  borderColor:"#36b7eb",
+                  backgroundColor:`rgba(54,100,180,.05)`,
+                  borderColor:`rgba(54,100,180,1)`,
                   borderWidth: "2",
                   yAxisID: "y-axis-0",
                   pointBackgroundColor:"#fff",
@@ -9200,7 +10364,7 @@ var desc_obj_page = () => {
                 }];
                 if (cpt) {
                   graph_data.push({
-                    type:"LineWithLine",
+                    type:"crossed_lines",
                     label:"比較",
                     data:integral_c_data_arr,
                     backgroundColor:"#fff",
@@ -10099,12 +11263,24 @@ var desc_obj_page = () => {
           });
         }
 
-        desc_week_section();
-        desc_source_section();
-        desc_customer_section();
-        desc_hour_section();
-        desc_associate();
-        desc_association();
+        setTimeout(() => {
+          desc_week_section();
+          setTimeout(() => {
+            desc_source_section();
+            setTimeout(() => {
+              desc_customer_section();
+              setTimeout(() => {
+                desc_hour_section();
+                setTimeout(() => {
+                  desc_associate();
+                  setTimeout(() => {
+                    desc_association();
+                  },250);
+                },250);
+              },250);
+            },250);
+          },250);
+        },250);
       }
 
       desc_unit();
@@ -10221,6 +11397,57 @@ var desc_obj_page = () => {
         ap +=
         `
         <div class="section">
+          <div class="section_title">エリア別</div>
+          <div class="cells_box">
+            <div class="cell cell_4x1 inline">
+              <div class="box">
+                <div class="cell_title text_overflow">リスト</div>
+                <div class="content _segment_">
+                  <div class="table_base table_base2" id="area_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cell cell_4x1 inline">
+              <div class="box">
+                <div class="cell_title text_overflow">顧客属性</div>
+                <div class="content _segment_">
+                  <div class="table_base table_base2 no_border" id="area_customer_table_base"></div>
+                </div>
+              </div>
+            </div>
+            <div class="cell cell_nx1__15rem inline">
+              <div class="box">
+                <div class="cell_title text_overflow">自費売上パイチャート</div>
+                <div class="content _trend_">
+                  <div class="base">
+                    <div class="graph_wrap">
+                      <canvas id="area_pie" width="100" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cell cell_13x1 inline">
+              <div class="box">
+                <div class="cell_title text_overflow">箱ひげ図</div>
+                <div class="content _trend_">
+                  <div class="base">
+                    <div class="graph_wrap">
+                      <canvas id="area_boxplot" width="300" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+      }
+      if (st <= 1) {
+        ap +=
+        `
+        <div class="section">
           <div class="section_title">店舗別</div>
           <div class="cells_box">
             <div class="cell cell_4x1 inline">
@@ -10268,7 +11495,7 @@ var desc_obj_page = () => {
         </div>
         `;
       }
-      if (st <= 1) {
+      if (st <= 2) {
         ap +=
         `
         <div class="section">
@@ -10326,6 +11553,31 @@ var desc_obj_page = () => {
         <div class="cells_box">
           <div class="cell cell_4x1 inline">
             <div class="box">
+              <div class="cell_title text_overflow">顧客属性の詳細な内訳</div>
+              <div class="content _geneder_details_">
+                <div class="base">
+                  <div class="graph_row">
+                    <div class="_column">
+                      <canvas id="geneder_details_bar" width="500" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas class="inline" id="geneder_details_bar_0" width="300" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas class="inline" id="geneder_details_radar_1" width="100" height="100"></canvas>
+                    </div>
+                    <div class="_column">
+                      <canvas id="geneder_details_pie" width="100" height="100"></canvas>
+                    </div>
+                  </div>
+                  <div class="table_base table_base1" id="geneder_details_table_base">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_4x1 inline">
+            <div class="box">
               <div class="cell_title text_overflow">リスト</div>
               <div class="content _segment_">
                 <div class="table_base table_base2" id="customer_table_base">
@@ -10372,6 +11624,428 @@ var desc_obj_page = () => {
     }
     const desc_menu_content = (data) => {
       const desc_static_sections = () => {
+        const desc_areas = () => {
+          let obj = data.data.ar;
+          let c_obj = data.cdata.ar;
+          if (!obj.exist_val()) return;
+
+          let sum_data_0 = obj.sum_val(`data_0`);
+          let sum_data_1 = obj.sum_val(`data_1`);
+          let sum_data_2 = obj.sum_val(`data_2`);
+          let sum_data_3 = obj.sum_val(`data_3`);
+
+          const desc_pie = () => {
+            let data_arr = [];
+            for (let i = 0;i < 5;i++) {
+              if (i >= obj.length) continue;
+              let cell = obj[i];
+              data_arr.push(cell.data_0);
+            }
+            if (obj.length >= 6) data_arr.push(sum_data_0 - data_arr.sum_val(``));
+
+            let graph_plugin = {
+              afterDatasetsDraw: function (chart, easing) {
+                var ctx = chart.ctx;
+                chart.data.datasets.forEach(function (dataset, i) {
+                  var meta = chart.getDatasetMeta(i);
+                  if (!meta.hidden) {
+                    meta.data.forEach(function (element, index) {
+                      ctx.fillStyle = "white";
+                      var fontSize = 8;
+                      var fontStyle = 'normal';
+                      var fontFamily = 'Helvetica Neue';
+                      ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+                      let amount = data_arr[index].to_perate(sum_data_0);
+                      var dataString =
+                      amount > 0 ? [`${amount}%`] : [``];
+                      ctx.textAlign = 'center';
+                      ctx.textBaseline = 'middle';
+                      var padding = 5;
+                      var position = element.tooltipPosition();
+                      ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                    });
+                  }
+                });
+              }
+            }
+            let graph_data = [{
+              data:data_arr,
+              backgroundColor:pgca,
+              borderColor:"",
+              borderWidth:0,
+            }];
+            let graph_option = {
+              maintainAspectRatio: true,
+              responsive: true,
+              cutoutPercentage:0,
+              title: {display:false,fontSize:12,fontStyle:500,text: ''},
+              pieceLabel: {render: 'label',position: 'outside'},
+              tooltips:{
+                callbacks: {
+                  title:function(t,d) {
+                    let index = t[0].index;
+                    let name = index != 5 ? obj[index].obj_name : `その他`;
+                    return `${name}`;
+                  },
+                  label: function(t,d) {
+                    let index = t.index;
+                    let amount = data_arr[index];
+                    return `¥${amount.toLocaleString()}`;
+                  }
+                }
+              }
+            }
+            area_pie.data = {
+              labels:"",
+              datasets:graph_data,
+            };
+            area_pie.config.plugins = [graph_plugin];
+            area_pie.options = graph_option;
+            area_pie.update();
+          }
+          const desc_plot = () => {
+            let data_0_arr = [];
+            let data_1_arr = [];
+            let data_2_arr = [];
+            let data_c_0_arr = [];
+            let data_c_1_arr = [];
+            let data_c_2_arr = [];
+
+            obj.forEach((cell) => {
+              data_0_arr.push(cell.data_1);
+              data_1_arr.push(cell.data_2);
+              data_2_arr.push(cell.data_3);
+            });
+            if (cpt) {
+              c_obj.forEach((cell) => {
+                data_c_0_arr.push(cell.data_1);
+                data_c_1_arr.push(cell.data_2);
+                data_c_2_arr.push(cell.data_3);
+              });
+            }
+            let graph_data = [];
+
+            graph_data = [{
+              label:"当期",
+              backgroundColor:'rgba(54,100,180,.5)',
+              borderColor:'rgba(54,100,180,1)',
+              borderWidth: 1.5,
+              outlierColor: '#999999',
+              padding: 10,
+              itemRadius: 0,
+              data: [data_0_arr,data_1_arr,data_2_arr],
+            }];
+            if (cpt) {
+              graph_data.push({
+                label:"前期",
+                backgroundColor:'rgba(242,100,100,.5)',
+                borderColor:'rgb(242,100,100)',
+                borderWidth: 1.5,
+                outlierColor: '#999999',
+                padding: 10,
+                itemRadius: 0,
+                data: [data_c_0_arr,data_c_1_arr,data_c_2_arr],
+              });
+            }
+            let graph_option = {
+              maintainAspectRatio:true,
+              responsive: true,
+              legend:{labels:{fontSize:10,boxWidth:24}},
+              title: {display:false},
+              scales: {
+                yAxes: [{
+                  gridLines: {
+                    display:true,
+                    drawBorder: false,
+                    zeroLineColor:"#eee",
+                    color:"#eee"
+                  },
+                  ticks: {
+                    autoSkip: true,
+                    fontSize:8,
+                    maxTicksLimit:6,
+                    callback: function(label, index, labels) {
+                      return label.str_jp();
+                    }
+                  },
+                }],
+                xAxes: [{
+                  ticks: {
+                    maxRotation: 0,
+                    minRotation: 0,
+                    fontSize:8,
+                    autoSkip: true,
+                  },
+                  gridLines: {
+                    display:false,
+                    drawBorder: false,
+                  },
+                  scaleLabel: {
+                    display: false,
+                  }
+                }]
+              },
+              tooltips:{
+                bodySpacing:5,
+                titleFontSize:12.5,
+                bodyFontSize:15,
+                intersect:false,
+                axis:'x',
+                mode:'index',
+              }
+            }
+            area_boxplot.data = {
+              labels:["施術回数","純患数","新患数"],
+              datasets:graph_data,
+            };
+            area_boxplot.options = graph_option;
+            area_boxplot.update();
+          }
+          const desc_table = () => {
+            let ap = ``;
+            obj.forEach((cell) => {
+              let data_0 = cell.data_0;
+              let data_1 = cell.data_1;
+              let data_2 = cell.data_2;
+              let data_3 = cell.data_3;
+
+              let app = ``;
+
+              if (!cpt) {
+                let rate_0 = data_0.to_perate(sum_data_0);
+                let rate_1 = data_1.to_perate(sum_data_1);
+                let rate_2 = data_2.to_perate(sum_data_2);
+                let rate_3 = data_3.to_perate(sum_data_3);
+
+                for (let i = 0;i < 4;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">
+                      ${eval(`data_${i}`).toLocaleString()}
+                      <span class="percent">${eval(`rate_${i}`)}%</span>
+                    </div>
+                    <div class="bb" style="width:${eval(`rate_${i}`)}%;"></div>
+                  </td>
+                  `;
+                }
+              } else {
+                let c_cell = c_obj.filter(({obj_id}) => obj_id == cell.obj_id);
+                if (c_cell.exist_val()) {
+                  let c_data_0 = c_cell.sum_val(`data_0`);
+                  let c_data_1 = c_cell.sum_val(`data_1`);
+                  let c_data_2 = c_cell.sum_val(`data_2`);
+                  let c_data_3 = c_cell.sum_val(`data_3`);
+
+                  let rate_0 = data_0.to_rate(c_data_0).rate_str();
+                  let rate_1 = data_1.to_rate(c_data_1).rate_str();
+                  let rate_2 = data_2.to_rate(c_data_2).rate_str();
+                  let rate_3 = data_3.to_rate(c_data_3).rate_str();
+
+                  for (let i = 0;i < 4;i++) {
+                    app +=
+                    `
+                    <td>
+                      <div class="amount">
+                        ${eval(`data_${i}`).toLocaleString()}
+                        <span>(${eval(`c_data_${i}`).toLocaleString()})</span>
+                      </div>
+                      <div class="rate">${eval(`rate_${i}`)}</div>
+                    </td>
+                    `;
+                  }
+                } else {
+                  for (let i = 0;i < 4;i++) {
+                    app +=
+                    `
+                    <td>
+                      <div class="amount">
+                        ${eval(`data_${i}`).toLocaleString()}
+                        <span>(0)</span>
+                      </div>
+                      <div class="rate">-%</div>
+                    </td>
+                    `;
+                  }
+                }
+              }
+              ap +=
+              `
+              <tr>
+                <th>
+                  <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                    ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+                  </a>
+                </th>
+                ${app}
+              </tr>
+              `;
+            });
+            $('#area_table_base').html(
+              `
+              <table id="area_table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>自費売上</th>
+                    <th>来院数</th>
+                    <th>純患数</th>
+                    <th>新患数</th>
+                  </tr>
+                </thead>
+                <tbody>${ap}</tbody>
+              </table>
+              `
+            );
+            let table = $('#area_table').DataTable({
+              columnDefs:[{type:'currency',targets:[1,2,3,4]}],
+              displayLength:10,
+              lengthChange: false,
+              searching: true,
+              ordering: true,
+              info: true,
+              paging: true,
+              order:[[1,"desc"]]
+            });
+          }
+          const desc_cus = () => {
+            let sum_geneder_0 = obj.sum_val(`geneder_0`);
+            let sum_geneder_1 = obj.sum_val(`geneder_1`);
+            let sum_geneder_2 = obj.sum_val(`geneder_2`);
+            let sum_geneder_3 = obj.sum_val(`geneder_3`);
+            let sum_geneder_4 = obj.sum_val(`geneder_4`);
+            let sum_geneder_5 = obj.sum_val(`geneder_5`);
+            let sum_geneder_6 = obj.sum_val(`geneder_6`);
+            let sum_geneder_7 = obj.sum_val(`geneder_7`);
+            let sum_geneder_8 = obj.sum_val(`geneder_8`);
+            let sum_geneder_9 = obj.sum_val(`geneder_9`);
+
+            let ap = ``;
+            obj.forEach((cell) => {
+              let geneder_0 = cell.geneder_0;
+              let geneder_1 = cell.geneder_1;
+              let geneder_2 = cell.geneder_2;
+              let geneder_3 = cell.geneder_3;
+              let geneder_4 = cell.geneder_4;
+              let geneder_5 = cell.geneder_5;
+              let geneder_6 = cell.geneder_6;
+              let geneder_7 = cell.geneder_7;
+              let geneder_8 = cell.geneder_8;
+              let geneder_9 = cell.geneder_9;
+
+
+              let app = ``;
+
+              if (!cpt) {
+                for (let i = 0;i < 10;i++) {
+                  let geneder = eval(`geneder_${i}`);
+                  let sum_geneder = eval(`sum_geneder_${i}`);
+
+                  let rate = geneder.to_perate(sum_geneder);
+
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">${geneder.str_jp()} <span class="percent">${rate}%</span></div>
+                    <div class="bb" style="width:${rate}%;"></div>
+                  </td>
+                  `;
+                }
+              } else {
+                let c_cell = c_obj.filter(({obj_id}) => obj_id == cell.obj_id);
+                if (c_cell.exist_val()) {
+                  let c_geneder_0 = c_cell.sum_val(`geneder_0`);
+                  let c_geneder_1 = c_cell.sum_val(`geneder_1`);
+                  let c_geneder_2 = c_cell.sum_val(`geneder_2`);
+                  let c_geneder_3 = c_cell.sum_val(`geneder_3`);
+                  let c_geneder_4 = c_cell.sum_val(`geneder_4`);
+                  let c_geneder_5 = c_cell.sum_val(`geneder_5`);
+                  let c_geneder_6 = c_cell.sum_val(`geneder_6`);
+                  let c_geneder_7 = c_cell.sum_val(`geneder_7`);
+                  let c_geneder_8 = c_cell.sum_val(`geneder_8`);
+                  let c_geneder_9 = c_cell.sum_val(`geneder_9`);
+
+                  for (let i = 0;i < 10;i++) {
+                    let geneder = eval(`geneder_${i}`);
+                    let c_geneder = eval(`c_geneder_${i}`);
+
+                    let rate = geneder.to_rate(c_geneder).rate_str();
+                    app +=
+                    `
+                    <td>
+                      <div class="amount">${geneder.str_jp()} <span>(${c_geneder.toLocaleString()})</span></div>
+                      <div class="rate">${rate}</div>
+                    </td>
+                    `;
+                  }
+                } else {
+                  for (let i = 0;i < 10;i++) {
+                    app +=
+                    `
+                    <td>
+                      <div class="rate">-%</div>
+                      <div class="amount">${eval(`data_${i}`).toLocaleString()} <span>(0)</span></div>
+                    </td>
+                    `;
+                  }
+                }
+              }
+              ap +=
+              `
+              <tr>
+                <th>
+                  <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                    ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+                  </a>
+                </th>
+                ${app}
+              </tr>
+              `;
+            });
+
+            $('#area_customer_table_base').html(
+              `
+              <table id="area_customer_table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>未成年 男性</th>
+                    <th>未成年 女性</th>
+                    <th>20~34歳 男性</th>
+                    <th>20~34歳 女性</th>
+                    <th>34~64歳 男性</th>
+                    <th>34~64歳 女性</th>
+                    <th>65~74歳 男性</th>
+                    <th>65~74歳 女性</th>
+                    <th>75歳~ 男性</th>
+                    <th>75歳~ 女性</th>
+                  </tr>
+                </thead>
+                <tbody>${ap}</tbody>
+              </table>
+              `
+            );
+            let table = $('#area_customer_table').DataTable({
+              columnDefs:[{type:'currency',targets:[1,2,3,4,5,6,7,8,9,10]}],
+              displayLength:5,
+              lengthChange: false,
+              searching: false,
+              ordering: true,
+              info: false,
+              paging: true,
+              order:[[1,"desc"]]
+            });
+          }
+
+          setTimeout(() => {
+            desc_pie();
+            setTimeout(() => {
+              desc_plot();
+            },500);
+          },250);
+          desc_table();
+          desc_cus();
+        }
         const desc_clinics = () => {
           let obj = data.data.cl;
           let c_obj = data.cdata.cl;
@@ -10621,7 +12295,7 @@ var desc_obj_page = () => {
               `
               <tr>
                 <th>
-                  <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                  <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                     ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
                   </a>
                 </th>
@@ -10742,7 +12416,7 @@ var desc_obj_page = () => {
               `
               <tr>
                 <th>
-                  <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                  <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                     ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
                   </a>
                 </th>
@@ -11044,7 +12718,7 @@ var desc_obj_page = () => {
               if (cls.filter(({id}) => id == cell.obj_clinic_id).exist_val()) {
                 link =
                 `
-                <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                   ${user_name==MSD_smn?`${stna[2]}${cell.obj_id}`: cell.obj_name}
                 </a>
                 `;
@@ -11173,7 +12847,7 @@ var desc_obj_page = () => {
               `
               <tr>
                 <th>
-                  <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+                  <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
                     ${user_name==MSD_smn?`${stna[2]}${cell.obj_id}`: cell.obj_name}
                   </a>
                 </th>
@@ -11225,10 +12899,611 @@ var desc_obj_page = () => {
           desc_table();
           desc_cus();
         }
+        const desc_geneder_details = () => {
+          const desc_bar = () => {
+            let objs = data.data.cs;
+            let sum_0 = objs.sum_val(`data_0`);
+            let sum_1 = objs.sum_val(`data_4`);
+            let sum_2 = objs.sum_val(`data_3`);
+
+            let objs_0 = objs.filter(({obj_id}) => 0 <= obj_id && obj_id <= 5);
+            let objs_1 = objs.filter(({obj_id}) => 6 <= obj_id && obj_id <= 13);
+            let objs_2 = objs.filter(({obj_id}) => 14 <= obj_id && obj_id <= 21);
+            let objs_3 = objs.filter(({obj_id}) => 22 <= obj_id && obj_id <= 29);
+            let objs_4 = objs.filter(({obj_id}) => 30 <= obj_id);
+
+            let data_0_arr = [
+              objs_0.sum_val(`data_0`).to_perate(sum_0),
+              objs_1.sum_val(`data_0`).to_perate(sum_0),
+              objs_2.sum_val(`data_0`).to_perate(sum_0),
+              objs_3.sum_val(`data_0`).to_perate(sum_0),
+              objs_4.sum_val(`data_0`).to_perate(sum_0)
+            ];
+            let data_1_arr = [
+              objs_0.sum_val(`data_4`).to_perate(sum_1),
+              objs_1.sum_val(`data_4`).to_perate(sum_1),
+              objs_2.sum_val(`data_4`).to_perate(sum_1),
+              objs_3.sum_val(`data_4`).to_perate(sum_1),
+              objs_4.sum_val(`data_4`).to_perate(sum_1)
+            ];
+            let data_2_arr = [
+              objs_0.sum_val(`data_3`).to_perate(sum_2),
+              objs_1.sum_val(`data_3`).to_perate(sum_2),
+              objs_2.sum_val(`data_3`).to_perate(sum_2),
+              objs_3.sum_val(`data_3`).to_perate(sum_2),
+              objs_4.sum_val(`data_3`).to_perate(sum_2)
+            ];
+
+            let ca = [
+              `rgba(18,83,164,1)`,
+              `rgba(18,83,164,.8)`,
+              `rgba(18,83,164,.6)`,
+              `rgba(18,83,164,.4)`,
+              `rgba(18,83,164,.2)`
+            ];
+            let na = [
+              `~19歳`,
+              `20~39歳`,
+              `40~59歳`,
+              `60~79歳`,
+              `80歳~`
+            ];
+
+            let data_arr = [];
+            for (let i = 0;i < 5;i++) {
+              data_arr.push({
+                data:[data_0_arr[i],data_1_arr[i],data_2_arr[i]],
+                backgroundColor: ca[i]
+              });
+            }
+
+            let graph_option = {
+              maintainAspectRatio: false,
+              legend: {display: false},
+              scales: {
+                xAxes: [{
+                  stacked:true,
+                  ticks: {
+                    min:0,
+                    max:100,
+                    maxTicksLimit: 8,
+                    fontSize:8,
+                    callback: function(label, index, labels) {
+                      return Number(label).toLocaleString() + "%";
+                    }
+                  },
+                  gridLines: {
+                    display:false,
+                  },
+                }],
+                yAxes: [{
+                  categoryPercentage:.6,
+                  stacked:true,
+                  ticks: {
+                    fontSize:8,
+                  },
+                  gridLines: {
+                    display:false,
+                    drawBorder:false,
+                  },
+                }]
+              },
+              tooltips:{
+                callbacks: {
+                  title:function(t,d) {
+                    let index = t[0].index;
+                    return `${["自費売上","来院数","新患数"][index]}`;
+                  },
+                  label: function(t,d) {
+                    let idx = t.datasetIndex;
+                    let index = t.index;
+                    let amount = data_arr[idx].data[index];
+                    return `${na[idx]} ${amount.toLocaleString()}%`;
+                  }
+                }
+              }
+            }
+            geneder_details_bar.data = {
+              labels:["自費売上","来院数","新患数"],
+              datasets:data_arr
+            };
+            geneder_details_bar.options = graph_option;
+            geneder_details_bar.update();
+
+          }
+          const desc_radar = () => {
+            let objs = data.data.gene;
+
+            const desc_bar_0 = () => {
+              let dma = [],dfa = [];
+              let dma_ = [],dfa_ = [];
+
+              for (let i = 0;i < 11;i++) {
+                let m = objs.filter((cell) => cell.generation == i && cell.gender == 1);
+                let f = objs.filter((cell) => cell.generation == i && cell.gender == 2);
+
+
+                dma.push(m.sum_val(`i_3_data`));
+                dfa.push(f.sum_val(`i_3_data`));
+
+                dma_.push(m.sum_val(`i_0_data`).to_devide(m.sum_val(`i_1_data`)));
+                dfa_.push(f.sum_val(`i_0_data`).to_devide(f.sum_val(`i_1_data`)));
+              }
+
+              let graph_data = [{
+                type:"crossed_lines",
+                data:dma_,
+                backgroundColor:`rgba(18,83,164,1)`,
+                borderColor:`rgba(18,83,164,1)`,
+                borderWidth:2,
+                pointRadius:3,
+                fill:false,
+                yAxisID: "y-axis-1",
+                lineTension:0
+              },{
+                type:"crossed_lines",
+                data:dfa_,
+                backgroundColor:`rgba(242,100,100,1)`,
+                borderColor:`rgba(242,100,100,1)`,
+                borderWidth:2,
+                pointRadius:3,
+                fill:false,
+                yAxisID: "y-axis-1",
+                lineTension:0
+              },{
+                data:dma,
+                backgroundColor:`rgba(18,83,164,.75)`,
+                borderWidth:0,
+                yAxisID: "y-axis-0",
+              },{
+                data:dfa,
+                backgroundColor:`rgba(242,100,100,.75)`,
+                borderWidth:0,
+                yAxisID: "y-axis-0",
+              }];
+              let graph_option = {
+                maintainAspectRatio: true,
+                responsive: true,
+                legend: {
+                  display: false,
+                  labels:{
+                    fontSize:8
+                  }
+                },
+                title: {display:true,fontSize:12,fontStyle:500,text: '男女年代別純患数と客単価'},
+                elements: {point:{radius:1.5}},
+                scales: {
+                  yAxes: [{
+                    id: "y-axis-0",
+                    type: "linear",
+                    position: "left",
+                    gridLines: {
+                      display:true,
+                      drawBorder: false,
+                      zeroLineColor:"#eee",
+                      color:"#eee"
+                    },
+                    ticks: {
+                      min:0,
+                      autoSkip: true,
+                      maxTicksLimit: 3,
+                      fontSize:10,
+                      callback: function(label, index, labels) {
+                        return label.str_jp();
+                      }
+                    },
+                  },{
+                    id: "y-axis-1",
+                    type: "linear",
+                    position: "right",
+                    gridLines: {
+                      display:true,
+                      drawBorder: false,
+                      zeroLineColor:"#eee",
+                      color:"#eee"
+                    },
+                    ticks: {
+                      min:0,
+                      autoSkip: true,
+                      maxTicksLimit: 3,
+                      fontSize:10,
+                      callback: function(label, index, labels) {
+                        return label.str_jp();
+                      }
+                    },
+                  }],
+                  xAxes: [{
+                    barPercentage:1,
+                    categoryPercentage: 0.9,
+                    ticks: {
+                      autoSkip: true,
+                      maxTicksLimit: 4,
+                      maxRotation: 0,
+                      minRotation: 0,
+                      fontSize:10,
+                    },
+                    gridLines: {
+                      display:false,
+                    },
+                    scaleLabel: {
+                      display: false,
+                      labelString: '日'
+                    }
+                  }]
+                },
+                tooltips: {
+                  bodySpacing:5,
+                  titleFontSize:12.5,
+                  bodyFontSize:15,
+                  intersect:false,
+                  axis:'x',
+                  mode:'index',
+                  callbacks: {
+                    title:function(t,d) {
+                      let index = t[0].index;
+                      let ar = ["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"];
+                      return `${ar[index]}`;
+                    },
+                    label:function(t,d) {
+                      let idx = t.datasetIndex;
+                      return `${["男性客単価","女性客単価","男性純患数","女性純患数"][idx]} : ${idx==0||idx==1?`¥`:``}${t.yLabel.toLocaleString()}${idx==2||idx==3?`人`:``}`;
+                    }
+                  }
+                }
+              }
+              geneder_details_bar_0.data = {
+                labels:["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"],
+                datasets:graph_data
+              };
+              geneder_details_bar_0.options = graph_option;
+              geneder_details_bar_0.update();
+            }
+            const desc_radar = () => {
+              let dma = [],dfa = [];
+
+              for (let i = 0;i < 7;i++) {
+                dma.push(objs.sum_val(`i_${i}_1_week`));
+                dfa.push(objs.sum_val(`i_${i}_2_week`));
+              }
+
+              let graph_data = [{
+                data:dma,
+                backgroundColor:'rgba(18,83,164,.1)',
+                borderColor:'rgba(18,83,164,1)',
+                borderWidth:2,
+                pointRadius:3,
+                pointBackgroundColor:'rgba(18,83,164,1)'
+              },{
+                data:dfa,
+                backgroundColor:'rgba(242,100,100,.1)',
+                borderColor:'rgba(242,100,100,1)',
+                borderWidth:2,
+                pointRadius:3,
+                pointBackgroundColor:'rgba(242,100,100,1)'
+              }];
+              let graph_option = {
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                title: {display:true,fontSize:12,fontStyle:500,text: '曜日別来院数分布'},
+                elements: {point:{radius:0.5}},
+                scale: {
+                  pointLabels: {
+                    fontSize:10,
+                    fontColor:"#73879C"
+                  },
+                  gridLines: {
+                    color:"#ddd"
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    fontSize:10,
+                    fontColor:"#73879C",
+                    callback: function(label, index, labels) {
+                      return Number(label).toLocaleString() + "人";
+                    }
+                  }
+                },
+                responsive: true,
+                tooltips: {
+                  bodySpacing:5,
+                  titleFontSize:12.5,
+                  bodyFontSize:15,
+                  intersect:false,
+                  callbacks: {
+                    title:function(t,d) {
+                      let idx = t[0].datasetIndex;
+                      let arr = ["総人数","男性","女性"];
+                      return `${arr[idx]}`;
+                    },
+                    label:function(t,d) {
+                      return `${t.yLabel.toLocaleString()}人`;
+                    }
+                  }
+                }
+              }
+              geneder_details_radar_1.data = {
+                labels:["日","月","火","水","木","金","土"],
+                datasets:graph_data
+              };
+              geneder_details_radar_1.options = graph_option;
+              geneder_details_radar_1.update();
+            }
+
+            desc_bar_0();
+            desc_radar();
+          }
+          const desc_pie = () => {
+            let objs = data.data.gene;
+            let male = objs.filter(({gender}) => gender == 1).sum_val(`i_3_data`);
+            let female = objs.filter(({gender}) => gender == 2).sum_val(`i_3_data`);
+
+            let data_arr = [male,female];
+            let graph_plugin = {
+              afterDatasetsDraw: function (chart, easing) {
+                var ctx = chart.ctx;
+                chart.data.datasets.forEach(function (dataset, i) {
+                  var meta = chart.getDatasetMeta(i);
+                  if (!meta.hidden) {
+                    meta.data.forEach(function (element, index) {
+                      ctx.fillStyle = "white";
+                      var fontSize = 8;
+                      var fontStyle = 'normal';
+                      var fontFamily = 'Helvetica Neue';
+                      ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+                      let amount = data_arr[index].to_perate(objs.sum_val(`i_3_data`));
+                      var dataString =
+                      amount > 0 ? [`${["男性","女性"][index]}${amount}%`] : [``];
+                      ctx.textAlign = 'center';
+                      ctx.textBaseline = 'middle';
+                      var padding = 5;
+                      var position = element.tooltipPosition();
+                      ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                    });
+                  }
+                });
+              }
+            }
+            let graph_data = [{
+              data:data_arr,
+              backgroundColor:["rgba(54,100,180,.75)","rgba(242,100,100,.75)"],
+              borderColor:"",
+              borderWidth:0,
+            }];
+            let graph_option = {
+              maintainAspectRatio: true,
+              responsive: true,
+              cutoutPercentage:0,
+              title: {display:true,fontSize:12,fontStyle:500,text: '顧客男女比'},
+              pieceLabel: {render: 'label',position: 'outside'},
+              tooltips:{
+                callbacks: {
+                  title:function(t,d) {
+                    let index = t[0].index;
+                    return `${["男性","女性"][index]}`;
+                  },
+                  label: function(t,d) {
+                    let index = t.index;
+                    let amount = data_arr[index];
+                    return `${amount.toLocaleString()}人`;
+                  }
+                }
+              }
+            }
+            geneder_details_pie.data = {
+              labels:"",
+              datasets:graph_data,
+            };
+            geneder_details_pie.config.plugins = [graph_plugin];
+            geneder_details_pie.options = graph_option;
+            geneder_details_pie.update();
+          }
+          const desc_table = () => {
+            let objs = data.data.gene;
+            let c_objs = data.cdata.gene;
+
+            let na = ["0代","10代","20代","30代","40代","50代","60代","70代","80代","90代","100歳~"]
+            let daf = ["","","","¥","","¥","¥",""];
+            let dar = ["回","人","人","","回","","",""];
+
+            let ap = ``;
+
+            let sd_0 = objs.sum_val(`i_1_data`);
+            let sd_1 = objs.sum_val(`i_3_data`);
+            let sd_2 = objs.sum_val(`i_2_data`);
+            let sd_3 = objs.sum_val(`i_0_data`);
+
+            for (let i = 0;i < 11;i++) {
+              let rslt = objs.filter(({generation}) => generation == i);
+
+              let data_0 = rslt.sum_val(`i_1_data`);
+              let data_1 = rslt.sum_val(`i_3_data`);
+              let data_2 = rslt.sum_val(`i_2_data`);
+              let data_3 = rslt.sum_val(`i_0_data`);
+              let data_4 = data_0.to_Perate(data_1);
+              let data_5 = data_3.to_devide(data_0);
+              let data_6 = data_3.to_devide(data_1);
+
+              let data_7 = rslt.filter(({gender}) => gender == 1).sum_val('i_3_data');
+              let data_8 = rslt.filter(({gender}) => gender == 2).sum_val('i_3_data');
+              let data_9 = rslt.sum_val('i_3_data');
+
+              data_7 = data_7.to_perate(data_9).to_devide(1);
+              data_8 = data_8.to_perate(data_9).to_devide(1);
+
+              let app = ``;
+
+              if (!cpt) {
+                let rate_0 = data_0.to_perate(sd_0);
+                let rate_1 = data_1.to_perate(sd_1);
+                let rate_2 = data_2.to_perate(sd_2);
+                let rate_3 = data_3.to_perate(sd_3);
+
+                for (let i = 0;i < 8;i++) {
+                  app +=
+                  `
+                  <td>
+                    <div class="amount">
+                      ${
+                        i != 7
+                        ? `${daf[i]}${eval(`data_${i}`).toLocaleString()}${dar[i]}${i <= 3?`<span class="percent">${eval(`rate_${i}`)}%</span>`:``}`
+                        : `${data_7} : ${data_8}`
+                      }
+                    </div>
+                    ${i <= 3?`<div class="bb" style="width:${eval(`rate_${i}`)}%;"></div>`:``}
+                  </td>
+                  `;
+                }
+              } else {
+                let c_rslt = c_objs.filter(({generation}) => generation == i);
+                if (c_rslt.exist_val()) {
+                  let c_data_0 = c_rslt.sum_val(`i_1_data`);
+                  let c_data_1 = c_rslt.sum_val(`i_3_data`);
+                  let c_data_2 = c_rslt.sum_val(`i_2_data`);
+                  let c_data_3 = c_rslt.sum_val(`i_0_data`);
+                  let c_data_4 = c_data_0.to_Perate(c_data_1);
+                  let c_data_5 = c_data_3.to_devide(c_data_0);
+                  let c_data_6 = c_data_3.to_devide(c_data_1);
+
+                  let c_data_7 = c_rslt.filter(({gender}) => gender == 1).sum_val('i_3_data');
+                  let c_data_8 = c_rslt.filter(({gender}) => gender == 2).sum_val('i_3_data');
+                  let c_data_9 = c_rslt.sum_val('i_3_data');
+
+                  c_data_7 = c_data_7.to_perate(c_data_9).to_devide(1);
+                  c_data_8 = c_data_8.to_perate(c_data_9).to_devide(1);
+
+                  let rate_0 = data_0.to_rate(c_data_0).rate_str();
+                  let rate_1 = data_1.to_rate(c_data_1).rate_str();
+                  let rate_2 = data_2.to_rate(c_data_2).rate_str();
+                  let rate_3 = data_3.to_rate(c_data_3).rate_str();
+                  let rate_4 = data_4.to_rate(c_data_4).rate_str();
+                  let rate_5 = data_5.to_rate(c_data_5).rate_str();
+                  let rate_6 = data_6.to_rate(c_data_6).rate_str();
+
+                  for (let i = 0;i < 8;i++) {
+                    app +=
+                    `
+                    <td>
+                      <div class="amount">
+                        ${
+                          i != 7
+                          ? `${eval(`data_${i}`).toLocaleString()}<span>(${eval(`c_data_${i}`).toLocaleString()})</span>`
+                          : `${data_7}<span>(${c_data_7})</span> : ${data_8} <span>(${c_data_8})</span>`
+                        }
+                      </div>
+                      ${i!=7?`<div class="rate">${eval(`rate_${i}`)}</div>`:``}
+                    </td>
+                    `;
+                  }
+                } else {
+                  for (let i = 0;i < 8;i++) {
+                    app +=
+                    `
+                    <td>
+                      <div class="amount">
+                        ${i != 7 ? `${daf[i]}${eval(`data_${i}`).toLocaleString()}${dar[i]}<span>(0)</span>` : `${data_7}<span>(0)</span> : ${data_8} <span>(0 : 0)</span>`}
+                      </div>
+                      ${i!=7?`<div class="rate">-%</div>`:``}
+                    </td>
+                    `;
+                  }
+                }
+              }
+
+              ap +=
+              `
+              <tr>
+                <th>${na[i]}</th>
+                ${app}
+              </tr>
+              `;
+            }
+
+            $('#geneder_details_table_base').html(
+              `
+              <table id="geneder_details_table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>来院数</th>
+                    <th>純患数</th>
+                    <th>新患数</th>
+                    <th>売上</th>
+                    <th>平均来院回数</th>
+                    <th>客単価</th>
+                    <th>LTV</th>
+                    <th>男女比率</th>
+                  </tr>
+                </thead>
+                <tbody>${ap}</tbody>
+              </table>
+              `
+            );
+            let table = $('#geneder_details_table').DataTable({
+              columnDefs:[{type:'currency',targets:[0,1,2,3]}],
+              displayLength:10,
+              lengthChange: false,
+              searching: false,
+              ordering: true,
+              info: false,
+              paging: false,
+              order:[[0,"asc"]]
+            });
+          }
+
+          desc_bar();
+          desc_radar();
+          desc_pie();
+          desc_table();
+        }
         const desc_customers = () => {
           let obj = data.data.cs;
           let c_obj = data.cdata.cs;
           if (!obj.exist_val()) return;
+
+          let g_obj = [
+            {obj_id:0,obj_name:"0代 男性"},
+            {obj_id:1,obj_name:"0代 女性"},
+            {obj_id:2,obj_name:"10~14歳 男性"},
+            {obj_id:3,obj_name:"10~14歳 女性"},
+            {obj_id:4,obj_name:"15~19歳 男性"},
+            {obj_id:5,obj_name:"15~19歳 女性"},
+            {obj_id:6,obj_name:"20~24歳 男性"},
+            {obj_id:7,obj_name:"20~24歳 女性"},
+            {obj_id:8,obj_name:"25~29歳 男性"},
+            {obj_id:9,obj_name:"25~29歳 女性"},
+            {obj_id:10,obj_name:"30~34歳 男性"},
+            {obj_id:11,obj_name:"30~34歳 女性"},
+            {obj_id:12,obj_name:"35~39歳 男性"},
+            {obj_id:13,obj_name:"35~39歳 女性"},
+            {obj_id:14,obj_name:"40~44歳 男性"},
+            {obj_id:15,obj_name:"40~44歳 女性"},
+            {obj_id:16,obj_name:"45~49歳 男性"},
+            {obj_id:17,obj_name:"45~49歳 女性"},
+            {obj_id:18,obj_name:"50~54歳 男性"},
+            {obj_id:19,obj_name:"50~54歳 女性"},
+            {obj_id:20,obj_name:"55~59歳 男性"},
+            {obj_id:21,obj_name:"55~59歳 女性"},
+            {obj_id:22,obj_name:"60~64歳 男性"},
+            {obj_id:23,obj_name:"60~64歳 女性"},
+            {obj_id:24,obj_name:"65~69歳 男性"},
+            {obj_id:25,obj_name:"65~69歳 女性"},
+            {obj_id:26,obj_name:"70~74歳 男性"},
+            {obj_id:27,obj_name:"70~74歳 女性"},
+            {obj_id:28,obj_name:"75~79歳 男性"},
+            {obj_id:29,obj_name:"75~79歳 女性"},
+            {obj_id:30,obj_name:"80~84歳 男性"},
+            {obj_id:31,obj_name:"80~84歳 女性"},
+            {obj_id:32,obj_name:"85~89歳 男性"},
+            {obj_id:33,obj_name:"85~89歳 女性"},
+            {obj_id:34,obj_name:"90~94歳 男性"},
+            {obj_id:35,obj_name:"90~94歳 女性"},
+            {obj_id:36,obj_name:"95~99歳 男性"},
+            {obj_id:37,obj_name:"95~99歳 女性"},
+            {obj_id:38,obj_name:"100歳~ 男性"},
+            {obj_id:39,obj_name:"100歳~ 女性"}
+          ];
 
           let sum_data_0 = obj.sum_val(`data_0`);
           let sum_data_1 = obj.sum_val(`data_1`);
@@ -11404,11 +13679,14 @@ var desc_obj_page = () => {
           }
           const desc_table = () => {
             let ap = ``;
-            obj.forEach((cell) => {
-              let data_0 = cell.data_0;
-              let data_1 = cell.data_1;
-              let data_2 = cell.data_2;
-              let data_3 = cell.data_3;
+
+            g_obj.forEach((cell) => {
+              let rslt = obj.filter(({obj_id}) => obj_id == cell.obj_id);
+
+              let data_0 = rslt.sum_val(`data_0`);
+              let data_1 = rslt.sum_val(`data_1`);
+              let data_2 = rslt.sum_val(`data_2`);
+              let data_3 = rslt.sum_val(`data_3`);
 
               let app = ``;
 
@@ -11509,14 +13787,26 @@ var desc_obj_page = () => {
           desc_table();
         }
 
-        desc_clinics();
-        setTimeout(() => {desc_staffs();},250);
-        setTimeout(() => {desc_customers();},750);
+        setTimeout(() => {
+          if (st == 0) {desc_areas();}
+          setTimeout(() => {
+            if (st <= 1) {desc_clinics();}
+            setTimeout(() => {
+              if (st <= 2) {desc_staffs();}
+              setTimeout(() => {
+                desc_geneder_details();
+                setTimeout(() => {
+                  desc_customers();
+                },250);
+              },250);
+            },250);
+          },250);
+        },250);
+
       }
 
       desc_static_sections();
     }
-
 
     desc_content_leveling();
     const desc_graph_init = (sender1,sender2,sender3,sender4) => {
@@ -11525,27 +13815,46 @@ var desc_obj_page = () => {
       eval(`${sender1} = new Chart(${sender2},{type:'${sender3}',data:{labels:"",datasets:"",},plugins:"",})`);
     }
 
+    let area_pie;
+    let area_boxplot;
     let clinic_pie;
     let clinic_boxplot;
     let staff_pie;
     let staff_boxplot;
     let customer_pie;
     let customer_boxplot;
+    let geneder_details_pie;
+    let geneder_details_bar;
+    let geneder_details_bar_0;
+    let geneder_details_radar_1;
 
-    let clinic_pie_ctx = st == 0 ? document.getElementById('clinic_pie').getContext('2d') : ``;
-    st == 0 ? desc_graph_init("clinic_pie","clinic_pie_ctx",'pie') : console.log();
-    let clinic_boxplot_ctx = st == 0 ? document.getElementById('clinic_boxplot').getContext('2d') : ``;
-    st == 0 ? desc_graph_init("clinic_boxplot","clinic_boxplot_ctx",'boxplot') : console.log();
+    let area_pie_ctx = st == 0 ? document.getElementById('area_pie').getContext('2d') : ``;
+    st == 0 ? desc_graph_init("area_pie","area_pie_ctx",'pie') : console.log();
+    let area_boxplot_ctx = st == 0 ? document.getElementById('area_boxplot').getContext('2d') : ``;
+    st == 0 ? desc_graph_init("area_boxplot","area_boxplot_ctx",'boxplot') : console.log();
 
-    let staff_pie_ctx = st <= 1 ? document.getElementById('staff_pie').getContext('2d') : ``;
-    st <= 1 ? desc_graph_init("staff_pie","staff_pie_ctx",'pie') : console.log();
-    let staff_boxplot_ctx = st <= 1 ? document.getElementById('staff_boxplot').getContext('2d') : ``;
-    st <= 1 ? desc_graph_init("staff_boxplot","staff_boxplot_ctx",'boxplot') : console.log();
+    let clinic_pie_ctx = st <= 1 ? document.getElementById('clinic_pie').getContext('2d') : ``;
+    st <= 1 ? desc_graph_init("clinic_pie","clinic_pie_ctx",'pie') : console.log();
+    let clinic_boxplot_ctx = st <= 1 ? document.getElementById('clinic_boxplot').getContext('2d') : ``;
+    st <= 1 ? desc_graph_init("clinic_boxplot","clinic_boxplot_ctx",'boxplot') : console.log();
+
+    let staff_pie_ctx = st <= 2 ? document.getElementById('staff_pie').getContext('2d') : ``;
+    st <= 2 ? desc_graph_init("staff_pie","staff_pie_ctx",'pie') : console.log();
+    let staff_boxplot_ctx = st <= 2 ? document.getElementById('staff_boxplot').getContext('2d') : ``;
+    st <= 2 ? desc_graph_init("staff_boxplot","staff_boxplot_ctx",'boxplot') : console.log();
 
     let customer_pie_ctx = document.getElementById('customer_pie').getContext('2d');
     desc_graph_init("customer_pie","customer_pie_ctx",'pie');
     let customer_boxplot_ctx = document.getElementById('customer_boxplot').getContext('2d');
     desc_graph_init("customer_boxplot","customer_boxplot_ctx",'boxplot');
+    let geneder_details_pie_ctx = document.getElementById('geneder_details_pie').getContext('2d');
+    desc_graph_init("geneder_details_pie","geneder_details_pie_ctx",'pie');
+    let geneder_details_bar_ctx = document.getElementById('geneder_details_bar').getContext('2d');
+    desc_graph_init("geneder_details_bar","geneder_details_bar_ctx",'horizontalBar');
+    let geneder_details_bar_0_ctx = document.getElementById('geneder_details_bar_0').getContext('2d');
+    desc_graph_init("geneder_details_bar_0","geneder_details_bar_0_ctx",'rounded_bar');
+    let geneder_details_radar_1_ctx = document.getElementById('geneder_details_radar_1').getContext('2d');
+    desc_graph_init("geneder_details_radar_1","geneder_details_radar_1_ctx",'radar');
 
     const ajax = async () => {
       let result = await desc_menu_query_data(bt);
@@ -11573,9 +13882,27 @@ var desc_obj_page = () => {
     let coa = [c_datas,c_datas.filter(({min_rep}) => min_rep == 1),c_datas.filter(({min_rep}) => min_rep != 1)];
 
     const desc_content_leveling = () => {
-      let cl_s =
+      let ar_s =
       st == 0
-      ? `
+      ?
+      `
+      <div class="cell cell_1x1 inline">
+        <div class="box cell_link">
+          <div class="cell_title text_overflow">エリア別平均来院数</div>
+          <div class="content _repeat_">
+            <div class="base">
+              <div class="table_base no_border" id="area_table_base">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      `
+      : ``;
+      let cl_s =
+      st <= 1
+      ?
+      `
       <div class="cell cell_1x1 inline">
         <div class="box cell_link">
           <div class="cell_title text_overflow">院別平均来院数</div>
@@ -11586,11 +13913,12 @@ var desc_obj_page = () => {
             </div>
           </div>
         </div>
-      </div>`
+      </div>
+      `
       : ``;
 
       let sf_s =
-      st <= 1
+      st <= 2
       ? `
       <div class="cell cell_1x1 inline">
         <div class="box cell_link">
@@ -11749,6 +14077,7 @@ var desc_obj_page = () => {
                 </div>
               </div>
             </div>
+            ${ar_s}
             ${cl_s}
             ${sf_s}
             <div class="cell cell_1x1 inline">
@@ -11979,7 +14308,7 @@ var desc_obj_page = () => {
         const desc_continue_line = () => {
           let f_color = !cpt ? `rgba(242,100,100,1)` : `rgba(54,100,180,.5)`;
           let graph_data = [{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"初回からの継続率",
             data:data_00_arr,
             backgroundColor:`#fff`,
@@ -11990,7 +14319,7 @@ var desc_obj_page = () => {
             cubicInterpolationMode: 'monotone',
             lineTension: 0
           },{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"前回からの継続率",
             data:data_01_arr,
             backgroundColor:`#fff`,
@@ -12003,7 +14332,7 @@ var desc_obj_page = () => {
           }];
           if (cpt) {
             graph_data.push({
-              type:"LineWithLine",
+              type:"crossed_lines",
               label:"初回からの継続率(比)",
               data:c_data_00_arr,
               backgroundColor:`#fff`,
@@ -12014,7 +14343,7 @@ var desc_obj_page = () => {
               cubicInterpolationMode: 'monotone',
               lineTension: 0
             },{
-              type:"LineWithLine",
+              type:"crossed_lines",
               label:"前回からの継続率(比)",
               data:c_data_01_arr,
               backgroundColor:`#fff`,
@@ -12106,7 +14435,7 @@ var desc_obj_page = () => {
         const desc_money_line = () => {
           let f_color = !cpt ? `rgba(255,200,0` : `rgba(54,100,180`;
           let graph_data = [{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"n回来院した顧客別総売客単価",
             data:data_11_arr,
             borderColor:`rgba(54,100,180,1)`,
@@ -12129,7 +14458,7 @@ var desc_obj_page = () => {
           }];
           if (cpt) {
             graph_data.push({
-              type:"LineWithLine",
+              type:"crossed_lines",
               label:"n回来院 ~ 客単価",
               data:c_data_11_arr,
               borderColor:`rgba(242,100,100,1)`,
@@ -12930,8 +15259,104 @@ var desc_obj_page = () => {
           order:[[1,"desc"]]
         });
       }
+      const desc_area_section = () => {
+        let ap = ``;
+        let ar = data.data.ar;
+
+        let sum_data_0 = objs.length;
+        let sum_c_data_0 = c_objs.length;
+
+        ar.forEach((cell) => {
+          let result = objs.filter(({area_id}) => area_id == cell.obj_id);
+          let data_0 = result.length;
+          let data_1 = result.sum_val(`data_3`);
+          let data_2 = data_1.to_Perate(data_0);
+
+          let rate_0 = data_0.to_perate(sum_data_0);
+
+          let link =
+          `
+          <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+            ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+          </a>
+          `;
+
+          if (!cpt) {
+            ap +=
+            `
+            <tr>
+              <th>${link}</th>
+              <td>
+                ${data_0.str_jp()}
+                <span>(${rate_0}%)</span>
+                <div class="bb" style="width:${rate_0}%;"></div>
+              </td>
+              <td>${data_2.str_jp()}</td>
+            </tr>
+            `;
+          } else {
+            let c_result = c_objs.filter(({area_id}) => area_id == cell.obj_id);
+            let c_data_0 = c_result.length;
+            let c_data_1 = c_result.sum_val(`data_3`);
+            let c_data_2 = c_data_1.to_Perate(c_data_0);
+
+            let c_rate_0 = c_data_0.to_perate(sum_c_data_0);
+
+            let rates_0 = data_0.to_rate(c_data_0).rate_str();
+            let rates_2 = data_2.to_rate(c_data_2).rate_str();
+
+            ap +=
+            `
+            <tr>
+              <th>${link}</th>
+              <td>
+                ${data_0.str_jp()}
+                <span>(${rate_0}%)</span>
+                <div class="bb" style="width:${rate_0}%;"></div>
+                <div class="c_a">
+                  ${c_data_0.str_jp()}
+                  <span>(${c_rate_0}%)</span>
+                  <div class="bb cb" style="width:${c_rate_0}%;"></div>
+                </div>
+                ${rates_0}
+              </td>
+              <td>
+                ${data_2.str_jp()}
+                <div class="c_a">
+                  ${c_data_2.str_jp()}
+                </div>
+                ${rates_2}
+              </td>
+            </tr>
+            `;
+          }
+        });
+        $('#area_table_base').html(
+          `
+          <table id="area_table">
+            <thead>
+              <tr>
+                <th>-</th>
+                <th>該当数</th>
+                <th>平均来院数</th>
+              </tr>
+            </thead>
+            <tbody>${ap}</tbody>
+          </table>
+          `
+        );
+        let table = $('#area_table').DataTable({
+          columnDefs:[{type:'currency',targets:[1]}],
+          displayLength:10,
+          lengthChange: false,
+          searching: false,
+          ordering: true,
+          info: true,
+          paging: true,
+          order:[[1,"desc"]]
+        });
+      }
       const desc_clinic_section = () => {
-        if (st != 0) return;
         let ap = ``;
         let co = data.data.cl;
 
@@ -12948,7 +15373,7 @@ var desc_obj_page = () => {
 
           let link =
           `
-          <a href="/achieve_analytics?st=1&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+          <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
             ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
           </a>
           `;
@@ -13029,7 +15454,6 @@ var desc_obj_page = () => {
         });
       }
       const desc_staff_section = () => {
-        if (st == 2) return;
         let ap = ``;
         let so = data.data.sf;
 
@@ -13048,7 +15472,7 @@ var desc_obj_page = () => {
           if (cls.filter(({id}) => id == cell.clinic_id).exist_val()) {
             link =
             `
-            <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+            <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
               ${user_name==MSD_smn?`${stna[2]}${cell.obj_id}`: cell.obj_name}
             </a>
             `;
@@ -13697,12 +16121,27 @@ var desc_obj_page = () => {
         desc_map_view();
       }
 
-      desc_trend_section();
-      desc_segment_section();
-      desc_geneder_section();
-      desc_clinic_section();
-      desc_staff_section();
-      desc_visit_reason_section();
+      setTimeout(() => {
+        desc_trend_section();
+        setTimeout(() => {
+          desc_segment_section();
+          setTimeout(() => {
+            desc_geneder_section();
+            setTimeout(() => {
+              if (st == 0) {desc_area_section();}
+              setTimeout(() => {
+                if (st <= 1) {desc_clinic_section();}
+                setTimeout(() => {
+                  if (st <= 2) {desc_staff_section();}
+                  setTimeout(() => {
+                    desc_visit_reason_section();
+                  },250);
+                },250);
+              },250);
+            },250);
+          },250);
+        },250);
+      },250);
 
       $(document).off('click','#open_map').on('click','#open_map',function() {
         $('._map_ .cover').hide();
@@ -13752,9 +16191,27 @@ var desc_obj_page = () => {
     let coa = [c_datas,c_datas.filter(({min_rep}) => min_rep == 1),c_datas.filter(({min_rep}) => min_rep != 1)];
 
     const desc_content_leveling = () => {
-      let cl_s =
+      let ar_s =
       st == 0
-      ? `
+      ?
+      `
+      <div class="cell cell_1x1 inline">
+        <div class="box cell_link">
+          <div class="cell_title text_overflow">エリア別</div>
+          <div class="content _repeat_">
+            <div class="base">
+              <div class="table_base table_base2" id="area_table_base">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      `
+      : ``;
+      let cl_s =
+      st <= 1
+      ?
+      `
       <div class="cell cell_1x1 inline">
         <div class="box cell_link">
           <div class="cell_title text_overflow">院別</div>
@@ -13765,10 +16222,11 @@ var desc_obj_page = () => {
             </div>
           </div>
         </div>
-      </div>`
+      </div>
+      `
       : ``;
       let sf_s =
-      st != 2
+      st <= 2
       ? `
       <div class="cell cell_2x1 inline">
         <div class="box cell_link">
@@ -13834,6 +16292,7 @@ var desc_obj_page = () => {
             </div>
           </div>
           <div class="cells_box">
+            ${ar_s}
             ${cl_s}
             ${sf_s}
             <div class="cell cell_1x1 inline">
@@ -13987,7 +16446,6 @@ var desc_obj_page = () => {
         }
         const desc_line = () => {
           let graph_data = [{
-            type:"bar",
             label:"当期",
             data:trend_data_arr,
             backgroundColor:`rgba(54,100,180,1)`,
@@ -13997,7 +16455,6 @@ var desc_obj_page = () => {
             cubicInterpolationMode: 'monotone',
             lineTension: 0
           },{
-            type:"bar",
             label:"来院数",
             data:trend_count_arr,
             backgroundColor:`rgba(54,100,180,.5)`,
@@ -14009,7 +16466,6 @@ var desc_obj_page = () => {
           }];
           if (cpt) {
             graph_data.push({
-              type:"bar",
               label:"比較",
               data:trend_c_data_arr,
               backgroundColor:"rgba(242,100,100,1)",
@@ -14277,16 +16733,15 @@ var desc_obj_page = () => {
           order:[[1,"desc"]]
         });
       }
-      const desc_clinic_section = () => {
-        if (st != 0) return;
+      const desc_area_section = () => {
         let ap = ``;
-        let co = data.data.cl;
+        let ar = data.data.ar;
 
         let sum_data_0 = objs.length;
         let sum_c_data_0 = c_objs.length;
 
-        co.forEach((cell) => {
-          let result = objs.filter(({clinic_id}) => clinic_id == cell.obj_id);
+        ar.forEach((cell) => {
+          let result = objs.filter(({area_id}) => area_id == cell.obj_id);
           let data_0 = result.length;
 
           let rate_0 = data_0.to_perate(sum_data_0);
@@ -14311,7 +16766,92 @@ var desc_obj_page = () => {
             </tr>
             `;
           } else {
-            let c_result = c_objs.filter(({staff_id}) => staff_id == cell.obj_id);
+            let c_result = c_objs.filter(({area_id}) => area_id == cell.obj_id);
+            let c_data_0 = c_result.length;
+
+            let c_rate_0 = c_data_0.to_perate(sum_c_data_0);
+
+            let rates_0 = data_0.to_rate(c_data_0).rate_str();
+
+            ap +=
+            `
+            <tr>
+              <th>${link}</th>
+              <td>
+                ${data_0.str_jp()}
+                <span>(${rate_0}%)</span>
+                <div class="bb" style="width:${rate_0}%;"></div>
+                <div class="c_a">
+                  ${c_data_0.str_jp()}
+                  <span>(${c_rate_0}%)</span>
+                  <div class="bb cb" style="width:${c_rate_0}%;"></div>
+                </div>
+                ${rates_0}
+              </td>
+            </tr>
+            `;
+          }
+        });
+
+        $('#area_table_base').html(
+          `
+          <table id="area_table">
+            <thead>
+              <tr>
+                <th>-</th>
+                <th>該当数</th>
+              </tr>
+            </thead>
+            <tbody>${ap}</tbody>
+          </table>
+          `
+        );
+
+        let table = $('#area_table').DataTable({
+          columnDefs:[{type:'currency',targets:[1]}],
+          displayLength:10,
+          lengthChange: false,
+          searching: true,
+          ordering: true,
+          info: true,
+          paging: true,
+          order:[[1,"desc"]]
+        });
+      }
+      const desc_clinic_section = () => {
+        let ap = ``;
+        let co = data.data.cl;
+
+        let sum_data_0 = objs.length;
+        let sum_c_data_0 = c_objs.length;
+
+        co.forEach((cell) => {
+          let result = objs.filter(({clinic_id}) => clinic_id == cell.obj_id);
+          let data_0 = result.length;
+
+          let rate_0 = data_0.to_perate(sum_data_0);
+
+          let link =
+          `
+          <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+            ${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}
+          </a>
+          `;
+
+          if (!cpt) {
+            ap +=
+            `
+            <tr>
+              <th>${link}</th>
+              <td>
+                ${data_0.str_jp()}
+                <span>(${rate_0}%)</span>
+                <div class="bb" style="width:${rate_0}%;"></div>
+              </td>
+            </tr>
+            `;
+          } else {
+            let c_result = c_objs.filter(({clinic_id}) => clinic_id == cell.obj_id);
             let c_data_0 = c_result.length;
 
             let c_rate_0 = c_data_0.to_perate(sum_c_data_0);
@@ -14364,7 +16904,6 @@ var desc_obj_page = () => {
         });
       }
       const desc_staff_section = () => {
-        if (st == 2) return;
         let ap = ``;
         let so = data.data.sf;
         let c_so = data.cdata.sf;
@@ -14398,7 +16937,7 @@ var desc_obj_page = () => {
           if (cls.filter(({id}) => id == cell.clinic_id).exist_val()) {
             link =
             `
-            <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+            <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
               ${user_name==MSD_smn?`担当者${cell.obj_id}`: cell.obj_name}
             </a>
             `;
@@ -14615,12 +17154,27 @@ var desc_obj_page = () => {
         });
       }
 
-      desc_trend_section();
-      desc_excel_section();
-      desc_geneder_section();
-      desc_clinic_section();
-      desc_staff_section();
-      desc_visit_reason_section();
+      setTimeout(() => {
+        desc_trend_section();
+        setTimeout(() => {
+          desc_excel_section();
+          setTimeout(() => {
+            desc_geneder_section();
+            setTimeout(() => {
+              if (st == 0) {desc_area_section();}
+              setTimeout(() => {
+                if (st <= 1) {desc_clinic_section();}
+                setTimeout(() => {
+                  if (st <= 2) {desc_staff_section();}
+                  setTimeout(() => {
+                    desc_visit_reason_section();
+                  },250);
+                },250);
+              },250);
+            },250);
+          },250);
+        },250);
+      },250);
     }
 
     desc_content_leveling();
@@ -14633,7 +17187,7 @@ var desc_obj_page = () => {
     let trend_line;
 
     let trend_line_ctx = document.getElementById('trend_line').getContext('2d');
-    desc_graph_init("trend_line","trend_line_ctx",'bar');
+    desc_graph_init("trend_line","trend_line_ctx",'rounded_bar');
 
     desc_cells_btn();
     desc_dynamic_sections(0);
@@ -14922,12 +17476,21 @@ var desc_list = () => {
       obj.forEach((cell,idx) => {
         os_ap += `<option value="${cell.obj_id}">${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}</option>`;
       })
-    } else {
+    } else if (st == 2) {
       sender_list_objs.objs[1].forEach((cell) => {
         let result = sender_list_objs.objs[2].filter(({pobj_id}) => pobj_id == cell.obj_id);
-        os_ap += `<optgroup label="院-${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}">`;
+        os_ap += `<optgroup label="エリア-${user_name==MSD_smn?`エリア${cell.obj_id}`: cell.obj_name}">`;
         result.forEach((cel) => {
-          os_ap += `<option value="${cel.obj_id}">${user_name==MSD_smn?`${stna[2]}${cel.obj_id}`: cel.obj_name}</option>`;
+          os_ap += `<option value="${cel.obj_id}">${user_name==MSD_smn?`店舗${cel.obj_id}`: cel.obj_name}</option>`;
+        });
+        os_ap += `</optgroup>`;
+      });
+    } else if (st == 3) {
+      sender_list_objs.objs[2].forEach((cell) => {
+        let result = sender_list_objs.objs[3].filter(({pobj_id}) => pobj_id == cell.obj_id);
+        os_ap += `<optgroup label="院-${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}">`;
+        result.forEach((cel) => {
+          os_ap += `<option value="${cel.obj_id}">${user_name==MSD_smn?`担当者${cel.obj_id}`: cel.obj_name}</option>`;
         });
         os_ap += `</optgroup>`;
       });
@@ -15072,7 +17635,6 @@ if ($('#page_js_status').prop('checked') == false) {
         desc_menu_option(index);
       });
 
-
       let width = window.innerWidth;
       if (width <= 767) {
         $('.center_left_base').remove();
@@ -15122,9 +17684,11 @@ if ($('#page_js_status').prop('checked') == false) {
                       <input type="radio" name="st_" id="st_0" value="0" checked>
                       <label for="st_0"><div class="icon inline"></div>管轄院</label>
                       <input type="radio" name="st_" id="st_1" value="1">
-                      <label for="st_1"><div class="icon inline"></div>店舗別</label>
+                      <label for="st_1"><div class="icon inline"></div>エリア</label>
                       <input type="radio" name="st_" id="st_2" value="2">
-                      <label for="st_2"><div class="icon inline"></div>担当者</label>
+                      <label for="st_2"><div class="icon inline"></div>店舗</label>
+                      <input type="radio" name="st_" id="st_3" value="3">
+                      <label for="st_3"><div class="icon inline"></div>担当者</label>
                     </div>
                   </div>
                 </div>
@@ -15157,21 +17721,35 @@ if ($('#page_js_status').prop('checked') == false) {
         );
 
         (async () => {
+          let ars = await ajax_api_function("read_area_objs","");
           let cls = await ajax_api_function("read_clinic_objs","");
           let sfs = await ajax_api_function("read_staff_objs","");
-          if (cls.dataExists && sfs.dataExists) {
-            sender_list_objs = [[],cls.data,sfs.data];
+          if (ars.dataExists && cls.dataExists && sfs.dataExists) {
+            sender_list_objs = [[],ars.data,cls.data,sfs.data];
+            let ap_ar = ``;
             let ap_cl = ``;
             let ap_sf = ``;
-            cls.data.forEach((cell,i) => {
-              ap_cl += `<option value="${cell.obj_id}">${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}</option>`;
 
-              ap_sf += `<optgroup label="${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}"></optgroup>`;
-              let result = sfs.data.filter(({clinic_id}) => clinic_id == cell.obj_id);
-              result.forEach((cel,idx) => {
-                ap_sf += `<option value="${cel.obj_id}">${user_name==MSD_smn?`担当者${cel.obj_id}`: cel.obj_name}</option>`;
+            console.log(ars.data);
+            console.log(cls.data);
+            ars.data.forEach((cel,i) => {
+              ap_ar += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
+
+              ap_cl += `<optgroup label="エリア-${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}"></optgroup>`;
+              ap_sf += `<optgroup label="エリア-${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}"></optgroup>`;
+              let rslt_ = cls.data.filter(({area_id}) => area_id == cel.obj_id);
+              rslt_.forEach((cell,idx) => {
+                ap_cl += `<option value="${cell.obj_id}">${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}</option>`;
+
+                ap_sf += `<optgroup label="店舗-${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}"></optgroup>`;
+                let rslt__ = sfs.data.filter(({clinic_id}) => clinic_id == cell.obj_id);
+                rslt__.forEach((celll,idx) => {
+                  ap_sf += `<option value="${celll.obj_id}">${user_name==MSD_smn?`担当者${celll.obj_id}`: celll.obj_name}</option>`;
+                });
               });
             });
+
+            $('#filter_area_0').html(ap_ar);
             $('#filter_clinic_0').html(ap_cl);
             $('#filter_staff_0').html(ap_sf);
 
@@ -15179,7 +17757,7 @@ if ($('#page_js_status').prop('checked') == false) {
               let st = getDOM('s_type').value;
               $(`#st_${st}`).prop('checked',true);
               if (st != 0) {
-                $('#segment_select').html(`${[ap_cl,ap_sf][st-1]}`);
+                $('#segment_select').html(`${[ap_ar,ap_cl,ap_sf][st-1]}`);
               } else {
                 $('#setting_obj_box').hide();
               }
@@ -15206,8 +17784,8 @@ if ($('#page_js_status').prop('checked') == false) {
                 } else {
                   $('#consb').show();
                   $('#setting_obj_box').show();
-                  $('#segment_select').html(`${[ap_cl,ap_sf][index-1]}`);
-                  $('#cos_select').html(`${[ap_cl,ap_sf][index-1]}`);
+                  $('#segment_select').html(`${[ap_ar,ap_cl,ap_sf][index-1]}`);
+                  $('#cos_select').html(`${[ap_ar,ap_cl,ap_sf][index-1]}`);
                 }
               }
               $(document).off('input','input[name="st_"]').on('input','input[name="st_"]',function() {

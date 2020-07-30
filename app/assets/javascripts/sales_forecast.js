@@ -317,7 +317,7 @@ var desc_function = (data,so) => {
         <div class="row">
           <div class="indi">今月末の売上予測</div>
           <div class="content">
-            <div class="amount" style="font-weight:700;">¥${data_4.toLocaleString()}</div>
+            <div class="amount" style="font-weight:300;font-size:2rem;">¥${data_4.toLocaleString()}</div>
           </div>
         </div>
         <div class="row">
@@ -479,7 +479,7 @@ var desc_function = (data,so) => {
   let trend_line;
 
   let trend_line_ctx = document.getElementById('trend_line').getContext('2d');
-  desc_graph_init("trend_line","trend_line_ctx",'LineWithLine');
+  desc_graph_init("trend_line","trend_line_ctx",'crossed_lines');
 
   $(document).off('input','input[name="trend_input_"]').on('input','input[name="trend_input_"]',function() {
     let index = $('input[name="trend_input_"]').index(this);
@@ -492,7 +492,7 @@ var query_function = async () => {
   let st = $('#obj_select option:selected').prop('value');
 
   (() => {
-    let stna = ["店舗別","担当者別"];
+    let stna = ["エリア別","店舗別","担当者別"];
     $('#setting_ios').prop('checked',false);
     $('#setting_indi').html(
       `

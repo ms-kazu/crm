@@ -899,9 +899,9 @@ var desc_function = (data) => {
   let generation_bar;
 
   let gender_bar_ctx = document.getElementById('gender_bar').getContext('2d');
-  desc_graph_init("gender_bar","gender_bar_ctx",'bar');
+  desc_graph_init("gender_bar","gender_bar_ctx",'rounded_bar');
   let generation_bar_ctx = document.getElementById('generation_bar').getContext('2d');
-  desc_graph_init("generation_bar","generation_bar_ctx",'bar');
+  desc_graph_init("generation_bar","generation_bar_ctx",'rounded_bar');
 
   desc_summary();
   desc_gender();
@@ -1027,7 +1027,7 @@ if ($('#page_js_status').prop('checked') == false) {
 
   $(document).ready(async function(){
     (() => {
-      $('.left_bar_base a:eq(15) .cell').addClass('selected');
+      $('.left_bar_base a:eq(16) .cell').addClass('selected');
       jQuery(function($) {
         $.extend( $.fn.dataTable.defaults, {
           language: {

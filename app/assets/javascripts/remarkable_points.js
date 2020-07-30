@@ -11,7 +11,11 @@ var desc_function = (sender) => {
     let objs = sender_objs.data[st];
     let c_objs = sender_objs.data_c[st];
 
-    let tia = [`<i class="fas fa-clinic-medical"></i>`,`<i class="fas fa-user-tie"></i>`];
+    let tia = [
+      `<i class="fas fa-map-marked-alt"></i>`,
+      `<i class="fas fa-clinic-medical"></i>`,
+      `<i class="fas fa-user-tie"></i>`
+    ];
 
     let ap = ``;
     objs.forEach((cell) => {

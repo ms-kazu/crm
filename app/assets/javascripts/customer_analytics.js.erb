@@ -800,7 +800,7 @@ var desc_function = (data,so) => {
         }
         const desc_male = () => {
           let graph_data = [{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"客単価",
             data:data_4_arr,
             backgroundColor:`#fff`,
@@ -931,7 +931,7 @@ var desc_function = (data,so) => {
         }
         const desc_female = () => {
           let graph_data = [{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"客単価",
             data:data_5_arr,
             backgroundColor:`#fff`,
@@ -1333,7 +1333,7 @@ var desc_function = (data,so) => {
         });
 
         let graph_data = [{
-          type:"LineWithLine",
+          type:"crossed_lines",
           label:"客単価",
           data:data_1_arr,
           backgroundColor:`rgba(54,100,180,0)`,
@@ -3158,7 +3158,7 @@ var desc_function = (data,so) => {
       const desc_graph = () => {
         const desc_bar = () => {
           let graph_data = [{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"総合売上累積割合",
             data:rate_0_arr,
             borderColor:`rgba(242,100,100)`,
@@ -3277,7 +3277,7 @@ var desc_function = (data,so) => {
         }
         const desc_line = () => {
           let graph_data = [{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"総売客単価",
             data:data_1_arr,
             borderColor:`rgba(242,100,100)`,
@@ -3286,7 +3286,7 @@ var desc_function = (data,so) => {
             cubicInterpolationMode: 'monotone',
             lineTension: 0
           },{
-            type:"LineWithLine",
+            type:"crossed_lines",
             label:"総売時間単価",
             data:data_2_arr,
             borderColor:`rgba(54,100,180,1)`,
@@ -4716,7 +4716,7 @@ var desc_function = (data,so) => {
   let decyle_line;
 
   let trend_line_ctx = document.getElementById('trend_line').getContext('2d');
-  desc_graph_init("trend_line","trend_line_ctx",'LineWithLine');
+  desc_graph_init("trend_line","trend_line_ctx",'crossed_lines');
   let male_bar_ctx = document.getElementById('male_bar').getContext('2d');
   desc_graph_init("male_bar","male_bar_ctx",'bar');
   let female_bar_ctx = document.getElementById('female_bar').getContext('2d');
@@ -4775,7 +4775,7 @@ if ($('#page_js_status').prop('checked') == false) {
   $('#page_js_status').prop('checked',true);
 
   $(document).ready(async function(){
-    $('.left_bar_base a:eq(12) .cell').addClass('selected');
+    $('.left_bar_base a:eq(13) .cell').addClass('selected');
 
     let clinics = await ajax_api_function("read_clinic_objs","");
 
