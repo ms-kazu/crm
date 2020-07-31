@@ -336,7 +336,9 @@ var desc_function = (data) => {
         let ap = ``;
         let day_pa = period_map(ps,pe,0);
 
-        pa.forEach((label) => {
+        for (let i = 0;i < pa.length;i++) {
+          let label = pa[i];
+
           let result = obj.filter(({period}) => period == label);
 
           let data_0 = result.sum_val(`data_0`);
@@ -501,8 +503,7 @@ var desc_function = (data) => {
             <td>${gene4}</td>
           </tr>
           `;
-
-        });
+        }
 
         $('#table_clinic_base').append(
           `
@@ -864,7 +865,9 @@ var desc_function = (data) => {
 
         let ap = ``;
 
-        pa.forEach((label) => {
+        for (let i = 0;i < pa.length;i++) {
+          let label = pa[i];
+
           let result = obj.filter(({period}) => period == label);
 
           let data_0 = result.sum_val(`data_0`);
@@ -993,8 +996,7 @@ var desc_function = (data) => {
             <td>${gene4}</td>
           </tr>
           `;
-
-        });
+        }
 
         $('#table_staff_base').append(
           `

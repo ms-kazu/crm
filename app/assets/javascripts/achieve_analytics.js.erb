@@ -550,7 +550,9 @@ var desc_obj_page = () => {
           let sx = 0,sy = 0,sxy = 0,sxx = 0;
           let c_sx = 0,c_sy = 0,c_sxy = 0,c_sxx = 0;
 
-          pa.forEach((label,idx) => {
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
+
             tpl.push(convert_pl(label,idx,pt));
             integral_ave_arr.push(ave * (idx + 1));
             idx == pa.length - 1 ? pointRadius_arr.push(5) : pointRadius_arr.push(0);
@@ -597,7 +599,7 @@ var desc_obj_page = () => {
               c_sxy += (idx + 1) * c_amount;
               c_sxx += (idx + 1) * (idx + 1);
             }
-          });
+          }
 
           const calc_regression = () => {
             let n = pa.length;
@@ -609,14 +611,14 @@ var desc_obj_page = () => {
             a = Sxy / Sxx;
             let b = y_ave - a * x_ave;
 
-            pa.forEach((cell,idx) =>  {
+            for (let idx = 0;idx < pa.length;idx++) {
               let amount = b + a*idx;
               trend_regression_data.push(amount);
               let sum = integral_regression_data[idx - 1];
               idx == 0
                 ? integral_regression_data.push(amount)
                 : integral_regression_data.push(amount + sum);
-            });
+            }
 
             if (cpt) {
               let c_n = cpa.length;
@@ -628,14 +630,14 @@ var desc_obj_page = () => {
               c_a = c_Sxy / c_Sxx;
               let c_b = c_y_ave - c_a * c_x_ave;
 
-              cpa.forEach((cell,idx) =>  {
+              for (let idx = 0;idx < cpa.length;idx++) {
                 let amount = c_b + c_a*idx;
                 let sum = integral_c_regression_data[idx - 1];
                 trend_c_regression_data.push(amount);
                 idx == 0
-                  ? integral_c_regression_data.push(amount)
-                  : integral_c_regression_data.push(amount + sum);
-              });
+                ? integral_c_regression_data.push(amount)
+                : integral_c_regression_data.push(amount + sum);
+              }
             }
           }
           calc_regression();
@@ -1154,7 +1156,9 @@ var desc_obj_page = () => {
           ;
 
           const desc_leveling = () => {
-            pa.forEach((label,idx) => {
+            for (let idx = 0;idx < pa.length;idx++) {
+              let label = pa[idx];
+
               tpl.push(convert_pl(label,idx,pt));
 
               let r_a = datas.filter(({period}) => period == label);
@@ -1175,8 +1179,7 @@ var desc_obj_page = () => {
               line_mission_data.push(line_mission_step);
 
               idx == pa.length - 1 ? pointRadius.push(5) : pointRadius.push(0);
-
-            });
+            }
           }
           const desc_line = () => {
             let graph_data = [{
@@ -1489,12 +1492,14 @@ var desc_obj_page = () => {
             eval(`w_data${i}.push(null)`);
           }
         }
-        day_pa.forEach((label) => {
+        for (let i = 0;i < day_pa.length;i++) {
+          let label = day_pa[i];
+
           let result = data.data.week.filter(({period}) => period == label);
           let amount = result.sum_val(`data_0`);
           let week = new Date(label).getDay();
           eval(`w_data${week}.push(${amount})`);
-        });
+        }
 
         const desc_leveling = () => {
           for (let i = 0;i < 7;i++) {
@@ -6293,8 +6298,9 @@ var desc_obj_page = () => {
           let data_4_arr = [];
 
           let tpl = [];
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
 
-          pa.forEach((label,idx) => {
             tpl.push(convert_pl(label,idx,pt));
 
             let result = trends.filter(({period}) => period == label);
@@ -6310,7 +6316,7 @@ var desc_obj_page = () => {
             data_2_arr.push(data_2);
             data_3_arr.push(rate_0);
             data_4_arr.push(rate_1);
-          });
+          }
 
           const desc_line = () => {
             let graph_data = [{
@@ -9965,7 +9971,9 @@ var desc_obj_page = () => {
             let sx = 0,sy = 0,sxy = 0,sxx = 0;
             let c_sx = 0,c_sy = 0,c_sxy = 0,c_sxx = 0;
 
-            pa.forEach((label,idx) => {
+            for (let idx = 0;idx < pa.length;idx++) {
+              let label = pa[idx];
+
               tpl.push(convert_pl(label,idx,pt));
               integral_ave_arr.push(ave * (idx + 1));
               idx == pa.length - 1 ? pointRadius_arr.push(5) : pointRadius_arr.push(0);
@@ -9982,8 +9990,8 @@ var desc_obj_page = () => {
               })();
 
               idx == 0
-                ? integral_data_arr.push(amount)
-                : integral_data_arr.push(amount + integral_data_arr[idx - 1]);
+              ? integral_data_arr.push(amount)
+              : integral_data_arr.push(amount + integral_data_arr[idx - 1]);
 
               sx += idx + 1;
               sy += amount;
@@ -10004,15 +10012,15 @@ var desc_obj_page = () => {
                 })();
 
                 idx == 0
-                  ? integral_c_data_arr.push(c_amount)
-                  : integral_c_data_arr.push(c_amount + integral_c_data_arr[idx - 1]);
+                ? integral_c_data_arr.push(c_amount)
+                : integral_c_data_arr.push(c_amount + integral_c_data_arr[idx - 1]);
 
                 c_sx += idx + 1;
                 c_sy += c_amount;
                 c_sxy += (idx + 1) * c_amount;
                 c_sxx += (idx + 1) * (idx + 1);
               }
-            });
+            }
 
             const calc_regression = () => {
               let n = pa.length;
@@ -10024,14 +10032,14 @@ var desc_obj_page = () => {
               a = Sxy / Sxx;
               let b = y_ave - a * x_ave;
 
-              pa.forEach((cell,idx) =>  {
+              for (let idx = 0;idx < pa.length;idx++) {
                 let amount = b + a*idx;
                 let sum = integral_regression_data[idx - 1];
                 trend_regression_data.push(amount);
                 idx == 0
-                  ? integral_regression_data.push(amount)
-                  : integral_regression_data.push(amount + sum);
-              });
+                ? integral_regression_data.push(amount)
+                : integral_regression_data.push(amount + sum);
+              }
 
               if (cpt) {
                 let c_n = cpa.length;
@@ -10043,14 +10051,15 @@ var desc_obj_page = () => {
                 c_a = c_Sxy / c_Sxx;
                 let c_b = c_y_ave - c_a * c_x_ave;
 
-                cpa.forEach((cell,idx) =>  {
+                for (let idx = 0;idx < cpa.length;idx++) {
                   let amount = c_b + c_a*idx;
                   let sum = integral_c_regression_data[idx - 1];
                   trend_c_regression_data.push(amount);
                   idx == 0
-                    ? integral_c_regression_data.push(amount)
-                    : integral_c_regression_data.push(amount + sum);
-                });
+                  ? integral_c_regression_data.push(amount)
+                  : integral_c_regression_data.push(amount + sum);
+                }
+
               }
             }
             calc_regression();
@@ -10568,12 +10577,13 @@ var desc_obj_page = () => {
               eval(`w_data${i}.push(null)`);
             }
           }
-          day_pa.forEach((label) => {
+          for (let i = 0;i < day_pa.length;i++) {
+            let label = day_pa[i];
             let result = data.data.week.filter(({period}) => period == label);
             let amount = result.sum_val(`data_0`);
             let week = new Date(label).getDay();
             eval(`w_data${week}.push(${amount})`);
-          });
+          }
 
           const desc_leveling = () => {
             for (let i = 0;i < 7;i++) {
@@ -16429,7 +16439,9 @@ var desc_obj_page = () => {
 
         let tpl = [];
         const desc_leveling = () => {
-          pa.forEach((label,idx) => {
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
+
             tpl.push(convert_pl(label,idx,pt));
             let result = objs.filter(({period}) => period == label);
             trend_data_arr.push(result.length);
@@ -16442,7 +16454,7 @@ var desc_obj_page = () => {
               let c_result = c_datas.filter(({period}) => period == c_label);
               trend_c_data_arr.push(c_result.length);
             }
-          });
+          }
         }
         const desc_line = () => {
           let graph_data = [{

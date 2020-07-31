@@ -105,7 +105,8 @@ var desc_function = (data,so) => {
       let tpl = [];
 
       const desc_leveling = () => {
-        pa.forEach((label,idx) => {
+        for (let idx = 0;idx < pa.length;idx++) {
+          let label = pa[idx];
           tpl.push(convert_pl(label,idx,0));
 
           let result = obj.filter(({period}) => period == label);
@@ -143,7 +144,7 @@ var desc_function = (data,so) => {
             forecast_up_arr.push(null);
             forecast_down_arr.push(null);
           }
-        });
+        }
       }
       const desc_graph = () => {
         let graph_data = [{

@@ -612,7 +612,9 @@ var desc_function = (data,so) => {
       let tpl = [];
 
       const desc_leveling = () => {
-        pa.forEach((label,idx) => {
+        for (let idx = 0;idx < pa.length;idx++) {
+          let label = pa[idx];
+
           tpl.push(convert_pl(label,idx,pt));
 
           let result = objs.filter(({period}) => period == label);
@@ -628,7 +630,7 @@ var desc_function = (data,so) => {
           data_2_arr.push(data_2);
           data_3_arr.push(data_3);
           data_4_arr.push(data_4);
-        });
+        }
       }
       const desc_graph = () => {
         let label_arr = ["来院数","期間内再来","月別純患数","純患数","新患数"];
@@ -1322,7 +1324,9 @@ var desc_function = (data,so) => {
 
         let objs = data.data.summary;
         let tpl = [];
-        objs.forEach((cell,idx) => {
+
+        for (let idx = 0;idx < objs.length;idx++) {
+          let cell = objs[idx];
           tpl.push(`${idx+1}回`);
 
           let data_0 = cell.data_0;
@@ -1330,7 +1334,7 @@ var desc_function = (data,so) => {
 
           data_0_arr.push(data_0);
           data_1_arr.push(data_0.to_devide(data_1));
-        });
+        }
 
         let graph_data = [{
           type:"crossed_lines",
@@ -1898,7 +1902,9 @@ var desc_function = (data,so) => {
         let sum_count = data.data.trend.sum_val('data_0');
 
         let ap = ``;
-        _objs.forEach((cell,idx) => {
+        for (let idx = 0;idx < _objs.length;idx++) {
+          let cell = _objs[idx];
+
           let app = ``;
           let menu_trend_arr = cell.menu_trend.split(',');
 
@@ -1934,7 +1940,7 @@ var desc_function = (data,so) => {
             ${app}
           </tr>
           `;
-        });
+        }
 
         $('#action_table').html(
           `
@@ -2753,7 +2759,9 @@ var desc_function = (data,so) => {
           let sum_amount = _objs.length;
           let sum_data = _objs.sum_val('data_0');
 
-          pa.forEach((label,idx) => {
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
+
             let day_pa = period_map(`${label}-01`,pe,0).length;
 
             let pl = label.str_date(`.`);
@@ -2817,7 +2825,7 @@ var desc_function = (data,so) => {
               <td><div class="amount">${count_cycle.str_jp()}日</div></td>
             </tr>
             `;
-          });
+          }
 
           $('#repeat_summary_table_base').html(
             `
@@ -2853,7 +2861,8 @@ var desc_function = (data,so) => {
           let sum_amount = _objs.length;
           let sum_data = _objs.sum_val('data_0');
 
-          pa.forEach((label,idx) => {
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
 
             let pl = label.str_date(`.`);
             col_pl += `<th>${pl}</th>`;
@@ -2864,7 +2873,9 @@ var desc_function = (data,so) => {
             let amount_rate = amount.to_perate(sum_amount);
 
             let app = ``;
-            pa.forEach((col_label,i) => {
+            for (let i = 0;i < pa.length;i++) {
+              let col_label = pa[i];
+
               let rslt =
               label == col_label
               ? result.filter((cell) => cell[col_label] >= 2)
@@ -2889,7 +2900,7 @@ var desc_function = (data,so) => {
                 excel_data_d_num += 1;
                 excel_data_d_arr.push({cuo:rslt,title:`初回来院月が${pl}でリピート月が${col_label.str_date(`.`)}`});
               }
-            });
+            }
 
             ap +=
             `
@@ -2907,7 +2918,7 @@ var desc_function = (data,so) => {
             `;
 
             excel_data_f_arr.push({cuo:result,title:`初回来院月が${pl}`});
-          });
+          }
 
           $('#repeat_table_base').html(
             `
@@ -2951,7 +2962,8 @@ var desc_function = (data,so) => {
           let sum_amount = _objs.length;
           let sum_data = _objs.sum_val('data_0');
 
-          pa.forEach((label,idx) => {
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
 
             let pl = label.str_date(`.`);
             col_pl += `<th>${pl}</th>`;
@@ -2961,7 +2973,9 @@ var desc_function = (data,so) => {
             let amount_rate = amount.to_perate(sum_amount);
 
             let app = ``;
-            pa.forEach((col_label) => {
+            for (let i = 0;i < pa.length;i++) {
+              let col_label = pa[i];
+
               let rslt = result.filter(({max_month}) => max_month == col_label);
 
               let user = rslt.length;
@@ -2983,7 +2997,7 @@ var desc_function = (data,so) => {
                 excel_data_d_num += 1;
                 excel_data_d_arr.push({cuo:rslt,title:`初回来院月が${pl}で離脱月が${col_label.str_date(`.`)}`});
               }
-            });
+            }
 
             ap +=
             `
@@ -3001,7 +3015,7 @@ var desc_function = (data,so) => {
             `;
 
             excel_data_f_arr.push({cuo:result,title:`初回来院月が${pl}`});
-          });
+          }
 
           $('#left_table_base').html(
             `
