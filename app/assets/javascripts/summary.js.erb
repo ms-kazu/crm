@@ -4087,8 +4087,8 @@ var query_function = async () => {
   let fore1 = `${today.aD(-1).dD()}`;
   let fore2 = `${today.aD(-1).dME().dD()}`;
 
-  let cps = `${today.aM(-1).dMS().dD()}`;
-  let cpe = `${today.aM(-1).dME().dD()}`;
+  let cps = `${today.dMS().aM(-1).dMS().dD()}`;
+  let cpe = `${today.dMS().aM(-1).dME().dD()}`;
 
   let pw0 = `${today.aD(-7*5).dD()}`;
   let pw1 = `${today.dD()}`;
@@ -4096,9 +4096,9 @@ var query_function = async () => {
   let pw2 = `${today.aD(-7*11).dD()}`;
   let pw3 = `${today.aD(-7*6).dD()}`;
 
-  let pm0 = `${today.aM(-5).dMS().dD()}`;
+  let pm0 = `${today.dMS().aM(-5).dMS().dD()}`;
   let pm1 = `${today.dD()}`;
-  let pm2 = `${today.aM(-11).dMS().dD()}`;
+  let pm2 = `${today.dMS().aM(-11).dMS().dD()}`;
   let pm3 = `${today.aM(-6).dME().dD()}`;
 
   const sender_data = {
@@ -4119,6 +4119,7 @@ var query_function = async () => {
     pm2:pm2,
     pm3:pm3
   }
+  console.log(sender_data);
 
   let result = await ajax_api_function("summary",sender_data);
   if (result.dataExists) {

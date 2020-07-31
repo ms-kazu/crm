@@ -32,10 +32,10 @@ if ($('#page_js_status').prop('checked') == false) {
 
       let pt2_0_s = `${today.dMS().dD()}`;
       let pt2_0_e = `${today.dD()}`;
-      let pt2_1_s = `${today.aM(-1).dMS().dD()}`;
-      let pt2_1_e = `${today.aM(-1).dMET().dD()}`;
-      let pt2_2_s = `${today.aM(-12).dMS().dD()}`;
-      let pt2_2_e = `${today.aM(-12).dMET().dD()}`;
+      let pt2_1_s = `${today.dMS().aM(-1).dMS().dD()}`;
+      let pt2_1_e = `${today.dMS().aM(-1).dMET().dD()}`;
+      let pt2_2_s = `${today.dMS().aM(-12).dMS().dD()}`;
+      let pt2_2_e = `${today.dMS().aM(-12).dMET().dD()}`;
 
       const sender_data = {
         pt0:{_0:[pt0_0,pt0_0],_1:[pt0_1,pt0_1],_2:[pt0_2,pt0_2]},
