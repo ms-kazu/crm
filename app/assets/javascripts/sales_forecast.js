@@ -355,9 +355,9 @@ var desc_function = (data,so) => {
           let data_1 = rslt.sum_val('data_1');
           let data_2 = rslt.sum_val('data_2');
 
-          ave_0_arr.push(data_0.to_devide(result.length / objs.length));
-          ave_1_arr.push(data_1.to_devide(result.length / objs.length));
-          ave_2_arr.push(data_2.to_devide(result.length / objs.length));
+          ave_0_arr.push(data_0.to_devide(rslt.length));
+          ave_1_arr.push(data_1.to_devide(rslt.length));
+          ave_2_arr.push(data_2.to_devide(rslt.length));
         }
         let achieve_0 = result.filter(({period}) => period >= ts).sum_val('data_0');
         let achieve_1 = result.filter(({period}) => period >= ts).sum_val('data_1');

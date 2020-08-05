@@ -116,6 +116,8 @@ var query_leveling = async () => {
     });
   }
 
+  console.log(axis_arr);
+
   let ps = $('#pi_s').prop('value');
   let pe = $('#pi_e').prop('value');
 
