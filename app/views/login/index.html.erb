@@ -67,12 +67,15 @@
   $('#particles').particleground({
     dotColor: 'rgba(54,100,180,.75)',
   	lineColor: 'rgba(54,100,180,.5)',
-    density:4500,
+    minSpeedX:0.5,
+    maxSpeedX:1.5,
+    maxSpeedY:0.5,
+    density:3500,
   	particleRadius:6,
     lineWidth:1,
-    parallax:false,
+    parallax:true,
     parallaxMultiplier:40,
-    proximity:115,
+    proximity:110,
   });
 </script>
 
