@@ -1449,13 +1449,24 @@ html {
         }
       }
     }
-    #particles {
+    .particles_base {
       position: absolute;
-      top:25%;
+      top:0;
       left:0;
-      bottom:25%;
+      bottom:0;
       right:0;
-      z-index: 10;
+      overflow: hidden;
+      #particles {
+        position: absolute;
+        top:15%;
+        left:0;
+        bottom:15%;
+        right:0;
+        z-index: 10;
+        canvas {
+          transform: rotate(25deg);
+        }
+      }
     }
     .login_footer {
       position: fixed;
