@@ -1380,6 +1380,7 @@ html {
       left:0;
       bottom:0;
       right:0;
+      background: linear-gradient(to bottom,#aaa,#fff,#aaa);
     }
     .login_base {
       position: absolute;
@@ -1450,13 +1451,11 @@ html {
     }
     #particles {
       position: absolute;
-      top:20%;
-      left:10%;
+      top:30%;
+      left:0;
       bottom:30%;
-      right:10%;
+      right:0;
       z-index: 10;
-      overflow: hidden;
-      border-radius: 25%;
     }
     .login_footer {
       position: fixed;
