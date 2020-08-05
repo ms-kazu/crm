@@ -1971,13 +1971,14 @@ var desc_function = (data,so) => {
 
         for (let i = 0;i < 3;i++) {
           let app = ``;
-          for (let i = 0;i < cpa.length;i++) {
-            let label = cpa[i];
+          for (let idx = 0;idx < cpa.length;idx++) {
+            let label = cpa[idx];
 
             let result = obj_c.filter(({period}) => period == label);
             let data = result.sum_val(`data_${i}`);
             app += `<td>${data.toLocaleString()}</td>`;
           }
+          console.log(app);
           ap +=
           `
           <tr>
@@ -2152,8 +2153,8 @@ var desc_function = (data,so) => {
 
         for (let i = 0;i < 3;i++) {
           let app = ``;
-          for (let i = 0;i < pa.length;i++) {
-            let label = pa[i];
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
             let result = obj.filter(({period}) => period == label);
             let data = result.sum_val(`data_${i}`);
             app += `<td>${data.toLocaleString()}</td>`;
@@ -2193,8 +2194,8 @@ var desc_function = (data,so) => {
 
         for (let i = 0;i < 3;i++) {
           let app = ``;
-          for (let i = 0;i < cpa.length;i++) {
-            let label = cpa[i];
+          for (let idx = 0;idx < cpa.length;idx++) {
+            let label = cpa[idx];
             let result = obj_c.filter(({period}) => period == label);
             let data = result.sum_val(`data_${i}`);
             app += `<td>${data.toLocaleString()}</td>`;
@@ -4119,7 +4120,6 @@ var query_function = async () => {
     pm2:pm2,
     pm3:pm3
   }
-  console.log(sender_data);
 
   let result = await ajax_api_function("summary",sender_data);
   if (result.dataExists) {

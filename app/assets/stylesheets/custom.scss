@@ -3000,8 +3000,10 @@ html {
                             }
                             .bb {
                               margin:.25rem .5rem;
-                              height:4px;
+                              height:6px;
                               background-color: $border_color;
+                              overflow: hidden;
+                              border-radius: 3px;
                               .b {
                                 background-color: $btn_color;
                                 height:100%;
