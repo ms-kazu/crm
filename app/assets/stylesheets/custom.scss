@@ -1384,6 +1384,7 @@ html {
       box-sizing: border-box;
       text-align: center;
       color:inherit;
+      z-index: 11;
       .title_icon {
         width:5rem;
         height:5rem;
@@ -1438,6 +1439,14 @@ html {
           background: linear-gradient(45deg,$btn_color,$off_white);
         }
       }
+    }
+    #particles {
+      position: absolute;
+      top:0;
+      left:0;
+      bottom:0;
+      right:0;
+      z-index: 10;
     }
     .login_footer {
       position: fixed;

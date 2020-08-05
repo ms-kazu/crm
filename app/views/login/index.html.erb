@@ -20,6 +20,9 @@
     </p> -->
   </div>
 
+  <div id="particles">
+  </div>
+
   <div class="login_footer">
     <div class="icons_base inline">
       <i class="fab fa-aws"></i>
@@ -49,6 +52,8 @@
   </div>
 </div>
 
+
+<%= javascript_include_tag 'jquery_login_bgv.min.js', 'data-turbolinks-track': 'reload' %>
 <script type="text/javascript">
   const login_width_init = () => {
     let width = window.innerWidth;
@@ -58,6 +63,14 @@
   login_width_init();
 
   $('#email').focus();
+
+  $('#particles').particleground({
+    dotColor: 'rgba(54,100,180,.75)',
+  	lineColor: 'rgba(54,100,180,.5)',
+  	particleRadius:6,
+    parallax:false,
+    proximity:125,
+  });
 </script>
 
 <style>
