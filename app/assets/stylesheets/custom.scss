@@ -150,8 +150,9 @@ $border_color:#e1e1e1;
               }
               &.percent {
                 position: absolute;
-                bottom:2px;
-                left:2px;
+                bottom:1px;
+                left:1px;
+                font-size: .7rem;
                 line-height: 1rem;
               }
               font-size: .7rem;
@@ -1743,8 +1744,12 @@ html {
       }
     }
     .graph_wrap {
-      padding: 1rem;
+      padding:1rem;
+      margin:0 !important;
       canvas {
+        padding: 0 !important;
+        margin:0 !important;
+        width:100% !important;
       }
     }
   }
@@ -4579,9 +4584,6 @@ html {
             opacity: 1 !important;
           }
         }
-      }
-      .graph_wrap {
-        padding:.5rem !important;
       }
       .table_base {
         font-size: .75rem;
