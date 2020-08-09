@@ -14,6 +14,8 @@ if ($('#page_js_status').prop('checked') == false) {
           }
         });
       });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-list"></i></div>成績リスト`);
     })();
 
     const desc_objs_list = async () => {
@@ -126,7 +128,7 @@ if ($('#page_js_status').prop('checked') == false) {
           ordering: true,
           info: true,
           paging: true,
-          order:[]
+          order:[[1,"desc"]]
         });
       }
       $(document).off('click','input[name="segment_input_"]').on('click','input[name="segment_input_"]',function() {

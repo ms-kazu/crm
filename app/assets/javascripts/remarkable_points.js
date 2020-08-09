@@ -1,6 +1,5 @@
 var user_name = getDOM('user_name').value;
 
-var sender_objs = {}
 var desc_function = (sender) => {
   const desc_content = () => {
     let cpt = $('#cpt').prop('checked');
@@ -8,8 +7,8 @@ var desc_function = (sender) => {
     let ps = getDOM('pi_s').value;
     let pe = getDOM('pi_e').value;
     let st = Number($('#segment_select option:selected').prop('value'));
-    let objs = sender_objs.data[st];
-    let c_objs = sender_objs.data_c[st];
+    let objs = sender.data[st];
+    let c_objs = sender.data_c[st];
 
     let tia = [
       `<i class="fas fa-map-marked-alt"></i>`,
@@ -237,7 +236,7 @@ var desc_function = (sender) => {
       ordering: true,
       info: true,
       paging: true,
-      order:[]
+      order:[[1,"desc"]]
     });
   }
   desc_content();
@@ -273,7 +272,6 @@ var query_function = async () => {
 
   let result = await ajax_api_function("remarkable_points",sender_data);
   if (result.dataExists) {
-    sender_objs = result.data;
     desc_function(result.data);
   } else {
     alert(`データ通信エラー:${result.reason}`);
@@ -285,7 +283,6 @@ if ($('#page_js_status').prop('checked') == false) {
 
   $(document).ready(async function(){
     (() => {
-      $('#left_input_0').prop('checked',true);
       $('.left_bar_base a:eq(2) .cell').addClass('selected');
       jQuery(function($) {
         $.extend( $.fn.dataTable.defaults, {
@@ -294,6 +291,8 @@ if ($('#page_js_status').prop('checked') == false) {
           }
         });
       });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-lightbulb-on"></i></div>重要指標`);
     })();
 
     const desc_init = async () => {

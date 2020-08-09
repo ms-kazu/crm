@@ -141,7 +141,7 @@ if ($('#page_js_status').prop('checked') == false) {
 
   $(document).ready(async function(){
     (() => {
-      $('.left_bar_base a:eq(12) .cell').addClass('selected');
+      $('.left_bar_base a:eq(13) .cell').addClass('selected');
       jQuery(function($) {
         $.extend( $.fn.dataTable.defaults, {
           language: {
@@ -149,6 +149,9 @@ if ($('#page_js_status').prop('checked') == false) {
           }
         });
       });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-random"></i></div>ランダムクエリ`);
+
       (() => {
         let today = new Date();
         let ps = today.dMS().dD();

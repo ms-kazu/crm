@@ -525,29 +525,36 @@ $(document).ready(function() {
   });
 
   const help_tip_event = () => {
-    $(`#help_tips_pop`).hide();
+    // $(`#help_tips_pop`).hide();
 
     $(document).off('mouseenter','.help_tips').on('mouseenter','.help_tips',function() {
       let offset = $(this).offset();
       let data_title = $(this).attr('data-title');
       let data_text = $(this).attr('data-help');
 
+      /*
+      <div class="video">
+        <iframe id="youtube" type="text/html" src="https://www.youtube.com/embed/Qpcbp_TnB8g?autoplay=1" frameborder="0"></iframe>
+      </div>
+      */
       $('#help_tips_pop').html(
         `
         <div class="title">${data_title}</div>
-        ${data_text}
+
+        <div class="cnt">
+          ${data_text}
+        </div>
         `
       );
       $(window).mousemove(function(e) {
         var x = e.pageX;
         var y = e.pageY;
         $(`#help_tips_pop`).css({left:x+'px',top:y+'px'});
-        $(`#help_tips_pop`).css({left:x+'px',top:y+'px'});
       })
-      $(`#help_tips_pop`).show();
     });
     $(document).off('mouseleave','.help_tips').on('mouseleave','.help_tips',function() {
-      $(`#help_tips_pop`).hide();
+      $('#help_tips_pop').html(``);
+      $(`#help_tips_pop`).css({left:'-100px',top:'-100px'});
     });
   }
   help_tip_event();

@@ -25,40 +25,49 @@
     </div>
 
     <div class="header_base">
-      <a href="/home">
-        <div class="logo_base inline">
-          <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
-          <div class="text_base inline">Medical CRM</div>
-        </div>
-      </a>
+      <div class="left_header">
+        <a href="/home">
+          <div class="logo_base inline">
+            <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
+            <div class="text_base inline">Medical CRM</div>
+          </div>
+        </a>
 
-      <label class="text_overflow inline" for="acounts_modal_input">
-        <%= @inc_name %>
-      </label>
-      <% if @name == "msd_system_master" %>
-      <div class="n_l_b">
-        <input type="checkbox" id="acounts_modal_input">
-        <div class="acount_modal inline" id="acount_modal">
-          <div class="cover" id="acount_cover">
-            <div class="loading_base inline">
-              <i class="fad fa-spinner-third fa-spin"></i>
+        <label class="text_overflow inline" for="acounts_modal_input">
+          <%= @inc_name %>
+        </label>
+        <% if @name == "msd_system_master" %>
+        <div class="n_l_b">
+          <input type="checkbox" id="acounts_modal_input">
+          <div class="acount_modal inline" id="acount_modal">
+            <div class="cover" id="acount_cover">
+              <div class="loading_base inline">
+                <i class="fad fa-spinner-third fa-spin"></i>
+              </div>
             </div>
-          </div>
-          <%= form_tag("/change_acount",{method:"POST",autocomplete:"off"}) do %>
-          <div class="title">アカウントの切り替え</div>
-          <div class="select_box">
-            <select name="acount_select" id="acount_select"></select>
-            <div class="icon_base">
-              <i class="fas fa-caret-down"></i>
+            <%= form_tag("/change_acount",{method:"POST",autocomplete:"off"}) do %>
+            <div class="title">アカウントの切り替え</div>
+            <div class="select_box">
+              <select name="acount_select" id="acount_select"></select>
+              <div class="icon_base">
+                <i class="fas fa-caret-down"></i>
+              </div>
             </div>
+            <div class="btn_base">
+              <button type="submit">切り替える</button>
+            </div>
+            <% end %>
           </div>
-          <div class="btn_base">
-            <button type="submit">切り替える</button>
+        </div>
+        <% end %>
+
+        <div class="page_ttl_base inline" id="page_ttl_base">
+          <div class="icn inline">
+            <i class="fas fa-home"></i>
           </div>
-          <% end %>
+          ホーム
         </div>
       </div>
-      <% end %>
 
       <div class="n_r_b inline">
         <a href="/home">
@@ -152,6 +161,11 @@
               </div>
             </a>
           </div>
+          <a href="/trends_line?s_type=1">
+            <div class="cell cell_box">
+              <i class="fas fa-analytics"></i> トレンド比較
+            </div>
+          </a>
           <div class="cell cell_grid_box cell_1x2_box">
             <a href="/sales_forecast?s_type=1">
               <div class="cell inline">

@@ -1030,7 +1030,7 @@ if ($('#page_js_status').prop('checked') == false) {
 
   $(document).ready(async function(){
     (() => {
-      $('.left_bar_base a:eq(16) .cell').addClass('selected');
+      $('.left_bar_base a:eq(17) .cell').addClass('selected');
       jQuery(function($) {
         $.extend( $.fn.dataTable.defaults, {
           language: {
@@ -1038,6 +1038,8 @@ if ($('#page_js_status').prop('checked') == false) {
           }
         });
       });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-search"></i></div>顧客検索`);
       let today = new Date();
       let s = today.dMS().dD();
       let e = today.dD();

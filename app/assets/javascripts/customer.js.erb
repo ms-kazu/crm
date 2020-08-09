@@ -463,6 +463,8 @@ var query_function = async (cid,ptno) => {
 if ($('#page_js_status').prop('checked') == false) {
   $('#page_js_status').prop('checked',true);
 
+  $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-user-injured"></i></div>患者`);
+
   $(document).ready(async function(){
     const desc_init = async () => {
       let cid = getDOM(`cid`).value;

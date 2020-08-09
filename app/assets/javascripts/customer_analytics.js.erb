@@ -111,8 +111,8 @@ var desc_function = (data,so) => {
             <div class="box cell_link">
               <div class="cell_title text_overflow">
                 男女別人気メニュー
-                <div class="icon inline">
-                  <i class="fas fa-question-circle help_tips" data-title="顧客属性毎の人気メニュー" data-help="顧客属性毎の人気メニューは上位10位まで表示されます。また、施術された回数と売上の割合は自費メニューの総施術数と総売上の比です。"></i>
+                <div class="icon inline help_tips" data-title="顧客属性毎の人気メニュー" data-help="顧客属性毎の人気メニューは上位10位まで表示されます。また、施術された回数と売上の割合は自費メニューの総施術数と総売上の比です。">
+                  <i class="fas fa-question"></i>
                 </div>
               </div>
               <div class="content _segment_">
@@ -158,8 +158,8 @@ var desc_function = (data,so) => {
             <div class="box cell_link">
               <div class="cell_title cell_title_r text_overflow">
                 男女世代別人気メニュー
-                <div class="icon inline">
-                  <i class="fas fa-question-circle help_tips" data-title="テーブルセルのクリック" data-help="テーブルセルをクリックすると他順位,他セグメントの同じメニューを合算した概要が表示されます。"></i>
+                <div class="icon inline help_tips" data-title="テーブルセルのクリック" data-help="テーブルセルをクリックすると他順位,他セグメントの同じメニューを合算した概要が表示されます。">
+                  <i class="fas fa-question"></i>
                 </div>
               </div>
               <div class="content _segment_">
@@ -189,8 +189,8 @@ var desc_function = (data,so) => {
               <div class="cell_title cell_title_r text_overflow">
                 自費メニュー人気セットパターン
 
-                <div class="icon inline">
-                  <i class="fas fa-question-circle help_tips" data-title="" data-help="該当患者数には自費メニューを受けた顧客あたりの割合を表示しています。"></i>
+                <div class="icon inline help_tips" data-title="" data-help="該当患者数には自費メニューを受けた顧客あたりの割合を表示しています。">
+                  <i class="fas fa-question"></i>
                 </div>
               </div>
               <div class="content _segment_">
@@ -283,8 +283,8 @@ var desc_function = (data,so) => {
             <div class="box">
               <div class="cell_title text_overflow">
                 表マップ
-                <div class="icon inline">
-                  <i class="fas fa-question-circle help_tips" data-title="データセルのクリック" data-help="表中にあるデータセルをクリックすることで対応する顧客一覧をexcel形式で抽出できます。"></i>
+                <div class="icon inline help_tips" data-title="データセルのクリック" data-help="表中にあるデータセルをクリックすることで対応する顧客一覧をexcel形式で抽出できます。">
+                  <i class="fas fa-question"></i>
                 </div>
               </div>
               <div class="content _segment_">
@@ -4789,7 +4789,9 @@ if ($('#page_js_status').prop('checked') == false) {
   $('#page_js_status').prop('checked',true);
 
   $(document).ready(async function(){
-    $('.left_bar_base a:eq(13) .cell').addClass('selected');
+    $('.left_bar_base a:eq(14) .cell').addClass('selected');
+
+    $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-braille"></i></div>顧客グラフ分析`);
 
     let clinics = await ajax_api_function("read_clinic_objs","");
 

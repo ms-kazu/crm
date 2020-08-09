@@ -11,18 +11,14 @@
 <input type="hidden" value="<%= @m_id %>"     id="m_id">
 
 <div class="page_base achieve_analytics_base">
-  <div class="center_top_base">
-    <div class="title inline">
-      <i class="fas fa-analytics"></i> 成績分析
-    </div>
-    <div class="inline" id="setting_sp_b">
-
-    </div>
-  </div>
   <div class="center_left_base">
     <div class="pb bb">
-      <input type="checkbox" id="setting_p" checked>
+      <input type="checkbox" id="setting_p">
       <label for="setting_p" id="setting_p_indi">
+        <div class="cell cell_0 inline"><i class="fas fa-calendar-alt"></i></div>
+        <div class="cell cell_1 inline">--</div>
+        <div class="cell cell_2 inline">-- ~ --</div>
+        <div class="cell cell_indi inline"><i class="fas fa-caret-down"></i></div>
       </label>
       <div class="modal">
         <div class="modal_title">
@@ -105,7 +101,9 @@
   </div>
   <div class="center_middle_base">
     <div class="name_title">
-      <div class="nt inline text_overflow" id="cmb_nt" data-id="nt_0">
+      <div class="nt inline text_overflow" id="cmb_nt" data-id="nt_0" data-nm="管轄院">
+      </div>
+      <div id="setting_sp_b">
       </div>
       <div class="setting_box inline" id="con_setting_box">
         <input class="input_label" type="checkbox" id="setting_cp">

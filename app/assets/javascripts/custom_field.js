@@ -1384,7 +1384,9 @@ if ($('#page_js_status').prop('checked') == false) {
   $('#page_js_status').prop('checked',true);
 
   $(document).ready(async function(){
-    $('.left_bar_base a:eq(5) .cell').addClass('selected');
+    $('.left_bar_base a:eq(6) .cell').addClass('selected');
+
+    $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-file-excel"></i></div>帳票`);
 
     let clinics = await ajax_api_function("read_clinic_objs","");
     if (clinics.dataExists) {

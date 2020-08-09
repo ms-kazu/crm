@@ -53,8 +53,8 @@ var desc_obj_page = () => {
         <div class="section">
           <div class="section_title">
             売上と集客の概要
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="セルのクリック" data-help="各項目をクリックすると下の青帯セクションの値が更新されます。"></i>
+            <div class="icon inline help_tips" data-title="セルのクリック" data-help="各項目をクリックすると下の青帯セクションの値が更新されます。">
+              <i class="fas fa-question-circle"></i>
             </div>
           </div>
           <div class="cell_btn_box" id="cell_btn_box"></div>
@@ -62,11 +62,11 @@ var desc_obj_page = () => {
             <div class="cell cell_2x1 inline">
               <div class="box cell_link">
                 <div class="cell_title text_overflow">トレンドを見る
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="平均成長率" data-help="単位期間ごとの平均の成長線です。この値は各変動に依存するので回帰線とは無相関な値になる場合があります。"></i>
+                  <div class="icon inline help_tips" data-title="平均成長率" data-help="単位期間ごとの平均の成長線です。この値は各変動に依存するので回帰線とは無相関な値になる場合があります。">
+                    <i class="fas fa-question"></i>
                   </div>
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="回帰直線とは?" data-help="回帰直線とは、散布図において予定値を求める際に用いられる直線のことです。2組のデータの中心的な分布傾向を表すもので、最小二乗法と呼ばれる算術を用いて求められます。この直線を用いることにより、現在のトレンドの傾向を捉えることができます。"></i>
+                  <div class="icon inline help_tips" data-title="回帰直線とは?" data-help="回帰直線とは、散布図において予定値を求める際に用いられる直線のことです。2組のデータの中心的な分布傾向を表すもので、最小二乗法と呼ばれる算術を用いて求められます。この直線を用いることにより、現在のトレンドの傾向を捉えることができます。">
+                    <i class="fas fa-question"></i>
                   </div>
                 </div>
                 <div class="content _trend_">
@@ -99,8 +99,8 @@ var desc_obj_page = () => {
             <div class="cell cell_1x1 inline">
               <div class="box cell_link">
                 <div class="cell_title cell_title_r text_overflow">トレンドの積分
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="トレンドの高次元グラフ" data-help="このグラフはトレンド図表を高次元展開した蓄積グラフです。各項目が積分された関数が表示されています。このセクションで言う成長線とはトレンド図の回帰線の積分関数です。"></i>
+                  <div class="icon inline help_tips" data-title="トレンドの高次元グラフ" data-help="このグラフはトレンド図表を高次元展開した蓄積グラフです。各項目が積分された関数が表示されています。このセクションで言う成長線とはトレンド図の回帰線の積分関数です。">
+                    <i class="fas fa-question"></i>
                   </div>
                 </div>
                 <div class="content _integral_">
@@ -390,8 +390,8 @@ var desc_obj_page = () => {
             <div class="cell cell_1x1 inline">
               <div class="box">
                 <div class="cell_title text_overflow">全国比較
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="全国比較" data-help="このセクションでは全国他社店舗の平均と自社平均を比較できます。例えば、セグメントを店舗にすると1日1店舗の全国平均と比較できます。"></i>
+                  <div class="icon inline help_tips" data-title="全国比較" data-help="このセクションでは全国他社店舗の平均と自社平均を比較できます。例えば、セグメントを店舗にすると1日1店舗の全国平均と比較できます。">
+                    <i class="fas fa-question"></i>
                   </div>
                 </div>
                 <div class="content _appearance_">
@@ -3190,7 +3190,7 @@ var desc_obj_page = () => {
             <tr>
               <th>
                 <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
-                  ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+                  ${user_name==MSD_smn?`${stna[2]}${cell.obj_id}`: cell.obj_name}
                 </a>
               </th>
               ${app}
@@ -3315,7 +3315,7 @@ var desc_obj_page = () => {
             <tr>
               <th>
                 <a href="/achieve_analytics?st=2&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
-                  ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+                  ${user_name==MSD_smn?`${stna[2]}${cell.obj_id}`: cell.obj_name}
                 </a>
               </th>
               ${app}
@@ -3634,11 +3634,11 @@ var desc_obj_page = () => {
               link =
               `
               <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
-                ${user_name==MSD_smn?`${stna[2]}${cell.obj_id}`: cell.obj_name}
+                ${user_name==MSD_smn?`${stna[3]}${cell.obj_id}`: cell.obj_name}
               </a>
               `;
             } else {
-              link = `${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}`;
+              link = `${user_name==MSD_smn?`${stna[3]}${cell.obj_id}`: cell.obj_name}`;
             }
 
             ap +=
@@ -3766,7 +3766,7 @@ var desc_obj_page = () => {
             <tr>
               <th>
                 <a href="/achieve_analytics?st=3&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
-                  ${user_name==MSD_smn?`${stna[1]}${cell.obj_id}`: cell.obj_name}
+                  ${user_name==MSD_smn?`${stna[3]}${cell.obj_id}`: cell.obj_name}
                 </a>
               </th>
               ${app}
@@ -9492,8 +9492,8 @@ var desc_obj_page = () => {
         <div class="section">
           <div class="section_title">
             売上と集客の概要
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="セルのクリック" data-help="各項目をクリックすると下の青帯セクションの値が更新されます。"></i>
+            <div class="icon inline help_tips" data-title="セルのクリック" data-help="各項目をクリックすると下の青帯セクションの値が更新されます。">
+              <i class="fas fa-question-circle"></i>
             </div>
           </div>
           <div class="cell_btn_box" id="cell_btn_box"></div>
@@ -9503,11 +9503,11 @@ var desc_obj_page = () => {
             <div class="cell cell_2x1 inline">
               <div class="box cell_link">
                 <div class="cell_title text_overflow">トレンドを見る
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="平均成長率" data-help="単位期間ごとの平均の成長線です。この値は各変動に依存するので回帰線とは無相関な値になる場合があります。"></i>
+                  <div class="icon inline help_tips" data-title="平均成長率" data-help="単位期間ごとの平均の成長線です。この値は各変動に依存するので回帰線とは無相関な値になる場合があります。">
+                    <i class="fas fa-question" ></i>
                   </div>
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="回帰直線とは?" data-help="回帰直線とは、散布図において予定値を求める際に用いられる直線のことです。2組のデータの中心的な分布傾向を表すもので、最小二乗法と呼ばれる算術を用いて求められます。この直線を用いることにより、現在のトレンドの傾向を捉えることができます。"></i>
+                  <div class="icon inline help_tips" data-title="回帰直線とは?" data-help="回帰直線とは、散布図において予定値を求める際に用いられる直線のことです。2組のデータの中心的な分布傾向を表すもので、最小二乗法と呼ばれる算術を用いて求められます。この直線を用いることにより、現在のトレンドの傾向を捉えることができます。">
+                    <i class="fas fa-question"></i>
                   </div>
                 </div>
                 <div class="content _trend_">
@@ -9540,8 +9540,8 @@ var desc_obj_page = () => {
             <div class="cell cell_1x1 inline">
               <div class="box cell_link">
                 <div class="cell_title cell_title_r text_overflow">トレンドの積分
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="トレンドの高次元グラフ" data-help="このグラフはトレンド図表を高次元展開した蓄積グラフです。各項目が積分された関数が表示されています。このセクションで言う成長線とはトレンド図の回帰線の積分関数です。"></i>
+                  <div class="icon inline help_tips" data-title="トレンドの高次元グラフ" data-help="このグラフはトレンド図表を高次元展開した蓄積グラフです。各項目が積分された関数が表示されています。このセクションで言う成長線とはトレンド図の回帰線の積分関数です。">
+                    <i class="fas fa-question"></i>
                   </div>
                 </div>
                 <div class="content _integral_">
@@ -9753,8 +9753,8 @@ var desc_obj_page = () => {
               <div class="box">
                 <div class="cell_title cell_title_r text_overflow">
                   一緒に施術されているものは？
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="客単価" data-help="ここでいう客単価とは対象の施術と各施術が共に行われた時の事です。"></i>
+                  <div class="icon inline help_tips" data-title="客単価" data-help="ここでいう客単価とは対象の施術と各施術が共に行われた時の事です。">
+                    <i class="fas fa-question"></i>
                   </div>
                 </div>
                 <div class="content _associate_">
@@ -9768,8 +9768,8 @@ var desc_obj_page = () => {
             <div class="cell cell_2x1 inline">
               <div class="box">
                 <div class="cell_title cell_title_r text_overflow">アソシエーション
-                  <div class="icon inline">
-                    <i class="fas fa-question-circle help_tips" data-title="アソシエーションとは？" data-help="アソシエーション分析とは対象の商品と付随してよく売られている商品を分析する手法です。最終的に得られる「リフト値」とは値が1よりも大きい場合、対象商品とよく一緒に売られている商品となります。"></i>
+                  <div class="icon inline help_tips" data-title="アソシエーションとは？" data-help="アソシエーション分析とは対象の商品と付随してよく売られている商品を分析する手法です。最終的に得られる「リフト値」とは値が1よりも大きい場合、対象商品とよく一緒に売られている商品となります。">
+                    <i class="fas fa-question"></i>
                   </div>
                 </div>
                 <div class="content _association_">
@@ -13934,8 +13934,8 @@ var desc_obj_page = () => {
         <div class="box cell_link">
           <div class="cell_title text_overflow">
             初回担当者
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="初回担当者別平均来院回数" data-help="期間内の1回目の来院時に担当した顧客がその後どの程度来院したかを分析するセクションです。"></i>
+            <div class="icon inline help_tips" data-title="初回担当者別平均来院回数" data-help="期間内の1回目の来院時に担当した顧客がその後どの程度来院したかを分析するセクションです。">
+              <i class="fas fa-question"></i>
             </div>
           </div>
           <div class="content _repeat_">
@@ -13952,8 +13952,8 @@ var desc_obj_page = () => {
         <div class="section">
           <div class="section_title">
             顧客属性別の概要
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="純患数の定義" data-help="このセクションの純患数の定義は指定期間中初来院時に担当された数値です。店舗セグメントでのこの純患数は他のそれと同値ですが、担当者では値が異なります。"></i>
+            <div class="icon inline help_tips" data-title="純患数の定義" data-help="このセクションの純患数の定義は指定期間中初来院時に担当された数値です。店舗セグメントでのこの純患数は他のそれと同値ですが、担当者では値が異なります。">
+              <i class="fas fa-question"></i>
             </div>
           </div>
           <div class="cell_btn_box cell3_btn_box" id="cell_btn_box">
@@ -16242,17 +16242,17 @@ var desc_obj_page = () => {
         <div class="box cell_link">
           <div class="cell_title cell_title_r text_overflow">
             最終担当者別・影響範囲・離脱割合・影響倍率
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="最終担当者が影響させているという確からしさの値" data-help="影響値とは、どの程度の効率で最終担当回数が算出されるかを表します。例えば、人気のスタッフは最終担当回数が必然的に多くなっていきますが、人気度の異なる他スタッフと比較するためには担当回数のみでは正確な値は出力できないので、影響の度合い多角度から計算します。"></i>
+            <div class="icon inline help_tips" data-title="最終担当者が影響させているという確からしさの値" data-help="影響値とは、どの程度の効率で最終担当回数が算出されるかを表します。例えば、人気のスタッフは最終担当回数が必然的に多くなっていきますが、人気度の異なる他スタッフと比較するためには担当回数のみでは正確な値は出力できないので、影響度合いを多角度から計算します。">
+              <i class="fas fa-question"></i>
             </div>
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="影響範囲" data-help="影響範囲とは、全体の純患数に対する担当純患数の割合です。<br> 式<br>影響範囲R = 期間中担当純患数 % 全体の純患数"></i>
+            <div class="icon inline help_tips" data-title="影響範囲" data-help="影響範囲とは、全体の純患数に対する担当純患数の割合です。<br> 式<br>影響範囲R = 期間中担当純患数 % 全体の純患数">
+              <i class="fas fa-question"></i>
             </div>
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="離脱割合" data-help="離脱割合とは、総離脱数に対して実際にどの程度影響させたかを示す値です。 <br> 式<br>離脱割合I = 離脱確率M x 影響範囲R"></i>
+            <div class="icon inline help_tips" data-title="離脱割合" data-help="離脱割合とは、総離脱数に対して実際にどの程度影響させたかを示す値です。 <br> 式<br>離脱割合I = 離脱確率M x 影響範囲R">
+              <i class="fas fa-question"></i>
             </div>
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="影響倍率" data-help="<br>式<br>影響倍率M = (最終担当回数 % 期間中担当純患数) % 全体の離脱率 <br>※1より高いほど平均よりも離脱させている"></i>
+            <div class="icon inline help_tips" data-title="影響倍率" data-help="<br>式<br>影響倍率M = (最終担当回数 % 期間中担当純患数) % 全体の離脱率 <br>※1より高いほど平均よりも離脱させている">
+              <i class="fas fa-question"></i>
             </div>
           </div>
           <div class="content _repeat_">
@@ -16269,8 +16269,8 @@ var desc_obj_page = () => {
         <div class="section">
           <div class="section_title">
             顧客属性別の概要
-            <div class="icon inline">
-              <i class="fas fa-question-circle help_tips" data-title="純患数の定義" data-help="このセクションの純患数の定義は、最終来院が指定期間中であった純患者数です。また、担当者セグメントでは最終来院時に担当した顧客が表示されます。"></i>
+            <div class="icon inline help_tips" data-title="純患数の定義" data-help="このセクションの純患数の定義は、最終来院が指定期間中であった純患者数です。また、担当者セグメントでは最終来院時に担当した顧客が表示されます。">
+              <i class="fas fa-question"></i>
             </div>
           </div>
           <div class="cell_btn_box cell3_btn_box" id="cell_btn_box">
@@ -17384,13 +17384,17 @@ var desc_obj_sp_leveling = () => {
 }
 var desc_obj_leveling = (sender) => {
   let st = Number($('input[name="st_"]:checked').prop('id').split('_')[1]);
-  $('#cmb_nt').prop('data-id',`nt_${sender}`);
   if (st == 0) {
-    $('#cmb_nt').html(`<div class="icon inline" style="${stca[st]}">${stia[st]}</div> 管轄院`);
+    $('#cmb_nt').prop('data-id',`nt_0`);
+    $('#cmb_nt').prop(`data-nm`,`<div class="icon inline" style="${stca[st]}">${stia[st]}</div> 管轄院`);
+    // $('#cmb_nt').html(`<div class="icon inline" style="${stca[st]}">${stia[st]}</div> 管轄院`);
   } else {
     let result = sender_list_objs.objs[st].filter(({obj_id}) => obj_id === Number(sender))[0];
 
-    $('#cmb_nt').html(`<div class="icon inline" style="${stca[st]}">${stia[st]}</div> ${user_name==MSD_smn?`${stna[st]}${result.obj_id}`:result.obj_name}`);
+    $('#cmb_nt').prop('data-id',`nt_${sender}`);
+    $('#cmb_nt').prop(`data-nm`,`<div class="icon inline" style="${stca[st]}">${stia[st]}</div> ${user_name==MSD_smn?`${stna[st]}${result.obj_id}`:result.obj_name}`);
+
+    // $('#cmb_nt').html(`<div class="icon inline" style="${stca[st]}">${stia[st]}</div> ${user_name==MSD_smn?`${stna[st]}${result.obj_id}`:result.obj_name}`);
 
     $('#map_list .cell').css('pointer-events','all');
     $(`#map_list_cell_${sender}`).css('pointer-events','none');
@@ -17586,6 +17590,8 @@ if ($('#page_js_status').prop('checked') == false) {
           }
         });
       });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-analytics"></i></div>成績分析`);
     })();
 
     const desc_init = async () => {

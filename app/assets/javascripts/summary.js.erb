@@ -170,8 +170,8 @@ var desc_function = (data,so) => {
             <div class="box">
               <div class="cell_title cell_title_r text_overflow">
                 今月のトレンド
-                <div class="icon inline">
-                  <i class="fas fa-question-circle help_tips" data-title="セルのクリック" data-help="セルをクリックするとトレンドセクションの値が更新されます。"></i>
+                <div class="icon inline  help_tips" data-title="セルのクリック" data-help="セルをクリックするとトレンドセクションの値が更新されます。">
+                  <i class="fas fa-question"></i>
                 </div>
 
                 <div class="link_base">
@@ -195,8 +195,8 @@ var desc_function = (data,so) => {
             <div class="box">
               <div class="cell_title text_overflow">
                 総合売上の予測
-                <div class="icon inline">
-                  <i class="fas fa-question-circle help_tips" data-title="売上予測" data-help="過去30日以内の曜日別平均値が予測値として表示されます。"></i>
+                <div class="icon inline help_tips" data-title="売上予測" data-help="過去30日以内の曜日別平均値が予測値として表示されます。">
+                  <i class="fas fa-question"></i>
                 </div>
                 <div class="link_base">
                   <a href="/sales_forecast?s_type=1">
@@ -4141,6 +4141,8 @@ if ($('#page_js_status').prop('checked') == false) {
           }
         });
       });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-desktop"></i></div>今月の概要`);
     })();
 
     const desc_init = async () => {

@@ -1,4 +1,4 @@
-<div class="page_base table_page_base">
+<div class="page_base cell_page_base">
   <div class="center_top_base">
     <div class="setting_box inline">
       <input class="input_label" type="checkbox" id="setting_ios">
@@ -6,13 +6,11 @@
         <div class="cell inline"><i class="fas fa-cogs"></i></div>
         <div class="cell inline">--</div>
         <div class="cell inline">--</div>
-        <div class="cell inline"><i class="fas fa-balance-scale-right"></i></div>
-        <div class="cell inline">--</div>
         <div class="cell cell_indi inline"><i class="fas fa-caret-down"></i></div>
       </label>
       <div class="modal">
         <div class="modal_title">
-          <i class="fas fa-cogs"></i> 期間と比較の設定
+          <i class="fas fa-cogs"></i> 期間の設定
           <label for="setting_ios"><i class="fas fa-times"></i></label>
         </div>
         <form onsubmit="query_function(); return false;" name="query_form">
@@ -30,6 +28,22 @@
           </div>
           <div class="box">
             <div class="content">
+              <div class="oibb">
+                <div class="select_box">
+                  <select id="segment_select">
+                    <option value="0">エリア</option>
+                    <option value="1" selected>店舗</option>
+                    <option value="2">担当者</option>
+                  </select>
+                  <div class="icon_base">
+                    <i class="fas fa-caret-down"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="content">
               <div class="pibb">
                 <input class="pi_" type="date" name="pi_s" id="pi_s" required>
                 <div class="border">~</div>
@@ -38,22 +52,7 @@
               <div class="pilbb" id="pilb_pi_"></div>
             </div>
           </div>
-          <div class="box">
-            <div class="content">
-              <div class="box_con">
-                <input type="checkbox" name="cpt" id="cpt">
-                比較 <label for="cpt"></label>
-                <div class="con_content">
-                  <div class="pibb">
-                    <input class="cpi_" type="date" name="cpi_s" id="cpi_s">
-                    <div class="border">~</div>
-                    <input class="cpi_" type="date" name="cpi_e" id="cpi_e">
-                  </div>
-                  <div class="pilbb" id="pilb_cpi_"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div class="box_submit">
             <div class="content">
               <div class="submit_base">
@@ -65,24 +64,9 @@
       </div>
     </div>
   </div>
-  <div class="content_base">
-    <div class="select_box">
-      <select id="segment_select">
-        <option value="0">エリア</option>
-        <option value="1">店舗</option>
-        <option value="2">担当者</option>
-      </select>
-      <div class="icon_base">
-        <i class="fas fa-caret-down"></i>
-      </div>
-    </div>
-    <div class="table_base" id="table_list">
-      <div class="loading_base inline">
-        <i class="fad fa-spinner-third fa-spin"></i>
-      </div>
-    </div>
+  <div class="content_base" id="content_base">
   </div>
 </div>
 
 <input type="hidden" id="page_js_status">
-<%= javascript_include_tag 'remarkable_points.js', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'trends_line.js', 'data-turbolinks-track': 'reload' %>

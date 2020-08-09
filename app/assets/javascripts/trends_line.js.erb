@@ -1,0 +1,508 @@
+var user_name = getDOM('user_name').value;
+
+var desc_function = (sender,so) => {
+  let pt = so.pt;
+  let ps = so.ps;
+  let pe = so.pe;
+  let st = so.st;
+  let trend = sender.trend;
+  let objs = sender.objs;
+  let pa = period_map(ps,pe,pt);
+
+  const desc_content_leveling = () => {
+    $('#content_base').html(
+      `
+      <div class="section">
+        <div class="cells_box">
+          <div class="switch_base">
+            <input type="radio" name="cti_" id="cti_0" checked>
+            <label for="cti_0">総合売上</label>
+            <input type="radio" name="cti_" id="cti_1">
+            <label for="cti_1">自費売上</label>
+            <input type="radio" name="cti_" id="cti_2">
+            <label for="cti_2">来院数</label>
+            <input type="radio" name="cti_" id="cti_3">
+            <label for="cti_3">新患数</label>
+          </div>
+          <div class="cell cell_4x1 inline">
+          </div>
+          <div class="cell cell_1x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">サマリ① (基底単位)</div>
+              <div class="content _bar_box_">
+                <div class="base" id="summary_0_base">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_1x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">サマリ②</div>
+              <div class="content _bar_box_">
+                <div class="base" id="summary_1_base">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_2x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">
+                トレンド
+                <span style="font-size:.7rem;color:#333;">※表示可能オブジェクトは5つまで</span>
+              </div>
+              <div class="content _trend_">
+                <div class="base">
+                  <div class="graph_wrap">
+                    <canvas id="trend_line" width="350" height="100"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell cell_4x1 inline">
+            <div class="box">
+              <div class="cell_title text_overflow">
+                トレンド表リスト
+                <div class="icon inline  help_tips" data-title="オブジェクトのチェック" data-help="テーブル左側のチェックボックスを入力すると対応するデータのトレンドを閲覧できます。">
+                <i class="fas fa-question"></i>
+                </div>
+              </div>
+              <div class="content _segment_">
+                <div class="table_base table_base2 table_base_th table_base_td_th" id="obj_table_base">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      `
+    );
+  }
+  const desc_dynamic_sections = (ct) => {
+    const desc_summary = () => {
+      let data_0 = trend.min_val(`data_${ct}`);
+      let data_1 = trend.max_val(`data_${ct}`);
+      let data_2 = trend.median_val(`data_${ct}`);
+      let data_3 = (trend.sum_val(`data_${ct}`)).to_devide(trend.length);
+      let data_4 = data_1 - data_0;
+      let data_5 = data_1 - data_3;
+      let data_6 = data_3 - data_0;
+      let data_7 = data_5 - data_6;
+      let data_8 = data_3.to_perate(data_2);
+
+      $('#summary_0_base').html(
+        `
+        <div class="row">
+          <div class="indi">最小値</div>
+          <div class="content">
+            <div class="amount">${data_0.toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="indi">最大値</div>
+          <div class="content">
+            <div class="amount">${data_1.toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="indi">中央値</div>
+          <div class="content">
+            <div class="amount">${data_2.toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="indi">平均</div>
+          <div class="content">
+            <div class="amount">${data_3.toLocaleString()}</div>
+          </div>
+        </div>
+        `
+      );
+      $('#summary_1_base').html(
+        `
+        <div class="row">
+          <div class="indi">最大 - 最小 ①</div>
+          <div class="content">
+            <div class="amount">${data_4.toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="indi">最大 - 平均 ②</div>
+          <div class="content">
+            <div class="amount">${data_5.toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="indi">平均 - 最小 ③</div>
+          <div class="content">
+            <div class="amount">${data_6.toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="indi">② - ③</div>
+          <div class="content">
+            <div class="amount">${data_7.toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="indi">平均/中央値</div>
+          <div class="content">
+            <div class="amount">${data_8.toLocaleString()}%</div>
+          </div>
+        </div>
+        `
+      );
+    }
+    const desc_trend = () => {
+      let tpl = [];
+
+      let graph_data = [];
+
+      let data_total_arr = [];
+      let data_ave_arr = [];
+      const desc_leveling = () => {
+        (() => {
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
+
+            tpl.push(convert_pl(label,idx,pt));
+
+            let rslt = trend.filter(({period}) => period == label);
+            let data = rslt.sum_val(`data_${ct}`);
+            let ave = data.to_Perate(objs.length);
+
+            data_total_arr.push(data);
+            data_ave_arr.push(ave);
+          }
+
+          graph_data = [{
+            label:"合計",
+            data:data_total_arr,
+            borderColor:"#ddd",
+            borderWidth:4,
+            fill:false,
+            yAxisID: "y-axis-0",
+            cubicInterpolationMode: 'monotone',
+            lineTension: 0,
+            hidden:true
+          },{
+            label:"平均",
+            data:data_ave_arr,
+            borderColor:"#ddd",
+            borderWidth:2,
+            fill:false,
+            yAxisID: "y-axis-0",
+            cubicInterpolationMode: 'monotone',
+            lineTension: 0
+          }];
+        })();
+        (() => {
+          let sum = 0;
+          objs.forEach((obj) => {
+            let bool = $(`#ot_input_${obj.obj_id}`).prop('checked');
+            if (bool && sum < 5) {
+              sum += 1;
+              let data_obj_arr = [];
+
+              for (let idx = 0;idx < pa.length;idx++) {
+                let label = pa[idx];
+
+                let result = trend.filter(({period}) => period == label);
+                let rslt = result.filter(({obj_id}) => obj_id == obj.obj_id);
+                let data = rslt.sum_val(`data_${ct}`);
+
+                data_obj_arr.push(data);
+              }
+
+              graph_data.push({
+                label:obj.obj_name,
+                data:data_obj_arr,
+                borderColor:random_color[sum],
+                borderWidth:2,
+                fill:false,
+                yAxisID: "y-axis-0",
+                cubicInterpolationMode: 'monotone',
+                lineTension: 0
+              });
+            } else {
+
+            }
+          });
+        })();
+      }
+      const desc_graph = () => {
+        let graph_option = {
+          maintainAspectRatio:true,
+          responsive: true,
+          legend:{
+            labels:{
+              fontSize:10,
+              boxWidth:24
+            }
+          },
+          title: {display:false,fontSize:12,text:"",},
+          elements: {
+            point:{radius:0}
+          },
+          scales: {
+            yAxes: [{
+              id: "y-axis-0",
+              type: "linear",
+              position: "left",
+              gridLines: {
+                display:true,
+                drawBorder: false,
+                zeroLineColor:"#eee",
+                color:"#eee"
+              },
+              ticks: {
+                min:0,
+                autoSkip: true,
+                fontSize:8,
+                maxTicksLimit:4,
+                callback: function(label, index, labels) {
+                  return label.str_jp();
+                }
+              },
+            }],
+            xAxes: [{
+              barPercentage: .9,
+              categoryPercentage:1,
+              ticks: {
+                maxRotation: 0,
+                minRotation: 0,
+                min:0,
+                fontSize:8,
+                autoSkip: true,
+                maxTicksLimit:8,
+              },
+              gridLines: {
+                display:false,
+                drawBorder: false,
+              },
+              scaleLabel: {
+                display: false,
+              }
+            }]
+          },
+          tooltips: {
+            bodySpacing:5,
+            titleFontSize:12.5,
+            bodyFontSize:15,
+            intersect:false,
+            axis:'x',
+            mode:'index',
+            callbacks: {
+              title:function(t,d) {
+                let index = t[0].index;
+                let period = pa[index];
+                period = period == undefined ? `0000-00-00` : period;
+                return `${period.str_date(`.`)}`;
+              },
+              label:function(t,d) {
+                let index = t.index;
+                let idx = t.datasetIndex;
+                if (idx == 1 || idx == 3) {return;}
+                let amount = t.yLabel;
+                let ar = ["当期","","比較",""];
+                return `${ar[idx]} ${amount.toLocaleString()}`;
+              }
+            }
+          }
+        }
+        trend_line.data = {
+          labels:tpl,
+          datasets:graph_data
+        };
+        trend_line.options = graph_option;
+        trend_line.update();
+      }
+      desc_leveling();
+      desc_graph();
+    }
+    const desc_table = () => {
+      let total_ap = ``;
+      let ap = ``;
+      (() => {
+        let ap_total = ``;
+        let ap_ave = ``;
+
+        let data_total = trend.sum_val(`data_${ct}`);
+        let data_ave = 0;
+        for (let idx = 0;idx < pa.length;idx++) {
+          let label = pa[idx];
+          let rslt = trend.filter(({period}) => period == label);
+
+          let data = rslt.sum_val(`data_${ct}`);
+          let ave = data.to_Perate(objs.length);
+          data_ave += ave;
+          ap_total += `<th>${data.toLocaleString()}</th>`;
+          ap_ave += `<th>${ave.toLocaleString()}</th>`;
+        }
+
+        total_ap =
+        `
+        <tr>
+          <th class="checkbox">
+            <input type="checkbox" name="ot_input_" id="ot_input_total" checked>
+            <label for="ot_input_total" class="disabled"></label>
+          </th>
+          <th>全体</th>
+          <th>${data_total.toLocaleString()}</th>
+          ${ap_total}
+        </tr>
+        <tr>
+          <th class="checkbox">
+            <input type="checkbox" name="ot_input_" id="ot_input_ave" checked>
+            <label for="ot_input_ave" class="disabled"></label>
+          </th>
+          <th>平均</th>
+          <th>${data_ave.toLocaleString()}</th>
+          ${ap_ave}
+        </tr>
+        `;
+      })();
+      objs.forEach((obj) => {
+        let result = trend.filter(({obj_id}) => obj_id == obj.obj_id);
+
+        let app = ``;
+        for (let idx = 0;idx < pa.length;idx++) {
+          let label = pa[idx];
+          let rslt = result.filter(({period}) => period == label);
+
+          let data = rslt.sum_val(`data_${ct}`);
+
+          app += `<td>${data.toLocaleString()}</td>`;
+        }
+
+        let total = result.sum_val(`data_${ct}`);
+        ap +=
+        `
+        <tr>
+          <th class="checkbox">
+            <input type="checkbox" name="ot_input_" id="ot_input_${obj.obj_id}">
+            <label for="ot_input_${obj.obj_id}"></label>
+          </th>
+          <th>${obj.obj_name}</th>
+          <th>${total.toLocaleString()}</th>
+          ${app}
+        </tr>
+        `;
+      });
+
+      let tp = ``;
+      for (let idx = 0;idx < pa.length;idx++) {
+        let label = pa[idx];
+        tp += `<th>${label.str_date(`/`)}</th>`;
+      }
+
+      $('#obj_table_base').html(
+        `
+        <table id="obj_table">
+          <thead>
+            <tr>
+              <th>表示</th>
+              <th>名前</th>
+              <th>合計</th>
+              ${tp}
+            </tr>
+          </thead>
+          <tbody>
+            ${total_ap}
+            ${ap}
+          </tbody>
+        </table>
+        `
+      );
+      let table = $('#obj_table').DataTable({
+        displayLength:20,
+        lengthChange: false,
+        searching: true,
+        ordering: true,
+        info: true,
+        paging: true,
+        order:[[2,"desc"]]
+      });
+    }
+    desc_table();
+    desc_summary();
+    desc_trend();
+
+    $(document).off('input','input[name="ot_input_"]').on('input','input[name="ot_input_"]',function() {
+      desc_trend();
+    });
+  }
+
+  desc_content_leveling();
+  const desc_graph_init = (sender1,sender2,sender3,sender4) => {
+    eval(`try {${sender1}.destroy();} catch(err) {}`);
+    eval(`${sender2}.canvas.height = 100;`);
+    eval(`${sender1} = new Chart(${sender2},{type:'${sender3}',data:{labels:"",datasets:"",},plugins:"",})`);
+  }
+
+  let trend_line;
+
+  let trend_line_ctx = document.getElementById('trend_line').getContext('2d');
+  desc_graph_init("trend_line","trend_line_ctx",'crossed_lines');
+
+
+  $('#cti_0').prop('checked',true);
+  desc_dynamic_sections(0);
+  $(document).off('input','input[name="cti_"]').on('input','input[name="cti_"]',function() {
+    let index = $('input[name="cti_"]').index(this);
+    desc_dynamic_sections(Number(index));
+  });
+}
+var query_function = async () => {
+  let form = document.forms['query_form'];
+  let pt = Number(form.elements['pt_'].value);
+  let ps = form.elements['pi_s'].value;
+  let pe = form.elements['pi_e'].value;
+  let st = $('#segment_select option:selected').prop('value');
+
+  (() => {
+    $('#setting_ios').prop('checked',false);
+    $('#setting_indi').html(
+      `
+      <div class="cell inline"><i class="fas fa-cogs"></i></div>
+      <div class="cell inline">${stna[Number(st) + 1]}別</div>
+      <div class="cell inline">${ptna[pt]}</div>
+      <div class="cell inline">${ps.str_date(`.`)} - ${pe.str_date(`.`)}</div>
+      <div class="cell cell_indi inline"><i class="fas fa-caret-down"></i></div>
+      `
+    );
+  })();
+
+  const sender_data = {pt:pt,ps:ps,pe:pe,st:st}
+  let result = await ajax_api_function("trend_lines",sender_data);
+  if (result.dataExists) {
+    desc_function(result.data,sender_data);
+  } else {
+    alert(`データ通信エラー:${result.reason}`);
+  }
+}
+
+if ($('#page_js_status').prop('checked') == false) {
+  $('#page_js_status').prop('checked',true);
+
+  $(document).ready(async function(){
+    (() => {
+      $('.left_bar_base a:eq(4) .cell').addClass('selected');
+      jQuery(function($) {
+        $.extend( $.fn.dataTable.defaults, {
+          language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+          }
+        });
+      });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-analytics"></i></div>トレンド比較`);
+    })();
+    const desc_init = async () => {
+      await psln_setter(0);
+      await psl_setter(0,"pi");
+      await query_function();
+    }
+    desc_init();
+  });
+}

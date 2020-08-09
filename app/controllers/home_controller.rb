@@ -4,26 +4,22 @@ class HomeController < ApplicationController
 
   def index
   end
-
   def index_sp
   end
-
   def summary
   end
-
   def achieve_summary
   end
-
   def remarkable_points
   end
-
+  def trends_line
+    @s_type = params[:s_type]
+  end
   def sales_forecast
     @s_type = params[:s_type]
   end
-
   def custom_field
   end
-
   def achieve_analytics
     @s_type = params[:st]
     @s_select = params[:ss]
@@ -37,16 +33,12 @@ class HomeController < ApplicationController
     @m_select = params[:ms]
     @m_id = params[:mi]
   end
-
   def random_stome
   end
-
   def customer_analytics
   end
-
   def customer_search
   end
-
   def customer
     @cid = params[:cid]
     @ptno = params[:ptno]

@@ -45,7 +45,7 @@ var desc_function = (data,so) => {
               <div class="cell_title text_overflow">トレンド</div>
               <div class="content _trend_">
                 <div class="base">
-                  <div class="graph_wrap graph_wrap_forecast">
+                  <div class="graph_wrap">
                     <canvas id="trend_line" width="350" height="100"></canvas>
                   </div>
                 </div>
@@ -431,7 +431,6 @@ var desc_function = (data,so) => {
         `;
 
       })();
-
       $('#obj_table_base').html(
         `
         <table id="obj_table">
@@ -451,7 +450,6 @@ var desc_function = (data,so) => {
         </table>
         `
       );
-
       let table = $('#obj_table').DataTable({
         columnDefs:[{type:'currency',targets:[1,2,3,4,5]}],
         displayLength:10,
@@ -535,7 +533,7 @@ if ($('#page_js_status').prop('checked') == false) {
   $('#page_js_status').prop('checked',true);
 
   $(document).ready(async function(){
-    $('.left_bar_base a:eq(4) .cell').addClass('selected');
+    $('.left_bar_base a:eq(5) .cell').addClass('selected');
 
     (() => {
       jQuery(function($) {
@@ -545,6 +543,8 @@ if ($('#page_js_status').prop('checked') == false) {
           }
         });
       });
+
+      $('#page_ttl_base').html(`<div class="icn inline"><i class="fas fa-forward"></i></div>今月の売上予測`);
 
       let s_type = (getDOM(`s_type`).value);
       $(`#obj_select option[value="${s_type}"]`).prop('selected',true);
