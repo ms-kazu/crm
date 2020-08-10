@@ -68,7 +68,7 @@ var desc_function = (sender,so) => {
                 </div>
               </div>
               <div class="content _segment_">
-                <div class="table_base table_base2 table_base_th table_base_td_th" id="obj_table_base">
+                <div class="table_base table_base2 table_base_th table_base_td_th table_base_long_th" id="obj_table_base">
                 </div>
               </div>
             </div>
@@ -393,7 +393,7 @@ var desc_function = (sender,so) => {
       let tp = ``;
       for (let idx = 0;idx < pa.length;idx++) {
         let label = pa[idx];
-        tp += `<th>${label.str_date(`/`)}</th>`;
+        tp += `<th class="width_7">${convert_pl(label,idx,pt)}</th>`;
       }
 
       $('#obj_table_base').html(
@@ -402,8 +402,8 @@ var desc_function = (sender,so) => {
           <thead>
             <tr>
               <th>表示</th>
-              <th>名前</th>
-              <th>合計</th>
+              <th class="width_7">名前</th>
+              <th class="width_7">合計</th>
               ${tp}
             </tr>
           </thead>

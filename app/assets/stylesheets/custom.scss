@@ -93,6 +93,11 @@ $border_color:#e6e6e6;
       overflow: hidden;
       border-top:0;
     }
+    &.table_base_long_th {
+      table thead th.width_7 {
+        min-width: 7rem !important;
+      }
+    }
     &.table_base_th {
       table {
         table-layout: auto !important;

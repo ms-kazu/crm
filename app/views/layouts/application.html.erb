@@ -26,18 +26,16 @@
 
     <div class="header_base">
       <div class="left_header">
-        <a href="/home">
-          <div class="logo_base inline">
-            <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
-            <div class="text_base inline">Medical CRM</div>
-          </div>
+        <a href="/home" class="logo_base inline">
+          <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
+          <div class="text_base inline">Medical CRM</div>
         </a>
 
         <label class="text_overflow inline" for="acounts_modal_input">
           <%= @inc_name %>
         </label>
         <% if @name == "msd_system_master" %>
-        <div class="n_l_b">
+        <div class="n_l_b inline">
           <input type="checkbox" id="acounts_modal_input">
           <div class="acount_modal inline" id="acount_modal">
             <div class="cover" id="acount_cover">
