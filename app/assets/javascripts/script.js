@@ -315,7 +315,7 @@ const ajax_api_function = (sender1,sender2) => {
           processData: false,
           contentType: false,
           dataType: 'json',
-          timeout:60000,
+          timeout:120000,
           error: () => {
             ajax_api_progress = false;
             console.timeEnd(`DB通信速度`);
