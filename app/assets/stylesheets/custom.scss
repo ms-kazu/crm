@@ -5206,6 +5206,9 @@ html {
   .page_base {
     margin-left:0 !important;
     padding: .25rem !important;
+    &.achieve_analytics_base {
+      margin-left:0 !important;
+    }
     .center_top_base {
       left:0 !important;
       white-space: nowrap;
