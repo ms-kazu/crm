@@ -2,9 +2,8 @@ var user_name = getDOM('user_name').value;
 
 var desc_function = (data,so) => {
   let objs = data.data.obj;
-  let sum_obj = data.data.summary;
-  let obj_m = data.data.m;
-  let obj_mmm = data.data.mmm;
+  let data_m = data.data.m;
+  let data_mmm = data.data.mmm;
   let opens = data.data.opens;
 
   let st = so.st;
@@ -18,7 +17,7 @@ var desc_function = (data,so) => {
   let pa_m = period_map(p0,pe,0);
   let pa_mmm = period_map(p2,pe,0);
   let pa_arr = [pa_m,pa_mmm];
-  let obj_arr = [obj_m,obj_mmm];
+  let data_arr = [data_m,data_mmm];
 
   const desc_content_leveling = () => {
     $('#content_base').html(
@@ -68,32 +67,25 @@ var desc_function = (data,so) => {
   }
   const desc_static_sections = (ti) => {
     let pa = pa_arr[ti];
-    let obj = obj_arr[ti];
+    let datas = data_arr[ti];
     let week_objs = [];
-    let accuracy = sum_obj.length.to_perate((sum_obj.length + period_map(p1,pe,0).length - 1)).to_Perate(1);
+    let accuracy = (period_map(p0,p1,0).length).to_perate(pa.length).to_Perate(1);
 
     let month_data_0 = 0;
     let month_data_1 = 0;
     let month_data_2 = 0;
-    let month_data_3 = obj.filter(({period}) => period >= ts).sum_val('data_0');
-    let month_data_4 = obj.filter(({period}) => period >= ts).sum_val('data_1');
-    let month_data_5 = obj.filter(({period}) => period >= ts).sum_val('data_2');
+    let month_data_3 = datas.filter(({period}) => period >= ts).sum_val('data_0');
+    let month_data_4 = datas.filter(({period}) => period >= ts).sum_val('data_1');
+    let month_data_5 = datas.filter(({period}) => period >= ts).sum_val('data_2');
 
     const desc_week_leveling = () => {
       for (let i = 0;i < 7;i++) {
-        let result = sum_obj.filter(({week}) => week == i);
-        let data_0 = result.sum_val('data_0');
-        let data_1 = result.sum_val('data_1');
-        let data_2 = result.sum_val('data_2');
-
-        let ave_0 = data_0.to_devide(result.length);
-        let ave_1 = data_1.to_devide(result.length);
-        let ave_2 = data_2.to_devide(result.length);
+        let result = datas.filter((data) => data.period <= p1 && data.week == i);
 
         week_objs.push({
-          ave_0:ave_0,
-          ave_1:ave_1,
-          ave_2:ave_2
+          ave_0:result.sum_val('data_0').to_devide(result.length),
+          ave_1:result.sum_val('data_1').to_devide(result.length),
+          ave_2:result.sum_val('data_2').to_devide(result.length)
         });
       }
     }
@@ -109,7 +101,7 @@ var desc_function = (data,so) => {
           let label = pa[idx];
           tpl.push(convert_pl(label,idx,0));
 
-          let result = obj.filter(({period}) => period == label);
+          let result = datas.filter(({period}) => period == label);
           let data_0 = result.sum_val('data_0');
           if (label <= p1) achieve_arr.push(data_0);
           else achieve_arr.push(null);
@@ -125,11 +117,25 @@ var desc_function = (data,so) => {
               let day = Number(label.split('-')[2]);
               let w = new Date(year,month,day).getDay();
 
-              let data_0 = week_objs[w].ave_0;
-              let data_1 = week_objs[w].ave_1;
-              let data_2 = week_objs[w].ave_2;
-              let data_up = (data_0 * (1+accuracy/100)).to_devide(1);
-              let data_down = (data_0 * (1-accuracy/100)).to_devide(1);
+              let data_0 = 0,data_1 = 0,data_2 = 0,data_up = 0,data_down = 0;
+              objs.forEach((cell) => {
+                let open = opens.filter((cel) => cel.period == label && cel.obj_id == cell.obj_id).sum_val(`status`) | 0;
+                if (st == 1 && open == 1) {
+
+                } else {
+                  let obj_data_0 = week_objs[w].ave_0;
+                  let obj_data_1 = week_objs[w].ave_1;
+                  let obj_data_2 = week_objs[w].ave_2;
+                  let obj_data_up = (obj_data_0 * (1+accuracy/100)).to_devide(1);
+                  let obj_data_down = (obj_data_0 * (1-accuracy/100)).to_devide(1);
+
+                  data_0 += obj_data_0;
+                  data_1 += obj_data_1;
+                  data_2 += obj_data_2;
+                  data_up += obj_data_up;
+                  data_down += obj_data_down;
+                }
+              });
 
               month_data_0 += data_0;
               month_data_1 += data_1;
@@ -342,7 +348,7 @@ var desc_function = (data,so) => {
       let accuracy_sum = 0;
 
       objs.forEach((cell) => {
-        let result = obj.filter(({obj_id}) => obj_id == cell.obj_id);
+        let result = datas.filter(({obj_id}) => obj_id == cell.obj_id);
         let result_open = opens.filter(({obj_id}) => obj_id == cell.obj_id);
 
         let obj_accuracy = result.length.to_perate((result.length + period_map(p1,pe,0).length - 1)).to_Perate(1);
@@ -410,9 +416,9 @@ var desc_function = (data,so) => {
         `;
       });
       (() => {
-        let achieve_0 = obj.filter(({period}) => period >= ts).sum_val('data_0');
-        let achieve_1 = obj.filter(({period}) => period >= ts).sum_val('data_1');
-        let achieve_2 = obj.filter(({period}) => period >= ts).sum_val('data_2');
+        let achieve_0 = datas.filter(({period}) => period >= ts).sum_val('data_0');
+        let achieve_1 = datas.filter(({period}) => period >= ts).sum_val('data_1');
+        let achieve_2 = datas.filter(({period}) => period >= ts).sum_val('data_2');
 
         let ave_accuracy = accuracy_sum.to_Perate(objs.length);
 

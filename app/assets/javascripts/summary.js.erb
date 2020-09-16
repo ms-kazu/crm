@@ -1241,6 +1241,328 @@ var desc_function = (data,so) => {
       desc__(0);
     }
     const desc_forecast = () => {
+      let fore0 = so.fore0;
+      let fore1 = so.fore1;
+      let fore2 = so.fore2;
+      let pa = period_map(fore0,fore2,0);
+      let datas = data.forecast_obj;
+      let objs = data.cl;
+      let opens = data.open_obj;
+      let accuracy = (period_map(fore0,pe,0).length - 1).to_perate(period_map(fore0,fore2,0).length).to_Perate(1);
+      let week_objs = [];
+
+      let month_data_0 = 0;
+
+      const desc_leveling = () => {
+        for (let i = 0;i < 7;i++) {
+          let result = datas.filter((data) => data.period < pe && data.week == i);
+
+          week_objs.push({
+            ave_0:result.sum_val('data_0').to_devide(result.length),
+            ave_1:result.sum_val('data_1').to_devide(result.length),
+            ave_2:result.sum_val('data_2').to_devide(result.length)
+          });
+        }
+      }
+      const desc_trend = () => {
+        let achieve_arr = [];
+        let forecast_arr = [];
+        let forecast_up_arr = [];
+        let forecast_down_arr = [];
+        let tpl = [];
+
+        const desc_leveling = () => {
+          for (let idx = 0;idx < pa.length;idx++) {
+            let label = pa[idx];
+
+            tpl.push(convert_pl(label,idx,0));
+
+            let result = datas.filter(({period}) => period == label);
+            let data_0 = result.sum_val('data_0');
+            if (label <= fore1) achieve_arr.push(data_0);
+            else achieve_arr.push(null);
+
+            if (label >= fore1) {
+              if (label == fore1) {
+                forecast_arr.push(data_0);
+                forecast_up_arr.push(data_0);
+                forecast_down_arr.push(data_0);
+              } else {
+                let year = label.split('-')[0];
+                let month = Number(label.split('-')[1]) - 1;
+                let day = Number(label.split('-')[2]);
+                let w = new Date(year,month,day).getDay();
+
+                let data_0 = 0,data_up = 0,data_down = 0;
+                objs.forEach((cell) => {
+                  let open = opens.filter((cel) => cel.period == label && cel.obj_id == cell.obj_id).sum_val(`status`) | 0;
+                  if (open == 1) {
+
+                  } else {
+                    let obj_data_0 = week_objs[w].ave_0;
+                    let obj_data_up = (obj_data_0 * (1+accuracy/100)).to_devide(1);
+                    let obj_data_down = (obj_data_0 * (1-accuracy/100)).to_devide(1);
+
+                    data_0 += obj_data_0;
+                    data_up += obj_data_up;
+                    data_down += obj_data_down;
+                  }
+                });
+
+                month_data_0 += data_0;
+
+                forecast_arr.push(data_0);
+                forecast_up_arr.push(data_up);
+                forecast_down_arr.push(data_down);
+              }
+            } else {
+              forecast_arr.push(null);
+              forecast_up_arr.push(null);
+              forecast_down_arr.push(null);
+            }
+          }
+        }
+        const desc_graph = () => {
+          let graph_data = [{
+            label:`実績値`,
+            data:achieve_arr,
+            borderColor:"rgb(18,83,164)",
+            borderWidth:1.5,
+            pointRadius:0,
+            pointBackgroundColor:"#fff",
+            fill:false,
+            yAxisID: "y-axis-0",
+            cubicInterpolationMode: 'monotone',
+            lineTension: 0
+          },{
+            label:`予測推移`,
+            data:forecast_arr,
+            borderColor:"rgb(18,83,164)",
+            borderWidth:1.5,
+            pointRadius:0,
+            borderDash: [5,3],
+            pointBackgroundColor:"#fff",
+            fill:false,
+            yAxisID: "y-axis-0",
+            cubicInterpolationMode: 'monotone',
+            lineTension: 0
+          },{
+            label:`上方修正`,
+            data:forecast_up_arr,
+            backgroundColor: "rgba(69,165,245,.2)",
+            borderColor:'rgba(69,165,245,.8)',
+            borderWidth:1.5,
+            pointRadius:0,
+            borderDash: [4,2],
+            fill:"1",
+            yAxisID: "y-axis-0",
+            cubicInterpolationMode: 'monotone',
+            lineTension: 0
+          },{
+            label:`下方修正`,
+            data:forecast_down_arr,
+            backgroundColor:"rgba(242,100,100,.2)",
+            borderColor:'rgba(242,100,100,.8)',
+            borderWidth:1.5,
+            pointRadius:0,
+            borderDash: [4,2],
+            fill:"1",
+            yAxisID: "y-axis-0",
+            cubicInterpolationMode: 'monotone',
+            lineTension: 0
+          }];
+          let graph_option = {
+            maintainAspectRatio:true,
+            responsive: true,
+            legend:{labels:{fontSize:10,boxWidth:12}},
+            title: {display:false,fontSize:12,text:"",},
+            elements: {
+              point:{radius:0}
+            },
+            scales: {
+              yAxes: [{
+                id: "y-axis-0",
+                type: "linear",
+                position: "left",
+                gridLines: {
+                  display:true,
+                  drawBorder: false,
+                  zeroLineColor:"#eee",
+                  color:"#eee"
+                },
+                ticks: {
+                  min:0,
+                  autoSkip: true,
+                  fontSize:8,
+                  mirror:true,
+                  maxTicksLimit:4,
+                  callback: function(label, index, labels) {
+                    return label.str_jp();
+                  }
+                },
+              }],
+              xAxes: [{
+                barPercentage: .9,
+                categoryPercentage:1,
+                ticks: {
+                  maxRotation: 0,
+                  minRotation: 0,
+                  min:0,
+                  fontSize:8,
+                  autoSkip: true,
+                  maxTicksLimit:8,
+                },
+                gridLines: {
+                  display:false,
+                  drawBorder: false,
+                },
+                scaleLabel: {
+                  display: false,
+                }
+              }]
+            },
+            tooltips: {
+              bodySpacing:5,
+              titleFontSize:12.5,
+              bodyFontSize:15,
+              intersect:false,
+              axis:'x',
+              mode:'index',
+              callbacks: {
+                title:function(t,d) {
+                  let index = t[0].index;
+                  let period = pa[index];
+                  period = period == undefined ? `0000-00-00` : period;
+                  return `${period.str_date(`.`)}`;
+                },
+                label:function(t,d) {
+                  let idx = t.datasetIndex;
+                  let amount = t.yLabel;
+                  let ar = ["実績","予測推移","上方修正","下方修正"];
+                  return `${ar[idx]} ${amount.toLocaleString()}`;
+                }
+              }
+            }
+          }
+          forecast_line.data = {
+            labels:tpl,
+            datasets:graph_data
+          };
+          forecast_line.options = graph_option;
+          forecast_line.update();
+        }
+
+        desc_leveling();
+        desc_graph();
+      }
+      const desc_table = () => {
+        $('#forecast_table_base').html(``);
+        let ap = ``;
+
+        let obj = data.forecast_obj;
+
+        let zentai = obj.filter(({period}) => period >= ps).sum_val('data_0');
+        let all_yosoku = 0;
+        let accuracy_sum = 0;
+        objs.forEach((cell) => {
+          let result = obj.filter(({obj_id}) => obj_id == cell.obj_id);
+          let result_open = opens.filter(({obj_id}) => obj_id == cell.obj_id);
+
+          let obj_accuracy = result.length.to_perate((result.length + period_map(fore1,fore2,0).length - 1)).to_Perate(1);
+          accuracy_sum += obj_accuracy;
+
+          let ave_0_arr = [];
+          for (let i = 0;i < 7;i++) {
+            let rslt = result.filter(({week}) => week == i);
+            let data_0 = rslt.sum_val('data_0');
+            ave_0_arr.push(data_0.to_devide(rslt.length));
+          }
+          let achieve_0 = result.filter(({period}) => period >= ps).sum_val('data_0');
+          let forecast_0 = 0;
+          pa.forEach((label) => {
+            if (label > fore1) {
+              let rslt_open = result_open.filter(({period}) => period == label);
+              let status = rslt_open.sum_val(`status`);
+
+              if (status == 1) {
+                let data_0 = 0;
+                forecast_0 += 0;
+              } else {
+                let year = label.split('-')[0];
+                let month = Number(label.split('-')[1]) - 1;
+                let day = Number(label.split('-')[2]);
+                let w = new Date(year,month,day).getDay();
+
+                let data_0 = ave_0_arr[w];
+                forecast_0 += data_0;
+              }
+            }
+          });
+
+          all_yosoku += achieve_0 + forecast_0;
+          ap +=
+          `
+          <tr>
+            <th>${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}</th>
+            <td>¥${achieve_0.toLocaleString()}</td>
+            <td>¥${(achieve_0 + forecast_0).toLocaleString()}</td>
+            <td>${obj_accuracy}%</td>
+          </tr>
+          `;
+        });
+
+        (() => {
+          let ave_accuracy = accuracy_sum.to_Perate(objs.length);
+
+          ap +=
+          `
+          <tr>
+            <th>全体集計予測</th>
+            <th>¥${zentai.toLocaleString()}</th>
+            <th>¥${(zentai + month_data_0).toLocaleString()}</th>
+            <td>${accuracy}%</td>
+          </tr>
+          <tr>
+            <th>個別集計予測</th>
+            <th>¥${zentai.toLocaleString()}</th>
+            <th>¥${all_yosoku.toLocaleString()}</th>
+            <td>${ave_accuracy}%</td>
+          </tr>
+          `;
+        })();
+
+        $('#forecast_table_base').html(
+          `
+          <table id="forecast_table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>今月 実績値</th>
+                <th>月末予測</th>
+                <th>精度</th>
+              </tr>
+            </thead>
+            <tbody>${ap}</tbody>
+          </table>
+          `
+        );
+        let table = $('#forecast_table').DataTable({
+          columnDefs:[{type:'currency',targets:[1,2]}],
+          displayLength:7,
+          lengthChange: false,
+          searching: true,
+          ordering: true,
+          info: true,
+          paging: true,
+          order:[[2,"desc"]]
+        });
+      }
+
+      desc_leveling();
+      desc_trend();
+      desc_table();
+    }
+    const desc_forecasta = () => {
       let fore1 = so.fore1;
       let fore2 = so.fore2;
       let pa = period_map(ps,fore2,0);
@@ -1249,6 +1571,7 @@ var desc_function = (data,so) => {
       let opens = data.open_obj;
       let accuracy = obj.length.to_perate((obj.length + period_map(fore1,fore2,0).length - 1)).to_Perate(1);
       let week_objs = [];
+      console.log(obj);
 
       let month_data_0 = 0;
 
