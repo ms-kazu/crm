@@ -200,7 +200,8 @@ var desc_function = (sender,so) => {
           let sum = 0;
           objs.forEach((obj) => {
             let bool = $(`#ot_input_${obj.obj_id}`).prop('checked');
-            if (bool && sum < 5) {
+            let length = trend.filter(({obj_id}) => obj_id == obj.obj_id);
+            if (bool && sum < 5 && length.length >= 1) {
               sum += 1;
               let data_obj_arr = [];
 
@@ -224,8 +225,6 @@ var desc_function = (sender,so) => {
                 cubicInterpolationMode: 'monotone',
                 lineTension: 0
               });
-            } else {
-
             }
           });
         })();

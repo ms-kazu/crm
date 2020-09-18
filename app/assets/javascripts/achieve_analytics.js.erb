@@ -17747,29 +17747,45 @@ if ($('#page_js_status').prop('checked') == false) {
             let ap_ar = ``;
             let ap_cl = ``;
             let ap_sf = ``;
+            let ap_ar_in = ``;
+            let ap_cl_in = ``;
+            let ap_sf_in = ``;
+            let ap_ar_out = ``;
+            let ap_cl_out = ``;
+            let ap_sf_out = ``;
 
-            console.log(ars.data);
-            console.log(cls.data);
-            ars.data.forEach((cel,i) => {
-              ap_ar += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
+            ars.data.filter(({enabled}) => enabled == 1).forEach((cel,i) => {
+              ap_ar_in += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
 
-              ap_cl += `<optgroup label="エリア-${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}"></optgroup>`;
-              ap_sf += `<optgroup label="エリア-${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}"></optgroup>`;
-              let rslt_ = cls.data.filter(({area_id}) => area_id == cel.obj_id);
+              ap_cl_in += `<optgroup label="エリア-${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}">`;
+              ap_sf_in += `<optgroup label="エリア-${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}">`;
+              let rslt_ = cls.data.filter(({enabled}) => enabled == 1).filter(({area_id}) => area_id == cel.obj_id);
               rslt_.forEach((cell,idx) => {
-                ap_cl += `<option value="${cell.obj_id}">${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}</option>`;
+                ap_cl_in += `<option value="${cell.obj_id}">${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}</option>`;
 
-                ap_sf += `<optgroup label="店舗-${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}"></optgroup>`;
-                let rslt__ = sfs.data.filter(({clinic_id}) => clinic_id == cell.obj_id);
+                ap_sf_in += `<optgroup label="店舗-${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}">`;
+                let rslt__ = sfs.data.filter(({enabled}) => enabled == 1).filter(({clinic_id}) => clinic_id == cell.obj_id);
                 rslt__.forEach((celll,idx) => {
-                  ap_sf += `<option value="${celll.obj_id}">${user_name==MSD_smn?`担当者${celll.obj_id}`: celll.obj_name}</option>`;
+                  ap_sf_in += `<option value="${celll.obj_id}">${user_name==MSD_smn?`担当者${celll.obj_id}`: celll.obj_name}</option>`;
                 });
+                ap_sf_in += `</optgroup>`;
               });
+              ap_cl_in += `</optgroup>`;
+              ap_sf_in += `</optgroup>`;
+            });
+            ars.data.filter(({enabled}) => enabled == 0).forEach((cel,i) => {
+              ap_ar_out += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
+            });
+            cls.data.filter(({enabled}) => enabled == 0).forEach((cel,i) => {
+              ap_cl_out += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
+            });
+            sfs.data.filter(({enabled}) => enabled == 0).forEach((cel,i) => {
+              ap_sf_out += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
             });
 
-            $('#filter_area_0').html(ap_ar);
-            $('#filter_clinic_0').html(ap_cl);
-            $('#filter_staff_0').html(ap_sf);
+            ap_ar = `<optgroup label="稼働中">${ap_ar_in}</optgroup><optgroup label="撤退・閉鎖">${ap_ar_out}</optgroup>`;
+            ap_cl = `<optgroup label="稼働中">${ap_cl_in}</optgroup><optgroup label="休業・閉店">${ap_cl_out}</optgroup>`;
+            ap_sf = `<optgroup label="稼働中">${ap_sf_in}</optgroup><optgroup label="休職・退職">${ap_sf_out}</optgroup>`;
 
             (async () => {
               let st = getDOM('s_type').value;

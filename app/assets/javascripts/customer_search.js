@@ -1053,22 +1053,36 @@ if ($('#page_js_status').prop('checked') == false) {
       if (cls.dataExists && sfs.dataExists) {
         let ap_cl = ``;
         let ap_sf = ``;
+        let ap_cl_in = ``;
+        let ap_sf_in = ``;
+        let ap_cl_out = ``;
+        let ap_sf_out = ``;
 
-        cls.data.forEach((cell,i) => {
-          ap_cl += `<option value="${cell.obj_id}">${cell.obj_name}</option>`;
+        cls.data.filter(({enabled}) => enabled == 1).forEach((cell,idx) => {
+          ap_cl_in += `<option value="${cell.obj_id}">${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}</option>`;
 
-          ap_sf += `<optgroup label="${cell.obj_name}"></optgroup>`;
-          let result = sfs.data.filter(({clinic_id}) => clinic_id == cell.obj_id);
-          result.forEach((cel,idx) => {
-            ap_sf += `<option value="${cel.obj_id}">${cel.obj_name}</option>`;
+          ap_sf_in += `<optgroup label="店舗-${user_name==MSD_smn?`店舗${cell.obj_id}`: cell.obj_name}">`;
+          let rslt__ = sfs.data.filter(({enabled}) => enabled == 1).filter(({clinic_id}) => clinic_id == cell.obj_id);
+          rslt__.forEach((celll,idx) => {
+            ap_sf_in += `<option value="${celll.obj_id}">${user_name==MSD_smn?`担当者${celll.obj_id}`: celll.obj_name}</option>`;
           });
+          ap_sf_in += `</optgroup>`;
         });
+        cls.data.filter(({enabled}) => enabled == 0).forEach((cel,i) => {
+          ap_cl_out += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
+        });
+        sfs.data.filter(({enabled}) => enabled == 0).forEach((cel,i) => {
+          ap_sf_out += `<option value="${cel.obj_id}">${user_name==MSD_smn?`エリア${cel.obj_id}`: cel.obj_name}</option>`;
+        });
+
+        ap_cl = `<optgroup label="稼働中">${ap_cl_in}</optgroup><optgroup label="休業・閉店">${ap_cl_out}</optgroup>`;
+        ap_sf = `<optgroup label="稼働中">${ap_sf_in}</optgroup><optgroup label="休職・退職">${ap_sf_out}</optgroup>`;
+
         $('#filter_clinic_0').html(ap_cl);
         $('#filter_staff_0').html(ap_sf);
       } else {
         alert(`データ通信エラー:${cls.reason}`);
       }
-
 
       $(document).off('click','input[name="fs_"]').on('click','input[name="fs_"]',function() {
         let id = $(this).prop('id');

@@ -1390,17 +1390,31 @@ if ($('#page_js_status').prop('checked') == false) {
 
     let clinics = await ajax_api_function("read_clinic_objs","");
     if (clinics.dataExists) {
-      let option = ``;
-      let all_option = ``;
+      let option = ``,option_out = ``,all_option = ``;
       let objs = clinics.data;
-
+      
       objs.forEach((cell,idx) => {
+        let enabled = cell.enabled;
+        if (enabled == 1) {
+          option += `<option value="${cell.obj_id}">${cell.obj_name}</option>`;
+        } else if (enabled == 0) {
+          option_out += `<option value="${cell.obj_id}">${cell.obj_name}</option>`;
+        }
         all_option += `${cell.obj_id}`;
         if (idx != objs.length - 1) all_option += `,`;
-        option += `<option value="${cell.obj_id}">${cell.obj_name}</option>`;
       });
 
-      $('#obj_select').html(`<option value="${all_option}">管轄全院</option>${option}`);
+      $('#obj_select').html(
+        `
+        <option value="${all_option}">全ての院</option>
+        <optgroup label="稼働中">
+          ${option}
+        </optgroup>
+        <optgroup label="休業中・閉店">
+          ${option_out}
+        </optgroup>
+        `
+      );
 
       const desc_init = async () => {
         await psln_setter(2);
