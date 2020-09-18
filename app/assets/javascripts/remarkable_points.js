@@ -17,6 +17,7 @@ var desc_function = (sender) => {
     ];
 
     let ap = ``;
+    /*
     objs.forEach((cell) => {
       let data0 = cell.data_0 || 0;
       let data1 = cell.data_1 || 0;
@@ -196,6 +197,160 @@ var desc_function = (sender) => {
         `;
       }
     });
+    */
+    objs.forEach((cell) => {
+      let data0 = cell.data_1 | 0;
+      let data1 = cell.data_0 | 0;
+      let data2 = cell.data_2 | 0;
+      let data3 = cell.data_3 | 0;
+      let data4 = cell.data_4 | 0;
+      let data5 = cell.data_5 | 0;
+      let data6 = cell.data_6 | 0;
+      let data7 = cell.data_7 | 0;
+
+      let new_p_all = data4.to_perate(data2);
+      let repeat_p_all = data5.to_perate(data2);
+      let ave_count = data2.to_Perate(data3);
+      let jihi_rate = data0.to_perate(data1);
+      let jihi_cup = data0.to_devide(data2);
+      let jihi_ltv = data0.to_devide(data3);
+      let mado_cup = data1.to_devide(data2);
+      let mado_ltv = data1.to_devide(data3);
+      let new_repeat = data7.to_perate(data4);
+      let total_repeat = data5.to_perate(data6);
+
+
+      let at1 = data0.toLocaleString();
+      let at2 = jihi_cup.toLocaleString();
+      let at3 = jihi_ltv.toLocaleString();
+      let at4 = jihi_rate.toLocaleString();
+      let at5 = data1.toLocaleString();
+      let at6 = mado_cup.toLocaleString();
+      let at7 = mado_ltv.toLocaleString();
+      let at8 = data3.toLocaleString();
+      let at9 = data2.toLocaleString();
+      let at10 = repeat_p_all;
+      let at11 = new_p_all;
+      let at12 = ave_count;
+      let at13 = new_repeat;
+      let at14 = total_repeat;
+
+      if (!cpt) {
+        ap +=
+        `
+        <tr>
+          <th>
+            <a href="/achieve_analytics?st=${st+1}&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+              ${user_name==MSD_smn?`${stna[st+1]}${cell.obj_id}`: cell.obj_name}
+            </a>
+          </th>
+          <td>¥${at1}</td>
+          <td>¥${at2}</td>
+          <td>¥${at3}</td>
+          <td>${at4}%</td>
+          <td>¥${at5}</td>
+          <td>¥${at6}</td>
+          <td>¥${at7}</td>
+          <td>${at8}</td>
+          <td>${at9}</td>
+          <td>${at10}%</td>
+          <td>${at11}%</td>
+          <td>${at12}</td>
+          <td>${at13}%</td>
+          <td>${at14}%</td>
+        </tr>
+        `;
+      } else {
+        let c_cells = c_objs.filter(({obj_id}) => obj_id == cell.obj_id);
+        let c_cell = c_cells.length == 1 ? c_cells[0] : {};
+
+        let c_data0 = c_cell.data_1 || 0;
+        let c_data1 = c_cell.data_0 || 0;
+        let c_data2 = c_cell.data_2 || 0;
+        let c_data3 = c_cell.data_3 || 0;
+        let c_data4 = c_cell.data_4 || 0;
+        let c_data5 = c_cell.data_5 || 0;
+        let c_data6 = c_cell.data_6 || 0;
+        let c_data7 = c_cell.data_7 || 0;
+
+        let c_new_p_all = c_data4.to_perate(c_data2);
+        let c_repeat_p_all = c_data5.to_perate(c_data2);
+        let c_ave_count = c_data2.to_Perate(c_data3);
+        let c_jihi_rate = c_data0.to_perate(c_data1);
+        let c_jihi_cup = c_data0.to_devide(c_data2);
+        let c_jihi_ltv = c_data0.to_devide(c_data3);
+        let c_mado_cup = c_data1.to_devide(c_data2);
+        let c_mado_ltv = c_data1.to_devide(c_data3);
+        let c_new_repeat = c_data7.to_perate(c_data4);
+        let c_total_repeat = c_data5.to_perate(c_data6);
+
+        let c_at1 = c_data0.toLocaleString();
+        let c_at2 = c_jihi_cup.toLocaleString();
+        let c_at3 = c_jihi_ltv.toLocaleString();
+        let c_at4 = c_jihi_rate.toLocaleString();
+        let c_at5 = c_data1.toLocaleString();
+        let c_at6 = c_mado_cup.toLocaleString();
+        let c_at7 = c_mado_ltv.toLocaleString();
+        let c_at8 = c_data3.toLocaleString();
+        let c_at9 = c_data2.toLocaleString();
+        let c_at10 = c_repeat_p_all;
+        let c_at11 = c_new_p_all;
+        let c_at12 = c_ave_count;
+        let c_at13 = c_new_repeat;
+        let c_at14 = c_total_repeat;
+
+
+        let rate1 = data0.to_rate(c_data0).rate_str();
+        let rate2 = jihi_cup.to_rate(c_jihi_cup).rate_str();
+        let rate3 = jihi_ltv.to_rate(c_jihi_ltv).rate_str();
+        let rate4 = jihi_rate.to_rate(c_jihi_rate).rate_str();
+        let rate5 = data1.to_rate(c_data1).rate_str();
+        let rate6 = mado_cup.to_rate(c_mado_cup).rate_str();
+        let rate7 = mado_ltv.to_rate(c_mado_ltv).rate_str();
+        let rate8 = data3.to_rate(c_data3).rate_str();
+        let rate9 = data2.to_rate(c_data2).rate_str();
+        let rate10 = repeat_p_all.to_rate(c_repeat_p_all).rate_str();
+        let rate11 = new_p_all.to_rate(c_new_p_all).rate_str();
+        let rate12 = ave_count.to_rate(c_ave_count).rate_str();
+        let rate13 = new_repeat.to_rate(c_new_repeat).rate_str();
+        let rate14 = total_repeat.to_rate(c_total_repeat).rate_str();
+
+        let app = ``;
+        for (let i = 1;i <= 14;i++) {
+          let at,c_at,rate = eval(`rate${i}`);
+          if (i == 1 || i == 2 || i == 3 || i == 5 || i == 6 || i == 7) {
+            at = `¥${eval(`at${i}`)}`;
+            c_at = `¥${eval(`c_at${i}`)}`;
+          } else if (i == 4 || i == 10 || i == 11 || i == 13 || i == 14) {
+            at = `${eval(`at${i}`)}%`;
+            c_at = `${eval(`c_at${i}`)}%`;
+          } else {
+            at = `${eval(`at${i}`)}`;
+            c_at = `${eval(`c_at${i}`)}`;
+          }
+          app +=
+          `
+          <td>
+            <div class="amount">${at}</div>
+            <div class="c_amount">${c_at}</div>
+            <div class="rate">${rate}</div>
+          </td>
+          `;
+        }
+
+        ap +=
+        `
+        <tr>
+          <th>
+            <a href="/achieve_analytics?st=${st+1}&ss=true&si=${cell.obj_id}&pt=${pt}&psel=true&ps=${ps}&pe=${pe}">
+              ${user_name==MSD_smn?`${stna[st+1]}${cell.obj_id}`: cell.obj_name}
+            </a>
+          </th>
+          ${app}
+        </tr>
+        `
+      }
+    });
 
     $('#table_list').html(
       `
@@ -203,21 +358,26 @@ var desc_function = (sender) => {
         <thead>
           <tr class="group">
             <th></th>
-            <th colspan="5">ボリューム(Quantity)</th>
-            <th colspan="7">効果(Quality)</th>
+            <th colspan="4">自費売上</th>
+            <th colspan="3">窓口売上</th>
+            <th colspan="4">ボリューム</th>
+            <th colspan="3">効果</th>
           </tr>
           <tr>
             <th>${tia[st]}</th>
-            <th>自費売上</th>
+            <th>売上</th>
+            <th>客単価</th>
+            <th>LTV</th>
+            <th>自費/窓口割合</th>
+            <th>売上</th>
+            <th>客単価</th>
+            <th>LTV</th>
+
             <th>純患数</th>
             <th>来院数</th>
-            <th>既存顧客割合</th>
-            <th>新規顧客割合</th>
-            <th>平均来院回数</th>
-            <th>自費割合</th>
-            <th>自費客単</th>
-            <th>自費時単</th>
-            <th>自費LTV</th>
+            <th>既存割合</th>
+            <th>新規割合</th>
+            <th>平均来院数</th>
             <th>新規顧客再来率</th>
             <th>リピート率</th>
           </tr>
@@ -228,7 +388,7 @@ var desc_function = (sender) => {
     );
 
     let table = $('#list_table').DataTable({
-      columnDefs:[{type:'currency',targets:[1,2,3,4,5,6,7,8,9,10,11,12]}],
+      columnDefs:[{type:'currency',targets:[1,2,3,4,5,6,7,8,9,10,11,12,13]}],
       lengthMenu: [10,20,30,40,50],
       displayLength:10,
       lengthChange: true,

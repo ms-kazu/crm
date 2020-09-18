@@ -15673,7 +15673,7 @@ var desc_obj_page = () => {
           let cell = co[i];
           let LatLng = {
             id:cell.obj_id,
-            name:cell.obj_name,
+            name:`${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}`,
             lat:cell.lat,
             lng:cell.lng
           }
