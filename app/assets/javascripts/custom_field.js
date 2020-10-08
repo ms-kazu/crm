@@ -329,8 +329,7 @@ var desc_function = (data) => {
     (() => {
       $('#table_clinic_base').html(``);
 
-      // if (clt_id == 10016) {
-      if (clt_id == 1) {
+      if (clt_id == 10016) {
         objs = objs.filter(({obj_id}) => obj_id >= 0);
         objs.forEach((cell) => {
           let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
