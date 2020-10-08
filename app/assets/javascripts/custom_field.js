@@ -329,7 +329,8 @@ var desc_function = (data) => {
     (() => {
       $('#table_clinic_base').html(``);
 
-      if (clt_id == 10016) {
+      // if (clt_id == 10016) {
+      if (clt_id == 1) {
         objs = objs.filter(({obj_id}) => obj_id >= 0);
         objs.forEach((cell) => {
           let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
@@ -344,8 +345,6 @@ var desc_function = (data) => {
             let result = obj.filter(({period}) => period == label);
 
             let data_0 = result.sum_val(`data_5`);
-            let data_1 = result.sum_val(`data_3`);
-            let data_2 = result.sum_val(`data_0`);
 
             let cate = cates.filter(({obj_id}) => obj_id == cell.obj_id).filter(({period}) => period == label);
 
@@ -369,13 +368,14 @@ var desc_function = (data) => {
             let cate_seikyu_2 = cate_2.sum_val(`data_1`);
 
             let cate_count_3 = cate_3.sum_val(`data_4`);
-            let cate_mado_3 = cate_3.sum_val(`data_0`);
+            let cate_mado_3 = (cate_3.sum_val(`data_0`) * (100 / 110)).to_devide(1);
 
             let cate_count_4 = cate_4.sum_val(`data_4`);
-            let cate_mado_4 = cate_4.sum_val(`data_0`);
+            let cate_mado_4 = (cate_4.sum_val(`data_0`) * (100 / 110)).to_devide(1);
 
-
-            let data_3 = cate_hutan_0 + cate_hutan_1 + cate_mado_3 + cate_mado_4;
+            let data_1 = cate_hutan_0 + cate_hutan_1 + cate_mado_3 + cate_mado_4;
+            let data_2 = cate_seikyu_0 + cate_seikyu_1 + cate_seikyu_2 + data_1;
+            let data_3 = data_1;
 
             ap +=
             `
