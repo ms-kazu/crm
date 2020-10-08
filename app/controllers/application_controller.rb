@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
       @clinic_ids = session[:clinic_ids]
       @current_user_id = session[:user_id]
       @inc_name = session[:inc_name]
+      @clt_id = session[:clt_id]
     end
   end
 

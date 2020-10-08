@@ -32,11 +32,13 @@ class LoginController < ApplicationController
               '","db_i_4":"' + @result["db_i_4"] +
               '","db_i_5":"' + @result["db_i_5"] +
               '","db_i_6":"' + @result["db_i_6"] +
+              '","db_i_7":"' + @result["db_i_7"] +
               '"}'
             session[:db_url] = @result["db_i_3"]
             session[:clinic_ids] = @result["db_i_4"]
             session[:user_id] = @result["db_i_5"]
             session[:user_name] = @result["db_i_6"]
+            session[:clt_id] = @result["db_i_7"]
             session[:inc_name] = @result["inc_name"]
 
             flash[:notice_pos] = "ログインしました"
@@ -96,6 +98,7 @@ class LoginController < ApplicationController
       session[:clinic_ids] = nil
       session[:user_id] = nil
       session[:user_name] = nil
+      session[:clt_id] = nil
       flash[:notice_pos] = "ログアウトしました"
       redirect_to("/")
   end

@@ -1,4 +1,5 @@
 var user_name = getDOM('user_name').value;
+var clt_id = getDOM('clt_id').value;
 
 var desc_function = (data) => {
   let pt = $('input[name="pt_"]:checked').prop('id').split('_')[1];
@@ -328,339 +329,458 @@ var desc_function = (data) => {
     (() => {
       $('#table_clinic_base').html(``);
 
-      objs = objs.filter(({obj_id}) => obj_id >= 0);
-      objs.forEach((cell) => {
-        let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
-        let repeat = repeats.filter(({obj_id}) => obj_id == cell.obj_id)
+      if (clt_id == 10016) {
+        objs = objs.filter(({obj_id}) => obj_id >= 0);
+        objs.forEach((cell) => {
+          let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
+          let repeat = repeats.filter(({obj_id}) => obj_id == cell.obj_id)
 
-        let ap = ``;
-        let day_pa = period_map(ps,pe,0);
+          let ap = ``;
+          let day_pa = period_map(ps,pe,0);
 
-        for (let i = 0;i < pa.length;i++) {
-          let label = pa[i];
+          for (let i = 0;i < pa.length;i++) {
+            let label = pa[i];
 
-          let result = obj.filter(({period}) => period == label);
+            let result = obj.filter(({period}) => period == label);
 
-          let data_0 = result.sum_val(`data_0`);
-          let data_1 = result.sum_val(`data_1`);
-          let data_2 = result.sum_val(`data_2`);
-          let data_3 = result.sum_val(`data_3`);
-          let data_4 = result.sum_val(`data_4`);
-          let data_5 = result.sum_val(`data_5`);
-          let data_6 = result.sum_val(`data_6`);
-          let data_7 = result.sum_val(`data_7`);
-          let data_8 = result.sum_val(`data_8`);
-          let data_9 = result.sum_val(`data_9`);
-          let data_10 = result.sum_val(`data_10`);
+            let data_0 = result.sum_val(`data_5`);
+            let data_1 = result.sum_val(`data_3`);
+            let data_2 = result.sum_val(`data_0`);
 
-          let lity_0 = data_3.to_devide(data_5);
-          let lity_1 = data_3.to_devide(data_9);
-          let lity_2 = data_5.to_Perate(data_6);
-          let lity_3 = data_7.to_perate(data_5);
-          let lity_4 = (data_5 - data_7).to_perate(data_5);
+            let cate = cates.filter(({obj_id}) => obj_id == cell.obj_id).filter(({period}) => period == label);
 
+            let cate_0 = cate.filter(({type}) => type == 11);//柔整
+            let cate_1 = cate.filter(({type}) => type == 12);//鍼灸
+            let cate_2 = cate.filter(({type}) => type == 14 || type == 15);//自賠,労災
+            let cate_3 = cate.filter(({type}) => type == 1);//自費
+            let cate_4 = cate.filter(({type}) => type == 2);//物販
 
-          let cate = cates.filter(({obj_id}) => obj_id == cell.obj_id);
+            let cate_count_0 = cate_0.sum_val(`data_4`);
+            let cate_hutan_0 = cate_0.sum_val(`data_2`);
+            let cate_seikyu_0 = cate_0.sum_val(`data_1`);
+            let cate_total_0 = cate_0.sum_val(`data_0`);
 
-          let cate_0 = cate.filter(({type}) => type == 11);
-          let cate_1 = cate.filter(({type}) => type == 12);
-          let cate_2 = cate.filter(({type}) => type == 13);
-          let cate_3 = cate.filter(({type}) => type == 14);
-          let cate_4 = cate.filter(({type}) => type == 15);
-          let cate_5 = cate.filter(({type}) => type == 16);
+            let cate_count_1 = cate_1.sum_val(`data_4`);
+            let cate_hutan_1 = cate_1.sum_val(`data_2`);
+            let cate_seikyu_1 = cate_1.sum_val(`data_1`);
+            let cate_total_1 = cate_1.sum_val(`data_0`);
 
-          let cate_s_0 = cate_0.filter(({period}) => period == label).sum_val(`data_1`);
-          let cate_f_0 = cate_0.filter(({period}) => period == label).sum_val(`data_2`);
-          let cate_c_0 = cate_0.filter(({period}) => period == label).sum_val(`data_4`);
-          let cate_a_0 = cate_c_0.to_Perate(day_pa.length);
+            let cate_count_2 = cate_2.sum_val(`data_4`);
+            let cate_seikyu_2 = cate_2.sum_val(`data_1`);
 
-          let cate_s_1 = cate_1.filter(({period}) => period == label).sum_val(`data_1`);
-          let cate_f_1 = cate_1.filter(({period}) => period == label).sum_val(`data_2`);
-          let cate_c_1 = cate_1.filter(({period}) => period == label).sum_val(`data_4`);
-          let cate_a_1 = cate_c_1.to_Perate(day_pa.length);
+            let cate_count_3 = cate_3.sum_val(`data_4`);
+            let cate_mado_3 = cate_3.sum_val(`data_0`);
 
-          let cate_s_2 = cate_2.filter(({period}) => period == label).sum_val(`data_1`);
-          let cate_f_2 = cate_2.filter(({period}) => period == label).sum_val(`data_2`);
-          let cate_c_2 = cate_2.filter(({period}) => period == label).sum_val(`data_4`);
-          let cate_a_2 = cate_c_2.to_Perate(day_pa.length);
-
-          let cate_s_3 = cate_3.filter(({period}) => period == label).sum_val(`data_1`);
-          let cate_f_3 = cate_3.filter(({period}) => period == label).sum_val(`data_2`);
-          let cate_c_3 = cate_3.filter(({period}) => period == label).sum_val(`data_4`);
-          let cate_a_3 = cate_c_3.to_Perate(day_pa.length);
-
-          let cate_s_4 = cate_4.filter(({period}) => period == label).sum_val(`data_1`);
-          let cate_f_4 = cate_4.filter(({period}) => period == label).sum_val(`data_2`);
-          let cate_c_4 = cate_4.filter(({period}) => period == label).sum_val(`data_4`);
-          let cate_a_4 = cate_c_4.to_Perate(day_pa.length);
-
-          let cate_s_5 = cate_5.filter(({period}) => period == label).sum_val(`data_1`);
-          let cate_f_5 = cate_5.filter(({period}) => period == label).sum_val(`data_2`);
-          let cate_c_5 = cate_5.filter(({period}) => period == label).sum_val(`data_4`);
-          let cate_a_5 = cate_c_5.to_Perate(day_pa.length);
+            let cate_count_4 = cate_4.sum_val(`data_4`);
+            let cate_mado_4 = cate_4.sum_val(`data_0`);
 
 
-          let repe = repeat.filter(({period}) => period == label);
-          let repe_origin = repe.filter(({count_num}) => count_num == 1).sum_val('count');
-          let repe_0 = repe.filter(({count_num}) => count_num == 1);
-          let repe_1 = repe.filter(({count_num}) => count_num == 2);
-          let repe_2 = repe.filter(({count_num}) => count_num == 4);
-          let repe_3 = repe.filter(({count_num}) => count_num == 8);
-          let repe_4 = repe.filter(({count_num}) => count_num == 10);
+            let data_3 = cate_hutan_0 + cate_hutan_1 + cate_mado_3 + cate_mado_4;
 
-
-          let am = result.sum_val('am');
-          let pm = result.sum_val('pm');
-
-          let holiday = result.sum_val('holiday');
-          let weekday = result.sum_val('weekday');
-
-          let gen0 = result.sum_val('gen0');
-          let gen1 = result.sum_val('gen1');
-
-          let gene0 = result.sum_val('gene0');
-          let gene1 = result.sum_val('gene1');
-          let gene2 = result.sum_val('gene2');
-          let gene3 = result.sum_val('gene3');
-          let gene4 = result.sum_val('gene4');
-
-          ap +=
-          `
-          <tr>
-            <th>${label.str_date(`.`)}</th>
-            <td>${data_0}</td>
-            <td>${data_1}</td>
-            <td>${data_2}</td>
-            <td>${data_3}</td>
-            <td>${data_4}</td>
-            <td>${data_5}</td>
-            <td>${data_6}</td>
-            <td>${data_7}</td>
-            <td>${data_8}</td>
-            <td>${data_9}</td>
-            <td>${data_10}</td>
-
-            <td>${lity_0}</td>
-            <td>${lity_1}</td>
-            <td>${lity_2}</td>
-            <td>${lity_3}</td>
-            <td>${lity_4}</td>
-
-            <td>${cate_s_0}</td>
-            <td>${cate_f_0}</td>
-            <td>${cate_c_0}</td>
-            <td>${cate_a_0}</td>
-
-            <td>${cate_s_1}</td>
-            <td>${cate_f_1}</td>
-            <td>${cate_c_1}</td>
-            <td>${cate_a_1}</td>
-
-            <td>${cate_s_2}</td>
-            <td>${cate_f_2}</td>
-            <td>${cate_c_2}</td>
-            <td>${cate_a_2}</td>
-
-            <td>${cate_s_3}</td>
-            <td>${cate_f_3}</td>
-            <td>${cate_c_3}</td>
-            <td>${cate_a_3}</td>
-
-            <td>${cate_s_4}</td>
-            <td>${cate_f_4}</td>
-            <td>${cate_c_4}</td>
-            <td>${cate_a_4}</td>
-
-            <td>${cate_s_5}</td>
-            <td>${cate_f_5}</td>
-            <td>${cate_c_5}</td>
-            <td>${cate_a_5}</td>
-
-            <td>${repe_0.sum_val('count')}</td>
-            <td>${repe_0.sum_val('count').to_perate(repe_origin)}%</td>
-            <td>${repe_1.sum_val('count')}</td>
-            <td>${repe_1.sum_val('count').to_perate(repe_origin)}%</td>
-            <td>${repe_2.sum_val('count')}</td>
-            <td>${repe_2.sum_val('count').to_perate(repe_origin)}%</td>
-            <td>${repe_3.sum_val('count')}</td>
-            <td>${repe_3.sum_val('count').to_perate(repe_origin)}%</td>
-            <td>${repe_4.sum_val('count')}</td>
-            <td>${repe_4.sum_val('count').to_perate(repe_origin)}%</td>
-
-            <td>${am}</td>
-            <td>${pm}</td>
-
-            <td>${holiday}</td>
-            <td>${weekday}</td>
-
-            <td>${gen0}</td>
-            <td>${gen1}</td>
-
-            <td>${gene0}</td>
-            <td>${gene1}</td>
-            <td>${gene2}</td>
-            <td>${gene3}</td>
-            <td>${gene4}</td>
-          </tr>
-          `;
-        }
-
-        $('#table_clinic_base').append(
-          `
-          <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
+            ap +=
+            `
             <tr>
-              <th>${cell.obj_name}</th>
-              <th>${ps.str_date(`.`)}</th>
-              <th>~</th>
-              <th>${pe.str_date(`.`)}</th>
+              <th>${label.str_date(`.`)}</th>
+              <td>${data_0}</td>
+              <td>${cate_count_0}</td>
+              <td>${cate_hutan_0}</td>
+              <td>${cate_seikyu_0}</td>
+              <td>${cate_total_0}</td>
+              <td>${cate_count_1}</td>
+              <td>${cate_hutan_1}</td>
+              <td>${cate_seikyu_1}</td>
+              <td>${cate_total_1}</td>
+              <td>${cate_count_2}</td>
+              <td>${cate_seikyu_2}</td>
+              <td>${cate_count_3}</td>
+              <td>${cate_mado_3}</td>
+              <td>${cate_count_4}</td>
+              <td>${cate_mado_4}</td>
+              <td>${data_1}</td>
+              <td>${data_2}</td>
+              <td>${cate_hutan_0}</td>
+              <td>${cate_hutan_1}</td>
+              <td>${cate_mado_3}</td>
+              <td>${cate_mado_4}</td>
+              <td>${data_3}</td>
             </tr>
+            `;
+          }
+
+          $('#table_clinic_base').append(
+            `
+            <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
+              <tr>
+                <th>${cell.obj_name}</th>
+                <th>${ps.str_date(`.`)}</th>
+                <th>~</th>
+                <th>${pe.str_date(`.`)}</th>
+              </tr>
+              <tr>
+                <th>--</th>
+                <th>来院数</th>
+                <th>柔整人数</th>
+                <th>柔整負担</th>
+                <th>柔整請求</th>
+                <th>柔整合計</th>
+                <th>鍼灸人数</th>
+                <th>鍼灸負担</th>
+                <th>鍼灸請求</th>
+                <th>鍼灸合計</th>
+                <th>自賠労災人数</th>
+                <th>自賠労災請求</th>
+                <th>自費人数</th>
+                <th>自費売上</th>
+                <th>物販個数</th>
+                <th>物販売上</th>
+                <th>現金売上</th>
+                <th>売上合計</th>
+                <th>柔整負担</th>
+                <th>鍼灸負担</th>
+                <th>自費売上</th>
+                <th>物販売上</th>
+                <th>収入合計</th>
+              </tr>
+              ${ap}
+            </table>
+            `
+          );
+        });
+      } else {
+        objs = objs.filter(({obj_id}) => obj_id >= 0);
+        objs.forEach((cell) => {
+          let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
+          let repeat = repeats.filter(({obj_id}) => obj_id == cell.obj_id)
+
+          let ap = ``;
+          let day_pa = period_map(ps,pe,0);
+
+          for (let i = 0;i < pa.length;i++) {
+            let label = pa[i];
+
+            let result = obj.filter(({period}) => period == label);
+
+            let data_0 = result.sum_val(`data_0`);
+            let data_1 = result.sum_val(`data_1`);
+            let data_2 = result.sum_val(`data_2`);
+            let data_3 = result.sum_val(`data_3`);
+            let data_4 = result.sum_val(`data_4`);
+            let data_5 = result.sum_val(`data_5`);
+            let data_6 = result.sum_val(`data_6`);
+            let data_7 = result.sum_val(`data_7`);
+            let data_8 = result.sum_val(`data_8`);
+            let data_9 = result.sum_val(`data_9`);
+            let data_10 = result.sum_val(`data_10`);
+
+            let lity_0 = data_3.to_devide(data_5);
+            let lity_1 = data_3.to_devide(data_9);
+            let lity_2 = data_5.to_Perate(data_6);
+            let lity_3 = data_7.to_perate(data_5);
+            let lity_4 = (data_5 - data_7).to_perate(data_5);
+
+
+            let cate = cates.filter(({obj_id}) => obj_id == cell.obj_id).filter(({period}) => period == label);
+
+            let cate_0 = cate.filter(({type}) => type == 11);
+            let cate_1 = cate.filter(({type}) => type == 12);
+            let cate_2 = cate.filter(({type}) => type == 13);
+            let cate_3 = cate.filter(({type}) => type == 14);
+            let cate_4 = cate.filter(({type}) => type == 15);
+            let cate_5 = cate.filter(({type}) => type == 16);
+
+            let cate_s_0 = cate_0.sum_val(`data_1`);
+            let cate_f_0 = cate_0.sum_val(`data_2`);
+            let cate_c_0 = cate_0.sum_val(`data_4`);
+            let cate_a_0 = cate_c_0.to_Perate(day_pa.length);
+
+            let cate_s_1 = cate_1.sum_val(`data_1`);
+            let cate_f_1 = cate_1.sum_val(`data_2`);
+            let cate_c_1 = cate_1.sum_val(`data_4`);
+            let cate_a_1 = cate_c_1.to_Perate(day_pa.length);
+
+            let cate_s_2 = cate_2.sum_val(`data_1`);
+            let cate_f_2 = cate_2.sum_val(`data_2`);
+            let cate_c_2 = cate_2.sum_val(`data_4`);
+            let cate_a_2 = cate_c_2.to_Perate(day_pa.length);
+
+            let cate_s_3 = cate_3.sum_val(`data_1`);
+            let cate_f_3 = cate_3.sum_val(`data_2`);
+            let cate_c_3 = cate_3.sum_val(`data_4`);
+            let cate_a_3 = cate_c_3.to_Perate(day_pa.length);
+
+            let cate_s_4 = cate_4.sum_val(`data_1`);
+            let cate_f_4 = cate_4.sum_val(`data_2`);
+            let cate_c_4 = cate_4.sum_val(`data_4`);
+            let cate_a_4 = cate_c_4.to_Perate(day_pa.length);
+
+            let cate_s_5 = cate_5.sum_val(`data_1`);
+            let cate_f_5 = cate_5.sum_val(`data_2`);
+            let cate_c_5 = cate_5.sum_val(`data_4`);
+            let cate_a_5 = cate_c_5.to_Perate(day_pa.length);
+
+
+            let repe = repeat.filter(({period}) => period == label);
+            let repe_origin = repe.filter(({count_num}) => count_num == 1).sum_val('count');
+            let repe_0 = repe.filter(({count_num}) => count_num == 1);
+            let repe_1 = repe.filter(({count_num}) => count_num == 2);
+            let repe_2 = repe.filter(({count_num}) => count_num == 4);
+            let repe_3 = repe.filter(({count_num}) => count_num == 8);
+            let repe_4 = repe.filter(({count_num}) => count_num == 10);
+
+
+            let am = result.sum_val('am');
+            let pm = result.sum_val('pm');
+
+            let holiday = result.sum_val('holiday');
+            let weekday = result.sum_val('weekday');
+
+            let gen0 = result.sum_val('gen0');
+            let gen1 = result.sum_val('gen1');
+
+            let gene0 = result.sum_val('gene0');
+            let gene1 = result.sum_val('gene1');
+            let gene2 = result.sum_val('gene2');
+            let gene3 = result.sum_val('gene3');
+            let gene4 = result.sum_val('gene4');
+
+            ap +=
+            `
             <tr>
-              <th>--</th>
-              <th>主要項目</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th>${label.str_date(`.`)}</th>
+              <td>${data_0}</td>
+              <td>${data_1}</td>
+              <td>${data_2}</td>
+              <td>${data_3}</td>
+              <td>${data_4}</td>
+              <td>${data_5}</td>
+              <td>${data_6}</td>
+              <td>${data_7}</td>
+              <td>${data_8}</td>
+              <td>${data_9}</td>
+              <td>${data_10}</td>
 
-              <th>効率</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <td>${lity_0}</td>
+              <td>${lity_1}</td>
+              <td>${lity_2}</td>
+              <td>${lity_3}</td>
+              <td>${lity_4}</td>
 
-              <th>柔整</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>鍼灸</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>マッサージ</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>自賠責</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>労災</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>生活保護</th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <td>${cate_s_0}</td>
+              <td>${cate_f_0}</td>
+              <td>${cate_c_0}</td>
+              <td>${cate_a_0}</td>
 
-              <th>継続率</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <td>${cate_s_1}</td>
+              <td>${cate_f_1}</td>
+              <td>${cate_c_1}</td>
+              <td>${cate_a_1}</td>
 
-              <th>来店時間</th>
-              <th></th>
-              <th>来店日</th>
-              <th></th>
+              <td>${cate_s_2}</td>
+              <td>${cate_f_2}</td>
+              <td>${cate_c_2}</td>
+              <td>${cate_a_2}</td>
 
-              <th>性別</th>
-              <th></th>
-              <th>年代</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <td>${cate_s_3}</td>
+              <td>${cate_f_3}</td>
+              <td>${cate_c_3}</td>
+              <td>${cate_a_3}</td>
+
+              <td>${cate_s_4}</td>
+              <td>${cate_f_4}</td>
+              <td>${cate_c_4}</td>
+              <td>${cate_a_4}</td>
+
+              <td>${cate_s_5}</td>
+              <td>${cate_f_5}</td>
+              <td>${cate_c_5}</td>
+              <td>${cate_a_5}</td>
+
+              <td>${repe_0.sum_val('count')}</td>
+              <td>${repe_0.sum_val('count').to_perate(repe_origin)}%</td>
+              <td>${repe_1.sum_val('count')}</td>
+              <td>${repe_1.sum_val('count').to_perate(repe_origin)}%</td>
+              <td>${repe_2.sum_val('count')}</td>
+              <td>${repe_2.sum_val('count').to_perate(repe_origin)}%</td>
+              <td>${repe_3.sum_val('count')}</td>
+              <td>${repe_3.sum_val('count').to_perate(repe_origin)}%</td>
+              <td>${repe_4.sum_val('count')}</td>
+              <td>${repe_4.sum_val('count').to_perate(repe_origin)}%</td>
+
+              <td>${am}</td>
+              <td>${pm}</td>
+
+              <td>${holiday}</td>
+              <td>${weekday}</td>
+
+              <td>${gen0}</td>
+              <td>${gen1}</td>
+
+              <td>${gene0}</td>
+              <td>${gene1}</td>
+              <td>${gene2}</td>
+              <td>${gene3}</td>
+              <td>${gene4}</td>
             </tr>
-            <tr>
-              <th>--</th>
-              <th>総合売上</th>
-              <th>保険請求額</th>
-              <th>保険負担金</th>
-              <th>自費売上</th>
-              <th>施術回数</th>
-              <th>来院数</th>
-              <th>純患数</th>
-              <th>新患数</th>
-              <th>完治者数</th>
-              <th>施術時間</th>
-              <th>2回目の来院者数</th>
-              <th>自費客単価</th>
-              <th>自費時間単価</th>
-              <th>平均来院数</th>
-              <th>新患割合</th>
-              <th>既存割合</th>
+            `;
+          }
 
-              <th>請求額</th>
-              <th>負担金</th>
-              <th>来院数</th>
-              <th>1日平均来院数</th>
+          $('#table_clinic_base').append(
+            `
+            <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
+              <tr>
+                <th>${cell.obj_name}</th>
+                <th>${ps.str_date(`.`)}</th>
+                <th>~</th>
+                <th>${pe.str_date(`.`)}</th>
+              </tr>
+              <tr>
+                <th>--</th>
+                <th>主要項目</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
 
-              <th>請求額</th>
-              <th>負担金</th>
-              <th>来院数</th>
-              <th>1日平均来院数</th>
+                <th>効率</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
 
-              <th>請求額</th>
-              <th>負担金</th>
-              <th>来院数</th>
-              <th>1日平均来院数</th>
+                <th>柔整</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>鍼灸</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>マッサージ</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>自賠責</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>労災</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>生活保護</th>
+                <th></th>
+                <th></th>
+                <th></th>
 
-              <th>請求額</th>
-              <th>負担金</th>
-              <th>来院数</th>
-              <th>1日平均来院数</th>
+                <th>継続率</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
 
-              <th>請求額</th>
-              <th>負担金</th>
-              <th>来院数</th>
-              <th>1日平均来院数</th>
+                <th>来店時間</th>
+                <th></th>
+                <th>来店日</th>
+                <th></th>
 
-              <th>請求額</th>
-              <th>負担金</th>
-              <th>来院数</th>
-              <th>1日平均来院数</th>
+                <th>性別</th>
+                <th></th>
+                <th>年代</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th>--</th>
+                <th>総合売上</th>
+                <th>保険請求額</th>
+                <th>保険負担金</th>
+                <th>自費売上</th>
+                <th>施術回数</th>
+                <th>来院数</th>
+                <th>純患数</th>
+                <th>新患数</th>
+                <th>完治者数</th>
+                <th>施術時間</th>
+                <th>2回目の来院者数</th>
+                <th>自費客単価</th>
+                <th>自費時間単価</th>
+                <th>平均来院数</th>
+                <th>新患割合</th>
+                <th>既存割合</th>
 
-              <th>1回目人数</th>
-              <th>1回目維持率</th>
-              <th>2回目</th>
-              <th>2回目維持率</th>
-              <th>4回目</th>
-              <th>4回目維持率</th>
-              <th>8回目</th>
-              <th>8回目維持率</th>
-              <th>10回以上</th>
-              <th>10回以上維持率</th>
+                <th>請求額</th>
+                <th>負担金</th>
+                <th>来院数</th>
+                <th>1日平均来院数</th>
 
-              <th>午前</th>
-              <th>午後</th>
-              <th>平日</th>
-              <th>休日</th>
+                <th>請求額</th>
+                <th>負担金</th>
+                <th>来院数</th>
+                <th>1日平均来院数</th>
 
-              <th>男性</th>
-              <th>女性</th>
-              <th>19歳以下</th>
-              <th>20~39歳</th>
-              <th>40~64歳</th>
-              <th>65~74歳</th>
-              <th>75歳以上</th>
-            </tr>
-            ${ap}
-          </table>
-          `
-        );
-      });
+                <th>請求額</th>
+                <th>負担金</th>
+                <th>来院数</th>
+                <th>1日平均来院数</th>
+
+                <th>請求額</th>
+                <th>負担金</th>
+                <th>来院数</th>
+                <th>1日平均来院数</th>
+
+                <th>請求額</th>
+                <th>負担金</th>
+                <th>来院数</th>
+                <th>1日平均来院数</th>
+
+                <th>請求額</th>
+                <th>負担金</th>
+                <th>来院数</th>
+                <th>1日平均来院数</th>
+
+                <th>1回目人数</th>
+                <th>1回目維持率</th>
+                <th>2回目</th>
+                <th>2回目維持率</th>
+                <th>4回目</th>
+                <th>4回目維持率</th>
+                <th>8回目</th>
+                <th>8回目維持率</th>
+                <th>10回以上</th>
+                <th>10回以上維持率</th>
+
+                <th>午前</th>
+                <th>午後</th>
+                <th>平日</th>
+                <th>休日</th>
+
+                <th>男性</th>
+                <th>女性</th>
+                <th>19歳以下</th>
+                <th>20~39歳</th>
+                <th>40~64歳</th>
+                <th>65~74歳</th>
+                <th>75歳以上</th>
+              </tr>
+              ${ap}
+            </table>
+            `
+          );
+        });
+      }
     })();
     (() => {
       let wopts = {
@@ -1158,7 +1278,7 @@ var desc_function = (data) => {
     let objs = data.data.data5;
 
     let ap = ``;
-    objs = objs.filter(({obj_id}) => obj_id >= 0);
+    objs = objs.filter(({reason_id}) => reason_id >= 0);
     objs.forEach((cell) => {
       ap +=
       `
@@ -1180,8 +1300,8 @@ var desc_function = (data) => {
       </tr>
       <tr>
         <th>--</th>
-        <th>人数</th>
-        <th>新患数</th>
+        <th>来院数</th>
+        <th>新患来院数</th>
       </tr>
       ${ap}
       `
@@ -1392,7 +1512,7 @@ if ($('#page_js_status').prop('checked') == false) {
     if (clinics.dataExists) {
       let option = ``,option_out = ``,all_option = ``;
       let objs = clinics.data;
-      
+
       objs.forEach((cell,idx) => {
         let enabled = cell.enabled;
         if (enabled == 1) {
