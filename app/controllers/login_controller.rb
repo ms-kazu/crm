@@ -33,6 +33,7 @@ class LoginController < ApplicationController
               '","db_i_5":"' + @result["db_i_5"] +
               '","db_i_6":"' + @result["db_i_6"] +
               '","db_i_7":"' + @result["db_i_7"] +
+              '","db_i_8":"' + @result["db_i_8"] +
               '"}'
             session[:db_url] = @result["db_i_3"]
             session[:clinic_ids] = @result["db_i_4"]
@@ -74,6 +75,7 @@ class LoginController < ApplicationController
             '","db_i_2":"' + @result["db_i_2"] +
             '","db_i_3":"' + @result["db_i_3"] +
             '","db_i_4":"' + @result["db_i_4"] +
+            '","db_i_8":"' + @result["db_i_8"] +
             '"}'
           session[:db_url] = @result["db_i_3"]
           session[:clinic_ids] = @result["db_i_4"]

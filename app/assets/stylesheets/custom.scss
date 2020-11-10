@@ -3404,18 +3404,19 @@ html {
                   grid-template-columns:7rem 1fr;
                   text-align: center;
                   border:1px solid $border_color;
-                  border-bottom:2px solid $border_color;
                   border-radius: 6px;
                   margin:4px 0;
                   .indi {
-                    line-height:3rem;
+                    padding: 1rem 0;
+                    line-height:1rem;
                     font-size: .75rem;
                     border-right: 1px solid $border_color;
                     background-color: rgba($border_color,.125);
                   }
                   .content {
-                    line-height: 3rem;
-                    font-size: 1.25rem;
+                    padding: .75rem 0;
+                    line-height:1.5rem;
+                    font-size: 1rem;
                   }
                   .contents {
                     font-size: 1rem;
