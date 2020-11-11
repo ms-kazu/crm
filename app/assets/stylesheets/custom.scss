@@ -797,37 +797,113 @@ $border_color:#e6e6e6;
       }
     }
   }
+  .border {
+    height:.5rem;
+  }
   .switch_base {
-    padding: 1rem;
+    padding-left: .5rem;
+    padding-top: .5rem;
     text-align: center;
+    position: relative;
     &.left {text-align: left;}
     font-size: 0;
     max-width: 100%;
-    input {
+    input[name="column_input"],input[name="trend_input_"] {
       display: none;
       &:checked + label {
         background-color: $btn_color;
         color:#fff;
         box-shadow: 0 5px 15px -5px #00000070;
       }
-    }
-    label {
-      text-align: center;
-      white-space: nowrap;
-      border:1px solid $btn_color;
-      border-right:0;
-      min-width:6rem;
-      padding: 0 .5rem;
-      line-height: 2rem;
-      background-color:#fff;
-      font-size:.65rem;
-      color:$btn_color;
-      &:first-of-type {
-        border-radius: .5rem 0 0 .5rem;
+      + label {
+        text-align: center;
+        white-space: nowrap;
+        border:1px solid $btn_color;
+        border-right:0;
+        min-width:6rem;
+        padding: 0 .5rem;
+        line-height: 2rem;
+        background-color:#fff;
+        font-size:.65rem;
+        color:$btn_color;
+        &:first-of-type {
+          border-radius: .5rem 0 0 .5rem;
+        }
+        &:last-of-type {
+          border-radius: 0 .5rem .5rem 0;
+          border-right:1px solid $btn_color;
+        }
       }
-      &:last-of-type {
-        border-radius: 0 .5rem .5rem 0;
-        border-right:1px solid $btn_color;
+    }
+    input[id="custom_btn"] {
+      display: none;
+      &:checked + label {
+        + .modal_bs {
+          display: block;
+        }
+      }
+      + label {
+        text-align: center;
+        white-space: nowrap;
+        border:1px solid $btn_color;
+        padding: 0 .5rem;
+        line-height: 2rem;
+        border-radius: .5rem;
+        background-color:#fff;
+        font-size:.65rem;
+        color:$btn_color;
+        span {
+          margin-right: 4px;
+        }
+        &:hover,&.selected {
+          background-color: $btn_color;
+          color:#fff;
+        }
+        + .modal_bs {
+          display: none;
+          position: absolute;
+          top:3rem;
+          left:.5rem;
+          box-shadow: 0 15px 30px -6px rgba(#555,.2);
+          width:15rem;
+          border:1px solid $btn_color;
+          background-color: #fff;
+          z-index: 1000;
+          padding: .5rem;
+          border-radius: .5rem;
+          input {
+            appearance:radio;
+            &:checked + label {
+              color:$btn_color;
+            }
+          }
+          label {
+            font-size: .75rem;
+            padding: 0;
+          }
+          .select_bs {
+            display: grid;
+            grid-template-columns: 1fr 2rem;
+            height:2rem;
+            font-size: 1rem;
+            margin-top: .5rem;
+            select {
+              width:100%;
+              border:1px solid;
+              border-color:#ccc !important;
+              border-radius: 4px;
+              font-size: .75rem;
+              background-color: #fff;
+              padding: 4px .5rem;
+            }
+            button {
+              color:#fff;
+              border-radius: .25rem;
+              text-align:center;
+              background-color: $btn_color;
+            }
+          }
+        }
       }
     }
   }
@@ -1380,7 +1456,7 @@ html {
             padding:.5rem;
             border:1px solid;
             margin-bottom: .25rem;
-            border-radius: 10px;
+            border-radius: 2px;
             overflow: hidden;
             &.cell_1x2_box {
               padding: 0;
@@ -1550,7 +1626,7 @@ html {
       overflow: hidden;
       #particles {
         width:100%;
-        height:50%;
+        height:40%;
         max-width: 2500px;
         max-height: 1125px;
         position: absolute;
@@ -1684,7 +1760,7 @@ html {
         position: relative;
         float: left;
         &.cell_box,&.cell_grid_box .cell {
-          border-radius: 10px;
+          border-radius: 2px;
           overflow: hidden;
           box-shadow: 0 3px 8px -3px #00000070;
           background:linear-gradient(225deg,#fff,rgba($off_white,1));
@@ -1763,7 +1839,7 @@ html {
           position: absolute;
           bottom:4px;
           left:4px;
-          border-radius: 6px;
+          border-radius: 2px;
           max-width:calc(100% - 8px);
           line-height: 1.5rem;
           font-size: .6rem;
@@ -2854,10 +2930,10 @@ html {
           .box {
             min-height: 6rem;
             height:100%;
-            border-radius:10px;
+            border-radius:4px;
             position: relative;
             background-color: #fff;
-            // box-shadow: 0 3px 8px -3px #00000070;
+            box-shadow: 1px 2px 3px 0 rgba(#555,.2);
             display: grid;
             grid-template-rows:3rem 1fr;
             overflow: hidden;
