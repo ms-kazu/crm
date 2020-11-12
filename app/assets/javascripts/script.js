@@ -33,6 +33,16 @@ Number.prototype.to_devide = function(base) {
   if (this == 0 || base == 0) return 0;
   else return Math.round(this / base);
 }
+Number.prototype.to_one_point = function(base) {
+  let value = (this / base);
+  if (this == 0 || base == 0) {
+    return 0;
+  } else if (value >= 1000) {
+    return Math.round(value);
+  } else {
+    return Math.round((value * 10)) / 10;
+  }
+}
 Number.prototype.to_Perate = function(base) {
   if (this == 0 || base == 0) return 0;
   else return Math.round((this / base * 1000)) / 1000;

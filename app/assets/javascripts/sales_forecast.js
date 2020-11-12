@@ -160,7 +160,12 @@ var desc_function = (data,so) => {
       result.forEach(({period}) => {
         if (!day_length.includes(period)) day_length.push(period);
       });
-      week_objs.push(result.sum_val(`data_${column_type}`).to_devide(day_length.length).to_devide(objs.length));
+      week_objs.push(
+        (result.sum_val(`data_${column_type}`)
+        / day_length.length
+        / objs.length)
+        .to_Perate(1)
+      );
     }
 
     const desc_trend = () => {
@@ -202,8 +207,8 @@ var desc_function = (data,so) => {
 
                 } else {
                   let obj_data = week_objs[w];
-                  let obj_data_up = (obj_data * (1 + (100 - accuracy) / 100)).to_devide(1);
-                  let obj_data_down = (obj_data * (accuracy / 100)).to_devide(1);
+                  let obj_data_up = (obj_data * (1 + (100 - accuracy) / 100)).to_one_point(1);
+                  let obj_data_down = (obj_data * (accuracy / 100)).to_one_point(1);
                   data += obj_data;
                   data_up += obj_data_up;
                   data_down += obj_data_down;
@@ -360,12 +365,12 @@ var desc_function = (data,so) => {
       desc_graph();
     }
     const desc_summary = () => {
-      let data_0 = datas.filter((data) => data.period >= ts).sum_val(`data_${column_type}`);
-      let data_1 = data_0 + month_data;
-      let data_2 = (data_1 * (1+(100 - accuracy)/100)).to_devide(1);
-      let data_3 = (data_1 * (accuracy / 100)).to_devide(1);
-      let data_4 = month_data;
-      let data_5 = month_data.to_devide(left_day_length);
+      let data_0 = datas.filter((data) => data.period >= ts).sum_val(`data_${column_type}`).to_one_point(1);
+      let data_1 = (data_0 + month_data).to_one_point(1);
+      let data_2 = (data_1 * (1+(100 - accuracy)/100)).to_one_point(1);
+      let data_3 = (data_1 * (accuracy / 100)).to_one_point(1);
+      let data_4 = month_data.to_one_point(1);
+      let data_5 = month_data.to_one_point(left_day_length);
 
       $('#summary_base').html(
         `
@@ -425,7 +430,7 @@ var desc_function = (data,so) => {
           let rslt = result.filter(({week}) => week == i);
           let data = rslt.sum_val(`data_${column_type}`);
 
-          ave_arr.push(data.to_devide(rslt.length));
+          ave_arr.push(data.to_one_point(rslt.length));
         }
         let achieve = result.filter(({period}) => period >= ts).sum_val(`data_${column_type}`);
         let forecast = 0;
@@ -453,10 +458,10 @@ var desc_function = (data,so) => {
         `
         <tr>
           <th>${cell.obj_name}</th>
-          <td>${dimension_0}${achieve.toLocaleString()}${dimension_1}</td>
-          <td>${dimension_0}${(achieve + forecast).toLocaleString()}${dimension_1}</td>
-          <td>${dimension_0}${forecast.toLocaleString()}${dimension_1}</td>
-          <td>${dimension_0}${(forecast.to_devide(left_day_length)).toLocaleString()}${dimension_1}</td>
+          <td>${dimension_0}${achieve.to_one_point(1).toLocaleString()}${dimension_1}</td>
+          <td>${dimension_0}${(achieve + forecast).to_one_point(1).toLocaleString()}${dimension_1}</td>
+          <td>${dimension_0}${forecast.to_one_point(1).toLocaleString()}${dimension_1}</td>
+          <td>${dimension_0}${(forecast.to_one_point(left_day_length)).toLocaleString()}${dimension_1}</td>
           <td>${obj_accuracy}%</td>
         </tr>
         `;
@@ -470,9 +475,9 @@ var desc_function = (data,so) => {
         <tr>
           <th>個別集計予測サマリ</th>
           <th>${dimension_0}${achieve.toLocaleString()}${dimension_1}</th>
-          <th>${dimension_0}${(achieve + sum_forecast).toLocaleString()}${dimension_1}</th>
-          <th>${dimension_0}${sum_forecast.toLocaleString()}${dimension_1}</th>
-          <th>${dimension_0}${(sum_forecast.to_devide(left_day_length)).toLocaleString()}${dimension_1}</th>
+          <th>${dimension_0}${(achieve + sum_forecast).to_one_point(1).toLocaleString()}${dimension_1}</th>
+          <th>${dimension_0}${sum_forecast.to_one_point(1).toLocaleString()}${dimension_1}</th>
+          <th>${dimension_0}${(sum_forecast.to_one_point(left_day_length)).toLocaleString()}${dimension_1}</th>
           <td>${ave_accuracy}%</td>
         </tr>
         `;
