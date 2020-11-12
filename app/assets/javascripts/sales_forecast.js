@@ -156,7 +156,11 @@ var desc_function = (data,so) => {
 
     for (let i = 0;i < 7;i++) {
       let result = datas.filter((data) => data.period <= p1 && data.week == i);
-      week_objs.push(result.sum_val(`data_${column_type}`).to_devide(result.length));
+      let day_length = [];
+      result.forEach(({period}) => {
+        if (!day_length.includes(period)) day_length.push(period);
+      });
+      week_objs.push(result.sum_val(`data_${column_type}`).to_devide(day_length.length).to_devide(objs.length));
     }
 
     const desc_trend = () => {
@@ -191,6 +195,7 @@ var desc_function = (data,so) => {
                 data = 0,
                 data_up = 0,
                 data_down = 0;
+
               objs.forEach((cell) => {
                 let open = opens.filter((cel) => cel.period == label && cel.obj_id == cell.obj_id).sum_val(`status`) | 0;
                 if (st == 1 && open == 1) {
@@ -204,7 +209,6 @@ var desc_function = (data,so) => {
                   data_down += obj_data_down;
                 }
               });
-
               month_data += data;
 
               forecast_arr.push(data);
@@ -524,9 +528,9 @@ var desc_function = (data,so) => {
     desc_static_sections();
   });
   $(document).off('input','input[name="column_input"]').on('input','input[name="column_input"]',function() {
-    desc_static_sections();
     $('label[for="custom_btn"]').removeClass('selected');
     custom_menu_check = false;
+    desc_static_sections();
   });
   $(document).off('click','#custom_menu_btn').on('click','#custom_menu_btn',async function() {
     $('#custom_btn').prop('checked',false);
