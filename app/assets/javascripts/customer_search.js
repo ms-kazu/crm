@@ -818,6 +818,7 @@ var desc_function = (data) => {
           ap +=
           `
           <tr>
+            <th>${cell.ptno}</th>
             <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.cname}</th>
             <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.ckana}</th>
             <th>${cell.clinic_name}</th>
@@ -842,6 +843,7 @@ var desc_function = (data) => {
         $('#download_table_base').html(
           `
           <tr>
+            <th>患者番号</th>
             <th>名前</th>
             <th>かな</th>
             <th>院</th>

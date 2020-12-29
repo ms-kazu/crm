@@ -1376,7 +1376,6 @@ var desc_obj_page = () => {
           c_datas.sum_val(`data_3`),
           c_datas.sum_val(`data_4`)
         ];
-        console.log(objs);
 
         const desc_money = () => {
           let data0 = objs[0];
@@ -8798,7 +8797,6 @@ var desc_obj_page = () => {
         const desc_menu_table = () => {
           let ap = ``;
           let result = [] = obj;
-          console.log(result);
           result.forEach((cell) => {
             let data_0 = cell.data_0;
             let data_1 = cell.data_1;
@@ -9791,11 +9789,11 @@ var desc_obj_page = () => {
       if (m_select) {
         let m_id = getDOM(`m_id`).value;
         $(`#menu_select option[value="${m_id}"]`).prop('selected',true);
+        console.log(m_id);
       }
     }
     const desc_menu_content = (data) => {
       if (!data.data.data.exist_val()) {
-        // $('#content_base').html(`<div class="loading_base inline">期間内データがありません。</div>`);
         alert(`期間内データがありませんでした。`);
         return;
       }
@@ -15099,6 +15097,7 @@ var desc_obj_page = () => {
               ap +=
               `
               <tr>
+                <th>${cell.ptno}</th>
                 <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                 <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
                 <th>${cell.tel}</th>
@@ -15123,6 +15122,7 @@ var desc_obj_page = () => {
             $('#download_table_base').html(
               `
               <tr>
+                <th>患者番号</th>
                 <th>名前</th>
                 <th>かな</th>
                 <th>電話番号</th>
@@ -16595,10 +16595,10 @@ var desc_obj_page = () => {
 
           cuso.forEach((cell) => {
             let clinic = co.filter(({obj_id}) => obj_id == cell.clinic_id)[0];
-
             ap +=
             `
             <tr>
+              <th>${cell.ptno}</th>
               <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
               <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_kana}</th>
               <th>${cell.period}</th>
@@ -16621,6 +16621,7 @@ var desc_obj_page = () => {
           $('#download_table_base').html(
             `
             <tr>
+              <th>患者番号</th>
               <th>名前</th>
               <th>かな</th>
               <th>最終来院日</th>
@@ -17311,7 +17312,6 @@ var desc_obj_query_data = () => {
   let cid = $('#consb option:selected').prop('value');
   let cps = getDOM(`cpi_s`).value || "0000-00-00";
   let cpe = getDOM(`cpi_e`).value || "0000-00-00";
-
   (() => {
     let cpts = cpt ?`比較する`:`比較しない`;
     let cpa = cpt ? `<div class="cell inline">${cps.str_date(`.`)} - ${cpe.str_date(`.`)}</div>` : ``;

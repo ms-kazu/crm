@@ -376,6 +376,10 @@ var desc_function = (data) => {
             let data_2 = cate_seikyu_0 + cate_seikyu_1 + cate_seikyu_2 + data_1;
             let data_3 = data_1;
 
+            let pay_cash = result.sum_val('pay_cash');
+            let pay_credit = result.sum_val('pay_credit');
+            let chousei = result.sum_val('chousei');
+
             ap +=
             `
             <tr>
@@ -402,6 +406,9 @@ var desc_function = (data) => {
               <td>${cate_mado_3}</td>
               <td>${cate_mado_4}</td>
               <td>${data_3}</td>
+              <td>${pay_cash}</td>
+              <td>${pay_credit}</td>
+              <td>${chousei}</td>
             </tr>
             `;
           }
@@ -431,13 +438,16 @@ var desc_function = (data) => {
                 <th>自費売上</th>
                 <th>物販個数</th>
                 <th>物販売上</th>
-                <th>現金売上</th>
+                <th>窓口売上</th>
                 <th>売上合計</th>
                 <th>柔整負担</th>
                 <th>鍼灸負担</th>
                 <th>自費売上</th>
                 <th>物販売上</th>
                 <th>収入合計</th>
+                <th>現金売上</th>
+                <th>クレジット売上</th>
+                <th>調整額</th>
               </tr>
               ${ap}
             </table>

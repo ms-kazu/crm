@@ -105,12 +105,12 @@ var desc_function = (data,so) => {
         </div>
       </div>
       <div class="section">
-        <div class="section_title">人気メニュー</div>
+        <div class="section_title">人気の自費メニュー</div>
         <div class="cells_box">
           <div class="cell cell_2x1 inline">
             <div class="box cell_link">
               <div class="cell_title text_overflow">
-                男女別人気メニュー
+                男女別人気自費メニュー
                 <div class="icon inline help_tips" data-title="顧客属性毎の人気メニュー" data-help="顧客属性毎の人気メニューは上位10位まで表示されます。また、施術された回数と売上の割合は自費メニューの総施術数と総売上の比です。">
                   <i class="fas fa-question"></i>
                 </div>
@@ -132,7 +132,7 @@ var desc_function = (data,so) => {
           <div class="cell cell_2x1 inline">
             <div class="box cell_link">
               <div class="cell_title text_overflow">
-                世代別人気メニュー
+                世代別人気自費メニュー
               </div>
               <div class="content _segment_">
                 <div class="table_base table_base1 table_base2 table_base_th ">
@@ -157,7 +157,7 @@ var desc_function = (data,so) => {
           <div class="cell cell_4x1 inline">
             <div class="box cell_link">
               <div class="cell_title cell_title_r text_overflow">
-                男女世代別人気メニュー
+                男女世代別人気自費メニュー
                 <div class="icon inline help_tips" data-title="テーブルセルのクリック" data-help="テーブルセルをクリックすると他順位,他セグメントの同じメニューを合算した概要が表示されます。">
                   <i class="fas fa-question"></i>
                 </div>
@@ -2665,6 +2665,7 @@ var desc_function = (data,so) => {
               ap +=
               `
               <tr>
+                <th>${cell.ptno}</th>
                 <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                 <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
                 <th>${cell.tel}</th>
@@ -2693,6 +2694,7 @@ var desc_function = (data,so) => {
             $('#repeat_excel_table').append(
               `
               <tr>
+                <th>患者番号</th>
                 <th>名前</th>
                 <th>かな</th>
                 <th>電話番号</th>
@@ -3487,6 +3489,7 @@ var desc_function = (data,so) => {
                 `
                 <tr>
                   <th>${i+1}</th>
+                  <th>${cell.ptno}</th>
                   <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                   <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
                   <th>${cell.tel}</th>
@@ -3515,6 +3518,7 @@ var desc_function = (data,so) => {
                 <table data-sheet-name="デシルランク${i+1}">
                   <tr>
                     <th>デシルランク</th>
+                    <th>患者番号</th>
                     <th>名前</th>
                     <th>かな</th>
                     <th>電話番号</th>
@@ -4055,11 +4059,11 @@ var desc_function = (data,so) => {
                   let result = g_obj[i];
 
                   result.forEach((cell) => {
-
                     ap +=
                     `
                     <tr>
-                      <th>${name_arr[i+1]}</th>
+                      <th>${name_arr[i]}</th>
+                      <th>${cell.ptno}</th>
                       <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                       <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
                       <th>${cell.tel}</th>
@@ -4088,6 +4092,7 @@ var desc_function = (data,so) => {
                     <table data-sheet-name="${name_arr[i]}">
                       <tr>
                         <th>クラスターランク</th>
+                        <th>患者番号</th>
                         <th>名前</th>
                         <th>かな</th>
                         <th>電話番号</th>
@@ -4319,6 +4324,7 @@ var desc_function = (data,so) => {
                     `
                     <tr>
                       <th>${i}</th>
+                      <th>${cell.ptno}</th>
                       <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                       <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
                       <th>${cell.tel}</th>
@@ -4347,6 +4353,7 @@ var desc_function = (data,so) => {
                     <table data-sheet-name="RF-${i}点">
                       <tr>
                         <th>RFランク</th>
+                        <th>患者番号</th>
                         <th>名前</th>
                         <th>かな</th>
                         <th>電話番号</th>
@@ -4585,6 +4592,7 @@ var desc_function = (data,so) => {
                     `
                     <tr>
                       <th>${i}</th>
+                      <th>${cell.ptno}</th>
                       <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                       <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
                       <th>${cell.tel}</th>
@@ -4613,6 +4621,7 @@ var desc_function = (data,so) => {
                     <table data-sheet-name="RFM-${i}点">
                       <tr>
                         <th>RFMランク</th>
+                        <th>患者番号</th>
                         <th>名前</th>
                         <th>かな</th>
                         <th>電話番号</th>

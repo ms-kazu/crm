@@ -1260,7 +1260,12 @@ var desc_function = (data,so) => {
           result.forEach(({period}) => {
             if (!day_length.includes(period)) day_length.push(period);
           });
-          week_objs.push(result.sum_val(`data_0`).to_devide(day_length.length).to_devide(objs.length));
+          week_objs.push(
+            result
+              .sum_val(`data_0`)
+              .to_devide(day_length.length)
+              .to_devide(objs.length) | 0
+          );
         }
       }
       const desc_trend = () => {
@@ -3346,7 +3351,7 @@ var desc_function = (data,so) => {
         <table id="left_table">
           <thead>
             <tr>
-              <th></th>
+              <th>患者名</th>
               <th>性別</th>
               <th>年齢</th>
             </tr>
@@ -3375,7 +3380,8 @@ var desc_function = (data,so) => {
           ap +=
           `
           <tr>
-            <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.cname}</th>
+            <th>${cell.ptno}</th>
+            <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
             <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.ckana}</th>
             <th>${cell.clinic_name}</th>
             <th>${cell.tel}</th>
@@ -3395,6 +3401,7 @@ var desc_function = (data,so) => {
         $('#download_table_base').html(
           `
           <tr>
+            <th>患者番号</th>
             <th>名前</th>
             <th>かな</th>
             <th>院</th>

@@ -157,15 +157,22 @@ var desc_function = (data,so) => {
     for (let i = 0;i < 7;i++) {
       let result = datas.filter((data) => data.period <= p1 && data.week == i);
       let day_length = [];
+
+
       result.forEach(({period}) => {
         if (!day_length.includes(period)) day_length.push(period);
       });
-      week_objs.push(
-        (result.sum_val(`data_${column_type}`)
-        / day_length.length
-        / objs.length)
-        .to_Perate(1)
-      );
+
+      if (result.sum_val(`data_${column_type}`)) {
+        week_objs.push(
+          (result.sum_val(`data_${column_type}`)
+          / day_length.length
+          / objs.length)
+          .to_Perate(1)
+        );
+      } else {
+        week_objs.push(0);
+      }
     }
 
     const desc_trend = () => {
