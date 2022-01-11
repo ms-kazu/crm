@@ -104,7 +104,9 @@ var desc_function = (data) => {
     (() => {
       let ap = ``;
       let day_pa = period_map(ps,pe,0);
+	    console.log(datas);
 
+	    console.log(objs);
       objs.forEach((cell) => {
         let result = datas.filter(({obj_id}) => obj_id == cell.obj_id);
 
@@ -119,6 +121,12 @@ var desc_function = (data) => {
         let data_8 = result.sum_val(`data_8`);
         let data_9 = result.sum_val(`data_9`);
         let data_10 = result.sum_val(`data_10`);
+	let data_11 = result.sum_val(`data_11`);      
+
+	let data_12 = result.sum_val(`data_12`);
+	let data_13 = result.sum_val(`data_13`);
+	let data_14 = result.sum_val(`data_14`);
+	let data_15 = result.sum_val(`data_15`);
 
         let lity_0 = data_3.to_devide(data_5);
         let lity_1 = data_3.to_devide(data_9);
@@ -139,43 +147,65 @@ var desc_function = (data) => {
         let cate_f_0 = cate_0.sum_val(`data_2`);
         let cate_c_0 = cate_0.sum_val(`data_4`);
         let cate_a_0 = cate_c_0.to_Perate(day_pa.length);
+	let cate_pure_0 = cate_0.sum_val(`pure_customer`);
+	let cate_newer_0 = cate_0.sum_val(`newer`);
+	let cate_cured_0 = cate_0.sum_val(`cured`);
 
         let cate_s_1 = cate_1.sum_val(`data_1`);
         let cate_f_1 = cate_1.sum_val(`data_2`);
         let cate_c_1 = cate_1.sum_val(`data_4`);
         let cate_a_1 = cate_c_1.to_Perate(day_pa.length);
+	let cate_pure_1 = cate_1.sum_val(`pure_customer`);
+        let cate_newer_1 = cate_1.sum_val(`newer`);
+        let cate_cured_1 = cate_1.sum_val(`cured`);
 
         let cate_s_2 = cate_2.sum_val(`data_1`);
         let cate_f_2 = cate_2.sum_val(`data_2`);
         let cate_c_2 = cate_2.sum_val(`data_4`);
         let cate_a_2 = cate_c_2.to_Perate(day_pa.length);
+	let cate_pure_2 = cate_2.sum_val(`pure_customer`);
+        let cate_newer_2 = cate_2.sum_val(`newer`);
+        let cate_cured_2 = cate_2.sum_val(`cured`);
 
         let cate_s_3 = cate_3.sum_val(`data_1`);
         let cate_f_3 = cate_3.sum_val(`data_2`);
         let cate_c_3 = cate_3.sum_val(`data_4`);
         let cate_a_3 = cate_c_3.to_Perate(day_pa.length);
+        let cate_pure_3 = cate_3.sum_val(`pure_customer`);
+        let cate_newer_3 = cate_3.sum_val(`newer`);
+        let cate_cured_3 = cate_3.sum_val(`cured`);
 
         let cate_s_4 = cate_4.sum_val(`data_1`);
         let cate_f_4 = cate_4.sum_val(`data_2`);
         let cate_c_4 = cate_4.sum_val(`data_4`);
         let cate_a_4 = cate_c_4.to_Perate(day_pa.length);
+        let cate_pure_4 = cate_4.sum_val(`pure_customer`);
+        let cate_newer_4 = cate_4.sum_val(`newer`);
+        let cate_cured_4 = cate_4.sum_val(`cured`);
 
         let cate_s_5 = cate_5.sum_val(`data_1`);
         let cate_f_5 = cate_5.sum_val(`data_2`);
         let cate_c_5 = cate_5.sum_val(`data_4`);
         let cate_a_5 = cate_c_5.to_Perate(day_pa.length);
+        let cate_pure_5 = cate_5.sum_val(`pure_customer`);
+        let cate_newer_5 = cate_5.sum_val(`newer`);
+        let cate_cured_5 = cate_5.sum_val(`cured`);
 
         ap +=
         `
         <tr>
-          <th>${cell.obj_name}</th>
+	  <th>${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}</th>
           <td>${data_0}</td>
           <td>${data_1}</td>
           <td>${data_2}</td>
-          <td>${data_3}</td>
+          <td>${data_12}</td>
+	  <td>${data_13}</td>
+	  <td>${data_3}</td>
+	  <td>${data_14}</td>
+	  <td>${data_15}</td>
           <td>${data_4}</td>
           <td>${data_5}</td>
-          <td>${data_6}</td>
+          <td>${data_11}</td>
           <td>${data_7}</td>
           <td>${data_8}</td>
           <td>${data_9}</td>
@@ -190,31 +220,49 @@ var desc_function = (data) => {
           <td>${cate_s_0}</td>
           <td>${cate_f_0}</td>
           <td>${cate_c_0}</td>
+	  <td>${cate_pure_0}</td>
+	  <td>${cate_newer_0}</td>
+	  <td>${cate_cured_0}</td>
           <td>${cate_a_0}</td>
 
           <td>${cate_s_1}</td>
           <td>${cate_f_1}</td>
           <td>${cate_c_1}</td>
+	  <td>${cate_pure_1}</td>
+          <td>${cate_newer_1}</td>
+          <td>${cate_cured_1}</td>
           <td>${cate_a_1}</td>
 
           <td>${cate_s_2}</td>
           <td>${cate_f_2}</td>
           <td>${cate_c_2}</td>
+	  <td>${cate_pure_2}</td>
+          <td>${cate_newer_2}</td>
+          <td>${cate_cured_2}</td>
           <td>${cate_a_2}</td>
 
           <td>${cate_s_3}</td>
           <td>${cate_f_3}</td>
           <td>${cate_c_3}</td>
+	  <td>${cate_pure_3}</td>
+          <td>${cate_newer_3}</td>
+          <td>${cate_cured_3}</td>
           <td>${cate_a_3}</td>
 
           <td>${cate_s_4}</td>
           <td>${cate_f_4}</td>
           <td>${cate_c_4}</td>
+	  <td>${cate_pure_4}</td>
+          <td>${cate_newer_4}</td>
+          <td>${cate_cured_4}</td>
           <td>${cate_a_4}</td>
 
           <td>${cate_s_5}</td>
           <td>${cate_f_5}</td>
           <td>${cate_c_5}</td>
+	  <td>${cate_pure_5}</td>
+          <td>${cate_newer_5}</td>
+          <td>${cate_cured_5}</td>
           <td>${cate_a_5}</td>
         </tr>
         `;
@@ -236,6 +284,10 @@ var desc_function = (data) => {
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
           <th></th>
           <th></th>
           <th></th>
@@ -250,33 +302,55 @@ var desc_function = (data) => {
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
           <th>鍼灸</th>
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
           <th>マッサージ</th>
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
           <th>自賠責</th>
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
           <th>労災</th>
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
           <th>生活保護</th>
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
         </tr>
         <tr>
           <th>--</th>
           <th>総合売上</th>
           <th>保険請求額</th>
           <th>保険負担金</th>
-          <th>自費売上</th>
+          <th>自費施術売上</th>
+	  <th>物販売上</th>
+	  <th>自費総合売上</th>
+	  <th>自費施術回数</th>
+	  <th>物販数</th>
           <th>施術回数</th>
           <th>来院数</th>
           <th>純患数</th>
@@ -294,31 +368,49 @@ var desc_function = (data) => {
           <th>請求額</th>
           <th>負担金</th>
           <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>1日平均来院</th>
 
           <th>請求額</th>
           <th>負担金</th>
           <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>1日平均来院</th>
 
           <th>請求額</th>
           <th>負担金</th>
           <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>1日平均来院</th>
 
           <th>請求額</th>
           <th>負担金</th>
           <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>1日平均来院</th>
 
           <th>請求額</th>
           <th>負担金</th>
           <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>1日平均来院</th>
 
           <th>請求額</th>
           <th>負担金</th>
           <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>1日平均来院</th>
         </tr>
 
@@ -414,9 +506,9 @@ var desc_function = (data) => {
           }
           $('#table_clinic_base').append(
             `
-            <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
+            <table data-sheet-name="${cell.obj_id}-${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}">
               <tr>
-                <th>${cell.obj_name}</th>
+		${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}
                 <th>${ps.str_date(`.`)}</th>
                 <th>~</th>
                 <th>${pe.str_date(`.`)}</th>
@@ -445,13 +537,92 @@ var desc_function = (data) => {
                 <th>自費売上</th>
                 <th>物販売上</th>
                 <th>収入合計</th>
-                <th>現金売上</th>
+                <th>現金実査</th>
                 <th>クレジット売上</th>
                 <th>調整額</th>
               </tr>
               ${ap}
             </table>
             `
+          );
+        });
+      } else if (clt_id == 10025) {
+	objs = objs.filter(({obj_id}) => obj_id >= 0);
+        objs.forEach((cell) => {
+          let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
+
+          let ap = ``;
+
+          for (let i = 0;i < pa.length;i++) {
+            let label = pa[i];
+      
+            let result = obj.filter(({period}) => period == label);
+
+            let crnum = result.sum_val(`crnum`),
+            firstnum = result.sum_val(`firstnum`),
+            hoken_futan = result.sum_val(`hoken_futan`),
+            shiteiko = result.sum_val(`shiteiko`),
+            homon_shinkyu = result.sum_val(`homon_shinkyu`),
+            tokuden = result.sum_val(`tokuden`),
+            buppin = result.sum_val(`buppin`),
+            hari = result.sum_val(`hari`),
+            sanso = result.sum_val(`sanso`),
+            shindansho = result.sum_val(`shindansho`),
+            jihi = result.sum_val(`jihi`),
+            bumon = hoken_futan + shiteiko + homon_shinkyu + tokuden + buppin + hari + sanso + shindansho + jihi,
+            henkin = result.sum_val(`henkin`),
+            total = bumon + henkin;
+
+            ap +=
+            `
+            <tr>
+              <th>${label.str_date(`.`)}</th>
+              <td>${crnum}</td>
+              <td>${firstnum}</td>
+              <td>${hoken_futan}</td>
+              <td>${shiteiko}</td>
+              <td>${homon_shinkyu}</td>
+              <td>${tokuden}</td>
+              <td>${buppin}</td>
+              <td>${hari}</td>
+              <td>${sanso}</td>
+              <td>${shindansho}</td>
+              <td>${jihi}</td>
+              <td>${bumon}</td>
+              <td>${henkin}</td>
+              <td>${total}</td>
+            </tr>
+            `;
+          }
+          $('#table_clinic_base').append(
+          `
+          <table data-sheet-name="${cell.obj_id}-${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}">
+            <tr>
+	      <th>${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}</tH>
+              <th>${ps.str_date(`.`)}</th>
+              <th>~</th>
+              <th>${pe.str_date(`.`)}</th>
+            </tr>
+            <tr>
+              <th>--</th>
+              <th>来院数</th>
+              <th>新患数</th>
+              <th>一部負担金・往診</th>
+              <th>強化指定校</th>
+              <th>訪問鍼灸</th>
+              <th>小計(特電)</th>
+              <th>小計(物品)</th>
+              <th>小計(鍼灸・美容)</th>
+              <th>小計(酸素)</th>
+              <th>小計(診断書)</th>
+              <th>自費</th>
+              <th>部門(1,2,3,4,5)</th>
+              <th>返金額</th>
+              <th>合計</th>
+            </tr>
+            ${ap}
+          </table>
+          `
           );
         });
       } else {
@@ -480,6 +651,12 @@ var desc_function = (data) => {
             let data_9 = result.sum_val(`data_9`);
             let data_10 = result.sum_val(`data_10`);
 
+
+            let data_12 = result.sum_val(`data_12`);
+            let data_13 = result.sum_val(`data_13`);
+            let data_14 = result.sum_val(`data_14`);
+            let data_15 = result.sum_val(`data_15`);
+
             let lity_0 = data_3.to_devide(data_5);
             let lity_1 = data_3.to_devide(data_9);
             let lity_2 = data_5.to_Perate(data_6);
@@ -500,31 +677,49 @@ var desc_function = (data) => {
             let cate_f_0 = cate_0.sum_val(`data_2`);
             let cate_c_0 = cate_0.sum_val(`data_4`);
             let cate_a_0 = cate_c_0.to_Perate(day_pa.length);
+            let cate_pure_0 = cate_0.sum_val(`pure_customer`);
+let cate_newer_0 = cate_0.sum_val(`newer`);
+let cate_cured_0 = cate_0.sum_val(`cured`);
 
             let cate_s_1 = cate_1.sum_val(`data_1`);
             let cate_f_1 = cate_1.sum_val(`data_2`);
             let cate_c_1 = cate_1.sum_val(`data_4`);
             let cate_a_1 = cate_c_1.to_Perate(day_pa.length);
+let cate_pure_1 = cate_1.sum_val(`pure_customer`);
+let cate_newer_1 = cate_1.sum_val(`newer`);
+let cate_cured_1 = cate_1.sum_val(`cured`);
 
             let cate_s_2 = cate_2.sum_val(`data_1`);
             let cate_f_2 = cate_2.sum_val(`data_2`);
             let cate_c_2 = cate_2.sum_val(`data_4`);
             let cate_a_2 = cate_c_2.to_Perate(day_pa.length);
+let cate_pure_2 = cate_2.sum_val(`pure_customer`);
+let cate_newer_2 = cate_2.sum_val(`newer`);
+let cate_cured_2 = cate_2.sum_val(`cured`);
 
             let cate_s_3 = cate_3.sum_val(`data_1`);
             let cate_f_3 = cate_3.sum_val(`data_2`);
             let cate_c_3 = cate_3.sum_val(`data_4`);
             let cate_a_3 = cate_c_3.to_Perate(day_pa.length);
+let cate_pure_3 = cate_3.sum_val(`pure_customer`);
+let cate_newer_3 = cate_3.sum_val(`newer`);
+let cate_cured_3 = cate_3.sum_val(`cured`);
 
             let cate_s_4 = cate_4.sum_val(`data_1`);
             let cate_f_4 = cate_4.sum_val(`data_2`);
             let cate_c_4 = cate_4.sum_val(`data_4`);
             let cate_a_4 = cate_c_4.to_Perate(day_pa.length);
+let cate_pure_4 = cate_4.sum_val(`pure_customer`);
+let cate_newer_4 = cate_4.sum_val(`newer`);
+let cate_cured_4 = cate_4.sum_val(`cured`);
 
             let cate_s_5 = cate_5.sum_val(`data_1`);
             let cate_f_5 = cate_5.sum_val(`data_2`);
             let cate_c_5 = cate_5.sum_val(`data_4`);
             let cate_a_5 = cate_c_5.to_Perate(day_pa.length);
+let cate_pure_5 = cate_5.sum_val(`pure_customer`);
+let cate_newer_5 = cate_5.sum_val(`newer`);
+let cate_cured_5 = cate_5.sum_val(`cured`);
 
 
             let repe = repeat.filter(({period}) => period == label);
@@ -558,7 +753,12 @@ var desc_function = (data) => {
               <td>${data_0}</td>
               <td>${data_1}</td>
               <td>${data_2}</td>
+	      <td>${data_12}</td>
+              <td>${data_13}</td>
               <td>${data_3}</td>
+              <td>${data_14}</td>
+              <td>${data_15}</td>
+
               <td>${data_4}</td>
               <td>${data_5}</td>
               <td>${data_6}</td>
@@ -576,32 +776,44 @@ var desc_function = (data) => {
               <td>${cate_s_0}</td>
               <td>${cate_f_0}</td>
               <td>${cate_c_0}</td>
-              <td>${cate_a_0}</td>
+	      <td>${cate_pure_0}</td>
+<td>${cate_newer_0}</td>
+<td>${cate_cured_0}</td>
 
               <td>${cate_s_1}</td>
               <td>${cate_f_1}</td>
               <td>${cate_c_1}</td>
-              <td>${cate_a_1}</td>
+	      <td>${cate_pure_1}</td>
+<td>${cate_newer_1}</td>
+<td>${cate_cured_1}</td>
 
               <td>${cate_s_2}</td>
               <td>${cate_f_2}</td>
               <td>${cate_c_2}</td>
-              <td>${cate_a_2}</td>
+	      <td>${cate_pure_2}</td>
+<td>${cate_newer_2}</td>
+<td>${cate_cured_2}</td>
 
               <td>${cate_s_3}</td>
               <td>${cate_f_3}</td>
               <td>${cate_c_3}</td>
-              <td>${cate_a_3}</td>
+	      <td>${cate_pure_3}</td>
+<td>${cate_newer_3}</td>
+<td>${cate_cured_3}</td>
 
               <td>${cate_s_4}</td>
               <td>${cate_f_4}</td>
               <td>${cate_c_4}</td>
-              <td>${cate_a_4}</td>
+	      <td>${cate_pure_4}</td>
+<td>${cate_newer_4}</td>
+<td>${cate_cured_4}</td>
 
               <td>${cate_s_5}</td>
               <td>${cate_f_5}</td>
               <td>${cate_c_5}</td>
-              <td>${cate_a_5}</td>
+	      <td>${cate_pure_5}</td>
+<td>${cate_newer_5}</td>
+<td>${cate_cured_5}</td>
 
               <td>${repe_0.sum_val('count')}</td>
               <td>${repe_0.sum_val('count').to_perate(repe_origin)}%</td>
@@ -634,9 +846,9 @@ var desc_function = (data) => {
 
           $('#table_clinic_base').append(
             `
-            <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
+            <table data-sheet-name="${cell.obj_id}-${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}">
               <tr>
-                <th>${cell.obj_name}</th>
+		<th>${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.obj_name}</th>
                 <th>${ps.str_date(`.`)}</th>
                 <th>~</th>
                 <th>${pe.str_date(`.`)}</th>
@@ -646,6 +858,10 @@ var desc_function = (data) => {
                 <th>主要項目</th>
                 <th></th>
                 <th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -665,27 +881,38 @@ var desc_function = (data) => {
                 <th></th>
                 <th></th>
                 <th></th>
+		<th></th>
+		<th></th>
                 <th>鍼灸</th>
                 <th></th>
                 <th></th>
-                <th></th>
+		<th></th>
+		<th></th>
+		<th></th>
                 <th>マッサージ</th>
                 <th></th>
                 <th></th>
                 <th></th>
+		<th></th>
+		<th></th>
                 <th>自賠責</th>
                 <th></th>
                 <th></th>
                 <th></th>
+		<th></th>
+		<th></th>
                 <th>労災</th>
                 <th></th>
                 <th></th>
-                <th></th>
+		<th></th>
+		<th></th>
+		<th></th>
                 <th>生活保護</th>
                 <th></th>
                 <th></th>
-                <th></th>
-
+		<th></th>
+		<th></th>
+		<th></th>
                 <th>継続率</th>
                 <th></th>
                 <th></th>
@@ -715,7 +942,11 @@ var desc_function = (data) => {
                 <th>総合売上</th>
                 <th>保険請求額</th>
                 <th>保険負担金</th>
-                <th>自費売上</th>
+		<th>自費施術売上</th>
+                <th>物販売上</th>
+                <th>自費総合売上</th>
+                <th>自費施術回数</th>
+                <th>物販数</th>
                 <th>施術回数</th>
                 <th>来院数</th>
                 <th>純患数</th>
@@ -732,32 +963,43 @@ var desc_function = (data) => {
                 <th>請求額</th>
                 <th>負担金</th>
                 <th>来院数</th>
-                <th>1日平均来院数</th>
+		<th>純患数</th>
+		<th>新患数</th>
+		<th>完治者数</th>
 
                 <th>請求額</th>
                 <th>負担金</th>
                 <th>来院数</th>
-                <th>1日平均来院数</th>
+		<th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
 
                 <th>請求額</th>
                 <th>負担金</th>
                 <th>来院数</th>
-                <th>1日平均来院数</th>
+		<th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
+                <th>請求額</th>
+                <th>負担金</th>
+                <th>来院数</th>
+		<th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
 
                 <th>請求額</th>
                 <th>負担金</th>
                 <th>来院数</th>
-                <th>1日平均来院数</th>
+		<th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
 
                 <th>請求額</th>
                 <th>負担金</th>
                 <th>来院数</th>
-                <th>1日平均来院数</th>
-
-                <th>請求額</th>
-                <th>負担金</th>
-                <th>来院数</th>
-                <th>1日平均来院数</th>
+		<th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
 
                 <th>1回目人数</th>
                 <th>1回目維持率</th>
@@ -842,6 +1084,18 @@ var desc_function = (data) => {
         let data_7 = result.sum_val(`data_7`);
         let data_8 = result.sum_val(`data_8`);
         let data_9 = result.sum_val(`data_9`);
+	let data_11 = result.sum_val(`data_11`);      
+
+	if (clt_id == 10010) {
+          if (!data_11 && cell.sf_enabled == 0) {
+            return;
+          }
+	}
+
+	let data_12 = result.sum_val(`data_12`);
+        let data_13 = result.sum_val(`data_13`);
+        let data_14 = result.sum_val(`data_14`);
+        let data_15 = result.sum_val(`data_15`);
 
         let lity_0 = data_3.to_devide(data_5);
         let lity_1 = data_3.to_devide(data_9);
@@ -860,29 +1114,62 @@ var desc_function = (data) => {
 
         let cate_s_0 = cate_0.sum_val(`data_1`);
         let cate_f_0 = cate_0.sum_val(`data_2`);
+	let cate_c_0 = cate_0.sum_val(`data_4`);
+	let cate_pure_0 = cate_0.sum_val(`pure_customer`);
+let cate_newer_0 = cate_0.sum_val(`newer`);
+let cate_cured_0 = cate_0.sum_val(`cured`);
+
         let cate_s_1 = cate_1.sum_val(`data_1`);
         let cate_f_1 = cate_1.sum_val(`data_2`);
+	let cate_c_1 = cate_1.sum_val(`data_4`);
+	let cate_pure_1 = cate_1.sum_val(`pure_customer`);
+let cate_newer_1 = cate_1.sum_val(`newer`);
+let cate_cured_1 = cate_1.sum_val(`cured`);
+
         let cate_s_2 = cate_2.sum_val(`data_1`);
         let cate_f_2 = cate_2.sum_val(`data_2`);
+	let cate_c_2 = cate_2.sum_val(`data_4`);
+	let cate_pure_2 = cate_2.sum_val(`pure_customer`);
+let cate_newer_2 = cate_2.sum_val(`newer`);
+let cate_cured_2 = cate_2.sum_val(`cured`);
+
         let cate_s_3 = cate_3.sum_val(`data_1`);
         let cate_f_3 = cate_3.sum_val(`data_2`);
+	let cate_c_3 = cate_3.sum_val(`data_4`);
+	let cate_pure_3 = cate_3.sum_val(`pure_customer`);
+let cate_newer_3 = cate_3.sum_val(`newer`);
+let cate_cured_3 = cate_3.sum_val(`cured`);
+
         let cate_s_4 = cate_4.sum_val(`data_1`);
         let cate_f_4 = cate_4.sum_val(`data_2`);
+	let cate_c_4 = cate_4.sum_val(`data_4`);
+	let cate_pure_4 = cate_4.sum_val(`pure_customer`);
+let cate_newer_4 = cate_4.sum_val(`newer`);
+let cate_cured_4 = cate_4.sum_val(`cured`);
+
         let cate_s_5 = cate_5.sum_val(`data_1`);
         let cate_f_5 = cate_5.sum_val(`data_2`);
+	let cate_c_5 = cate_5.sum_val(`data_4`);
+	let cate_pure_5 = cate_5.sum_val(`pure_customer`);
+let cate_newer_5 = cate_5.sum_val(`newer`);
+let cate_cured_5 = cate_5.sum_val(`cured`);
 
         ap +=
         `
         <tr>
-          <th>${cell.obj_name}</th>
-          <th>${cell.clinic_name}</th>
+	  <th>${user_name==MSD_smn?`担当者${cell.obj_id}`:cell.obj_name}</th>
+	  <th>${user_name==MSD_smn?`店舗${cell.obj_id}`:cell.clinic_name}</th>
           <td>${data_0}</td>
           <td>${data_1}</td>
           <td>${data_2}</td>
+	  <td>${data_12}</td>
+          <td>${data_13}</td>
           <td>${data_3}</td>
+          <td>${data_14}</td>
+          <td>${data_15}</td>
           <td>${data_4}</td>
           <td>${data_5}</td>
-          <td>${data_6}</td>
+          <td>${data_11}</td>
           <td>${data_7}</td>
           <td>${data_8}</td>
           <td>${data_9}</td>
@@ -895,16 +1182,40 @@ var desc_function = (data) => {
 
           <td>${cate_s_0}</td>
           <td>${cate_f_0}</td>
+	  <td>${cate_c_0}</td>
+	  <td>${cate_pure_0}</td>
+<td>${cate_newer_0}</td>
+<td>${cate_cured_0}</td>
           <td>${cate_s_1}</td>
           <td>${cate_f_1}</td>
+	  <td>${cate_c_1}</td>
+	  <td>${cate_pure_1}</td>
+<td>${cate_newer_1}</td>
+<td>${cate_cured_1}</td>
           <td>${cate_s_2}</td>
           <td>${cate_f_2}</td>
+	  <td>${cate_c_2}</td>
+	  <td>${cate_pure_2}</td>
+<td>${cate_newer_2}</td>
+<td>${cate_cured_2}</td>
           <td>${cate_s_3}</td>
           <td>${cate_f_3}</td>
+	  <td>${cate_c_3}</td>
+	  <td>${cate_pure_3}</td>
+<td>${cate_newer_3}</td>
+<td>${cate_cured_3}</td>
           <td>${cate_s_4}</td>
           <td>${cate_f_4}</td>
+	  <td>${cate_c_4}</td>
+	  <td>${cate_pure_4}</td>
+<td>${cate_newer_4}</td>
+<td>${cate_cured_4}</td>
           <td>${cate_s_5}</td>
           <td>${cate_f_5}</td>
+	  <td>${cate_c_5}</td>
+	  <td>${cate_pure_5}</td>
+<td>${cate_newer_5}</td>
+<td>${cate_cured_5}</td>
         </tr>
         `;
       });
@@ -924,6 +1235,10 @@ var desc_function = (data) => {
           <th></th>
           <th></th>
           <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
           <th></th>
           <th></th>
           <th></th>
@@ -936,16 +1251,40 @@ var desc_function = (data) => {
           <th></th>
           <th>柔整</th>
           <th></th>
+	  <th></th>
+	  <th></th>
+<th></th>
+<th></th>
           <th>鍼灸</th>
           <th></th>
+	  <th></th>
+	  <th></th>
+<th></th>
+<th></th>
           <th>マッサージ</th>
           <th></th>
+	  <th></th>
+	  <th></th>
+<th></th>
+<th></th>
           <th>自賠責</th>
           <th></th>
+	  <th></th>
+	  <th></th>
+<th></th>
+<th></th>
           <th>労災</th>
           <th></th>
+	  <th></th>
+	  <th></th>
+<th></th>
+<th></th>
           <th>生活保護</th>
           <th></th>
+	  <th></th>
+	  <th></th>
+<th></th>
+<th></th>
         </tr>
         <tr>
           <th>--</th>
@@ -953,7 +1292,11 @@ var desc_function = (data) => {
           <th>総合売上</th>
           <th>保険請求額</th>
           <th>保険負担金</th>
-          <th>自費売上</th>
+	  <th>自費施術売上</th>
+          <th>物販売上</th>
+          <th>自費総合売上</th>
+          <th>自費施術回数</th>
+          <th>物販数</th>
           <th>施術回数</th>
           <th>来院数</th>
           <th>純患数</th>
@@ -968,16 +1311,40 @@ var desc_function = (data) => {
 
           <th>請求額</th>
           <th>負担金</th>
+	  <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>請求額</th>
           <th>負担金</th>
+	  <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>請求額</th>
           <th>負担金</th>
+	  <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>請求額</th>
           <th>負担金</th>
+	  <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>請求額</th>
           <th>負担金</th>
+	  <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
           <th>請求額</th>
           <th>負担金</th>
+	  <th>来院数</th>
+	  <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
         </tr>
         ${ap}
         `
@@ -986,6 +1353,91 @@ var desc_function = (data) => {
     (() => {
       $('#table_staff_base').html(``);
 
+
+if (clt_id == 10025) {
+	objs = objs.filter(({obj_id}) => obj_id >= 0);
+  objs.forEach((cell) => {
+    let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
+    let ap = ``;
+
+    for (let i = 0;i < pa.length;i++) {
+      let label = pa[i];
+
+      let result = obj.filter(({period}) => period == label);
+
+      let crnum = result.sum_val(`crnum`),
+      firstnum = result.sum_val(`firstnum`),
+      hoken_futan = result.sum_val(`hoken_futan`),
+      shiteiko = result.sum_val(`shiteiko`),
+      homon_shinkyu = result.sum_val(`homon_shinkyu`),
+      tokuden = result.sum_val(`tokuden`),
+      buppin = result.sum_val(`buppin`),
+      hari = result.sum_val(`hari`),
+      sanso = result.sum_val(`sanso`),
+      shindansho = result.sum_val(`shindansho`),
+      jihi = result.sum_val(`jihi`),
+      bumon = hoken_futan + shiteiko + homon_shinkyu + tokuden + buppin + hari + sanso + shindansho + jihi,
+      henkin = result.sum_val(`henkin`),
+      total = bumon + henkin;
+
+      ap +=
+      `
+      <tr>
+        <th>${label.str_date(`.`)}</th>
+        <td>${crnum}</td>
+        <td>${firstnum}</td>
+        <td>${hoken_futan}</td>
+        <td>${shiteiko}</td>
+        <td>${homon_shinkyu}</td>
+        <td>${tokuden}</td>
+        <td>${buppin}</td>
+        <td>${hari}</td>
+        <td>${sanso}</td>
+        <td>${shindansho}</td>
+        <td>${jihi}</td>
+        <td>${bumon}</td>
+        <td>${henkin}</td>
+        <td>${total}</td>
+      </tr>
+      `;
+    }
+    $('#table_staff_base').append(
+      `
+      <table data-sheet-name="${cell.obj_id}-${user_name==MSD_smn?`担当者${cell.obj_id}`:cell.obj_name}">
+        <tr>
+	  <th>${user_name==MSD_smn?`担当者${cell.obj_id}`:cell.obj_name}</th>
+          <th>${ps.str_date(`.`)}</th>
+          <th>~</th>
+          <th>${pe.str_date(`.`)}</th>
+        </tr>
+        <tr>
+          <th>--</th>
+          <th>来院数</th>
+          <th>新患数</th>
+          <th>一部負担金・往診</th>
+          <th>強化指定校</th>
+          <th>訪問鍼灸</th>
+          <th>小計(特電)</th>
+          <th>小計(物品)</th>
+          <th>小計(鍼灸・美容)</th>
+          <th>小計(酸素)</th>
+          <th>小計(診断書)</th>
+          <th>自費</th>
+          <th>部門(1,2,3,4,5)</th>
+          <th>返金額</th>
+          <th>合計</th>
+        </tr>
+        ${ap}
+      </table>
+      `
+    );
+  });
+
+      } else {
+
+
+
+ 
       objs = objs.filter(({obj_id}) => obj_id >= 0);
       objs.forEach((cell) => {
         let obj = datas.filter(({obj_id}) => obj_id == cell.obj_id);
@@ -1008,6 +1460,18 @@ var desc_function = (data) => {
           let data_7 = result.sum_val(`data_7`);
           let data_8 = result.sum_val(`data_8`);
           let data_9 = result.sum_val(`data_9`);
+  
+	
+          if (clt_id == 10010) {
+            if (!data_5 && cell.sf_enabled == 0) {
+              return;
+            }
+          }
+
+          let data_12 = result.sum_val(`data_12`);
+          let data_13 = result.sum_val(`data_13`);
+          let data_14 = result.sum_val(`data_14`);
+          let data_15 = result.sum_val(`data_15`);
 
           let lity_0 = data_3.to_devide(data_5);
           let lity_1 = data_3.to_devide(data_9);
@@ -1027,17 +1491,41 @@ var desc_function = (data) => {
 
           let cate_s_0 = cate_0.sum_val(`data_1`);
           let cate_f_0 = cate_0.sum_val(`data_2`);
+		let cate_pure_0 = cate_0.sum_val(`pure_customer`);
+let cate_newer_0 = cate_0.sum_val(`newer`);
+let cate_cured_0 = cate_0.sum_val(`cured`);
           let cate_s_1 = cate_1.sum_val(`data_1`);
           let cate_f_1 = cate_1.sum_val(`data_2`);
+		let cate_pure_1 = cate_1.sum_val(`pure_customer`);
+let cate_newer_1 = cate_1.sum_val(`newer`);
+let cate_cured_1 = cate_1.sum_val(`cured`);
           let cate_s_2 = cate_2.sum_val(`data_1`);
           let cate_f_2 = cate_2.sum_val(`data_2`);
+		let cate_pure_2 = cate_2.sum_val(`pure_customer`);
+let cate_newer_2 = cate_2.sum_val(`newer`);
+let cate_cured_2 = cate_2.sum_val(`cured`);
           let cate_s_3 = cate_3.sum_val(`data_1`);
           let cate_f_3 = cate_3.sum_val(`data_2`);
+		let cate_pure_3 = cate_3.sum_val(`pure_customer`);
+let cate_newer_3 = cate_3.sum_val(`newer`);
+let cate_cured_3 = cate_3.sum_val(`cured`);
           let cate_s_4 = cate_4.sum_val(`data_1`);
           let cate_f_4 = cate_4.sum_val(`data_2`);
+		let cate_pure_4 = cate_4.sum_val(`pure_customer`);
+let cate_newer_4 = cate_4.sum_val(`newer`);
+let cate_cured_4 = cate_4.sum_val(`cured`);
           let cate_s_5 = cate_5.sum_val(`data_1`);
           let cate_f_5 = cate_5.sum_val(`data_2`);
+		let cate_pure_5 = cate_5.sum_val(`pure_customer`);
+let cate_newer_5 = cate_5.sum_val(`newer`);
+let cate_cured_5 = cate_5.sum_val(`cured`);
 
+		let cate_c_0 = cate_0.sum_val(`data_4`);
+		let cate_c_1 = cate_1.sum_val(`data_4`);
+		let cate_c_2 = cate_2.sum_val(`data_4`);
+		let cate_c_3 = cate_3.sum_val(`data_4`);
+		let cate_c_4 = cate_4.sum_val(`data_4`);
+		let cate_c_5 = cate_5.sum_val(`data_4`);
 
           let repe = repeat.filter(({period}) => period == label);
           let repe_origin = repe.filter(({count_num}) => count_num == 1).sum_val('count');
@@ -1070,7 +1558,11 @@ var desc_function = (data) => {
             <td>${data_0}</td>
             <td>${data_1}</td>
             <td>${data_2}</td>
+	    <td>${data_12}</td>
+            <td>${data_13}</td>
             <td>${data_3}</td>
+            <td>${data_14}</td>
+            <td>${data_15}</td>
             <td>${data_4}</td>
             <td>${data_5}</td>
             <td>${data_6}</td>
@@ -1086,16 +1578,40 @@ var desc_function = (data) => {
 
             <td>${cate_s_0}</td>
             <td>${cate_f_0}</td>
+	    <td>${cate_c_0}</td>
+	    <td>${cate_pure_0}</td>
+<td>${cate_newer_0}</td>
+<td>${cate_cured_0}</td>
             <td>${cate_s_1}</td>
             <td>${cate_f_1}</td>
+	    <td>${cate_c_1}</td>
+	    <td>${cate_pure_1}</td>
+<td>${cate_newer_1}</td>
+<td>${cate_cured_1}</td>
             <td>${cate_s_2}</td>
             <td>${cate_f_2}</td>
+	    <td>${cate_c_2}</td>
+	    <td>${cate_pure_2}</td>
+<td>${cate_newer_2}</td>
+<td>${cate_cured_2}</td>
             <td>${cate_s_3}</td>
             <td>${cate_f_3}</td>
+	    <td>${cate_c_3}</td>
+	    <td>${cate_pure_3}</td>
+<td>${cate_newer_3}</td>
+<td>${cate_cured_3}</td>
             <td>${cate_s_4}</td>
             <td>${cate_f_4}</td>
+	    <td>${cate_c_4}</td>
+	    <td>${cate_pure_4}</td>
+<td>${cate_newer_4}</td>
+<td>${cate_cured_4}</td>
             <td>${cate_s_5}</td>
             <td>${cate_f_5}</td>
+	    <td>${cate_c_5}</td>
+	    <td>${cate_pure_5}</td>
+<td>${cate_newer_5}</td>
+<td>${cate_cured_5}</td>
 
             <td>${repe_0.sum_val('count')}</td>
             <td>${repe_0.sum_val('count').to_perate(repe_origin)}%</td>
@@ -1128,9 +1644,9 @@ var desc_function = (data) => {
 
         $('#table_staff_base').append(
           `
-          <table data-sheet-name="${cell.obj_id}-${cell.obj_name}">
+          <table data-sheet-name="${cell.obj_id}-${user_name==MSD_smn?`担当者${cell.obj_id}`:cell.obj_name}">
             <tr>
-              <th>${cell.obj_name}</th>
+	      <th>${user_name==MSD_smn?`担当者${cell.obj_id}`:cell.obj_name}</th>
               <th>${ps.str_date(`.`)}</th>
               <th>~</th>
               <th>${pe.str_date(`.`)}</th>
@@ -1147,6 +1663,10 @@ var desc_function = (data) => {
               <th></th>
               <th></th>
               <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
 
               <th>効率</th>
               <th></th>
@@ -1156,15 +1676,39 @@ var desc_function = (data) => {
 
               <th>柔整</th>
               <th></th>
+	      <th></th>
+              <th></th>
+              <th></th>
+	      <th></th>
               <th>鍼灸</th>
               <th></th>
+	      <th></th>
+              <th></th>
+              <th></th>
+	      <th></th>
               <th>マッサージ</th>
               <th></th>
+	      <th></th>
+              <th></th>
+              <th></th>
+	      <th></th>
               <th>自賠責</th>
               <th></th>
+	      <th></th>
+              <th></th>
+              <th></th>
+	      <th></th>
               <th>労災</th>
               <th></th>
+	      <th></th>
+              <th></th>
+	      <th></th>
+              <th></th>
               <th>生活保護</th>
+              <th></th>
+	      <th></th>
+	      <th></th>
+              <th></th>
               <th></th>
 
               <th>継続率</th>
@@ -1196,7 +1740,11 @@ var desc_function = (data) => {
               <th>総合売上</th>
               <th>保険請求額</th>
               <th>保険負担金</th>
-              <th>自費売上</th>
+	      <th>自費施術売上</th>
+              <th>物販売上</th>
+              <th>自費総合売上</th>
+              <th>自費施術回数</th>
+              <th>物販数</th>
               <th>施術回数</th>
               <th>来院数</th>
               <th>純患数</th>
@@ -1211,16 +1759,40 @@ var desc_function = (data) => {
 
               <th>請求額</th>
               <th>負担金</th>
+	      <th>来院数</th>
+	      <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
               <th>請求額</th>
               <th>負担金</th>
+	      <th>来院数</th>
+	      <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
               <th>請求額</th>
               <th>負担金</th>
+	      <th>来院数</th>
+	      <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
               <th>請求額</th>
               <th>負担金</th>
+	      <th>来院数</th>
+	      <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
               <th>請求額</th>
               <th>負担金</th>
+	      <th>来院数</th>
+	      <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
               <th>請求額</th>
               <th>負担金</th>
+	      <th>来院数</th>
+	      <th>純患数</th>
+<th>新患数</th>
+<th>完治者数</th>
 
               <th>1回目人数</th>
               <th>1回目維持率</th>
@@ -1250,7 +1822,9 @@ var desc_function = (data) => {
           </table>
           `
         );
+
       });
+      }
     })();
     (() => {
       let wopts = {
@@ -1500,11 +2074,11 @@ var query_function = async () => {
   }
 
   $('#content_base').html(`<div class="loading_base inline"><i class="fad fa-spinner-third fa-spin"></i></div>`);
-  let result = await ajax_api_function("custom_field",sender_data);
-  if (result.dataExists) {
-    desc_function(result.data);
+  let result_custom_field = await ajax_api_function("custom_field",sender_data);
+  if (result_custom_field.dataExists) {
+    desc_function(result_custom_field.data);
   } else {
-    alert(`データ通信エラー:${result.reason}`);
+    alert(`データ通信エラー:${result_custom_field.reason}`);
   }
 }
 
@@ -1545,7 +2119,7 @@ if ($('#page_js_status').prop('checked') == false) {
       );
 
       const desc_init = async () => {
-        await psln_setter(2);
+        await psln_setter(0);
         await psl_setter(0,"pi");
         await query_function();
       }

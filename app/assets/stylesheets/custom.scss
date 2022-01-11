@@ -4,7 +4,7 @@ $bgc:#73879c;
 $off_white:#f4f6f9;
 $btn_color:rgb(54,100,180);
 $con_color:rgba(242,100,100,1);
-$lap_border:1600px;
+$lap_border:1279px;
 $mini_lap_border:1200px;
 $tablet_border:1025px;
 $phone_border:768px;
@@ -808,7 +808,7 @@ $border_color:#e6e6e6;
     &.left {text-align: left;}
     font-size: 0;
     max-width: 100%;
-    input[name="column_input"],input[name="trend_input_"] {
+    input[name="column_input"],input[name="trend_input_"],input {
       display: none;
       &:checked + label {
         background-color: $btn_color;
@@ -4576,10 +4576,10 @@ html {
           }
           .flex_box {
             width:calc(100% / 4);
-            @media (max-width:1600px) {
+            @media (max-width:1279px) {
               width:calc(100% / 3);
             }
-            @media (max-width:1300px) {
+            @media (max-width:1200px) {
               width:calc(100% / 2);
             }
             padding: .25rem;
@@ -5203,10 +5203,10 @@ html {
               margin-top:.5rem;
               line-height: 2rem;
               color:#fff;
-              border-radius: 1rem;
-              &.create {
-                width:65%;
-                background-color: $btn_color;
+              border-radius:1rem;
+	      &.create {
+		width:65%;
+		 background-color: $btn_color;
               }
               &.quit {
                 width:calc(35% - .5rem);

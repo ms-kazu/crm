@@ -312,8 +312,9 @@ const MSD_client = [];
 
 let ajax_api_progress = false;
 const ajax_api_function = (sender1,sender2) => {
-  if (!ajax_api_progress) {
-    ajax_api_progress = true;
+  if (!ajax_api_progress || true) {
+	  $('body').css(`pointer-events`,`none`);
+    //ajax_api_progress = true;
     sender2 = JSON.stringify(sender2);
     return new Promise((resolve,reject) => {
       try {
@@ -328,16 +329,19 @@ const ajax_api_function = (sender1,sender2) => {
           timeout:120000,
           error: () => {
             ajax_api_progress = false;
+		  $('body').css(`pointer-events`,`all`);
             console.timeEnd(`DB通信速度`);
             resolve({"dataExists":false,"reason":"NetWork Timeout"});
           }
         })
         .done(function(data) {
-          ajax_api_progress = false;
+          //ajax_api_progress = false;
+		$('body').css(`pointer-events`,`all`);
           console.timeEnd(`DB通信速度`);
           resolve(data.results);
         });
       } catch(err) {
+	      $('body').css(`pointer-events`,`all`);
         ajax_api_progress = false;
         reject('{\"dataExists\":false,\"reason\":\"DB server connection error\"}');
       }

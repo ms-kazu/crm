@@ -44,7 +44,7 @@ class LoginController < ApplicationController
 
             flash[:notice_pos] = "ログインしました"
 
-            session[:home] = "/summary"
+            session[:home] = "/home"
             redirect_to(session[:home])
           else
             flash[:notice_nega] = "emailまたはパスワードが間違っています"

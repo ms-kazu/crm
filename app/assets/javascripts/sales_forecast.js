@@ -464,7 +464,7 @@ var desc_function = (data,so) => {
         ap +=
         `
         <tr>
-          <th>${cell.obj_name}</th>
+          <th>${user_name==MSD_smn?`オブジェクト${cell.obj_id}`:cell.obj_name}</th>
           <td>${dimension_0}${achieve.to_one_point(1).toLocaleString()}${dimension_1}</td>
           <td>${dimension_0}${(achieve + forecast).to_one_point(1).toLocaleString()}${dimension_1}</td>
           <td>${dimension_0}${forecast.to_one_point(1).toLocaleString()}${dimension_1}</td>

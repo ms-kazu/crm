@@ -301,9 +301,8 @@ var desc_function = (sender,so) => {
               label:function(t,d) {
                 let index = t.index;
                 let idx = t.datasetIndex;
-                if (idx == 1 || idx == 3) {return;}
                 let amount = t.yLabel;
-                let ar = ["当期","","比較",""];
+                let ar = ["合計","平均","比較1","比較2","比較3","比較4","比較5"];
                 return `${ar[idx]} ${amount.toLocaleString()}`;
               }
             }
@@ -382,7 +381,7 @@ var desc_function = (sender,so) => {
             <input type="checkbox" name="ot_input_" id="ot_input_${obj.obj_id}">
             <label for="ot_input_${obj.obj_id}"></label>
           </th>
-          <th>${obj.obj_name}</th>
+          <th>${user_name==MSD_smn?`オブジェクト${obj.obj_id}`:obj.obj_name}</th>
           <th>${total.toLocaleString()}</th>
           ${app}
         </tr>

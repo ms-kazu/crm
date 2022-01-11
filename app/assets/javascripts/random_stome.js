@@ -29,7 +29,13 @@ var desc_list = (data) => {
       let app = ``;
       for (let i = 0;i < axis_length;i++) {
         let data = cell[`axis_${i}`];
-        app += `<th>${data}</th>`;
+	let title =  $(`#ul_axis li:eq(${i})`).html();
+	
+	if ([`エリア`,`担当者`,`店舗`].includes(title)) {
+          app += `<th>オブジェクト</th>`;
+	} else {
+          app += `<th>${data}</th>`;
+	}
       }
       for (let i = 0;i < column_length;i++) {
         let data = cell[`column_${i}`];
@@ -115,8 +121,6 @@ var query_leveling = async () => {
       id:Number(id)
     });
   }
-
-  console.log(axis_arr);
 
   let ps = $('#pi_s').prop('value');
   let pe = $('#pi_e').prop('value');

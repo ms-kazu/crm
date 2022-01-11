@@ -2614,7 +2614,7 @@ var desc_function = (data,so) => {
                 title:function(t,d) {
                   let idx = t[0].datasetIndex;
                   let arr = ["総人数","男性","女性"];
-                  return `${arr[idx]}`;
+                  return `${arr[idx + 1]}`;
                 },
                 label:function(t,d) {
                   return `${t.yLabel.toLocaleString()}人`;
@@ -3553,9 +3553,10 @@ var desc_function = (data,so) => {
 
       let ap = ``;
       objs.forEach((cell) => {
-        let name = cell.obj_name;
-        let pname = cell.pobj_name;
-        let ppname = cell.ppobj_name;
+        let name = user_name==MSD_smn?`担当者${cell.obj_id}`:cell.obj_name;
+        let pname = user_name==MSD_smn?`店舗${cell.obj_id}`:cell.pobj_name;
+        let ppname = user_name==MSD_smn?`エリア${cell.obj_id}`:cell.ppobj_name;
+
         let data_0 = cell.data_0;
         let data_1 = cell.data_1;
         let data_2 = cell.data_2;
@@ -4134,11 +4135,11 @@ var query_function = async () => {
     pm3:pm3
   }
 
-  let result = await ajax_api_function("summary",sender_data);
-  if (result.dataExists) {
-    desc_function(result.data,sender_data);
+  let result_summary = await ajax_api_function("summary",sender_data);
+  if (result_summary.dataExists) {
+    desc_function(result_summary.data,sender_data);
   } else {
-    alert(`データ通信エラー:${result.reason}`);
+    alert(`データ通信エラー:${result_summary.reason}`);
   }
 }
 

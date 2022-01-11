@@ -2110,7 +2110,7 @@ var desc_function = (data,so) => {
             addr2:cell.addr2,
             name:`${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}`,
             geneder:gro[cell.geneder_id].name,
-            staff_id:cell.staff_id,
+            staff_id:cell.first_staff_id,
             clinic_id:cell.clinic_id,
             data_0:cell.data_0,
             data_1:cell.data_1,
@@ -3498,8 +3498,10 @@ var desc_function = (data,so) => {
                   <th>${cell.addr1}</th>
                   <th>${cell.addr2}</th>
                   <th>${cell.email}</th>
-                  <th>${cell.clinic_name}</th>
-                  <th>${cell.staff_name}</th>
+                  <th>${user_name==MSD_smn?`店舗`:cell.clinic_name}</th>
+                  <th>${user_name==MSD_smn?`担当者`:cell.first_staff_name}</th>
+                  <th>${user_name==MSD_smn?`担当者`:cell.last_staff_name}</th>
+                  <th>${cell.last_sdate}</th>
                   <th>${cell.age}</th>
                   <th>${go[cell.gender]}</th>
 
@@ -3529,6 +3531,8 @@ var desc_function = (data,so) => {
                     <th>eメール</th>
                     <th>院</th>
                     <th>初回担当者</th>
+                    <th>最終担当者</th>
+                    <th>最終来院日</th>
                     <th>年齢</th>
                     <th>性別</th>
 
@@ -4063,6 +4067,9 @@ var desc_function = (data,so) => {
                     `
                     <tr>
                       <th>${name_arr[i]}</th>
+                      <th>${cell.r_level}</th>
+                      <th>${cell.f_level}</th>
+                      <th>${cell.m_level}</th>
                       <th>${cell.ptno}</th>
                       <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                       <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
@@ -4072,8 +4079,10 @@ var desc_function = (data,so) => {
                       <th>${cell.addr1}</th>
                       <th>${cell.addr2}</th>
                       <th>${cell.email}</th>
-                      <th>${cell.clinic_name}</th>
-                      <th>${cell.staff_name}</th>
+                      <th>${user_name==MSD_smn?`店舗`:cell.clinic_name}</th>
+                      <th>${user_name==MSD_smn?`担当者`:cell.first_staff_name}</th>
+                      <th>${user_name==MSD_smn?`担当者`:cell.last_staff_name}</th>
+                      <th>${cell.last_sdate}</th>
                       <th>${cell.age}</th>
                       <th>${go[cell.gender]}</th>
 
@@ -4092,6 +4101,9 @@ var desc_function = (data,so) => {
                     <table data-sheet-name="${name_arr[i]}">
                       <tr>
                         <th>クラスターランク</th>
+                        <th>Rランク</th>
+                        <th>Fランク</th>
+                        <th>Mランク</th>
                         <th>患者番号</th>
                         <th>名前</th>
                         <th>かな</th>
@@ -4103,6 +4115,8 @@ var desc_function = (data,so) => {
                         <th>eメール</th>
                         <th>院</th>
                         <th>初回担当者</th>
+                        <th>最終担当者</th>
+                        <th>最終来院日</th>
                         <th>年齢</th>
                         <th>性別</th>
 
@@ -4324,6 +4338,9 @@ var desc_function = (data,so) => {
                     `
                     <tr>
                       <th>${i}</th>
+                      <th>${cell.r_level}</th>
+                      <th>${cell.f_level}</th>
+                      <th>${cell.m_level}</th>
                       <th>${cell.ptno}</th>
                       <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                       <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
@@ -4333,8 +4350,10 @@ var desc_function = (data,so) => {
                       <th>${cell.addr1}</th>
                       <th>${cell.addr2}</th>
                       <th>${cell.email}</th>
-                      <th>${cell.clinic_name}</th>
-                      <th>${cell.staff_name}</th>
+                      <th>${user_name==MSD_smn?`店舗`:cell.clinic_name}</th>
+                      <th>${user_name==MSD_smn?`担当者`:cell.first_staff_name}</th>
+                      <th>${user_name==MSD_smn?`担当者`:cell.last_staff_name}</th>
+                      <th>${cell.last_sdate}</th>
                       <th>${cell.age}</th>
                       <th>${go[cell.gender]}</th>
 
@@ -4353,6 +4372,9 @@ var desc_function = (data,so) => {
                     <table data-sheet-name="RF-${i}点">
                       <tr>
                         <th>RFランク</th>
+                        <th>Rランク</th>
+                        <th>Fランク</th>
+                        <th>Mランク</th>
                         <th>患者番号</th>
                         <th>名前</th>
                         <th>かな</th>
@@ -4364,6 +4386,8 @@ var desc_function = (data,so) => {
                         <th>eメール</th>
                         <th>院</th>
                         <th>初回担当者</th>
+                        <th>最終担当者</th>
+                        <th>最終来院日</th>
                         <th>年齢</th>
                         <th>性別</th>
 
@@ -4592,6 +4616,9 @@ var desc_function = (data,so) => {
                     `
                     <tr>
                       <th>${i}</th>
+                      <th>${cell.r_level}</th>
+                      <th>${cell.f_level}</th>
+                      <th>${cell.m_level}</th>
                       <th>${cell.ptno}</th>
                       <th>${user_name==MSD_smn?`患者${cell.c_ptno}`:cell.c_name}</th>
                       <th>${user_name==MSD_smn?`カンジャ${cell.c_ptno}`:cell.c_kana}</th>
@@ -4601,8 +4628,10 @@ var desc_function = (data,so) => {
                       <th>${cell.addr1}</th>
                       <th>${cell.addr2}</th>
                       <th>${cell.email}</th>
-                      <th>${cell.clinic_name}</th>
-                      <th>${cell.staff_name}</th>
+                      <th>${user_name==MSD_smn?`店舗`:cell.clinic_name}</th>
+                      <th>${user_name==MSD_smn?`担当者`:cell.first_staff_name}</th>
+                      <th>${user_name==MSD_smn?`担当者`:cell.last_staff_name}</th>
+                      <th>${cell.last_sdate}</th>
                       <th>${cell.age}</th>
                       <th>${go[cell.gender]}</th>
 
@@ -4621,6 +4650,9 @@ var desc_function = (data,so) => {
                     <table data-sheet-name="RFM-${i}点">
                       <tr>
                         <th>RFMランク</th>
+                        <th>Rランク</th>
+                        <th>Fランク</th>
+                        <th>Mランク</th>
                         <th>患者番号</th>
                         <th>名前</th>
                         <th>かな</th>
@@ -4632,6 +4664,8 @@ var desc_function = (data,so) => {
                         <th>eメール</th>
                         <th>院</th>
                         <th>初回担当者</th>
+                        <th>最終担当者</th>
+                        <th>最終来院日</th>
                         <th>年齢</th>
                         <th>性別</th>
 

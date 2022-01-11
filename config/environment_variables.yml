@@ -1,0 +1,9 @@
+development:
+  DB_SERVER_URL: http://localhost:8000/login
+  S3_DB_URL: https://raccommunityimageobjs.s3-ap-northeast-1.amazonaws.com
+production:
+  DB_SERVER_URL: http://localhost:8000/login
+  S3_DB_URL: https://raccommunityimageobjs.s3-ap-northeast-1.amazonaws.com
+
+  #http://ip-172-31-41-137.ap-northeast-1.compute.internal:8000/login
+

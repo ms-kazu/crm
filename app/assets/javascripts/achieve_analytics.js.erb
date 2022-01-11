@@ -2560,7 +2560,7 @@ var desc_obj_page = () => {
                 title:function(t,d) {
                   let index = t[0].index;
                   let name = index != 5 ? obj[index].obj_name : `その他`;
-                  return `${name}`;
+                  return user_name==MSD_smn?`エリア`:name;
                 },
                 label: function(t,d) {
                   let index = t.index;
@@ -2899,8 +2899,8 @@ var desc_obj_page = () => {
                   <th>未成年 女性</th>
                   <th>20~34歳 男性</th>
                   <th>20~34歳 女性</th>
-                  <th>34~64歳 男性</th>
-                  <th>34~64歳 女性</th>
+                  <th>35~64歳 男性</th>
+                  <th>35~64歳 女性</th>
                   <th>65~74歳 男性</th>
                   <th>65~74歳 女性</th>
                   <th>75歳~ 男性</th>
@@ -2994,7 +2994,7 @@ var desc_obj_page = () => {
                 title:function(t,d) {
                   let index = t[0].index;
                   let name = index != 5 ? obj[index].obj_name : `その他`;
-                  return `${name}`;
+                  return user_name==MSD_smn?`店舗`:name;
                 },
                 label: function(t,d) {
                   let index = t.index;
@@ -3429,7 +3429,7 @@ var desc_obj_page = () => {
                 title:function(t,d) {
                   let index = t[0].index;
                   let name = index != 5 ? obj[index].obj_name : `その他`;
-                  return `${name}`;
+                  return user_name==MSD_smn?`担当者`:name;
                 },
                 label: function(t,d) {
                   let index = t.index;
@@ -11694,7 +11694,7 @@ var desc_obj_page = () => {
                   title:function(t,d) {
                     let index = t[0].index;
                     let name = index != 5 ? obj[index].obj_name : `その他`;
-                    return `${name}`;
+                    return user_name==MSD_smn?`エリア`:name;
                   },
                   label: function(t,d) {
                     let index = t.index;
@@ -12116,7 +12116,7 @@ var desc_obj_page = () => {
                   title:function(t,d) {
                     let index = t[0].index;
                     let name = index != 5 ? obj[index].obj_name : `その他`;
-                    return `${name}`;
+                    return user_name==MSD_smn?`店舗`:name;
                   },
                   label: function(t,d) {
                     let index = t.index;
@@ -12539,7 +12539,7 @@ var desc_obj_page = () => {
                   title:function(t,d) {
                     let index = t[0].index;
                     let name = index != 5 ? obj[index].obj_name : `その他`;
-                    return `${name}`;
+                    return user_name==MSD_smn?`担当者`:name;
                   },
                   label: function(t,d) {
                     let index = t.index;
@@ -13521,13 +13521,15 @@ var desc_obj_page = () => {
 
           const desc_pie = () => {
             let data_arr = [];
+            let index_arr = [];
             for (let i = 0;i < 5;i++) {
               if (i >= obj.length) continue;
               let cell = obj[i];
               data_arr.push(cell.data_0);
+              index_arr.push(cell.obj_id);
             }
             if (obj.length >= 6) data_arr.push(sum_data_0 - data_arr.sum_val(``));
-
+            
             let graph_plugin = {
               afterDatasetsDraw: function (chart, easing) {
                 var ctx = chart.ctx;
@@ -13569,7 +13571,7 @@ var desc_obj_page = () => {
                 callbacks: {
                   title:function(t,d) {
                     let index = t[0].index;
-                    let name = index != 5 ? obj[index].obj_name : `その他`;
+                    let name = index != 5 ? g_obj.filter(({obj_id}) => obj_id == index_arr[index])[0].obj_name : `その他`;
                     return `${name}`;
                   },
                   label: function(t,d) {
@@ -16242,7 +16244,7 @@ var desc_obj_page = () => {
       <div class="cell cell_2x1 inline">
         <div class="box cell_link">
           <div class="cell_title cell_title_r text_overflow">
-            最終担当者別・影響範囲・離脱割合・影響倍率
+            最終担当者別・リフト値
             <div class="icon inline help_tips" data-title="最終担当者が影響させているという確からしさの値" data-help="影響値とは、どの程度の効率で最終担当回数が算出されるかを表します。例えば、人気のスタッフは最終担当回数が必然的に多くなっていきますが、人気度の異なる他スタッフと比較するためには担当回数のみでは正確な値は出力できないので、影響度合いを多角度から計算します。">
               <i class="fas fa-question"></i>
             </div>
@@ -16252,7 +16254,7 @@ var desc_obj_page = () => {
             <div class="icon inline help_tips" data-title="離脱割合" data-help="離脱割合とは、総離脱数に対して実際にどの程度影響させたかを示す値です。 <br> 式<br>離脱割合I = 離脱確率M x 影響範囲R">
               <i class="fas fa-question"></i>
             </div>
-            <div class="icon inline help_tips" data-title="影響倍率" data-help="<br>式<br>影響倍率M = (最終担当回数 % 期間中担当純患数) % 全体の離脱率 <br>※1より高いほど平均よりも離脱させている">
+            <div class="icon inline help_tips" data-title="リフト値" data-help="<br>式<br>影響倍率M = (最終担当回数 % 期間中担当純患数) % 全体の離脱率 <br>※1より高いほど平均よりも離脱させている">
               <i class="fas fa-question"></i>
             </div>
           </div>
@@ -16609,7 +16611,7 @@ var desc_obj_page = () => {
               <th>${cell.addr2}</th>
               <th>${cell.email}</th>
               <th>${user_name==MSD_smn?` 店舗${clinic.obj_id}`:clinic.obj_name}</th>
-              <th>${user_name==MSD_smn?`担当者${cell.staff_name}`:cell.staff_id}</th>
+              <th>${user_name==MSD_smn?`担当者${cell.staff_id}`:cell.staff_name}</th>
               <th>${cell.age}</th>
               <th>${go[cell.gender]}</th>
               <th>${ro[cell.max_recover]}</th>
@@ -17068,7 +17070,7 @@ var desc_obj_page = () => {
                 <th>離脱確率</th>
                 <th>影響範囲</th>
                 <th>離脱割合</th>
-                <th>影響倍率</th>
+                <th>リフト値</th>
               </tr>
             </thead>
             <tbody>${ap}</tbody>
@@ -17609,7 +17611,7 @@ if ($('#page_js_status').prop('checked') == false) {
         sender_menus_so = ["","","","",""];
         let cate1 = menus.data_cate1;
 
-        cate1.forEach((cel) => {
+        cate1.filter(({enabled}) => enabled == 1).forEach((cel) => {
           (() => {
             sender_menus_so[0] += `<option value="${cel.id}">大 - ${cel.name}</option>`;
             sender_menus_so[1] += `<optgroup label="大-${cel.name}">`;
@@ -17617,12 +17619,12 @@ if ($('#page_js_status').prop('checked') == false) {
             sender_menus_so[4] += `<optgroup label="大-${cel.name}">`;
           })();
           (() => {
-            let cate2 = menus.data_cate2.filter(({parent_category1_id}) => parent_category1_id == cel.id);
+            let cate2 = menus.data_cate2.filter(({enabled}) => enabled == 1).filter(({parent_category1_id}) => parent_category1_id == cel.id);
             cate2.forEach((cell) => {
               sender_menus_so[1] += `<option value="${cell.id}">中 - ${cell.name}</option>`;
               sender_menus_so[2] += `<optgroup label="&nbsp;&nbsp;中-${cell.name}">`;
 
-              let cate3 = menus.data_cate3.filter(({parent_category1_id}) => parent_category1_id == cell.id);
+              let cate3 = menus.data_cate3.filter(({enabled}) => enabled == 1).filter(({parent_category1_id}) => parent_category1_id == cell.id);
               cate3.forEach((celll) => {
                 sender_menus_so[2] += `<option value="${celll.id}">小 - ${celll.name}</option>`;
               });
@@ -17630,7 +17632,7 @@ if ($('#page_js_status').prop('checked') == false) {
             });
           })();
           (() => {
-            let menuss = menus.data_menu.filter(({category1_id}) => category1_id == cel.id);
+            let menuss = menus.data_menu.filter(({enabled}) => enabled == 1).filter(({category1_id}) => category1_id == cel.id);
             menuss.forEach((cellll) => {
               sender_menus_so[4] += `<option value="${cellll.id}">施 - ${cellll.name}</option>`;
             });
@@ -17643,7 +17645,7 @@ if ($('#page_js_status').prop('checked') == false) {
         });
 
         let kywds = menus.data_keyword;
-        kywds.forEach((cell) => {
+        kywds.filter(({enabled}) => enabled == 1).forEach((cell) => {
           sender_menus_so[3] += `<option value="${cell.id}">キ - ${cell.name}</option>`;
         });
       } else {

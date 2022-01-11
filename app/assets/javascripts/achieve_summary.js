@@ -77,6 +77,7 @@ if ($('#page_js_status').prop('checked') == false) {
           let result_pt1 = data_objs[1].filter(({obj_id}) => obj_id == cell.obj_id);
           let result_pt2 = data_objs[2].filter(({obj_id}) => obj_id == cell.obj_id);
 
+	  let total = result_pt0.reduce((a,b) => a + b.total,0) || 0;
           let at0 = result_pt0.reduce((a,b) => a + b.mado,0) || 0;
 
           let at1 = result_pt0.reduce((a,b) => a + b.m_mado,0) || 0;
@@ -95,6 +96,7 @@ if ($('#page_js_status').prop('checked') == false) {
                 ${user_name==MSD_smn?`${stna[st+1]}${cell.obj_id}`:cell.obj_name}
               </a>
             </th>
+	    <td>¥${total.toLocaleString()}</td>
             <td>¥${at0.toLocaleString()}</td>
             <td>${at1_s}</td>
             <td>${at2_s}</td>
@@ -109,6 +111,7 @@ if ($('#page_js_status').prop('checked') == false) {
             <thead>
               <tr>
                 <th>${tia[st]}</th>
+		<th>総合売上</th>
                 <th>窓口売上</th>
                 <th>目標達成率</th>
                 <th>${c0_ta[pt]}</th>
