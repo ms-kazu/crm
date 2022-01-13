@@ -2653,10 +2653,11 @@ var desc_function = (data,so) => {
         let title = sender.title;
 
         if (!cuo.exist_val()) {
-          alert('該当する顧客がいなかったのでエクセルの出力を停止しました。');
+          alert('該当する顧客が存在しなかったため、エクセルの出力を停止しました。');
         } else {
           (() => {
             $('#repeat_table').html(``);
+            $('#repeat_excel_table').html(``);
             let ap = ``;
 
             let go = ["","男性","女性"];
@@ -2988,7 +2989,7 @@ var desc_function = (data,so) => {
               } else {
                 app +=
                 `
-                <td class="repeat_0_tdd_" id="repeat_0_tdd_${excel_data_d_num}">
+                <td class="repeat_10_tdd_" id="repeat_10_tdd_${excel_data_d_num}">
                   <div class="amount">
                     <span>(${rate}%)</span>
                     ${user.toLocaleString()}
@@ -3005,7 +3006,7 @@ var desc_function = (data,so) => {
             `
             <tr>
               <th>${pl}</th>
-              <td class="repeat_0_tdf_" id="repeat_0_tdf_${idx}">
+              <td class="repeat_10_tdf_" id="repeat_10_tdf_${idx}">
                 <div class="amount">
                   <span>(${amount_rate}%)</span>
                   ${amount.toLocaleString()}
@@ -3039,12 +3040,12 @@ var desc_function = (data,so) => {
             `
           );
 
-          $(document).off('click','.repeat_0_tdf_').on('click','.repeat_0_tdf_',function() {
+          $(document).off('click','.repeat_10_tdf_').on('click','.repeat_10_tdf_',function() {
             let id = $(this).prop('id').split('_')[3];
             let arr = excel_data_f_arr[id];
             desc_repeat_excel(arr);
           });
-          $(document).off('click','.repeat_0_tdd_').on('click','.repeat_0_tdd_',function() {
+          $(document).off('click','.repeat_10_tdd_').on('click','.repeat_10_tdd_',function() {
             let id = $(this).prop('id').split('_')[3];
             let arr = excel_data_d_arr[id];
             desc_repeat_excel(arr);
