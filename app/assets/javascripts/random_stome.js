@@ -31,8 +31,17 @@ var desc_list = (data) => {
         let data = cell[`axis_${i}`];
 	let title =  $(`#ul_axis li:eq(${i})`).html();
 	
+	if (user_name==MSD_smn) {
+
+        } else {
+
+	}
 	if ([`エリア`,`担当者`,`店舗`].includes(title)) {
-          app += `<th>オブジェクト</th>`;
+	  if (user_name==MSD_smn) {
+            app += `<td>${title}</td>`;
+	  } else {
+            app += `<td>${data}</td>`;
+          }
 	} else {
           app += `<th>${data}</th>`;
 	}
