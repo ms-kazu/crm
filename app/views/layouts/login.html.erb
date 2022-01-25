@@ -22,7 +22,7 @@
   </head>
 
   <body class="home_body">
-    <div class="header_base">
+    <div class="header_base" id="header_base">
       <div class="left_header">
         <div class="logo_base inline">
           <div class="icon_base inline"><img src="<%= image_path "search_logo.png" %>" alt=""></div>
@@ -66,5 +66,13 @@
     <% end %>
 
     <%= yield %>
+    <script>
+      (() => {
+        if (location.host == "crm-dev.net") {
+          let header = document.getElementById("header_base");
+          header.style.backgroundColor = '#84a2d4'; 
+        }
+      })();
+    </script>
   </body>
 </html>
