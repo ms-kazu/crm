@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: rails s -p 5000 -b '0.0.0.0'
+    volumes:
+      - .:/INSPECT_CRM_AP
+    ports:
+      - "5000:5000"
