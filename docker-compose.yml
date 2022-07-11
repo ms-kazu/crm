@@ -7,3 +7,4 @@ services:
       - .:/INSPECT_CRM_AP
     ports:
       - "5000:5000"
+    
